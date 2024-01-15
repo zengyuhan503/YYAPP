@@ -1,9 +1,30 @@
 {
 	"pages": [
 		{
+			"path": "pages/userAddress/index",
+			"style": {
+				"navigationBarTitleText": "地址管理",
+				"backgroundColorTop": "#D44469",
+				"navigationBarBackgroundColor": "#D44469",
+				"backgroundColor": "#D44469",
+				"navigationBarTextStyle": "white"
+			}
+		},
+		{
 			"path": "pages/index/index",
 			"style": {
 				"navigationStyle": "custom"
+			}
+		},
+		
+		{
+			"path": "pages/user/index",
+			"style": {
+				"navigationBarTitleText": "预颜口腔",
+				"backgroundColorTop": "#D44469",
+				"navigationBarBackgroundColor": "#D44469",
+				"backgroundColor": "#D44469",
+				"navigationBarTextStyle": "white"
 			}
 		},
 		{
@@ -16,6 +37,7 @@
 				"navigationBarTextStyle": "white"
 			}
 		},
+		
 		{
 			"path": "pages/popularScience/index",
 			"style": {
@@ -66,30 +88,11 @@
 				"navigationBarTextStyle": "white"
 			}
 		},
-		{
-			"path": "pages/userAddress/index",
-			"style": {
-				"navigationBarTitleText": "地址管理",
-				"backgroundColorTop": "#D44469",
-				"navigationBarBackgroundColor": "#D44469",
-				"backgroundColor": "#D44469",
-				"navigationBarTextStyle": "white"
-			}
-		},
+		
 		{
 			"path": "pages/order/all",
 			"style": {
 				"navigationBarTitleText": "全部订单",
-				"backgroundColorTop": "#D44469",
-				"navigationBarBackgroundColor": "#D44469",
-				"backgroundColor": "#D44469",
-				"navigationBarTextStyle": "white"
-			}
-		},
-		{
-			"path": "pages/user/index",
-			"style": {
-				"navigationBarTitleText": "预颜口腔",
 				"backgroundColorTop": "#D44469",
 				"navigationBarBackgroundColor": "#D44469",
 				"backgroundColor": "#D44469",

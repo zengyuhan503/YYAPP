@@ -1,5 +1,6 @@
 "use strict";
 const common_vendor = require("../../common/vendor.js");
+const utils_api_index = require("../../utils/api/index.js");
 if (!Array) {
   const _easycom_uni_swipe_action_item2 = common_vendor.resolveComponent("uni-swipe-action-item");
   const _easycom_uni_swipe_action2 = common_vendor.resolveComponent("uni-swipe-action");
@@ -27,6 +28,7 @@ const _sfc_main = {
         }
       }
     ]);
+    common_vendor.ref([]);
     let isOpened = common_vendor.ref(false);
     const bindClick = (e) => {
       console.log(e);
@@ -38,6 +40,19 @@ const _sfc_main = {
     const change = (e) => {
       console.log(e);
     };
+    const handleToCreateAdds = () => {
+      common_vendor.index.navigateTo({
+        url: "/pages/userAddress/add"
+      });
+    };
+    const handleGetAddressList = () => {
+      utils_api_index.GetAddressList().then((res) => {
+        console.log(res);
+      });
+    };
+    common_vendor.onMounted(() => {
+      handleGetAddressList();
+    });
     return (_ctx, _cache) => {
       return {
         a: common_vendor.o(change),
@@ -45,7 +60,8 @@ const _sfc_main = {
         c: common_vendor.p({
           show: common_vendor.unref(isOpened),
           ["auto-close"]: false
-        })
+        }),
+        d: common_vendor.o(handleToCreateAdds)
       };
     };
   }

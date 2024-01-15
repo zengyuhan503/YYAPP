@@ -113,32 +113,21 @@ const _sfc_main = {
         url: "/pages/editUser/index"
       });
     };
-    common_vendor.onMounted(() => {
-      common_vendor.index.getStorage({
-        key: "yy-is_login",
-        success: function(res) {
-          if (res != null) {
-            isLogin.value = true;
-            let info = common_vendor.index.getStorage({
-              key: "yy-userinfo",
-              success(res2) {
-                console.log(res2);
-                info = res2.data;
-                userInfo.value = JSON.parse(info);
-                console.log(userInfo.value);
-              },
-              fail(err) {
-                isLogin.value = false;
-              }
-            });
-          } else {
-            isLogin.value = false;
-          }
-        },
-        fail(err) {
-          isLogin.value = false;
-        }
+    const handleServerGetUserInfo = () => {
+      utils_api_index.GetServerUserInfo().then((res) => {
+        console.log(res);
+        userInfo.value = res;
+        userInfo.value.avatar = "https://dental.cdwuhu.com/" + res.avatar;
+        isLogin.value = true;
       });
+    };
+    const handleToAddress = () => {
+      common_vendor.wx$1.navigateTo({
+        url: "/pages/userAddress/index"
+      });
+    };
+    common_vendor.onMounted(() => {
+      handleServerGetUserInfo();
     });
     return (_ctx, _cache) => {
       return common_vendor.e({
@@ -160,11 +149,7 @@ const _sfc_main = {
           size: "18",
           color: "#B3BAC5"
         }),
-        i: common_vendor.p({
-          type: "right",
-          size: "18",
-          color: "#B3BAC5"
-        }),
+        i: common_vendor.o(handleToAddress),
         j: common_vendor.p({
           type: "right",
           size: "18",
@@ -174,11 +159,16 @@ const _sfc_main = {
           type: "right",
           size: "18",
           color: "#B3BAC5"
+        }),
+        l: common_vendor.p({
+          type: "right",
+          size: "18",
+          color: "#B3BAC5"
         })
       } : {}, {
-        l: isLogin.value
+        m: isLogin.value
       }, isLogin.value ? {} : {
-        m: common_vendor.o(getinfos)
+        n: common_vendor.o(getinfos)
       });
     };
   }

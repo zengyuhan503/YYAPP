@@ -38,13 +38,16 @@ const tokenfFail = () => {
     duration: 2e3
   });
 };
-let apiGet = (uri, params) => {
+let apiGet = (uri, params, token = null) => {
   return new Promise((resolve, reject) => {
     let url = "https://dental.cdwuhu.com/" + uri;
     common_vendor.wx$1.request({
       url,
       data: params,
       method: "GET",
+      header: {
+        "Token": token != null ? token() : null
+      },
       success(res) {
         if (res.data.code) {
           resolve(res.data.data);
@@ -56,12 +59,19 @@ let apiGet = (uri, params) => {
     });
   });
 };
-const GetIndexBanner = () => apiGet("api/common/banner", null);
-const GetUserInfo = (params) => apiPost("api/user/wechat", params);
-const GetUserPhone = (params) => apiPost("api/user/phone", params, function() {
+function getUserToken() {
   let token = common_vendor.index.getStorageSync("yy-token");
   return token;
-});
+}
+const GetIndexBanner = () => apiGet("api/common/banner", null);
+const GetServerUserInfo = (params) => apiGet("api/user/getUser", params, getUserToken);
+const GetUserInfo = (params) => apiPost("api/user/wechat", params);
+const GetUserPhone = (params) => apiPost("api/user/phone", params, getUserToken);
+const EditUserInfo = (params) => apiPost("/api/user/edit", params, getUserToken);
+const GetAddressList = () => apiGet("api/user/address/lists", null, getUserToken);
+exports.EditUserInfo = EditUserInfo;
+exports.GetAddressList = GetAddressList;
 exports.GetIndexBanner = GetIndexBanner;
+exports.GetServerUserInfo = GetServerUserInfo;
 exports.GetUserInfo = GetUserInfo;
 exports.GetUserPhone = GetUserPhone;

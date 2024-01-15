@@ -15,7 +15,7 @@
               <image src="../../static/icon/icon.png" style="width: 16px; height: 18px" />
             </div>
             <div class="inputs">
-              <input type="text" placeholder="收货人名" />
+              <input v-model="addrForm.name" type="text" placeholder="收货人名" />
             </div>
           </view>
           <view class="item">
@@ -26,7 +26,7 @@
               />
             </div>
             <div class="inputs">
-              <input type="text" placeholder="收获电话" />
+              <input v-model="addrForm.phone" type="text" placeholder="收获电话" />
             </div>
           </view>
           <view class="item">
@@ -38,7 +38,7 @@
                 />
               </div>
               <div class="inputs">
-                <input type="text" :value="addrForm.region" placeholder="省市区" />
+                <input type="text" :value="addrForm.provinces" placeholder="省市区" />
               </div>
             </picker>
           </view>
@@ -54,6 +54,7 @@
               <textarea
                 name=""
                 id=""
+                v-model="addrForm.address"
                 placeholder="收获地址"
                 cols="30"
                 style="height: 100px"
@@ -77,21 +78,30 @@ import { ref, onMounted } from "vue";
 const isDefault = ref(false);
 let addrForm = ref({
   name: "",
-  region: "",
+  phone: "",
+  provinces: "",
+  address: "",
+  is_default: "",
 });
 const bindRegionChange = (e) => {
   console.log(e);
   let detail = e.detail;
   let value = detail.value;
-  addrForm.value.region = value.join("-");
+  addrForm.value.provinces = value.join("-");
   console.log(addrForm.value);
 };
 const submitUpdata = () => {
-  uni.showToast({
-    icon: "error",
-    title: "标题",
-    duration: 2000,
-  });
+  // uni.showToast({
+  //   icon: "error",
+  //   title: "标题",
+  //   duration: 2000,
+  // });
+  console.log(isDefault.value)
+  let params={
+    ...addrForm.value,
+    is_default:isDefault.value?1:0
+  }
+  console.log(params)
 };
 </script>
 

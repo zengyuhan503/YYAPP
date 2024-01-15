@@ -1,5 +1,6 @@
 "use strict";
 const common_vendor = require("../../common/vendor.js");
+const utils_api_index = require("../../utils/api/index.js");
 if (!Array) {
   const _easycom_uni_easyinput2 = common_vendor.resolveComponent("uni-easyinput");
   const _easycom_uni_forms_item2 = common_vendor.resolveComponent("uni-forms-item");
@@ -17,15 +18,80 @@ const _sfc_main = {
   setup(__props) {
     let alignmentFormData = common_vendor.ref({
       avatar: null,
-      nickname: null
+      nickname: null,
+      phone: ""
     });
+    const handleEditNickname = () => {
+      let params = {
+        ...alignmentFormData.value
+      };
+      utils_api_index.EditUserInfo(params).then((res) => {
+        console.log(res);
+        common_vendor.index.showToast({
+          title: "修改成功",
+          duration: 2e3
+        });
+        handleServerGetUserInfo();
+      });
+    };
+    const handleServerGetUserInfo = () => {
+      utils_api_index.GetServerUserInfo().then((res) => {
+        console.log(res);
+        alignmentFormData.value.avatar = "https://dental.cdwuhu.com/" + res.avatar;
+        alignmentFormData.value.nickname = res.nickname;
+      });
+    };
+    const handlebindchooseavatar = (e) => {
+      let avatar = e.detail.avatarUrl;
+      console.log(avatar);
+      common_vendor.index.uploadFile({
+        url: "https://dental.cdwuhu.com/api/upload",
+        //仅为示例，非真实的接口地址
+        filePath: avatar,
+        name: "limit_image",
+        success: (uploadFileRes) => {
+          let url = uploadFileRes.data;
+          console.log(JSON.parse(url));
+          url = JSON.parse(url);
+          alignmentFormData.value.avatar = "https://dental.cdwuhu.com/" + url.data;
+          let params = {
+            ...alignmentFormData.value,
+            avatar: url.data
+          };
+          console.log(params);
+          utils_api_index.EditUserInfo(params).then((res) => {
+            console.log(res);
+            common_vendor.index.showToast({
+              title: "修改成功",
+              duration: 2e3
+            });
+            handleServerGetUserInfo();
+          });
+        }
+      });
+    };
+    const getinfos = (e) => {
+      let detail = e.detail;
+      if (detail.errMsg.indexOf("ok") != -1) {
+        let params = {
+          code: detail.code
+        };
+        utils_api_index.GetUserPhone(params).then((res) => {
+          if (res === alignmentFormData.value.phone)
+            return false;
+          alignmentFormData.value.phone = res;
+          let params2 = {
+            ...alignmentFormData.value
+          };
+          utils_api_index.EditUserInfo(params2).then((res2) => {
+            console.log(res2);
+          });
+        });
+      }
+    };
     common_vendor.onMounted(() => {
       try {
-        let info = common_vendor.index.getStorageSync("yy-userinfo");
-        console.log(common_vendor.index.getStorageSync("yy-phone"));
-        info = JSON.parse(info);
-        alignmentFormData.value.avatar = info.avatar;
-        alignmentFormData.value.nickname = info.nickname;
+        handleServerGetUserInfo();
         alignmentFormData.value.phone = common_vendor.index.getStorageSync("yy-phone");
       } catch (error) {
         common_vendor.index.removeStorageSync("yy-userinfo");
@@ -36,25 +102,29 @@ const _sfc_main = {
     });
     return (_ctx, _cache) => {
       return {
-        a: common_vendor.o(($event) => common_vendor.unref(alignmentFormData).nickname = $event),
-        b: common_vendor.p({
+        a: common_vendor.unref(alignmentFormData).avatar,
+        b: common_vendor.o(handlebindchooseavatar),
+        c: common_vendor.o(handleEditNickname),
+        d: common_vendor.o(($event) => common_vendor.unref(alignmentFormData).nickname = $event),
+        e: common_vendor.p({
           placeholder: "请输入姓名",
           modelValue: common_vendor.unref(alignmentFormData).nickname
         }),
-        c: common_vendor.p({
+        f: common_vendor.p({
           label: "姓名"
         }),
-        d: common_vendor.o(_ctx.getinfos),
-        e: common_vendor.o(($event) => common_vendor.unref(alignmentFormData).phone = $event),
-        f: common_vendor.p({
+        g: common_vendor.o(($event) => common_vendor.unref(alignmentFormData).phone = $event),
+        h: common_vendor.p({
+          disabled: true,
           placeholder: "请输入手机号",
           modelValue: common_vendor.unref(alignmentFormData).phone
         }),
-        g: common_vendor.p({
+        i: common_vendor.o(getinfos),
+        j: common_vendor.p({
           label: "电话"
         }),
-        h: common_vendor.sr("baseForm", "d9dfb2ef-0"),
-        i: common_vendor.p({
+        k: common_vendor.sr("baseForm", "d9dfb2ef-0"),
+        l: common_vendor.p({
           modelValue: common_vendor.unref(alignmentFormData),
           ["label-position"]: "left"
         })

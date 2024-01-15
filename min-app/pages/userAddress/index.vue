@@ -37,6 +37,7 @@
     </div>
     <view class="loginOut">
       <button
+        @click="handleToCreateAdds"
         size="default"
         type="default"
         style="color: #ffffff; backgroundcolor: #d44469; bordercolor: #d44469"
@@ -50,6 +51,7 @@
 
 <script setup>
 import { ref, onMounted } from "vue";
+import { GetAddressList } from "../../utils/api/index";
 let options2 = ref([
   {
     text: "取消",
@@ -64,6 +66,7 @@ let options2 = ref([
     },
   },
 ]);
+let addressList = ref([]);
 let isOpened = ref(false);
 const bindClick = (e) => {
   console.log(e);
@@ -75,6 +78,20 @@ const bindClick = (e) => {
 const change = (e) => {
   console.log(e);
 };
+const handleToCreateAdds = () => {
+  uni.navigateTo({
+    url: "/pages/userAddress/add",
+  });
+};
+const handleGetAddressList = () => {
+  GetAddressList().then((res) => {
+    console.log(res);
+    addressList = res;
+  });
+};
+onMounted(() => {
+  handleGetAddressList();
+});
 </script>
 
 <style lang="less" scoped>

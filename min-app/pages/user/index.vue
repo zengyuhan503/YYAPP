@@ -35,7 +35,7 @@
       </view>
       <view class="helps" v-if="isLogin">
         <view class="items">
-          <view class="item">
+          <view class="item" @click="handleToAddress">
             <view class="label">
               <image src="../../static/icon/help1.png" mode="" /><text>地址管理</text>
             </view>
@@ -90,7 +90,7 @@
 <script setup>
 import navs from "/components/navs/index.vue";
 import { onLaunch, onShow, onLoad } from "@dcloudio/uni-app";
-import { GetUserInfo, GetUserPhone } from "../../utils/api/index";
+import { GetUserInfo, GetUserPhone, GetServerUserInfo } from "../../utils/api/index";
 import { ref, onMounted } from "vue";
 
 let modeIndex = ref(-1);
@@ -198,32 +198,21 @@ const handleEditInfo = () => {
     url: "/pages/editUser/index",
   });
 };
-onMounted(() => {
-  uni.getStorage({
-    key: "yy-is_login",
-    success: function (res) {
-      if (res != null) {
-        isLogin.value = true;
-        let info = uni.getStorage({
-          key: "yy-userinfo",
-          success(res) {
-            console.log(res);
-            info = res.data;
-            userInfo.value = JSON.parse(info);
-            console.log(userInfo.value);
-          },
-          fail(err) {
-            isLogin.value = false;
-          },
-        });
-      } else {
-        isLogin.value = false;
-      }
-    },
-    fail(err) {
-      isLogin.value = false;
-    },
+const handleServerGetUserInfo = () => {
+  GetServerUserInfo().then((res) => {
+    console.log(res);
+    userInfo.value = res;
+    userInfo.value.avatar='https://dental.cdwuhu.com/'+res.avatar
+    isLogin.value=true
   });
+};
+const handleToAddress=()=>{
+  wx.navigateTo({
+    url:"/pages/userAddress/index"
+  })
+}
+onMounted(() => {
+  handleServerGetUserInfo();
 });
 </script>
 

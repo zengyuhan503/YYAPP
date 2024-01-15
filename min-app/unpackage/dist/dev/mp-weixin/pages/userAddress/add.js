@@ -6,28 +6,38 @@ const _sfc_main = {
     const isDefault = common_vendor.ref(false);
     let addrForm = common_vendor.ref({
       name: "",
-      region: ""
+      phone: "",
+      provinces: "",
+      address: "",
+      is_default: ""
     });
     const bindRegionChange = (e) => {
       console.log(e);
       let detail = e.detail;
       let value = detail.value;
-      addrForm.value.region = value.join("-");
+      addrForm.value.provinces = value.join("-");
       console.log(addrForm.value);
     };
     const submitUpdata = () => {
-      common_vendor.index.showToast({
-        icon: "error",
-        title: "标题",
-        duration: 2e3
-      });
+      console.log(isDefault.value);
+      let params = {
+        ...addrForm.value,
+        is_default: isDefault.value ? 1 : 0
+      };
+      console.log(params);
     };
     return (_ctx, _cache) => {
       return {
         a: isDefault.value,
-        b: common_vendor.unref(addrForm).region,
-        c: common_vendor.o(bindRegionChange),
-        d: common_vendor.o(submitUpdata)
+        b: common_vendor.unref(addrForm).name,
+        c: common_vendor.o(($event) => common_vendor.unref(addrForm).name = $event.detail.value),
+        d: common_vendor.unref(addrForm).phone,
+        e: common_vendor.o(($event) => common_vendor.unref(addrForm).phone = $event.detail.value),
+        f: common_vendor.unref(addrForm).provinces,
+        g: common_vendor.o(bindRegionChange),
+        h: common_vendor.unref(addrForm).address,
+        i: common_vendor.o(($event) => common_vendor.unref(addrForm).address = $event.detail.value),
+        j: common_vendor.o(submitUpdata)
       };
     };
   }

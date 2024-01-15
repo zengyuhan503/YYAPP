@@ -1,6 +1,8 @@
 {
   "pages": [
+    "pages/userAddress/index",
     "pages/index/index",
+    "pages/user/index",
     "pages/editUser/index",
     "pages/popularScience/index",
     "pages/detail/unpaid",
@@ -8,9 +10,7 @@
     "pages/mall/info",
     "pages/mall/index",
     "pages/userAddress/add",
-    "pages/userAddress/index",
-    "pages/order/all",
-    "pages/user/index"
+    "pages/order/all"
   ],
   "window": {
     "navigationBarTextStyle": "black",
