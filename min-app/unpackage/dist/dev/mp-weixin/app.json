@@ -1,0 +1,23 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/editUser/index",
+    "pages/popularScience/index",
+    "pages/detail/unpaid",
+    "pages/mall/purchase",
+    "pages/mall/info",
+    "pages/mall/index",
+    "pages/userAddress/add",
+    "pages/userAddress/index",
+    "pages/order/all",
+    "pages/user/index"
+  ],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "uni-app",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8"
+  },
+  "permission": {},
+  "usingComponents": {}
+}

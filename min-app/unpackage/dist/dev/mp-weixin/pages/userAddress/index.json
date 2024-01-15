@@ -1,0 +1,11 @@
+{
+  "navigationBarTitleText": "地址管理",
+  "backgroundColorTop": "#D44469",
+  "navigationBarBackgroundColor": "#D44469",
+  "backgroundColor": "#D44469",
+  "navigationBarTextStyle": "white",
+  "usingComponents": {
+    "uni-swipe-action-item": "../../uni_modules/uni-swipe-action/components/uni-swipe-action-item/uni-swipe-action-item",
+    "uni-swipe-action": "../../uni_modules/uni-swipe-action/components/uni-swipe-action/uni-swipe-action"
+  }
+}
