@@ -29,6 +29,13 @@ const _sfc_main = {
     });
     let wxInfo = {};
     const isLogin = common_vendor.ref(false);
+    const showCtUs = common_vendor.ref(false);
+    const handleMakePhoneCall = () => {
+      common_vendor.index.makePhoneCall({
+        phoneNumber: "15522756996"
+        //仅为示例
+      });
+    };
     const handleGetUserInfo = (fn) => {
       let params = {
         cloudID: wxInfo.cloudID,
@@ -70,6 +77,11 @@ const _sfc_main = {
         isLogin.value = true;
         fn();
       });
+    };
+    const handleLoginOut = () => {
+      common_vendor.index.removeStorageSync("yy-token");
+      common_vendor.index.removeStorageSync("yy-userinfo");
+      isLogin.value = false;
     };
     const getinfos = (e) => {
       let detail = e.detail;
@@ -115,8 +127,8 @@ const _sfc_main = {
     };
     const handleServerGetUserInfo = () => {
       utils_api_index.GetServerUserInfo().then((res) => {
-        console.log(res);
         userInfo.value = res;
+        console.log(res);
         userInfo.value.avatar = "https://dental.cdwuhu.com/" + res.avatar;
         isLogin.value = true;
       });
@@ -124,6 +136,16 @@ const _sfc_main = {
     const handleToAddress = () => {
       common_vendor.wx$1.navigateTo({
         url: "/pages/userAddress/index"
+      });
+    };
+    const handleToAboutDesc = () => {
+      common_vendor.wx$1.navigateTo({
+        url: "/pages/about/desc"
+      });
+    };
+    const handleToAboutUs = () => {
+      common_vendor.wx$1.navigateTo({
+        url: "/pages/about/us"
       });
     };
     common_vendor.onMounted(() => {
@@ -155,21 +177,35 @@ const _sfc_main = {
           size: "18",
           color: "#B3BAC5"
         }),
-        k: common_vendor.p({
-          type: "right",
-          size: "18",
-          color: "#B3BAC5"
-        }),
+        k: common_vendor.o(handleToAboutDesc),
         l: common_vendor.p({
           type: "right",
           size: "18",
           color: "#B3BAC5"
-        })
+        }),
+        m: common_vendor.o(handleToAboutUs),
+        n: common_vendor.p({
+          type: "right",
+          size: "18",
+          color: "#B3BAC5"
+        }),
+        o: common_vendor.o(($event) => showCtUs.value = true)
       } : {}, {
-        m: isLogin.value
-      }, isLogin.value ? {} : {
-        n: common_vendor.o(getinfos)
-      });
+        p: isLogin.value
+      }, isLogin.value ? {
+        q: common_vendor.o(handleLoginOut)
+      } : {
+        r: common_vendor.o(getinfos)
+      }, {
+        s: showCtUs.value
+      }, showCtUs.value ? {
+        t: common_vendor.o(($event) => showCtUs.value = false),
+        v: common_vendor.p({
+          type: "closeempty",
+          size: "30"
+        }),
+        w: common_vendor.o(handleMakePhoneCall)
+      } : {});
     };
   }
 };

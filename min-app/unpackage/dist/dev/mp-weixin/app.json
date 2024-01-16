@@ -1,8 +1,10 @@
 {
   "pages": [
+    "pages/user/index",
+    "pages/about/desc",
+    "pages/about/us",
     "pages/userAddress/index",
     "pages/index/index",
-    "pages/user/index",
     "pages/editUser/index",
     "pages/popularScience/index",
     "pages/detail/unpaid",
@@ -10,6 +12,7 @@
     "pages/mall/info",
     "pages/mall/index",
     "pages/userAddress/add",
+    "pages/userAddress/edit",
     "pages/order/all"
   ],
   "window": {

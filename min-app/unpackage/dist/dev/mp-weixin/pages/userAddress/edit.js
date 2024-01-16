@@ -2,7 +2,7 @@
 const common_vendor = require("../../common/vendor.js");
 const utils_api_index = require("../../utils/api/index.js");
 const _sfc_main = {
-  __name: "add",
+  __name: "edit",
   setup(__props) {
     const isDefault = common_vendor.ref(false);
     let addrForm = common_vendor.ref({
@@ -25,7 +25,8 @@ const _sfc_main = {
     const submitUpdata = () => {
       let params = {
         ...addrForm.value,
-        is_default: isDefault.value ? 1 : 0
+        is_default: isDefault.value ? 1 : 0,
+        address_id: editid
       };
       if (Object.values(params).includes("")) {
         common_vendor.index.showToast({
@@ -34,7 +35,7 @@ const _sfc_main = {
         });
         return false;
       }
-      utils_api_index.CreateAddress(params).then((res) => {
+      utils_api_index.EditAddress(params).then((res) => {
         common_vendor.index.showToast({
           title: "添加成功",
           icon: "success",
@@ -48,6 +49,16 @@ const _sfc_main = {
       });
       console.log(params);
     };
+    let editid = null;
+    common_vendor.onLoad((option) => {
+      addrForm.value.address = option.address;
+      addrForm.value.phone = option.phone;
+      addrForm.value.name = option.name;
+      addrForm.value.provinces = option.provinces;
+      addrForm.value.is_default = option.is_default;
+      editid = option.id;
+      console.log(option);
+    });
     return (_ctx, _cache) => {
       return {
         a: common_vendor.o(handleChangeRadio),
@@ -64,5 +75,5 @@ const _sfc_main = {
     };
   }
 };
-const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__scopeId", "data-v-09e5ba6c"], ["__file", "F:/PROJECT-ZENGYUHAN/yuyan-project/min-app/pages/userAddress/add.vue"]]);
+const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__scopeId", "data-v-788d9103"], ["__file", "F:/PROJECT-ZENGYUHAN/yuyan-project/min-app/pages/userAddress/edit.vue"]]);
 wx.createPage(MiniProgramPage);

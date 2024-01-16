@@ -6,6 +6,7 @@
       backgroundColor="transparent"
       :title="pageTitle"
       :height="height"
+      @clickLeft="handleleft"
       color="#ffffff"
     />
   </div>
@@ -22,10 +23,15 @@ let pageTitle = ref("标题");
 let props = defineProps({
   title: String,
 });
-pageTitle.value=props.title
+pageTitle.value = props.title;
 onLaunch((options) => {
   console.log(options);
 });
+const handleleft = () => {
+  uni.navigateBack({
+    delta: 1,
+  });
+};
 onShow((options) => {
   const res = wx.getMenuButtonBoundingClientRect();
   height.value = res.height;
@@ -34,12 +40,12 @@ onShow((options) => {
 </script>
 
 <style lang="less">
-	.page-header{
-		// position: absolute;
-		width: 100%;
-		z-index: 1001;
-	}
-  .uni-navbar__header-btns{
-    float: left;
-  }
+.page-header {
+  // position: absolute;
+  width: 100%;
+  z-index: 1001;
+}
+.uni-navbar__header-btns {
+  float: left;
+}
 </style>

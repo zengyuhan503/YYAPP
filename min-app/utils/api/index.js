@@ -13,6 +13,7 @@ let apiPost = (uri, params, token = null) => {
 				if (res.data.code == 200) {
 					resolve(res.data.data)
 				} else {
+					console.log(res.data.code)
 					if (res.data.code == 203) {
 						tokenfFail()
 						reject()
@@ -34,13 +35,20 @@ let apiPost = (uri, params, token = null) => {
 const tokenfFail = () => {
 	uni.showToast({
 		title: '登录失效，请重新登录',
+		icon: "none",
 		duration: 2000
 	});
-	// uni.removeStorageSync('yy-token');
-	// uni.removeStorageSync('yy-userinfo');
-	// wx.navigateTo({
-	// 	url: "/pages/user/index",
-	//   });
+	uni.removeStorageSync('yy-token');
+	uni.removeStorageSync('yy-userinfo');
+	var pages = getCurrentPages();
+	var currentPage = pages[pages.length - 1];
+	var currentRoute = currentPage.route;
+	console.log(currentRoute)
+	if (currentRoute == 'pages/user/index') return false;
+
+	wx.navigateTo({
+		url: "/pages/user/index",
+	});
 }
 let apiGet = (uri, params, token = null) => {
 	return new Promise((resolve, reject) => {
@@ -53,8 +61,19 @@ let apiGet = (uri, params, token = null) => {
 				"Token": token != null ? token() : null
 			},
 			success(res) {
-				if (res.data.code) {
+				if (res.data.code == 200) {
 					resolve(res.data.data)
+				} else {
+					console.log(res.data.code)
+					if (res.data.code == 203) {
+						tokenfFail()
+						reject()
+					} else {
+						uni.showToast({
+							title: res.data.msg,
+							duration: 2000
+						});
+					}
 				}
 			},
 			fail(err) {
@@ -77,6 +96,7 @@ const apiUploadImage = (uri) => {
 				if (res.data.code == 200) {
 					resolve(res.data.data)
 				} else {
+					console.log(res.data.code)
 					if (res.data.code == 203) {
 						tokenfFail()
 						reject()
@@ -109,3 +129,9 @@ export const uploadImage = (params) => apiUploadImage('/api/upload', params)
 
 
 export const GetAddressList = () => apiGet('api/user/address/lists', null, getUserToken)
+export const CreateAddress = (params) => apiPost('api/user/address/add', params, getUserToken)
+export const RmAddress = (params) => apiPost('api/user/address/delete', params, getUserToken)
+export const EditAddress = (params) => apiPost('api/user/address/edit', params, getUserToken)
+
+export const AboutDesc = () => apiGet('/api/common/desc', null, null)
+export const AboutUs = () => apiGet('/api/common/about', null, null)

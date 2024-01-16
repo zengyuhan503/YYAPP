@@ -2,7 +2,7 @@
 	<view class="page-content">
 		<view class="content">
 			<view class="page-header">
-				<!-- 预颜口腔 -->
+				预颜口腔
 			</view>
 			<view class="page-banner">
 				<uni-swiper-dot class="uni-swiper-dot-box" @clickItem="clickItem" :info="info" :current="current" :mode="mode"

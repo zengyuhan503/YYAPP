@@ -1,6 +1,29 @@
 {
 	"pages": [
 		{
+			"path": "pages/user/index",
+			"style": {
+				"navigationBarTitleText": "预颜口腔",
+				"backgroundColorTop": "#D44469",
+				"navigationBarBackgroundColor": "#D44469",
+				"backgroundColor": "#D44469",
+				"navigationBarTextStyle": "white"
+			}
+		},
+		
+		{
+			"path": "pages/about/desc",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/about/us",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		},
+		{
 			"path": "pages/userAddress/index",
 			"style": {
 				"navigationBarTitleText": "地址管理",
@@ -16,17 +39,6 @@
 				"navigationStyle": "custom"
 			}
 		},
-		
-		{
-			"path": "pages/user/index",
-			"style": {
-				"navigationBarTitleText": "预颜口腔",
-				"backgroundColorTop": "#D44469",
-				"navigationBarBackgroundColor": "#D44469",
-				"backgroundColor": "#D44469",
-				"navigationBarTextStyle": "white"
-			}
-		},
 		{
 			"path": "pages/editUser/index",
 			"style": {
@@ -37,7 +49,6 @@
 				"navigationBarTextStyle": "white"
 			}
 		},
-		
 		{
 			"path": "pages/popularScience/index",
 			"style": {
@@ -88,7 +99,16 @@
 				"navigationBarTextStyle": "white"
 			}
 		},
-		
+		{
+			"path": "pages/userAddress/edit",
+			"style": {
+				"navigationBarTitleText": "我的地址",
+				"backgroundColorTop": "#D44469",
+				"navigationBarBackgroundColor": "#D44469",
+				"backgroundColor": "#D44469",
+				"navigationBarTextStyle": "white"
+			}
+		},
 		{
 			"path": "pages/order/all",
 			"style": {

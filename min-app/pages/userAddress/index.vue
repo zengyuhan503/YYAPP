@@ -3,28 +3,30 @@
     <div class="main">
       <uni-swipe-action>
         <uni-swipe-action-item
+          v-for="(item, index) in addressList"
+          :key="index"
           :show="isOpened"
           :auto-close="false"
           @change="change"
           @click="bindClick"
         >
           <div class="items">
-            <div class="name">张三</div>
-            <div class="phone">18328518241</div>
+            <div class="name">{{ item.name }}</div>
+            <div class="phone">{{ item.phone }}</div>
             <div class="addres">
-              <div class="default">默认</div>
-              四川省成都市高新区天府三街写字楼B座30
+              <div class="default" v-if="item.is_default">默认</div>
+              {{ item.provinces }}-{{ item.addres }}
             </div>
           </div>
           <template v-slot:right>
             <div class="action">
-              <div class="delete">
+              <div class="delete" @click="handleDelete(item)">
                 <div class="icons">
                   <image src="../../static/image/delete.png" />
                 </div>
                 <div class="label">删除</div>
               </div>
-              <div class="delete" style="margin-right: 0">
+              <div class="delete" style="margin-right: 0" @click="handleEditAdd(item)">
                 <div class="icons">
                   <image src="../../static/image/edit.png" />
                 </div>
@@ -51,7 +53,7 @@
 
 <script setup>
 import { ref, onMounted } from "vue";
-import { GetAddressList } from "../../utils/api/index";
+import { GetAddressList, RmAddress } from "../../utils/api/index";
 let options2 = ref([
   {
     text: "取消",
@@ -69,7 +71,6 @@ let options2 = ref([
 let addressList = ref([]);
 let isOpened = ref(false);
 const bindClick = (e) => {
-  console.log(e);
   uni.showToast({
     title: `点击了${e.position === "left" ? "左侧" : "右侧"} ${e.content.text}按钮`,
     icon: "none",
@@ -83,10 +84,42 @@ const handleToCreateAdds = () => {
     url: "/pages/userAddress/add",
   });
 };
+function objectToQueryString(obj) {
+  var queryString = "";
+  for (var key in obj) {
+    if (obj.hasOwnProperty(key)) {
+      if (queryString.length > 0) {
+        queryString += "&";
+      }
+      queryString += key + "=" + obj[key];
+    }
+  }
+  return "?" + queryString;
+}
 const handleGetAddressList = () => {
   GetAddressList().then((res) => {
     console.log(res);
-    addressList = res;
+    addressList.value = res;
+  });
+};
+const handleEditAdd = (item) => {
+  let querys = objectToQueryString(item);
+  let url = `/pages/userAddress/edit${querys}`;
+  console.log(url);
+  uni.navigateTo({
+     url:url
+  });
+};
+const handleDelete = (item) => {
+  let params = {
+    address_id: item.id,
+  };
+  RmAddress(params).then((res) => {
+    uni.showToast({
+      title: "操作成功",
+      icon: "none",
+    });
+    handleGetAddressList();
   });
 };
 onMounted(() => {

@@ -74,8 +74,9 @@
 </template>
 
 <script setup>
+import { onLaunch, onLoad } from "@dcloudio/uni-app";
 import { ref, onMounted } from "vue";
-import { CreateAddress } from "../../utils/api/index";
+import { EditAddress } from "../../utils/api/index";
 const isDefault = ref(false);
 let addrForm = ref({
   name: "",
@@ -103,18 +104,19 @@ const submitUpdata = () => {
   let params = {
     ...addrForm.value,
     is_default: isDefault.value ? 1 : 0,
+    address_id: editid,
   };
-  if(Object.values(params).includes("")){
+  if (Object.values(params).includes("")) {
     uni.showToast({
-      title:"格式不正确",
-      icon:"error"
-    })
-    return false
+      title: "格式不正确",
+      icon: "error",
+    });
+    return false;
   }
-  CreateAddress(params).then((res) => {
+  EditAddress(params).then((res) => {
     uni.showToast({
       title: "添加成功",
-      icon:"success",
+      icon: "success",
       duration: 2000,
       success() {
         wx.navigateTo({
@@ -126,6 +128,16 @@ const submitUpdata = () => {
 
   console.log(params);
 };
+let editid = null;
+onLoad((option) => {
+  addrForm.value.address = option.address;
+  addrForm.value.phone = option.phone;
+  addrForm.value.name = option.name;
+  addrForm.value.provinces = option.provinces;
+  addrForm.value.is_default = option.is_default;
+  editid = option.id;
+  console.log(option);
+});
 </script>
 
 <style lang="less" scoped>

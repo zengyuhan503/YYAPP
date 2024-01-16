@@ -28,10 +28,9 @@ const _sfc_main = {
         }
       }
     ]);
-    common_vendor.ref([]);
+    let addressList = common_vendor.ref([]);
     let isOpened = common_vendor.ref(false);
     const bindClick = (e) => {
-      console.log(e);
       common_vendor.index.showToast({
         title: `点击了${e.position === "left" ? "左侧" : "右侧"} ${e.content.text}按钮`,
         icon: "none"
@@ -45,9 +44,42 @@ const _sfc_main = {
         url: "/pages/userAddress/add"
       });
     };
+    function objectToQueryString(obj) {
+      var queryString = "";
+      for (var key in obj) {
+        if (obj.hasOwnProperty(key)) {
+          if (queryString.length > 0) {
+            queryString += "&";
+          }
+          queryString += key + "=" + obj[key];
+        }
+      }
+      return "?" + queryString;
+    }
     const handleGetAddressList = () => {
       utils_api_index.GetAddressList().then((res) => {
         console.log(res);
+        addressList.value = res;
+      });
+    };
+    const handleEditAdd = (item) => {
+      let querys = objectToQueryString(item);
+      let url = `/pages/userAddress/edit${querys}`;
+      console.log(url);
+      common_vendor.index.navigateTo({
+        url
+      });
+    };
+    const handleDelete = (item) => {
+      let params = {
+        address_id: item.id
+      };
+      utils_api_index.RmAddress(params).then((res) => {
+        common_vendor.index.showToast({
+          title: "操作成功",
+          icon: "none"
+        });
+        handleGetAddressList();
       });
     };
     common_vendor.onMounted(() => {
@@ -55,13 +87,27 @@ const _sfc_main = {
     });
     return (_ctx, _cache) => {
       return {
-        a: common_vendor.o(change),
-        b: common_vendor.o(bindClick),
-        c: common_vendor.p({
+        a: common_vendor.f(common_vendor.unref(addressList), (item, index, i0) => {
+          return common_vendor.e({
+            a: common_vendor.t(item.name),
+            b: common_vendor.t(item.phone),
+            c: item.is_default
+          }, item.is_default ? {} : {}, {
+            d: common_vendor.t(item.provinces),
+            e: common_vendor.t(item.addres),
+            f: common_vendor.o(($event) => handleDelete(item), index),
+            g: common_vendor.o(($event) => handleEditAdd(item), index),
+            h: index,
+            i: common_vendor.o(change, index),
+            j: common_vendor.o(bindClick, index),
+            k: "7f8df939-1-" + i0 + ",7f8df939-0"
+          });
+        }),
+        b: common_vendor.p({
           show: common_vendor.unref(isOpened),
           ["auto-close"]: false
         }),
-        d: common_vendor.o(handleToCreateAdds)
+        c: common_vendor.o(handleToCreateAdds)
       };
     };
   }
