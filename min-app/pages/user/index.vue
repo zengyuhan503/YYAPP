@@ -148,7 +148,7 @@ const handleGetUserInfo = (fn) => {
       ...res,
     };
     userInfo.value = {
-      avatar:  info.avatar,
+      avatar: info.avatar,
       nickname: info.nickname,
       user_id: info.user_id,
       session_key: info.session_key,
@@ -179,7 +179,7 @@ const handleGetUserInfo = (fn) => {
 const handleLoginOut = () => {
   uni.removeStorageSync("yy-token");
   uni.removeStorageSync("yy-userinfo");
-  isLogin.value=false
+  isLogin.value = false;
 };
 const getinfos = (e) => {
   let detail = e.detail;
@@ -208,6 +208,7 @@ const getinfos = (e) => {
                 console.log(res);
                 uni.setStorageSync("yy-phone", res);
               });
+              handleServerGetUserInfo();
             });
           }
         },
@@ -227,7 +228,7 @@ const handleEditInfo = () => {
 const handleServerGetUserInfo = () => {
   GetServerUserInfo().then((res) => {
     userInfo.value = res;
-    console.log(res)
+    console.log(res);
     userInfo.value.avatar = "https://dental.cdwuhu.com/" + res.avatar;
     isLogin.value = true;
   });

@@ -110,6 +110,7 @@ const _sfc_main = {
                     console.log(res);
                     common_vendor.index.setStorageSync("yy-phone", res);
                   });
+                  handleServerGetUserInfo();
                 });
               }
             }

@@ -25,6 +25,7 @@ const _sfc_main = {
       let params = {
         ...alignmentFormData.value
       };
+      params.avatar = params.avatar.replace("https://dental.cdwuhu.com/", "");
       utils_api_index.EditUserInfo(params).then((res) => {
         console.log(res);
         common_vendor.index.showToast({
@@ -51,14 +52,12 @@ const _sfc_main = {
         name: "limit_image",
         success: (uploadFileRes) => {
           let url = uploadFileRes.data;
-          console.log(JSON.parse(url));
           url = JSON.parse(url);
           alignmentFormData.value.avatar = "https://dental.cdwuhu.com/" + url.data;
           let params = {
             ...alignmentFormData.value,
             avatar: url.data
           };
-          console.log(params);
           utils_api_index.EditUserInfo(params).then((res) => {
             console.log(res);
             common_vendor.index.showToast({

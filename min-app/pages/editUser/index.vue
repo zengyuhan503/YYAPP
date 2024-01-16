@@ -49,6 +49,7 @@ const handleEditNickname = () => {
   let params = {
     ...alignmentFormData.value,
   };
+  params.avatar=params.avatar.replace('https://dental.cdwuhu.com/','')
   EditUserInfo(params).then((res) => {
     console.log(res);
     uni.showToast({
@@ -74,14 +75,12 @@ const handlebindchooseavatar = (e) => {
     name: "limit_image",
     success: (uploadFileRes) => {
       let url = uploadFileRes.data;
-      console.log(JSON.parse(url));
       url = JSON.parse(url);
       alignmentFormData.value.avatar = "https://dental.cdwuhu.com/" + url.data;
       let params = {
         ...alignmentFormData.value,
         avatar: url.data,
       };
-      console.log(params);
       EditUserInfo(params).then((res) => {
         console.log(res);
         uni.showToast({
