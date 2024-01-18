@@ -18,10 +18,10 @@ let formState = reactive({
   discount: 100,
   category_id: [],
 });
-let disPrice=computed(()=>{
-    let val=formState.price*(formState.discount/100);
-    return val
-})
+let disPrice = computed(() => {
+  let val = formState.price * (formState.discount / 100);
+  return val;
+});
 const head_image = ref([]);
 const deputy_image = ref([]);
 const detail_image = ref([]);
@@ -134,31 +134,44 @@ const handleSubmit = () => {
     message.error("请全部填写后再确定");
     return false;
   }
+  submitLoading.value = true;
   uploadImages().then((res) => {
     let head_image = res[0];
-    let deputy_image = res[1];
-    let detail_image = res[2];
-    let params = {
-      head_image: head_image.data,
-      deputy_image: deputy_image.data,
-      detail_image: detail_image.data,
-      price: formState.price,
-      category_id: formState.category_id.join(","),
-      title: formState.title,
-      desc: formState.desc,
-      discount: formState.discount + "",
-    };
-    createGoods(params).then((res) => {
-      console.log(res);
-      if (res.code == 200) {
-        message.success("操作成功");
-        router.push({
-          path: "/commodity/list",
-          query: { active: 2 },
-        });
-      }
+    let detail_image = res[1];
+    uploadImages2().then((ciimgs) => {
+      let imgs = ciimgs.map((item) => item.data);
+      let params = {
+        head_image: head_image.data,
+        deputy_image: imgs.join(','),
+        detail_image: detail_image.data,
+        price: formState.price,
+        category_id: formState.category_id.join(","),
+        title: formState.title,
+        desc: formState.desc,
+        discount: formState.discount + "",
+      };
+      createGoods(params).then((res) => {
+        console.log(res);
+        if (res.code == 200) {
+          message.success("操作成功");
+          router.push({
+            path: "/commodity/list",
+            query: { active: 2 },
+          });
+        }
+      });
     });
   });
+};
+const uploadImages2 = () => {
+  let arr = [];
+  for (let i = 0; i < deputy_image.value.length; i++) {
+    const item = deputy_image.value[i];
+    let uploadParams = new FormData();
+    uploadParams.append("limit_image", item.originFileObj);
+    arr.push(imageUpLoad(uploadParams));
+  }
+  return Promise.all(arr);
 };
 const uploadImages = () => {
   return new Promise((resolve, reject) => {
@@ -172,12 +185,9 @@ const uploadImages = () => {
     }
     let uploads = [];
     let uploadParams = new FormData();
-    let uploadParams1 = new FormData();
     let uploadParams2 = new FormData();
     uploadParams.append("limit_image", head_image.value[0].originFileObj);
     uploads.push(imageUpLoad(uploadParams));
-    uploadParams1.append("limit_image", deputy_image.value[0].originFileObj);
-    uploads.push(imageUpLoad(uploadParams1));
     uploadParams2.append("limit_image", detail_image.value[0].originFileObj);
     uploads.push(imageUpLoad(uploadParams2));
     Promise.all(uploads)
@@ -252,7 +262,7 @@ onMounted(() => {
                       name="file"
                       v-model:file-list="deputy_image"
                       :before-upload="coverBeforeUpload2"
-                      :maxCount="1"
+                      :maxCount="5"
                     >
                       <a-button type="primary">
                         <PlusOutlined />
@@ -319,9 +329,13 @@ onMounted(() => {
                 </a-form-item>
                 <div class="form-upload form-price">
                   <p>
-                    <span class="label">折后价格：</span><span class="price">{{ disPrice }} ¥</span>
+                    <span class="label">折后价格：</span
+                    ><span class="price">{{ disPrice }} ¥</span>
                   </p>
-                  <p><span class="label">价格差：</span><span class="price">{{ formState.price - disPrice }} ¥</span></p>
+                  <p>
+                    <span class="label">价格差：</span
+                    ><span class="price">{{ formState.price - disPrice }} ¥</span>
+                  </p>
                 </div>
               </a-col>
               <a-col :span="8">

@@ -394,8 +394,14 @@ const saveTimes = () => {
 };
 let submitLoading = ref(false);
 const handleSubmit = () => {
+  let date=hastime.map(item=>{
+    const newItem={...item};
+    delete newItem.id;
+    return newItem
+  })
   let params = {
-    date: hastime,
+    date: date,
+    type:props.type
   };
   booking_plan_edit(params).then((res) => {
     console.log(res);

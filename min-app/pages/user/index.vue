@@ -15,19 +15,19 @@
       <view class="orders" v-if="isLogin">
         <view class="title">我的订单</view>
         <view class="items">
-          <view class="item">
+          <view class="item" @click="handleToOrderPage('0')">
             <image src="../../static/icon/order1.png" />
             <view>待付款</view>
           </view>
-          <view class="item">
+          <view class="item" @click="handleToOrderPage('2')">
             <image src="../../static/icon/order2.png" />
             <view>待收货</view>
           </view>
-          <view class="item">
+          <view class="item" @click="handleToOrderPage('4')">
             <image src="../../static/icon/order3.png" />
             <view>完成订单</view>
           </view>
-          <view class="item">
+          <view class="item" @click="handleToOrderPage('all')">
             <image src="../../static/icon/order4.png" />
             <view>全部订单</view>
           </view>
@@ -55,7 +55,7 @@
           </view>
           <view class="item" @click="showCtUs = true">
             <view class="label">
-              <image src="../../static/icon/help3.png" mode="" /><text>联系我们</text>
+              <image src="../../static/icon/help4.png" mode="" /><text>联系我们</text>
             </view>
             <uni-icons type="right" size="18" color="#B3BAC5"></uni-icons>
           </view>
@@ -106,7 +106,12 @@
 <script setup>
 import navs from "/components/navs/index.vue";
 import { onLaunch, onShow, onLoad } from "@dcloudio/uni-app";
-import { GetUserInfo, GetUserPhone, GetServerUserInfo } from "../../utils/api/index";
+import {
+  GetUserInfo,
+  GetUserPhone,
+  GetServerUserInfo,
+  GetOrderList,
+} from "../../utils/api/index";
 import { ref, onMounted } from "vue";
 
 let modeIndex = ref(-1);
@@ -248,7 +253,55 @@ const handleToAboutUs = () => {
     url: "/pages/about/us",
   });
 };
+let orderList = {
+  0: [],
+  2: [],
+  4: [],
+  all: [],
+};
+const handleGetOrderList = () => {
+  let params = {
+    page: 1,
+    page_size: 1000,
+    status: "all",
+  };
+  GetOrderList(params).then((res) => {
+    console.log(res);
+
+    let list = res.data;
+    orderList["0"] = list.filter((item) => item.status == 0);
+    orderList["2"] = list.filter((item) => item.status == 2);
+    orderList["all"] = list;
+  });
+};
+const handleToOrderPage = (status) => {
+  let str = {
+    0: "待付款",
+    2: "待收货",
+    4: "完成",
+    all: "全部",
+  };
+  if (orderList[status].length == 0) {
+    uni.showToast({
+      icon: "error",
+      title: `无${str[status]}订单`,
+      duration: 2000,
+    });
+    return false;
+  }
+  if (status == 0) {
+    let orderid = orderList[status][0].id;
+    uni.navigateTo({
+      url: "/pages/detail/unpaid?id=" + orderid,
+    });
+  } else {
+    uni.navigateTo({
+      url: "/pages/order/all?status=" + status,
+    });
+  }
+};
 onMounted(() => {
+  handleGetOrderList();
   handleServerGetUserInfo();
 });
 </script>

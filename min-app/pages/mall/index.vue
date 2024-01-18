@@ -2,14 +2,22 @@
   <view class="page-content">
     <view class="banner">
       <view class="banner-back">
-        <image src="../../static/image/banner.png" mode="" />
+        <image :src="showbanner" mode="" />
         <view class="filter-back"></view>
       </view>
       <view class="page-banner">
         <uni-swiper-dot class="uni-swiper-dot-box" field="content">
-          <swiper class="swiper-box" @change="change" :current="swiperDotIndex">
-            <swiper-item v-for="(item, index) in 3" :key="index">
-              <image src="../../static/image/banner.png" class="swiper-image"></image>
+          <swiper
+            class="swiper-box"
+            @change="handleBannerChange"
+            :current="swiperDotIndex"
+          >
+            <swiper-item v-for="(item, index) in banners" :key="index" :item-id="index">
+              <image
+                :src="'https://dental.cdwuhu.com/' + item.image"
+                mode="widthFix"
+                class="swiper-image"
+              ></image>
             </swiper-item>
           </swiper>
         </uni-swiper-dot>
@@ -18,122 +26,106 @@
     <view class="main">
       <view class="sider">
         <view class="items">
-          <view class="item active">
-            <image src="../../static/image/cate.png" />
-            <view class="title">所有商品</view>
-          </view>
-          <view class="item">
-            <image src="../../static/image/cate.png" />
-            <view class="title">所有商品</view>
-          </view>
-          <view class="item">
-            <image src="../../static/image/cate.png" />
-            <view class="title">所有商品</view>
+          <view
+            class="item"
+            :class="{ active: item.id == cateActive }"
+            v-for="(item, index) in cateList"
+            :key="index"
+            @click="handleChangeCate(item.id)"
+          >
+            <image :src="'https://dental.cdwuhu.com/' + item.icon"  />
+            <view class="title">{{ item.title }}</view>
           </view>
         </view>
       </view>
       <view class="content">
         <view class="items">
-          <view class="item">
+          <view
+            class="item"
+            v-for="(item, index) in goodsList"
+            :key="index"
+            @click="handleToInfo(item)"
+          >
             <view class="cover">
-              <image src="../../static/image/banner.png" />
+              <image :src="'https://dental.cdwuhu.com/' + item.head_image" />
             </view>
             <div class="info">
-              <view class="title">预颜超白美净牙膏</view>
-              <view class="original">¥888</view>
-              <view class="price">¥200</view>
-            </div>
-          </view>
-          <view class="item">
-            <view class="cover">
-              <image src="../../static/image/banner.png" />
-            </view>
-            <div class="info">
-              <view class="title">预颜超白美净牙膏</view>
-              <view class="original">¥888</view>
-              <view class="price">¥200</view>
-            </div>
-          </view>
-          <view class="item">
-            <view class="cover">
-              <image src="../../static/image/banner.png" />
-            </view>
-            <div class="info">
-              <view class="title">预颜超白美净牙膏</view>
-              <view class="original">¥888</view>
-              <view class="price">¥200</view>
-            </div>
-          </view>
-          <view class="item">
-            <view class="cover">
-              <image src="../../static/image/banner.png" />
-            </view>
-            <div class="info">
-              <view class="title">预颜超白美净牙膏</view>
-              <view class="original">¥888</view>
-              <view class="price">¥200</view>
-            </div>
-          </view>
-          <view class="item">
-            <view class="cover">
-              <image src="../../static/image/banner.png" />
-            </view>
-            <div class="info">
-              <view class="title">预颜超白美净牙膏</view>
-              <view class="original">¥888</view>
-              <view class="price">¥200</view>
-            </div>
-          </view>
-          <view class="item">
-            <view class="cover">
-              <image src="../../static/image/banner.png" />
-            </view>
-            <div class="info">
-              <view class="title">预颜超白美净牙膏</view>
-              <view class="original">¥888</view>
-              <view class="price">¥200</view>
-            </div>
-          </view>
-          <view class="item">
-            <view class="cover">
-              <image src="../../static/image/banner.png" />
-            </view>
-            <div class="info">
-              <view class="title">预颜超白美净牙膏</view>
-              <view class="original">¥888</view>
-              <view class="price">¥200</view>
-            </div>
-          </view>
-          <view class="item">
-            <view class="cover">
-              <image src="../../static/image/banner.png" />
-            </view>
-            <div class="info">
-              <view class="title">预颜超白美净牙膏</view>
-              <view class="original">¥888</view>
-              <view class="price">¥200</view>
-            </div>
-          </view>
-          <view class="item">
-            <view class="cover">
-              <image src="../../static/image/banner.png" />
-            </view>
-            <div class="info">
-              <view class="title">预颜超白美净牙膏</view>
-              <view class="original">¥888</view>
-              <view class="price">¥200</view>
+              <view class="title">{{ item.title }}</view>
+              <view class="original">
+                <span v-if="item.discount != '100.0'">¥{{ item.price }}</span>
+              </view>
+              <view class="price">¥{{ item.sale_price }}</view>
+              <view class="discount"  v-if="item.discount!='100.0'">
+                <image src="../../static/image/mailtag.png" mode="widthFix" />
+                <view class="num"><text>{{parseInt( item.discount)/10 }}</text>折</view>
+              </view>
             </div>
           </view>
         </view>
       </view>
     </view>
-  <navs active="mall"/>
+    <navs active="mall" />
   </view>
 </template>
 
 <script setup>
 import { ref, onMounted } from "vue";
-	import navs from "/components/navs/index.vue";
+import navs from "/components/navs/index.vue";
+import { GetIndexBanner, GetCateList, GetGoodsList } from "../../utils/api";
+let banners = ref([]);
+const handleGetBanner = () => {
+  GetIndexBanner({ type: 2 }).then((res) => {
+    console.log(res);
+    banners.value = res;
+    showbanner.value = "https://dental.cdwuhu.com/" + res[0].image;
+  });
+};
+let cateList = ref([]);
+let cateActive = ref(null);
+const handleGetCateList = () => {
+  let params = {
+    page: 1,
+    page_size: 1000,
+  };
+  GetCateList(params).then((res) => {
+    console.log(res);
+    cateList.value = res;
+    cateActive.value = res[0].id;
+    handleGetGoodsList();
+  });
+};
+let showbanner = ref("");
+let swiperDotIndex = ref(null);
+const handleBannerChange = (e) => {
+  let index = e.detail.current;
+  console.log(index);
+  showbanner.value = "https://dental.cdwuhu.com/" + banners.value[index].image;
+};
+let goodsList = ref([]);
+const handleGetGoodsList = () => {
+  let params = {
+    page: 1,
+    page_size: 1000,
+    category_id: cateActive.value,
+  };
+  GetGoodsList(params).then((res) => {
+    console.log(res);
+    goodsList.value = res.data;
+  });
+};
+const handleChangeCate = (id) => {
+  cateActive.value = id;
+  handleGetGoodsList();
+};
+const handleToInfo = (item) => {
+  uni.navigateTo({
+    url: "/pages/mall/info?id=" + item.id,
+  });
+};
+onMounted(() => {
+  handleGetBanner();
+  handleGetCateList();
+});
 </script>
 
 <style lang="less" scoped>

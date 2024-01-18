@@ -5,8 +5,10 @@
         <view class="label">
           <view class="">新增收获地址</view>
           <view class="">
-            <radio @change="handleChangeRadio" :checked="true" color="#d44469" />
-            设为默认地址
+            <radio-group @change="handleChangeRadio">
+              <radio color="#d44469" value="1" />
+              设为默认地址
+            </radio-group>
           </view>
         </view>
         <div class="form-box">
@@ -93,6 +95,7 @@ const bindRegionChange = (e) => {
 };
 const handleChangeRadio = (e) => {
   console.log(e);
+  addrForm.value.is_default = e.detail.value;
 };
 const submitUpdata = () => {
   // uni.showToast({
@@ -104,17 +107,17 @@ const submitUpdata = () => {
     ...addrForm.value,
     is_default: isDefault.value ? 1 : 0,
   };
-  if(Object.values(params).includes("")){
+  if (Object.values(params).includes("")) {
     uni.showToast({
-      title:"格式不正确",
-      icon:"error"
-    })
-    return false
+      title: "格式不正确",
+      icon: "error",
+    });
+    return false;
   }
   CreateAddress(params).then((res) => {
     uni.showToast({
       title: "添加成功",
-      icon:"success",
+      icon: "success",
       duration: 2000,
       success() {
         wx.navigateTo({

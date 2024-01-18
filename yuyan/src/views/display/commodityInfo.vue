@@ -16,6 +16,8 @@ let formState = reactive({
   url: "",
   cover: "",
   imageUrl: "",
+  image: "",
+  long_image: "",
   id: "",
   goods_id: "",
 });
@@ -114,9 +116,9 @@ const handleSubmit = () => {
     .then((res) => {
       console.log(res);
       let params = {
-        type: "1",
+        type: "2",
         url: formState.url,
-        goods_id: "0",
+        goods_id: formState.goods_id,
         remark: formState.remark,
         image: res[0] == undefined ? formState.image : res[0],
         long_image: res[1] == undefined ? formState.long_image : res[1],
@@ -198,7 +200,8 @@ const handleGetGoodsList = () => {
     status: "1",
   };
   goodList(params).then((res) => {
-    goodLists.value = res.data.data.data;
+    goodLists.value = res.data.data;
+    console.log(res.data)
   });
 };
 onMounted(() => {
@@ -252,8 +255,8 @@ onMounted(() => {
                     <a-select-option
                       v-for="(item, index) in goodLists"
                       :key="index"
-                      value="jack"
-                      >Jack</a-select-option
+                      :value="item.id"
+                      >{{ item.title }}</a-select-option
                     >
                   </a-select>
                 </a-form-item>

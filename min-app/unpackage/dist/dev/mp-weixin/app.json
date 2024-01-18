@@ -1,12 +1,14 @@
 {
   "pages": [
+    "pages/index/index",
+    "pages/index/bannerinfo",
     "pages/user/index",
     "pages/about/desc",
     "pages/about/us",
     "pages/userAddress/index",
-    "pages/index/index",
     "pages/editUser/index",
     "pages/popularScience/index",
+    "pages/popularScience/index2",
     "pages/detail/unpaid",
     "pages/mall/purchase",
     "pages/mall/info",

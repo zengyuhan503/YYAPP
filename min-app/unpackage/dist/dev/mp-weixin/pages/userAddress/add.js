@@ -21,6 +21,7 @@ const _sfc_main = {
     };
     const handleChangeRadio = (e) => {
       console.log(e);
+      addrForm.value.is_default = e.detail.value;
     };
     const submitUpdata = () => {
       let params = {

@@ -13,8 +13,16 @@ app.$mount()
 
 // #ifdef VUE3
 import { createSSRApp } from 'vue'
+import { createI18n } from 'vue-i18n'// v9.x
+
+
+let i18nConfig = {
+  locale: uni.getLocale(),// 获取已设置的语言
+}
+const i18n = createI18n(i18nConfig)
 export function createApp() {
   const app = createSSRApp(App)
+  app.use(i18n)
   return {
     app
   }

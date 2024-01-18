@@ -149,7 +149,54 @@ const _sfc_main = {
         url: "/pages/about/us"
       });
     };
+    let orderList = {
+      0: [],
+      2: [],
+      4: [],
+      all: []
+    };
+    const handleGetOrderList = () => {
+      let params = {
+        page: 1,
+        page_size: 1e3,
+        status: "all"
+      };
+      utils_api_index.GetOrderList(params).then((res) => {
+        console.log(res);
+        let list = res.data;
+        orderList["0"] = list.filter((item) => item.status == 0);
+        orderList["2"] = list.filter((item) => item.status == 2);
+        orderList["all"] = list;
+      });
+    };
+    const handleToOrderPage = (status) => {
+      let str = {
+        0: "待付款",
+        2: "待收货",
+        4: "完成",
+        all: "全部"
+      };
+      if (orderList[status].length == 0) {
+        common_vendor.index.showToast({
+          icon: "error",
+          title: `无${str[status]}订单`,
+          duration: 2e3
+        });
+        return false;
+      }
+      if (status == 0) {
+        let orderid = orderList[status][0].id;
+        common_vendor.index.navigateTo({
+          url: "/pages/detail/unpaid?id=" + orderid
+        });
+      } else {
+        common_vendor.index.navigateTo({
+          url: "/pages/order/all?status=" + status
+        });
+      }
+    };
     common_vendor.onMounted(() => {
+      handleGetOrderList();
       handleServerGetUserInfo();
     });
     return (_ctx, _cache) => {
@@ -164,48 +211,53 @@ const _sfc_main = {
         e: common_vendor.o(handleEditInfo)
       } : {}, {
         f: isLogin.value
-      }, isLogin.value ? {} : {}, {
-        g: isLogin.value
       }, isLogin.value ? {
-        h: common_vendor.p({
-          type: "right",
-          size: "18",
-          color: "#B3BAC5"
-        }),
-        i: common_vendor.o(handleToAddress),
-        j: common_vendor.p({
-          type: "right",
-          size: "18",
-          color: "#B3BAC5"
-        }),
-        k: common_vendor.o(handleToAboutDesc),
+        g: common_vendor.o(($event) => handleToOrderPage("0")),
+        h: common_vendor.o(($event) => handleToOrderPage("2")),
+        i: common_vendor.o(($event) => handleToOrderPage("4")),
+        j: common_vendor.o(($event) => handleToOrderPage("all"))
+      } : {}, {
+        k: isLogin.value
+      }, isLogin.value ? {
         l: common_vendor.p({
           type: "right",
           size: "18",
           color: "#B3BAC5"
         }),
-        m: common_vendor.o(handleToAboutUs),
+        m: common_vendor.o(handleToAddress),
         n: common_vendor.p({
           type: "right",
           size: "18",
           color: "#B3BAC5"
         }),
-        o: common_vendor.o(($event) => showCtUs.value = true)
+        o: common_vendor.o(handleToAboutDesc),
+        p: common_vendor.p({
+          type: "right",
+          size: "18",
+          color: "#B3BAC5"
+        }),
+        q: common_vendor.o(handleToAboutUs),
+        r: common_vendor.p({
+          type: "right",
+          size: "18",
+          color: "#B3BAC5"
+        }),
+        s: common_vendor.o(($event) => showCtUs.value = true)
       } : {}, {
-        p: isLogin.value
+        t: isLogin.value
       }, isLogin.value ? {
-        q: common_vendor.o(handleLoginOut)
+        v: common_vendor.o(handleLoginOut)
       } : {
-        r: common_vendor.o(getinfos)
+        w: common_vendor.o(getinfos)
       }, {
-        s: showCtUs.value
+        x: showCtUs.value
       }, showCtUs.value ? {
-        t: common_vendor.o(($event) => showCtUs.value = false),
-        v: common_vendor.p({
+        y: common_vendor.o(($event) => showCtUs.value = false),
+        z: common_vendor.p({
           type: "closeempty",
           size: "30"
         }),
-        w: common_vendor.o(handleMakePhoneCall)
+        A: common_vendor.o(handleMakePhoneCall)
       } : {});
     };
   }

@@ -3,10 +3,10 @@ import { reactive, ref, watch, onMounted, computed } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import { message, Upload } from "ant-design-vue";
 import { UploadOutlined, PlusOutlined } from "@ant-design/icons-vue";
-import { imageUpLoad, goodsCategorys, createGoods } from "@/utils/request/index";
+import { imageUpLoad, goodsCategorys, EditGoods } from "@/utils/request/index";
 let router = useRouter();
 let route = useRoute();
-let query=null;
+let query = null;
 const layout = reactive({
   labelCol: { span: 24 },
   wrapperCol: { span: 24 },
@@ -137,66 +137,78 @@ const handleSubmit = () => {
     message.error("请全部填写后再确定");
     return false;
   }
+  submitLoading.value = true;
   uploadImages().then((res) => {
-    console.log(res)
+    console.log(res);
     let head_image = res[0];
-    let deputy_image = res[1];
-    let detail_image = res[2];
-    let params = {
-      head_image: head_image,
-      deputy_image: deputy_image,
-      detail_image: detail_image,
-      price: formState.price,
-      category_id: formState.category_id.join(","),
-      title: formState.title,
-      desc: formState.desc,
-      discount: formState.discount + "",
-      goods_id:query.id
-    };
-    console.log(params)
-    createGoods(params).then((res) => {
-      console.log(res);
-      if (res.code == 200) {
-        message.success("操作成功");
-        router.push({
-          path: "/commodity/list",
-          query: { active: 2 },
-        });
-      }
+    let detail_image = res[1];
+    uploadImages2().then((ciimgs) => {
+      console.log(ciimgs);
+      let imgs = ciimgs.map((item) => item);
+      let params = {
+        goods_id: query.id,
+        head_image: head_image,
+        deputy_image: imgs.join(","),
+        detail_image: detail_image,
+        price: formState.price,
+        category_id: formState.category_id.join(","),
+        title: formState.title,
+        desc: formState.desc,
+        discount: formState.discount + "",
+      };
+      EditGoods(params).then((res) => {
+        console.log(res);
+        if (res.code == 200) {
+          message.success("操作成功");
+          router.push({
+            path: "/commodity/list",
+            query: { active: 2 },
+          });
+        }
+      });
     });
   });
 };
+const uploadImages2 = () => {
+  return new Promise((resolve, reject) => {
+    let arr = [];
+    if (deputy_image.value.length == 0) {
+      let res = formState.deputy_image;
+      resolve(res);
+    }
+    for (let i = 0; i < deputy_image.value.length; i++) {
+      const item = deputy_image.value[i];
+      let uploadParams = new FormData();
+      uploadParams.append("limit_image", item.originFileObj);
+      arr.push(imageUpLoad(uploadParams));
+    }
+    Promise.all(arr).then((res) => {
+      let newarr = res.map((item) => item.data);
+      resolve(newarr);
+    });
+  });
+};
+
 const uploadImages = () => {
   return new Promise((resolve, reject) => {
     let uploads = [];
     let uploadParams = new FormData();
-    let uploadParams1 = new FormData();
     let uploadParams2 = new FormData();
     let up1 = false;
-    let up2 = false;
     let up3 = false;
     if (head_image.value.length != 0) {
       uploadParams.append("limit_image", head_image.value[0].originFileObj);
       uploads.push(imageUpLoad(uploadParams));
       up1 = true;
     }
-    if (deputy_image.value.length != 0) {
-      uploadParams1.append("limit_image", deputy_image.value[0].originFileObj);
-      uploads.push(imageUpLoad(uploadParams1));
-      up2 = true;
-    }
     if (detail_image.value.length != 0) {
       uploadParams2.append("limit_image", detail_image.value[0].originFileObj);
       uploads.push(imageUpLoad(uploadParams2));
       up3 = true;
     }
-    if(uploads.length==0){
-      resolve( [
-        query.head_image,
-        query.deputy_image,
-        query.detail_image,
-      ])
-      return false
+    if (uploads.length == 0) {
+      resolve([query.head_image, query.detail_image]);
+      return false;
     }
     Promise.all(uploads)
       .then((res) => {
@@ -205,11 +217,6 @@ const uploadImages = () => {
           ress.push(res[0].data);
         } else {
           ress.push(query.head_image);
-        }
-        if (up2) {
-          ress.push(res[1].data);
-        } else {
-          ress.push(query.deputy_image);
         }
         if (up3) {
           ress.push(res[2].data);
@@ -235,11 +242,12 @@ const handleGetGoodsCategorys = () => {
 };
 onMounted(() => {
   handleGetGoodsCategorys();
-   query = route.query;
+  query = route.query;
   formState.category_id = query.category_id.split(",");
   formState.cover = "https://dental.cdwuhu.com/" + query.head_image;
   formState.imageUrl = "https://dental.cdwuhu.com/" + query.detail_image;
   formState.title = query.title;
+  formState.deputy_image = query.deputy_image;
   formState.discount = parseInt(query.discount);
   formState.price = query.price;
   formState.desc = query.desc;

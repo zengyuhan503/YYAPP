@@ -15,14 +15,12 @@ let createBanner = (item: any) => {
 let banners = ref([]);
 const getList = () => {
   let params = {
-    page: 1,
-    page_size: 1000,
     type: 2,
   };
   bannerList(params)
     .then((result) => {
       let data = result.data;
-      banners.value = result.data.data;
+      banners.value = data.data;
     })
     .catch((err) => {});
 };

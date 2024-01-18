@@ -162,15 +162,35 @@ const handleOk = () => {
     });
   });
 };
-const handleEditOk = () => {
+const handleEditOk = async () => {
   if (editCateForm.value.title == "" || editCateForm.value.icon == "") {
     message.error("请全部填写后再确定");
     return false;
   }
 
-  if (editCateForm.value.iconFiles.length > 0) {
+  if (EditCateOpen.value) {
+    let icon = "";
+    if (editCateForm.value.iconFiles.length != 0) {
+      let params = new FormData();
+      params.append("limit_image", editCateForm.value.iconFiles[0].originFileObj);
+       icon=(await imageUpLoad(params)).data;
+    }else{
+      icon=editCateForm.value.icon.replace("https://dental.cdwuhu.com/", "");
+    }
+    let params2 = {
+      title: editCateForm.value.title,
+      icon: icon,
+      category_id: editCateForm.value.id,
+    };
+    editCategorys(params2).then((res) => {
+      message.success("操作成功");
+      handleRest();
+      EditCateOpen.value = false;
+      handleGetGoodsCategorys();
+    });
+  } else {
     let params = new FormData();
-    params.append("limit_image", editCateForm.value.iconFiles[0].originFileObj);
+    params.append("limit_image", cateForm.iconFiles[0].originFileObj);
     imageUpLoad(params).then((res) => {
       let params2 = {
         title: editCateForm.value.title,
@@ -182,18 +202,6 @@ const handleEditOk = () => {
         addCateOpen.value = false;
         handleGetGoodsCategorys();
       });
-    });
-  } else {
-    let params2 = {
-      title: editCateForm.value.title,
-      icon: editCateForm.value.icon.replace("https://dental.cdwuhu.com/", ""),
-      category_id: editCateForm.value.id,
-    };
-    editCategorys(params2).then((res) => {
-      message.success("操作成功");
-      handleRest();
-      EditCateOpen.value = false;
-      handleGetGoodsCategorys();
     });
   }
 };
@@ -275,6 +283,7 @@ const handleUploadIcon = (file) => {
           return false;
         }
         cateForm.icon = src as string;
+        editCateForm.value.icon = src as string;
       };
       image.src = src as string;
     };
@@ -288,7 +297,7 @@ const toCreate = () => {
 
 const handleChangeStatus = (record) => {
   let status = JSON.parse(JSON.stringify(record)).status;
-  let title =status ? "你确定要下架当前商品吗" : "你确定要上架当前商品吗";
+  let title = status ? "你确定要下架当前商品吗" : "你确定要上架当前商品吗";
   console.log(record);
   Modal.confirm({
     title: title,

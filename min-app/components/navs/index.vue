@@ -33,7 +33,7 @@ let props = defineProps({
 const navTo = (route) => {
   let uri = {
     home: "/pages/index/index",
-    detail: "/pages/detail/index",
+    detail: "/pages/mall/index",
     user: "/pages/user/index",
   };
   wx.navigateTo({

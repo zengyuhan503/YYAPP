@@ -26,7 +26,6 @@ axios.interceptors.request.use(
     config => {
         config.withCredentials = false;
         let token = localStorage.getItem("yuyan.token");
-        console.log(config.headers)
         if (token) {
             config.headers.Token = token
         }
@@ -39,7 +38,6 @@ axios.interceptors.request.use(
 );
 axios.interceptors.response.use(
     response => {
-        console.log(response.data)
         if (response.data.code == 301) {
             localStorage.removeItem('userInfo');
             message.error('登陆信息过期或失效，请重新登陆！');
@@ -51,7 +49,6 @@ axios.interceptors.response.use(
         return response.data;
     },
     err => {
-        console.log(err)
         if (err.response == undefined) {
             message.error('网络错误，请刷新重试或者检查网络');
         }
@@ -125,8 +122,6 @@ export const changeUserStatus = (params: {
 
 
 export const bannerList = (params: {
-    page: number,
-    page_size: number,
     type: number
 }) => apiGet('/web/banner/lists', params)
 
@@ -164,6 +159,7 @@ export const goodList = (params: {
 }) => apiGet('/web/goods/lists', params)
 
 export const createGoods = (params) => apiPost('/web/goods/add', params)
+export const EditGoods = (params) => apiPost('/web/goods/edit', params)
 export const goodsCategorys = (params: {
     "page": number,
     "page_size": number,

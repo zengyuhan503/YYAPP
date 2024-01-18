@@ -38,17 +38,16 @@ const tokenfFail = () => {
 		icon: "none",
 		duration: 2000
 	});
-	uni.removeStorageSync('yy-token');
-	uni.removeStorageSync('yy-userinfo');
-	var pages = getCurrentPages();
-	var currentPage = pages[pages.length - 1];
-	var currentRoute = currentPage.route;
-	console.log(currentRoute)
-	if (currentRoute == 'pages/user/index') return false;
+	// uni.removeStorageSync('yy-token');
+	// uni.removeStorageSync('yy-userinfo');
+	// var pages = getCurrentPages();
+	// var currentPage = pages[pages.length - 1];
+	// var currentRoute = currentPage.route;
+	// if (currentRoute == 'pages/user/index') return false;
 
-	wx.navigateTo({
-		url: "/pages/user/index",
-	});
+	// wx.navigateTo({
+	// 	url: "/pages/user/index",
+	// });
 }
 let apiGet = (uri, params, token = null) => {
 	return new Promise((resolve, reject) => {
@@ -119,7 +118,7 @@ function getUserToken() {
 	let token = uni.getStorageSync('yy-token');
 	return token
 }
-export const GetIndexBanner = () => apiGet("api/common/banner", null)
+export const GetIndexBanner = (params) => apiGet("api/common/banner", params, null)
 export const GetServerUserInfo = (params) => apiGet('api/user/getUser', params, getUserToken)
 export const GetUserInfo = (params) => apiPost('api/user/wechat', params)
 export const GetUserPhone = (params) => apiPost('api/user/phone', params, getUserToken)
@@ -135,3 +134,19 @@ export const EditAddress = (params) => apiPost('api/user/address/edit', params, 
 
 export const AboutDesc = () => apiGet('/api/common/desc', null, null)
 export const AboutUs = () => apiGet('/api/common/about', null, null)
+
+export const booking_plans = (params) => apiGet('/api/booking_plan/lists?type=' + params.type, null, getUserToken)
+export const booking_plans_detail = (params) => apiGet('/api/booking_plan/detail', params, getUserToken)
+export const booking_order_detail = (params) => apiGet('/api/booking_order/detail', params, getUserToken)
+export const CreateBookingPlans = (params) => apiPost('/api/booking_order/createKpBooking', params, getUserToken)
+export const CancelBookingPlans = (params) => apiPost('/api/booking_order/cancel', params, getUserToken)
+
+export const GetGoodsList = (params) => apiGet('/api/goods/lists', params, getUserToken)
+export const GetGoodsInfo = (params) => apiGet("/api/goods/detail", params, getUserToken)
+
+export const GetCalculate =params=>apiGet('/api/order/calculate',params,getUserToken)
+export const CreateOrder=params=>apiPost('/api/order/create',params,getUserToken) 
+export const GetCateList = (params) => apiGet('/api/goods_category/lists', params, getUserToken)
+export const CreateWxPay=params=>apiPost('/api/order/pay',params,getUserToken)
+export const GetOrderList = (params) => apiGet("/api/order/lists", params, getUserToken)
+export const GetOrderInfo = (params) => apiGet("/api//order/detail", params, getUserToken)

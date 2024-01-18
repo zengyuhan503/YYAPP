@@ -28,7 +28,6 @@ const _sfc_main = {
       current.value = e;
     };
     const handleToPopularScience = () => {
-      console.log(1111);
       common_vendor.wx$1.navigateTo({
         url: "/pages/popularScience/index",
         fail: (err) => {
@@ -36,10 +35,38 @@ const _sfc_main = {
         }
       });
     };
+    const handleToPopularScience2 = () => {
+      common_vendor.wx$1.navigateTo({
+        url: "/pages/popularScience/index2",
+        fail: (err) => {
+          console.log(err);
+        }
+      });
+    };
     const handleGetBanner = () => {
-      utils_api_index.GetIndexBanner().then((res) => {
+      utils_api_index.GetIndexBanner({ type: 1 }).then((res) => {
         console.log(res);
         banners.value = res;
+      });
+    };
+    function objectToQueryString(obj) {
+      var queryString = "";
+      for (var key in obj) {
+        if (obj.hasOwnProperty(key)) {
+          if (queryString.length > 0) {
+            queryString += "&";
+          }
+          queryString += key + "=" + obj[key];
+        }
+      }
+      return "?" + queryString;
+    }
+    const handleToBannerInfo = (item) => {
+      let querys = objectToQueryString(item);
+      let url = "/pages/index/bannerinfo" + querys;
+      console.log(url);
+      common_vendor.index.navigateTo({
+        url
       });
     };
     common_vendor.onMounted(() => {
@@ -50,7 +77,8 @@ const _sfc_main = {
         a: common_vendor.f(common_vendor.unref(banners), (item, index, i0) => {
           return {
             a: "https://dental.cdwuhu.com/" + item.image,
-            b: index
+            b: index,
+            c: common_vendor.o(($event) => handleToBannerInfo(item), index)
           };
         }),
         b: common_vendor.o(change),
@@ -64,7 +92,7 @@ const _sfc_main = {
           field: "content"
         }),
         f: common_vendor.o(handleToPopularScience),
-        g: common_vendor.o(handleToPopularScience),
+        g: common_vendor.o(handleToPopularScience2),
         h: common_vendor.p({
           active: "home"
         })

@@ -10,7 +10,7 @@ const _sfc_main = {
     const navTo = (route) => {
       let uri = {
         home: "/pages/index/index",
-        detail: "/pages/detail/index",
+        detail: "/pages/mall/index",
         user: "/pages/user/index"
       };
       common_vendor.wx$1.navigateTo({
