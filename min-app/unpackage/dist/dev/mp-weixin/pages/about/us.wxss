@@ -1,4 +1,6 @@
 .page-header.data-v-99a1d68c {
+  width: 100%;
+  z-index: 1001;
   font-size: 17px;
   font-weight: 500;
   color: #ffffff;
@@ -6,6 +8,7 @@
   height: 33px;
   line-height: 33px;
   padding: 8px 17px;
+  position: absolute;
 }
 .page-content image.data-v-99a1d68c {
   width: 100%;

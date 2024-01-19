@@ -191,12 +191,13 @@ const uploadImages = () => {
 };
 onMounted(() => {
   let params = route.query;
+  if (Object.keys(params).length === 0) return false;
   for (const key in params) {
     formState[key] = params[key];
   }
   formState.cover = "https://dental.cdwuhu.com/" + params.image;
   formState.imageUrl = "https://dental.cdwuhu.com/" + params.long_image;
-  console.log(formState);
+  console.log(!params);
 });
 </script>
 

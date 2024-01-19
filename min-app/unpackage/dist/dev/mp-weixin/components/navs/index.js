@@ -37,7 +37,9 @@ const _sfc_main = {
         c: common_vendor.unref(props).active == "mall"
       }, common_vendor.unref(props).active == "mall" ? {} : {}, {
         d: common_vendor.o(($event) => navTo("detail")),
-        e: common_vendor.o(handleGetUserProfile)
+        e: common_vendor.unref(props).active == "user"
+      }, common_vendor.unref(props).active == "user" ? {} : {}, {
+        f: common_vendor.o(handleGetUserProfile)
       });
     };
   }

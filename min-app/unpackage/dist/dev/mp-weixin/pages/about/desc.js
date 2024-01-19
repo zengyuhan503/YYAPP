@@ -18,18 +18,17 @@ const _sfc_main = {
       });
     };
     let refStyle = common_vendor.ref({
-      top: "0"
+      top: "46px"
     });
     let height = common_vendor.ref(0);
     common_vendor.onShow((options) => {
       const res = common_vendor.wx$1.getMenuButtonBoundingClientRect();
       height.value = res.height;
-      refStyle.value["padding-top"] = res.top + "px";
+      refStyle.value["top"] = res.top + "px";
     });
     let aboutDescs = common_vendor.ref("");
     common_vendor.onMounted(() => {
       utils_api_index.AboutDesc().then((res) => {
-        console.log(res);
         aboutDescs.value = "https://dental.cdwuhu.com/" + res.image;
       });
     });

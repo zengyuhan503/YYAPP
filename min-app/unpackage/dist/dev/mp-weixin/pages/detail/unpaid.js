@@ -30,36 +30,47 @@ const _sfc_main = {
         timeouts.value = formattedCountdown;
       });
     };
+    const handleCopy = () => {
+      common_vendor.index.setClipboardData({
+        data: "1234567890",
+        success: function() {
+          console.log("success");
+        }
+      });
+    };
     const handleCancelOrder = () => {
     };
     return (_ctx, _cache) => {
       return common_vendor.e({
         a: common_vendor.t(common_vendor.unref(timeouts)),
         b: common_vendor.unref(orderInfo).status == 2
-      }, common_vendor.unref(orderInfo).status == 2 ? {} : {}, {
-        c: common_vendor.t(common_vendor.unref(orderInfo).name),
-        d: common_vendor.t(common_vendor.unref(orderInfo).phone),
-        e: common_vendor.t(common_vendor.unref(orderInfo).address),
-        f: common_vendor.t(common_vendor.unref(orderInfo).create_time),
-        g: common_vendor.t(common_vendor.unref(orderInfo).order_no),
-        h: "https://dental.cdwuhu.com/" + common_vendor.unref(orderInfo).goods_image,
-        i: common_vendor.t(common_vendor.unref(orderInfo).goods_name),
-        j: common_vendor.t(common_vendor.unref(orderInfo).num),
-        k: common_vendor.t(common_vendor.unref(orderInfo).real_price),
-        l: common_vendor.unref(orderInfo).status == 0
-      }, common_vendor.unref(orderInfo).status == 0 ? {
-        m: common_vendor.o(($event) => common_vendor.isRef(showCancel) ? showCancel.value = true : showCancel = true)
+      }, common_vendor.unref(orderInfo).status == 2 ? {
+        c: common_vendor.o(handleCopy)
       } : {}, {
-        n: common_vendor.unref(orderInfo).status !== 0
+        d: common_vendor.t(common_vendor.unref(orderInfo).name),
+        e: common_vendor.t(common_vendor.unref(orderInfo).phone),
+        f: common_vendor.t(common_vendor.unref(orderInfo).address),
+        g: common_vendor.t(common_vendor.unref(orderInfo).create_time),
+        h: common_vendor.t(common_vendor.unref(orderInfo).order_no),
+        i: "https://dental.cdwuhu.com/" + common_vendor.unref(orderInfo).goods_image,
+        j: common_vendor.t(common_vendor.unref(orderInfo).goods_name),
+        k: common_vendor.t(common_vendor.unref(orderInfo).num),
+        l: common_vendor.t(common_vendor.unref(orderInfo).real_price),
+        m: common_vendor.unref(orderInfo).status == 0
+      }, common_vendor.unref(orderInfo).status == 0 ? {
+        n: common_vendor.o(($event) => common_vendor.isRef(showCancel) ? showCancel.value = true : showCancel = true)
+      } : {}, {
+        o: common_vendor.unref(orderInfo).status !== 0
       }, common_vendor.unref(orderInfo).status !== 0 ? {} : {}, {
-        o: common_vendor.unref(orderInfo).status == 0
+        p: common_vendor.unref(orderInfo).status == 0
       }, common_vendor.unref(orderInfo).status == 0 ? {
-        p: common_vendor.t(common_vendor.unref(orderInfo).real_price)
+        q: common_vendor.t(common_vendor.unref(orderInfo).real_price),
+        r: common_vendor.o((...args) => _ctx.handleToCreateOrder && _ctx.handleToCreateOrder(...args))
       } : {}, {
-        q: common_vendor.unref(showCancel)
+        s: common_vendor.unref(showCancel)
       }, common_vendor.unref(showCancel) ? {
-        r: common_vendor.o(($event) => common_vendor.isRef(showCancel) ? showCancel.value = false : showCancel = false),
-        s: common_vendor.o(handleCancelOrder)
+        t: common_vendor.o(($event) => common_vendor.isRef(showCancel) ? showCancel.value = false : showCancel = false),
+        v: common_vendor.o(handleCancelOrder)
       } : {});
     };
   }

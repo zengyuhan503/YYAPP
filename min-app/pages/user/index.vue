@@ -3,7 +3,7 @@
     <view class="main">
       <view class="user-info">
         <view class="portrait">
-          <image src="../../static/image/logo.png" v-if="!isLogin" mode="" />
+          <image src="http://h5.dental.cdwuhu.com/static/image/logo.png" v-if="!isLogin" mode="" />
           <image :src="userInfo.avatar" v-else mode="" />
         </view>
         <view class="desc" @click="handleEditInfo" v-if="isLogin">
@@ -16,19 +16,19 @@
         <view class="title">我的订单</view>
         <view class="items">
           <view class="item" @click="handleToOrderPage('0')">
-            <image src="../../static/icon/order1.png" />
+            <image src="http://h5.dental.cdwuhu.com/static/icon/order1.png" />
             <view>待付款</view>
           </view>
           <view class="item" @click="handleToOrderPage('2')">
-            <image src="../../static/icon/order2.png" />
+            <image src="http://h5.dental.cdwuhu.com/static/icon/order2.png" />
             <view>待收货</view>
           </view>
           <view class="item" @click="handleToOrderPage('4')">
-            <image src="../../static/icon/order3.png" />
+            <image src="http://h5.dental.cdwuhu.com/static/icon/order3.png" />
             <view>完成订单</view>
           </view>
           <view class="item" @click="handleToOrderPage('all')">
-            <image src="../../static/icon/order4.png" />
+            <image src="http://h5.dental.cdwuhu.com/static/icon/order4.png" />
             <view>全部订单</view>
           </view>
         </view>
@@ -37,25 +37,25 @@
         <view class="items">
           <view class="item" @click="handleToAddress">
             <view class="label">
-              <image src="../../static/icon/help1.png" mode="" /><text>地址管理</text>
+              <image src="http://h5.dental.cdwuhu.com/static/icon/help1.png" mode="" /><text>地址管理</text>
             </view>
             <uni-icons type="right" size="18" color="#B3BAC5"></uni-icons>
           </view>
           <view class="item" @click="handleToAboutDesc">
             <view class="label">
-              <image src="../../static/icon/help2.png" mode="" /><text>医生介绍</text>
+              <image src="http://h5.dental.cdwuhu.com/static/icon/help2.png" mode="" /><text>医生介绍</text>
             </view>
             <uni-icons type="right" size="18" color="#B3BAC5"></uni-icons>
           </view>
           <view class="item" @click="handleToAboutUs">
             <view class="label">
-              <image src="../../static/icon/help3.png" mode="" /><text>关于我们</text>
+              <image src="http://h5.dental.cdwuhu.com/static/icon/help3.png" mode="" /><text>关于我们</text>
             </view>
             <uni-icons type="right" size="18" color="#B3BAC5"></uni-icons>
           </view>
           <view class="item" @click="showCtUs = true">
             <view class="label">
-              <image src="../../static/icon/help4.png" mode="" /><text>联系我们</text>
+              <image src="http://h5.dental.cdwuhu.com/static/icon/help4.png" mode="" /><text>联系我们</text>
             </view>
             <uni-icons type="right" size="18" color="#B3BAC5"></uni-icons>
           </view>
@@ -84,7 +84,7 @@
         </button>
       </view>
     </view>
-    <navs />
+    <navs active="user"/>
   </view>
   <view class="contus" v-if="showCtUs">
     <div class="contus_body">
@@ -95,12 +95,14 @@
         <div class="title">立即致电我们</div>
         <div class="desc">
           或者添加我们的客服微信 <br />
-          yuyanXXXX
+          15522756996
         </div>
         <div class="call" @click="handleMakePhoneCall">拨打电话</div>
       </div>
     </div>
   </view>
+  
+  <view class="" style="height: 100px"> </view>
 </template>
 
 <script setup>

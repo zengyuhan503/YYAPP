@@ -6,7 +6,7 @@
   position: fixed;
   height: 90px;
   background: #f9f9f9;
-  box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.3);
   bottom: 0;
   left: 0;
   -webkit-backdrop-filter: blur(20px);

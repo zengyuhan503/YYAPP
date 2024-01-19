@@ -63,6 +63,11 @@ const _sfc_main = {
         url: "/pages/mall/info?id=" + item.id
       });
     };
+    const handleToBannerInfo = (item) => {
+      common_vendor.index.navigateTo({
+        url: "/pages/mall/info?id=" + item.goods_id
+      });
+    };
     common_vendor.onMounted(() => {
       handleGetBanner();
       handleGetCateList();
@@ -73,8 +78,9 @@ const _sfc_main = {
         b: common_vendor.f(common_vendor.unref(banners), (item, index, i0) => {
           return {
             a: "https://dental.cdwuhu.com/" + item.image,
-            b: index,
-            c: index
+            b: common_vendor.o(($event) => handleToBannerInfo(item), index),
+            c: index,
+            d: index
           };
         }),
         c: common_vendor.o(handleBannerChange),

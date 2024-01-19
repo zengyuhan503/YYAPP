@@ -15,7 +15,8 @@
         <view class="info">
           <view class="name"> 快递公司： <text>2023/12/11 13:50</text> </view>
           <view class="phone">
-            快递单号： <text>1234567890</text> <text class="copy">复制</text></view
+            快递单号： <text>1234567890</text>
+            <text @click="handleCopy" class="copy">复制</text></view
           >
         </view>
       </view>
@@ -69,10 +70,12 @@
     </view>
     <view class="pays-content" v-if="orderInfo.status == 0">
       <view class="pays">
-        <view class="price"
-          >折后价 <text>¥ {{ orderInfo.real_price }}</text></view
-        >
-        <view class="btns"> 购买 </view>
+        <view class="price">
+          <text style="margin-right: 16px">合计</text>
+          <text style="color: #f9a143"> ¥</text>
+          <text class="num"> {{ orderInfo.real_price }}</text>
+        </view>
+        <view class="btns" @click="handleToCreateOrder"> 支付 </view>
       </view>
     </view>
   </view>
@@ -81,7 +84,7 @@
     <view class="body">
       <view class="close">
         <image
-          src="../../static/image/close.png"
+          src="http://h5.dental.cdwuhu.com/static/image/close.png"
           @click="showCancel = false"
           mode="widthFix"
         />
@@ -133,6 +136,14 @@ const handleGetOrderInfo = () => {
 
     console.log(formattedCountdown);
     timeouts.value = formattedCountdown;
+  });
+};
+const handleCopy = () => {
+  uni.setClipboardData({
+    data: "1234567890",
+    success: function () {
+      console.log("success");
+    },
   });
 };
 const handleCancelOrder = () => {};

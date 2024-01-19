@@ -16,7 +16,7 @@ const _sfc_main = {
   setup(__props) {
     const count = common_vendor.ref(1);
     let goodsId = common_vendor.ref(null);
-    let showSubscribeSuccess = common_vendor.ref(true);
+    let showSubscribeSuccess = common_vendor.ref(false);
     let addressId = common_vendor.ref(null);
     let goodsInfo = common_vendor.ref({});
     let addrForm = common_vendor.ref({
@@ -68,7 +68,8 @@ const _sfc_main = {
       addressId.value = item.id;
       addrForm.value = item;
     };
-    const handleCreateOrder = () => {
+    let order_id = "";
+    const handleToCreateOrder = () => {
       let params = {
         goods_id: goodsId.value,
         number: count.value,
@@ -82,9 +83,13 @@ const _sfc_main = {
       };
       utils_api_index.CreateOrder(params).then((res) => {
         console.log(res);
-        utils_api_index.CreateWxPay(res).then((res2) => {
-          console.log(res2);
-        });
+        order_id = res.order_id;
+        showSubscribeSuccess.value = true;
+      });
+    };
+    const handleOpenOrder = () => {
+      common_vendor.index.navigateTo({
+        url: "/pages/detail/unpaid?id=" + order_id
       });
     };
     const handleToUser = () => {
@@ -111,29 +116,28 @@ const _sfc_main = {
       }, {
         f: common_vendor.t(count.value),
         g: common_vendor.o(($event) => count.value++),
-        h: common_vendor.t(common_vendor.unref(addrForm).is_default),
-        i: common_vendor.unref(addrForm).is_default == 1,
-        j: common_vendor.o(handleChangeRadio),
-        k: common_vendor.unref(addrForm).name,
-        l: common_vendor.o(($event) => common_vendor.unref(addrForm).name = $event.detail.value),
-        m: common_vendor.unref(addrForm).phone,
-        n: common_vendor.o(($event) => common_vendor.unref(addrForm).phone = $event.detail.value),
-        o: common_vendor.unref(addrForm).provinces,
-        p: common_vendor.o(bindRegionChange),
-        q: common_vendor.unref(addrForm).address,
-        r: common_vendor.o(($event) => common_vendor.unref(addrForm).address = $event.detail.value),
-        s: common_vendor.p({
+        h: common_vendor.unref(addrForm).is_default == 1,
+        i: common_vendor.o(handleChangeRadio),
+        j: common_vendor.unref(addrForm).name,
+        k: common_vendor.o(($event) => common_vendor.unref(addrForm).name = $event.detail.value),
+        l: common_vendor.unref(addrForm).phone,
+        m: common_vendor.o(($event) => common_vendor.unref(addrForm).phone = $event.detail.value),
+        n: common_vendor.unref(addrForm).provinces,
+        o: common_vendor.o(bindRegionChange),
+        p: common_vendor.unref(addrForm).address,
+        q: common_vendor.o(($event) => common_vendor.unref(addrForm).address = $event.detail.value),
+        r: common_vendor.p({
           type: "right",
           size: "18"
         }),
-        t: common_vendor.o(open),
-        v: common_vendor.o(closePopup),
-        w: common_vendor.p({
+        s: common_vendor.o(open),
+        t: common_vendor.o(closePopup),
+        v: common_vendor.p({
           type: "left",
           size: "30",
           color: "#000000"
         }),
-        x: common_vendor.f(common_vendor.unref(addressList), (item, index, i0) => {
+        w: common_vendor.f(common_vendor.unref(addressList), (item, index, i0) => {
           return common_vendor.e({
             a: common_vendor.t(item.name),
             b: common_vendor.t(item.phone),
@@ -146,19 +150,21 @@ const _sfc_main = {
             h: common_vendor.o(($event) => handleSelectAddress(item), index)
           });
         }),
-        y: common_vendor.sr(popup, "bcb386f7-1", {
+        x: common_vendor.sr(popup, "bcb386f7-1", {
           "k": "popup"
         }),
-        z: common_vendor.p({
+        y: common_vendor.p({
           ["background-color"]: "#fff",
           type: "bottom"
         }),
-        A: common_vendor.unref(goodsInfo).sale_price != common_vendor.unref(goodsInfo).price
+        z: common_vendor.unref(goodsInfo).sale_price != common_vendor.unref(goodsInfo).price
       }, common_vendor.unref(goodsInfo).sale_price != common_vendor.unref(goodsInfo).price ? {} : {}, {
-        B: common_vendor.o(handleCreateOrder),
+        A: common_vendor.t(common_vendor.unref(goodsInfo).sale_price),
+        B: common_vendor.o(handleToCreateOrder),
         C: common_vendor.unref(showSubscribeSuccess)
       }, common_vendor.unref(showSubscribeSuccess) ? {
-        D: common_vendor.o(handleToUser)
+        D: common_vendor.o(handleToUser),
+        E: common_vendor.o(handleOpenOrder)
       } : {});
     };
   }

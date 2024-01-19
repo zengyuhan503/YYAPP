@@ -38,16 +38,16 @@ const tokenfFail = () => {
 		icon: "none",
 		duration: 2000
 	});
-	// uni.removeStorageSync('yy-token');
-	// uni.removeStorageSync('yy-userinfo');
-	// var pages = getCurrentPages();
-	// var currentPage = pages[pages.length - 1];
-	// var currentRoute = currentPage.route;
-	// if (currentRoute == 'pages/user/index') return false;
+	uni.removeStorageSync('yy-token');
+	uni.removeStorageSync('yy-userinfo');
+	var pages = getCurrentPages();
+	var currentPage = pages[pages.length - 1];
+	var currentRoute = currentPage.route;
+	if (currentRoute == 'pages/user/index') return false;
 
-	// wx.navigateTo({
-	// 	url: "/pages/user/index",
-	// });
+	wx.navigateTo({
+		url: "/pages/user/index",
+	});
 }
 let apiGet = (uri, params, token = null) => {
 	return new Promise((resolve, reject) => {
@@ -132,8 +132,8 @@ export const CreateAddress = (params) => apiPost('api/user/address/add', params,
 export const RmAddress = (params) => apiPost('api/user/address/delete', params, getUserToken)
 export const EditAddress = (params) => apiPost('api/user/address/edit', params, getUserToken)
 
-export const AboutDesc = () => apiGet('/api/common/desc', null, null)
-export const AboutUs = () => apiGet('/api/common/about', null, null)
+export const AboutDesc = () => apiGet('api/common/desc', null, null)
+export const AboutUs = () => apiGet('api/common/about', null, null)
 
 export const booking_plans = (params) => apiGet('/api/booking_plan/lists?type=' + params.type, null, getUserToken)
 export const booking_plans_detail = (params) => apiGet('/api/booking_plan/detail', params, getUserToken)

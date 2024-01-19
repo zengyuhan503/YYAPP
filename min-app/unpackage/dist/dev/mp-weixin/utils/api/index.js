@@ -39,6 +39,16 @@ const tokenfFail = () => {
     icon: "none",
     duration: 2e3
   });
+  common_vendor.index.removeStorageSync("yy-token");
+  common_vendor.index.removeStorageSync("yy-userinfo");
+  var pages = getCurrentPages();
+  var currentPage = pages[pages.length - 1];
+  var currentRoute = currentPage.route;
+  if (currentRoute == "pages/user/index")
+    return false;
+  common_vendor.wx$1.navigateTo({
+    url: "/pages/user/index"
+  });
 };
 let apiGet = (uri, params, token = null) => {
   return new Promise((resolve, reject) => {
@@ -85,8 +95,8 @@ const GetAddressList = () => apiGet("api/user/address/lists", null, getUserToken
 const CreateAddress = (params) => apiPost("api/user/address/add", params, getUserToken);
 const RmAddress = (params) => apiPost("api/user/address/delete", params, getUserToken);
 const EditAddress = (params) => apiPost("api/user/address/edit", params, getUserToken);
-const AboutDesc = () => apiGet("/api/common/desc", null, null);
-const AboutUs = () => apiGet("/api/common/about", null, null);
+const AboutDesc = () => apiGet("api/common/desc", null, null);
+const AboutUs = () => apiGet("api/common/about", null, null);
 const booking_plans_detail = (params) => apiGet("/api/booking_plan/detail", params, getUserToken);
 const booking_order_detail = (params) => apiGet("/api/booking_order/detail", params, getUserToken);
 const CreateBookingPlans = (params) => apiPost("/api/booking_order/createKpBooking", params, getUserToken);
@@ -96,7 +106,6 @@ const GetGoodsInfo = (params) => apiGet("/api/goods/detail", params, getUserToke
 const GetCalculate = (params) => apiGet("/api/order/calculate", params, getUserToken);
 const CreateOrder = (params) => apiPost("/api/order/create", params, getUserToken);
 const GetCateList = (params) => apiGet("/api/goods_category/lists", params, getUserToken);
-const CreateWxPay = (params) => apiPost("/api/order/pay", params, getUserToken);
 const GetOrderList = (params) => apiGet("/api/order/lists", params, getUserToken);
 const GetOrderInfo = (params) => apiGet("/api//order/detail", params, getUserToken);
 exports.AboutDesc = AboutDesc;
@@ -105,7 +114,6 @@ exports.CancelBookingPlans = CancelBookingPlans;
 exports.CreateAddress = CreateAddress;
 exports.CreateBookingPlans = CreateBookingPlans;
 exports.CreateOrder = CreateOrder;
-exports.CreateWxPay = CreateWxPay;
 exports.EditAddress = EditAddress;
 exports.EditUserInfo = EditUserInfo;
 exports.GetAddressList = GetAddressList;

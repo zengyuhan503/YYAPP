@@ -83,7 +83,7 @@
 		{
 			"path": "pages/mall/purchase",
 			"style": {
-				"navigationBarTitleText": "购买",
+				"navigationBarTitleText": "预颜口腔",
 				"backgroundColorTop": "#D44469",
 				"navigationBarBackgroundColor": "#D44469",
 				"backgroundColor": "#D44469",
@@ -105,7 +105,7 @@
 		{
 			"path": "pages/userAddress/add",
 			"style": {
-				"navigationBarTitleText": "我的地址",
+				"navigationBarTitleText": "添加地址",
 				"backgroundColorTop": "#D44469",
 				"navigationBarBackgroundColor": "#D44469",
 				"backgroundColor": "#D44469",
@@ -115,7 +115,7 @@
 		{
 			"path": "pages/userAddress/edit",
 			"style": {
-				"navigationBarTitleText": "我的地址",
+				"navigationBarTitleText": "修改地址",
 				"backgroundColorTop": "#D44469",
 				"navigationBarBackgroundColor": "#D44469",
 				"backgroundColor": "#D44469",
@@ -135,7 +135,7 @@
 	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "uni-app",
+		"navigationBarTitleText": "预颜口腔",
 		"navigationBarBackgroundColor": "#F8F8F8",
 		"backgroundColor": "#F8F8F8"
 	},

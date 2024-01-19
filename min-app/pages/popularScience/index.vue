@@ -1,22 +1,26 @@
 <template>
   <view class="page-content">
     <Header title="科普馆预约" />
-    <view class="content">
-      <view class="backimage">
-        <image src="../../static/image/yuyuebj.png" mode="widthFix"> </image>
-      </view>
+    <view class="content" style="padding: 15px">
       <view class="main main1">
-        <view class="imgs">
-          <image src="../../static/image/1.png" mode="widthFix"></image>
-        </view>
-        <view class="main-title"> 科普馆邀请函 </view>
-        <view class="main-desc">
-          这里是文字内容介绍，总字数不超过200个字，长文字介绍，文字介绍，总文字介绍，总文字介绍，总总字数不超过200个字，长文字介绍总字数不超过200个字，长文字介绍总字数不超过200个字，长文字
+        <!-- <view class="inner-inset"></view>
+		<view class="inner-inset2"></view> -->
+        <view class="content-top">
+          <view class="imgs">
+            <image
+              src="http://h5.dental.cdwuhu.com/static/image/1.png"
+              mode="widthFix"
+            ></image>
+          </view>
+          <view class="main-title"> 科普馆邀请函 </view>
+          <view class="main-desc">
+            这里是文字内容介绍，总字数不超过200个字，长文字介绍，文字介绍，总文字介绍，总文字介绍，总总字数不超过200个字，长文字介绍总字数不超过200个字，长文字介绍总字数不超过200个字，长文字
+          </view>
         </view>
         <view class="solid"> </view>
         <view class="popularForm">
           <view class="formInput">
-            <image src="../../static/image/name.png" />
+            <image src="http://h5.dental.cdwuhu.com/static/image/name.png" />
             <input
               type="text"
               placeholder="姓名"
@@ -26,7 +30,7 @@
             />
           </view>
           <view class="formInput">
-            <image src="../../static/image/phone.png" />
+            <image src="http://h5.dental.cdwuhu.com/static/image/phone.png" />
             <input
               type="text"
               placeholder="手机号"
@@ -40,7 +44,7 @@
               <view class="formInput">
                 <image
                   style="width: 28px; height: 28px; left: 12px; top: 10px"
-                  src="../../static/image/addr.png"
+                  src="http://h5.dental.cdwuhu.com/static/image/addr.png"
                 />
                 <input
                   type="text"
@@ -62,7 +66,7 @@
                 <view class="formInput" bindchange="bindPickerChange">
                   <image
                     style="width: 18px; height: 18px"
-                    src="../../static/image/count.png"
+                    src="http://h5.dental.cdwuhu.com/static/image/count.png"
                   />
                   <input
                     type="text"
@@ -78,14 +82,18 @@
         </view>
         <view class="submit-btns">
           <!-- <image
-            src="../../static/image/confirm.png"
+            src="http://h5.dental.cdwuhu.com/static/image/confirm.png"
             @click="handleSubmit"
             v-if="isSubmit"
             mode="widthFix"
           /> -->
           <view v-if="!hasSubscribe">
             <view @click="handleSubmit" class="submitbtn" v-if="isSubmit">预约</view>
-            <image src="../../static/image/confirm-disable.png" v-else mode="widthFix" />
+            <image
+              src="http://h5.dental.cdwuhu.com/static/image/confirm-disable.png"
+              v-else
+              mode="widthFix"
+            />
           </view>
           <view v-else>
             <view class="cancel" @click="showCancel = true">取消预约</view>
@@ -104,13 +112,16 @@
     <view class="subscribemodal">
       <view class="close">
         <image
-          src="../../static/image/close.png"
+          src="http://h5.dental.cdwuhu.com/static/image/close.png"
           @click="showSubscribeSuccess = false"
           mode="widthFix"
         />
       </view>
       <view class="main">
-        <image src="../../static/image/subscribe.png" mode="widthFix" />
+        <image
+          src="http://h5.dental.cdwuhu.com/static/image/subscribe.png"
+          mode="widthFix"
+        />
         <view class="title">预约成功</view>
         <view class="desc">感谢您的预约，请及时到店～</view>
       </view>
@@ -122,7 +133,7 @@
     <view class="body">
       <view class="close">
         <image
-          src="../../static/image/close.png"
+          src="http://h5.dental.cdwuhu.com/static/image/close.png"
           @click="showCancel = false"
           mode="widthFix"
         />
@@ -165,19 +176,97 @@ let times = ref([
     index: "1",
     show: false,
   },
-  { start_time: "07:00", end_time: "08:00", is_limit: 0, index: "2", show: false },
-  { start_time: "08:00", end_time: "09:00", is_limit: 0, index: "3", show: false },
-  { start_time: "09:00", end_time: "10:00", is_limit: 0, index: "4", show: false },
-  { start_time: "10:00", end_time: "11:00", is_limit: 0, index: "5", show: false },
-  { start_time: "11:00", end_time: "12:00", is_limit: 0, index: "6", show: false },
-  { start_time: "12:00", end_time: "13:00", is_limit: 0, index: "7", show: false },
-  { start_time: "13:00", end_time: "14:00", is_limit: 0, index: "8", show: false },
-  { start_time: "14:00", end_time: "15:00", is_limit: 0, index: "9", show: false },
-  { start_time: "15:00", end_time: "16:00", is_limit: 0, index: "10", show: false },
-  { start_time: "16:00", end_time: "17:00", is_limit: 0, index: "11", show: false },
-  { start_time: "17:00", end_time: "18:00", is_limit: 0, index: "12", show: false },
-  { start_time: "18:00", end_time: "19:00", is_limit: 0, index: "13", show: false },
-  { start_time: "19:00", end_time: "20:00", is_limit: 0, index: "14", show: false },
+  {
+    start_time: "07:00",
+    end_time: "08:00",
+    is_limit: 0,
+    index: "2",
+    show: false,
+  },
+  {
+    start_time: "08:00",
+    end_time: "09:00",
+    is_limit: 0,
+    index: "3",
+    show: false,
+  },
+  {
+    start_time: "09:00",
+    end_time: "10:00",
+    is_limit: 0,
+    index: "4",
+    show: false,
+  },
+  {
+    start_time: "10:00",
+    end_time: "11:00",
+    is_limit: 0,
+    index: "5",
+    show: false,
+  },
+  {
+    start_time: "11:00",
+    end_time: "12:00",
+    is_limit: 0,
+    index: "6",
+    show: false,
+  },
+  {
+    start_time: "12:00",
+    end_time: "13:00",
+    is_limit: 0,
+    index: "7",
+    show: false,
+  },
+  {
+    start_time: "13:00",
+    end_time: "14:00",
+    is_limit: 0,
+    index: "8",
+    show: false,
+  },
+  {
+    start_time: "14:00",
+    end_time: "15:00",
+    is_limit: 0,
+    index: "9",
+    show: false,
+  },
+  {
+    start_time: "15:00",
+    end_time: "16:00",
+    is_limit: 0,
+    index: "10",
+    show: false,
+  },
+  {
+    start_time: "16:00",
+    end_time: "17:00",
+    is_limit: 0,
+    index: "11",
+    show: false,
+  },
+  {
+    start_time: "17:00",
+    end_time: "18:00",
+    is_limit: 0,
+    index: "12",
+    show: false,
+  },
+  {
+    start_time: "18:00",
+    end_time: "19:00",
+    is_limit: 0,
+    index: "13",
+    show: false,
+  },
+  {
+    start_time: "19:00",
+    end_time: "20:00",
+    is_limit: 0,
+    index: "14",
+    show: false,
+  },
 ]);
 const handleChangeFrom = () => {
   let froms = popularForm.value;
@@ -209,7 +298,7 @@ const handleSelectTimes = (date, actDayTime) => {
 };
 let selectror = ref(1);
 const handleSelectCount = (e) => {
-  popularForm.value.number = e.detail.value;
+  popularForm.value.number = e.detail.value + "人";
   handleChangeFrom();
 };
 let hasTimes = ref([]);
@@ -225,7 +314,7 @@ const handleGetPlans = () => {
         hasSubscribe.value = true;
         popularForm.value.name = res.name;
         popularForm.value.phone = res.phone;
-        popularForm.value.number = res.number;
+        popularForm.value.number = res.number + "人";
         let date = times.value.find((obj) => obj.index == res.time_index);
         selectTime = {
           date: res.booking_time,
@@ -260,7 +349,7 @@ const handleSubmit = () => {
     date: selectTime.date,
     date_index: selectTime.index,
     type: "2",
-    number: popularForm.value.number,
+    number: popularForm.value.number.replace("人", ""),
   };
   CreateBookingPlans(params).then((res) => {
     console.log(res);
@@ -276,7 +365,13 @@ const handleCancelSub = () => {
       title: "操作成功，可再次在入口处预约时间",
       duration: 2000,
       icon: "none",
+      success() {
+        uni.navigateTo({
+          url: "/pages/index/index",
+        });
+      },
     });
+
     popularForm.value = {
       name: "",
       phone: "",
@@ -290,6 +385,12 @@ const handleCancelSub = () => {
 };
 onMounted(() => {
   handleGetPlans();
+
+  let phone = uni.getStorageSync("yy-phone");
+
+  if (phone) {
+    popularForm.value.phone = phone;
+  }
 });
 </script>
 <style lang="less">

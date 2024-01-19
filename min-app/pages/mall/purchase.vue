@@ -26,7 +26,7 @@
           <view class="label">
             <view class="">新增收获地址</view>
             <view class="radios"
-              >{{ addrForm.is_default }}
+              >
               <radio-group @change="handleChangeRadio">
                 <radio color="#d44469" :checked="addrForm.is_default == 1" value="1" />
                 设为默认地址
@@ -135,24 +135,35 @@
     </view>
     <view class="pays">
       <view class="price">
-        <text v-if="goodsInfo.sale_price != goodsInfo.price">折扣价</text>
-        <text v-else>惊喜价</text> <text class="num">¥ 234</text></view
-      >
-      <view class="btns" @click="handleCreateOrder"> 支付 </view>
+        <text style="margin-right: 16px" v-if="goodsInfo.sale_price != goodsInfo.price"
+          >折扣价</text
+        >
+        <text style="margin-right: 16px" v-else>惊喜价</text>
+        <text style="color: #f9a143"> ¥</text>
+        <text class="num"> {{ goodsInfo.sale_price }}</text>
+      </view>
+      <view class="btns" @click="handleToCreateOrder"> 支付 </view>
     </view>
   </view>
 
   <view class="subscribeSuccess" v-if="showSubscribeSuccess">
     <view class="subscribemodal">
       <view class="close">
-        <image src="../../static/image/close.png" @click="handleToUser" mode="widthFix" />
+        <image
+          src="http://h5.dental.cdwuhu.com/static/image/close.png"
+          @click="handleToUser"
+          mode="widthFix"
+        />
       </view>
       <view class="submain">
-        <image src="../../static/image/subscribe.png" mode="widthFix" />
+        <image
+          src="http://h5.dental.cdwuhu.com/static/image/subscribe.png"
+          mode="widthFix"
+        />
         <view class="title">支付成功</view>
         <view class="desc">感谢您的购买，请及等待收货～</view>
       </view>
-      <view class="btns">查看我的订单</view>
+      <view class="btns" @click="handleOpenOrder">查看我的订单</view>
     </view>
   </view>
 </template>
@@ -163,7 +174,7 @@ import { onLaunch, onShow, onLoad } from "@dcloudio/uni-app";
 import { CreateOrder, GetCalculate, GetAddressList, CreateWxPay } from "../../utils/api";
 const count = ref(1);
 let goodsId = ref(null);
-let showSubscribeSuccess = ref(true);
+let showSubscribeSuccess = ref(false);
 let addressId = ref(null);
 let goodsInfo = ref({});
 let addrForm = ref({
@@ -216,7 +227,8 @@ const handleSelectAddress = (item) => {
   addressId.value = item.id;
   addrForm.value = item;
 };
-const handleCreateOrder = () => {
+let order_id = "";
+const handleToCreateOrder = () => {
   let params = {
     goods_id: goodsId.value,
     number: count.value,
@@ -230,9 +242,16 @@ const handleCreateOrder = () => {
   };
   CreateOrder(params).then((res) => {
     console.log(res);
-    CreateWxPay(res).then((res2) => {
-      console.log(res2);
-    });
+    order_id=res.order_id
+    showSubscribeSuccess.value = true;
+    // CreateWxPay(res).then((res2) => {
+    //   console.log(res2);
+    // });
+  });
+};
+const handleOpenOrder = () => {
+  uni.navigateTo({
+    url: "/pages/detail/unpaid?id=" + order_id,
   });
 };
 const handleToUser = () => {

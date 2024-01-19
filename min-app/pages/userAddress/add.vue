@@ -6,7 +6,7 @@
           <view class="">新增收获地址</view>
           <view class="">
             <radio-group @change="handleChangeRadio">
-              <radio color="#d44469" value="1" />
+              <radio color="#d44469" value="1" :checked="addrForm.is_default == 1" />
               设为默认地址
             </radio-group>
           </view>
@@ -14,7 +14,10 @@
         <div class="form-box">
           <view class="item">
             <div class="prefix">
-              <image src="../../static/icon/icon.png" style="width: 16px; height: 18px" />
+              <image
+                src="http://h5.dental.cdwuhu.com/static/icon/icon.png"
+                style="width: 16px; height: 18px"
+              />
             </div>
             <div class="inputs">
               <input v-model="addrForm.name" type="text" placeholder="收货人名" />
@@ -23,7 +26,7 @@
           <view class="item">
             <div class="prefix">
               <image
-                src="../../static/icon/icon3.png"
+                src="http://h5.dental.cdwuhu.com/static/icon/icon3.png"
                 style="width: 15px; height: 19px"
               />
             </div>
@@ -35,12 +38,17 @@
             <picker mode="region" @change="bindRegionChange" custom-item="{{customItem}}">
               <div class="prefix" style="left: 15px; top: 10px">
                 <image
-                  src="../../static/icon/icon2.png"
+                  src="http://h5.dental.cdwuhu.com/static/icon/icon2.png"
                   style="width: 28px; height: 28px"
                 />
               </div>
               <div class="inputs">
-                <input type="text" :value="addrForm.provinces" placeholder="省市区" />
+                <input
+                  type="text"
+                  disabled
+                  :value="addrForm.provinces"
+                  placeholder="省市区"
+                />
               </div>
             </picker>
           </view>
@@ -48,7 +56,7 @@
           <view class="item">
             <div class="prefix" style="left: 19px; top: 17px">
               <image
-                src="../../static/icon/icon1.png"
+                src="http://h5.dental.cdwuhu.com/static/icon/icon1.png"
                 style="width: 19px; height: 15px"
               />
             </div>
@@ -98,14 +106,9 @@ const handleChangeRadio = (e) => {
   addrForm.value.is_default = e.detail.value;
 };
 const submitUpdata = () => {
-  // uni.showToast({
-  //   icon: "error",
-  //   title: "标题",
-  //   duration: 2000,
-  // });
   let params = {
     ...addrForm.value,
-    is_default: isDefault.value ? 1 : 0,
+    is_default: addrForm.value.is_default == 1 ? 1 : 0,
   };
   if (Object.values(params).includes("")) {
     uni.showToast({
@@ -129,6 +132,13 @@ const submitUpdata = () => {
 
   console.log(params);
 };
+onMounted(() => {
+  let phone = uni.getStorageSync("yy-phone");
+
+  if (phone) {
+    addrForm.value.phone = phone;
+  }
+});
 </script>
 
 <style lang="less" scoped>

@@ -4,7 +4,7 @@ const utils_api_index = require("../../utils/api/index.js");
 const _sfc_main = {
   __name: "add",
   setup(__props) {
-    const isDefault = common_vendor.ref(false);
+    common_vendor.ref(false);
     let addrForm = common_vendor.ref({
       name: "",
       phone: "",
@@ -26,7 +26,7 @@ const _sfc_main = {
     const submitUpdata = () => {
       let params = {
         ...addrForm.value,
-        is_default: isDefault.value ? 1 : 0
+        is_default: addrForm.value.is_default == 1 ? 1 : 0
       };
       if (Object.values(params).includes("")) {
         common_vendor.index.showToast({
@@ -49,18 +49,25 @@ const _sfc_main = {
       });
       console.log(params);
     };
+    common_vendor.onMounted(() => {
+      let phone = common_vendor.index.getStorageSync("yy-phone");
+      if (phone) {
+        addrForm.value.phone = phone;
+      }
+    });
     return (_ctx, _cache) => {
       return {
-        a: common_vendor.o(handleChangeRadio),
-        b: common_vendor.unref(addrForm).name,
-        c: common_vendor.o(($event) => common_vendor.unref(addrForm).name = $event.detail.value),
-        d: common_vendor.unref(addrForm).phone,
-        e: common_vendor.o(($event) => common_vendor.unref(addrForm).phone = $event.detail.value),
-        f: common_vendor.unref(addrForm).provinces,
-        g: common_vendor.o(bindRegionChange),
-        h: common_vendor.unref(addrForm).address,
-        i: common_vendor.o(($event) => common_vendor.unref(addrForm).address = $event.detail.value),
-        j: common_vendor.o(submitUpdata)
+        a: common_vendor.unref(addrForm).is_default == 1,
+        b: common_vendor.o(handleChangeRadio),
+        c: common_vendor.unref(addrForm).name,
+        d: common_vendor.o(($event) => common_vendor.unref(addrForm).name = $event.detail.value),
+        e: common_vendor.unref(addrForm).phone,
+        f: common_vendor.o(($event) => common_vendor.unref(addrForm).phone = $event.detail.value),
+        g: common_vendor.unref(addrForm).provinces,
+        h: common_vendor.o(bindRegionChange),
+        i: common_vendor.unref(addrForm).address,
+        j: common_vendor.o(($event) => common_vendor.unref(addrForm).address = $event.detail.value),
+        k: common_vendor.o(submitUpdata)
       };
     };
   }

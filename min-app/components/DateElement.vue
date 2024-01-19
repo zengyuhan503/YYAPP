@@ -47,7 +47,7 @@
           {{ item.start_time }} - {{ item.end_time }}
         </view>
       </view>
-      <view class="label">下午</view>
+      <view class="label" v-show="hasTimes.some(item=>parseInt(item.index)>7)">下午</view>
       <view class="items">
         <view
           @click="handleSelectDay(item)"
@@ -149,6 +149,8 @@ const handleGetBooking_plans_detail = (date = null) => {
   };
   booking_plans_detail(params).then((res) => {
     // hasTimes.value = [{ ...res }];
+	console.log(res)
+		if(res.length==0) return false
     let indexs = res.index.split(",");
     hasTimes.value = times.value.filter((item) => indexs.includes(item.index));
   });

@@ -29,19 +29,97 @@ const _sfc_main = {
         index: "1",
         show: false
       },
-      { start_time: "07:00", end_time: "08:00", is_limit: 0, index: "2", show: false },
-      { start_time: "08:00", end_time: "09:00", is_limit: 0, index: "3", show: false },
-      { start_time: "09:00", end_time: "10:00", is_limit: 0, index: "4", show: false },
-      { start_time: "10:00", end_time: "11:00", is_limit: 0, index: "5", show: false },
-      { start_time: "11:00", end_time: "12:00", is_limit: 0, index: "6", show: false },
-      { start_time: "12:00", end_time: "13:00", is_limit: 0, index: "7", show: false },
-      { start_time: "13:00", end_time: "14:00", is_limit: 0, index: "8", show: false },
-      { start_time: "14:00", end_time: "15:00", is_limit: 0, index: "9", show: false },
-      { start_time: "15:00", end_time: "16:00", is_limit: 0, index: "10", show: false },
-      { start_time: "16:00", end_time: "17:00", is_limit: 0, index: "11", show: false },
-      { start_time: "17:00", end_time: "18:00", is_limit: 0, index: "12", show: false },
-      { start_time: "18:00", end_time: "19:00", is_limit: 0, index: "13", show: false },
-      { start_time: "19:00", end_time: "20:00", is_limit: 0, index: "14", show: false }
+      {
+        start_time: "07:00",
+        end_time: "08:00",
+        is_limit: 0,
+        index: "2",
+        show: false
+      },
+      {
+        start_time: "08:00",
+        end_time: "09:00",
+        is_limit: 0,
+        index: "3",
+        show: false
+      },
+      {
+        start_time: "09:00",
+        end_time: "10:00",
+        is_limit: 0,
+        index: "4",
+        show: false
+      },
+      {
+        start_time: "10:00",
+        end_time: "11:00",
+        is_limit: 0,
+        index: "5",
+        show: false
+      },
+      {
+        start_time: "11:00",
+        end_time: "12:00",
+        is_limit: 0,
+        index: "6",
+        show: false
+      },
+      {
+        start_time: "12:00",
+        end_time: "13:00",
+        is_limit: 0,
+        index: "7",
+        show: false
+      },
+      {
+        start_time: "13:00",
+        end_time: "14:00",
+        is_limit: 0,
+        index: "8",
+        show: false
+      },
+      {
+        start_time: "14:00",
+        end_time: "15:00",
+        is_limit: 0,
+        index: "9",
+        show: false
+      },
+      {
+        start_time: "15:00",
+        end_time: "16:00",
+        is_limit: 0,
+        index: "10",
+        show: false
+      },
+      {
+        start_time: "16:00",
+        end_time: "17:00",
+        is_limit: 0,
+        index: "11",
+        show: false
+      },
+      {
+        start_time: "17:00",
+        end_time: "18:00",
+        is_limit: 0,
+        index: "12",
+        show: false
+      },
+      {
+        start_time: "18:00",
+        end_time: "19:00",
+        is_limit: 0,
+        index: "13",
+        show: false
+      },
+      {
+        start_time: "19:00",
+        end_time: "20:00",
+        is_limit: 0,
+        index: "14",
+        show: false
+      }
     ]);
     const handleChangeFrom = () => {
       let froms = popularForm.value;
@@ -73,7 +151,7 @@ const _sfc_main = {
     };
     let selectror = common_vendor.ref(1);
     const handleSelectCount = (e) => {
-      popularForm.value.number = e.detail.value;
+      popularForm.value.number = e.detail.value + "人";
       handleChangeFrom();
     };
     common_vendor.ref([]);
@@ -89,7 +167,7 @@ const _sfc_main = {
             hasSubscribe.value = true;
             popularForm.value.name = res.name;
             popularForm.value.phone = res.phone;
-            popularForm.value.number = res.number;
+            popularForm.value.number = res.number + "人";
             let date = times.value.find((obj) => obj.index == res.time_index);
             selectTime = {
               date: res.booking_time,
@@ -123,7 +201,7 @@ const _sfc_main = {
         date: selectTime.date,
         date_index: selectTime.index,
         type: "2",
-        number: popularForm.value.number
+        number: popularForm.value.number.replace("人", "")
       };
       utils_api_index.CreateBookingPlans(params).then((res) => {
         console.log(res);
@@ -138,7 +216,12 @@ const _sfc_main = {
         common_vendor.index.showToast({
           title: "操作成功，可再次在入口处预约时间",
           duration: 2e3,
-          icon: "none"
+          icon: "none",
+          success() {
+            common_vendor.index.navigateTo({
+              url: "/pages/index/index"
+            });
+          }
         });
         popularForm.value = {
           name: "",
@@ -153,6 +236,10 @@ const _sfc_main = {
     };
     common_vendor.onMounted(() => {
       handleGetPlans();
+      let phone = common_vendor.index.getStorageSync("yy-phone");
+      if (phone) {
+        popularForm.value.phone = phone;
+      }
     });
     return (_ctx, _cache) => {
       return common_vendor.e({

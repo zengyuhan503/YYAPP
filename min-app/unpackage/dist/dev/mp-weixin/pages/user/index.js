@@ -250,14 +250,17 @@ const _sfc_main = {
       } : {
         w: common_vendor.o(getinfos)
       }, {
-        x: showCtUs.value
+        x: common_vendor.p({
+          active: "user"
+        }),
+        y: showCtUs.value
       }, showCtUs.value ? {
-        y: common_vendor.o(($event) => showCtUs.value = false),
-        z: common_vendor.p({
+        z: common_vendor.o(($event) => showCtUs.value = false),
+        A: common_vendor.p({
           type: "closeempty",
           size: "30"
         }),
-        A: common_vendor.o(handleMakePhoneCall)
+        B: common_vendor.o(handleMakePhoneCall)
       } : {});
     };
   }

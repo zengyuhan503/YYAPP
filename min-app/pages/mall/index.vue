@@ -12,7 +12,7 @@
             @change="handleBannerChange"
             :current="swiperDotIndex"
           >
-            <swiper-item v-for="(item, index) in banners" :key="index" :item-id="index">
+            <swiper-item v-for="(item, index) in banners" @click="handleToBannerInfo(item)" :key="index" :item-id="index">
               <image
                 :src="'https://dental.cdwuhu.com/' + item.image"
                 mode="widthFix"
@@ -56,7 +56,7 @@
               </view>
               <view class="price">¥{{ item.sale_price }}</view>
               <view class="discount"  v-if="item.discount!='100.0'">
-                <image src="../../static/image/mailtag.png" mode="widthFix" />
+                <image src="http://h5.dental.cdwuhu.com/static/image/mailtag.png" mode="widthFix" />
                 <view class="num"><text>{{parseInt( item.discount)/10 }}</text>折</view>
               </view>
             </div>
@@ -120,6 +120,11 @@ const handleChangeCate = (id) => {
 const handleToInfo = (item) => {
   uni.navigateTo({
     url: "/pages/mall/info?id=" + item.id,
+  });
+};
+const handleToBannerInfo = (item) => {
+  uni.navigateTo({
+    url: "/pages/mall/info?id=" + item.goods_id,
   });
 };
 onMounted(() => {

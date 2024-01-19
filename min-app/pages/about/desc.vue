@@ -7,7 +7,7 @@
         backgroundColor="transparent"
         title="医生介绍"
         :height="height"
-      @clickLeft="handleleft"
+        @clickLeft="handleleft"
         color="#000000"
       />
     </div>
@@ -27,18 +27,17 @@ const handleleft = () => {
   });
 };
 let refStyle = ref({
-  top: "0",
+  top: "46px",
 });
 let height = ref(0);
 onShow((options) => {
   const res = wx.getMenuButtonBoundingClientRect();
   height.value = res.height;
-  refStyle.value["padding-top"] = res.top + "px";
+  refStyle.value["top"] = res.top + "px";
 });
 let aboutDescs = ref("");
 onMounted(() => {
   AboutDesc().then((res) => {
-    console.log(res);
     aboutDescs.value = "https://dental.cdwuhu.com/" + res.image;
   });
 });
@@ -46,13 +45,16 @@ onMounted(() => {
 
 <style lang="less" scoped>
 .page-header {
+  width: 100%;
+  z-index: 1001;
   font-size: 17px;
   font-weight: 500;
   color: #ffffff;
   text-align: center;
-//   height: 33px;
+  height: 33px;
   line-height: 33px;
   padding: 8px 17px;
+  position: absolute;
 }
 .page-content {
   image {
@@ -61,7 +63,7 @@ onMounted(() => {
 }
 
 .page-header {
-//   position: absolute;
+  //   position: absolute;
   width: 100%;
   z-index: 1001;
 }

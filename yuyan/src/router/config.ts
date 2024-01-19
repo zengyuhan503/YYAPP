@@ -18,6 +18,10 @@ import commodityCreate from "@views/commodity/create.vue"
 
 import biography from "@views/about/bio.vue"
 import aboutUs from "@views/about/us.vue"
+
+
+import orders from "@views/order/list.vue"
+import orderinfo from "@views/order/info.vue"
 let options = [
     {
         path: '/login',
@@ -175,6 +179,36 @@ let options = [
                 component: commodityCreate,
                 meta: {
                     showMenu: false,
+                    keepAlive: true,
+                }
+            },
+        ]
+    },
+    {
+        path: '/order',
+        name: '订单',
+        meta: {
+            keepAlive: false,
+            showMenu: true
+        },
+        children: [
+            {
+                path: '/order/orders',
+                name: '订单管理',
+                redirect: null,
+                component: orders,
+                meta: {
+                    showMenu: true,
+                    keepAlive: true,
+                }
+            },
+            {
+                path: '/order/info',
+                name: '订单详情',
+                redirect: null,
+                component: orderinfo,
+                meta: {
+                    showMenu: true,
                     keepAlive: true,
                 }
             },

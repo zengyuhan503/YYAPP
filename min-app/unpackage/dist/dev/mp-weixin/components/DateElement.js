@@ -82,6 +82,9 @@ const _sfc_main = {
         type: props.type
       };
       utils_api_index.booking_plans_detail(params).then((res) => {
+        console.log(res);
+        if (res.length == 0)
+          return false;
         let indexs = res.index.split(",");
         hasTimes.value = times.value.filter((item) => indexs.includes(item.index));
       });
@@ -136,7 +139,8 @@ const _sfc_main = {
             f: common_vendor.unref(actTime) == item.index ? 1 : ""
           };
         }),
-        g: common_vendor.f(common_vendor.unref(hasTimes), (item, i = 0, i0) => {
+        g: common_vendor.unref(hasTimes).some((item) => parseInt(item.index) > 7),
+        h: common_vendor.f(common_vendor.unref(hasTimes), (item, i = 0, i0) => {
           return {
             a: common_vendor.t(item.start_time),
             b: common_vendor.t(item.end_time),
@@ -147,7 +151,7 @@ const _sfc_main = {
           };
         })
       } : {}, {
-        h: common_vendor.o(handleConfirm)
+        i: common_vendor.o(handleConfirm)
       });
     };
   }

@@ -31,22 +31,33 @@
         <view class="item" @click="handleToPopularScience">
           <view class="title">科普馆预约</view>
           <view class="desc">了解更多科普知识</view>
-          <image class="yuyueimg" src="../../static/image/yuyue1.png" mode="widthFix">
+          <image
+            class="yuyueimg"
+            src="http://h5.dental.cdwuhu.com/static/image/yuyue1.png"
+            mode="widthFix"
+          >
           </image>
           <view class="yuyue-btn">
-            <image src="../../static/image/yuyue-btn1.png" mode=""></image>
+            <image
+              src="http://h5.dental.cdwuhu.com/static/image/yuyue-btn1.png"
+              mode=""
+            ></image>
             <view class=""> 预约 </view>
           </view>
         </view>
         <view class="item item2" @click="handleToPopularScience2">
           <view class="title">看诊预约</view>
           <view class="desc">专业团队一触即达</view>
-          <image class="yuyueimg" src="../../static/image/yuyue2.png" mode="widthFix">
+          <image
+            class="yuyueimg"
+            src="http://h5.dental.cdwuhu.com/static/image/yuyue2.png"
+            mode="widthFix"
+          >
           </image>
           <view class="yuyue-btn">
             <image
               style="width: 134px"
-              src="../../static/image/yuyue-btn2.png"
+              src="http://h5.dental.cdwuhu.com/static/image/yuyue-btn2.png"
               mode=""
             ></image>
             <view class=""> 预约 </view>
@@ -56,7 +67,10 @@
       <view class="homeImage">
         <view class="homeImagebox">
           <view class="showimage">
-            <image src="../../static/image/homeimage1.png" mode="widthFix"></image>
+            <image
+              src="http://h5.dental.cdwuhu.com/static/image/homeimage1.png"
+              mode="widthFix"
+            ></image>
           </view>
           <view class="text">
             <view class="text1"> 成长大道 </view>
@@ -64,7 +78,7 @@
           </view>
         </view>
       </view>
-      <view class="" style="height: 200px"> </view>
+      <view class="" style="height: 100px"> </view>
     </view>
     <navs active="home" />
   </view>
@@ -106,7 +120,7 @@ const handleToPopularScience2 = () => {
   });
 };
 const handleGetBanner = () => {
-  GetIndexBanner({type:1}).then((res) => {
+  GetIndexBanner({ type: 1 }).then((res) => {
     console.log(res);
     banners.value = res;
   });

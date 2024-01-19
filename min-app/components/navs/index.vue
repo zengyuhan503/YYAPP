@@ -19,7 +19,12 @@
       商城
     </view>
     <view class="nav" @click="handleGetUserProfile">
-      <image src="../../static/image/user.png" mode=""></image>
+      <image
+        v-if="props.active == 'user'"
+        src="../../static/image/user-1.png"
+        mode=""
+      ></image>
+      <image v-else src="../../static/image/user.png" mode=""></image>
       我的
     </view>
   </view>
