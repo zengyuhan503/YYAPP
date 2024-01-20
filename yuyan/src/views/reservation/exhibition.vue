@@ -13,7 +13,9 @@ let searchStatus = ref(false);
 let tabActive = ref(1);
 let searchVal = ref("");
 let contact_status = ref("0");
-const onSearch = () => {};
+const onSearch = () => {
+  getList();
+};
 let dateElementRef=ref(null)
 const columns = [
   {

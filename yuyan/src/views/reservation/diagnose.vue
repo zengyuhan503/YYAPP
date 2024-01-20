@@ -13,7 +13,9 @@ let searchStatus = ref(false);
 let tabActive = ref(1);
 let searchVal = ref("");
 let contact_status = ref("0");
-const onSearch = () => {};
+const onSearch = () => {
+  getList();
+};
 let dateElementRef = ref(null);
 const columns = [
   {
@@ -111,7 +113,7 @@ const handleSignin = (record) => {
 const handleCancelReservation = (record) => {
   Modal.confirm({
     title: "取消该用户预约?",
-    content: createVNode("div", {}, "请确认该客户已无法到店，且已告知客户。"),
+    content:"请确认该客户已无法到店，且已告知客户。",
     onOk() {
       console.log("OK");
       let params = {

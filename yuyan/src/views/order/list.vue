@@ -8,7 +8,10 @@ let route = useRoute();
 let searchStatus = ref(false);
 let tabActive = ref(1);
 let searchVal = ref("");
-const onSearch = () => {};
+const onSearch = () => {
+  pagination.current=1
+  getList()
+};
 let goodsCategoryList = ref([]);
 const columns = [
   {
@@ -82,6 +85,7 @@ const columns = [
 const orderList = ref([]);
 const changeTables = (status) => {
   tabActive.value = status;
+  getList();
 };
 
 const pagination = reactive({
@@ -104,7 +108,7 @@ const getList = () => {
   };
   order_list(params).then((res) => {
     console.log(res);
-    let data = result.data;
+    let data = res.data;
     pagination.total = data.total;
     pagination.current = data.current_page;
   });

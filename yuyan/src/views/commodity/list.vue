@@ -17,7 +17,10 @@ let route = useRoute();
 let searchStatus = ref(false);
 let tabActive = ref(1);
 let searchVal = ref("");
-const onSearch = () => {};
+const onSearch = () => {
+  let stats = tabActive.value;
+  changeTables(stats);
+};
 let goodsCategoryList = ref([]);
 const columns = [
   {
@@ -173,9 +176,9 @@ const handleEditOk = async () => {
     if (editCateForm.value.iconFiles.length != 0) {
       let params = new FormData();
       params.append("limit_image", editCateForm.value.iconFiles[0].originFileObj);
-       icon=(await imageUpLoad(params)).data;
-    }else{
-      icon=editCateForm.value.icon.replace("https://dental.cdwuhu.com/", "");
+      icon = (await imageUpLoad(params)).data;
+    } else {
+      icon = editCateForm.value.icon.replace("https://dental.cdwuhu.com/", "");
     }
     let params2 = {
       title: editCateForm.value.title,

@@ -8,7 +8,7 @@ let searchStatus = ref(false);
 let searchVal = ref("");
 const columns = [
   {
-    name: "用户昵称",
+    title: "用户昵称",
     dataIndex: "nickname",
     align: "center",
     key: "nickname",
@@ -151,16 +151,9 @@ const handlechangeUserStatus = (status: string) => {
             @change="handlePageChange"
             :pagination="pagination"
           >
-            <template #headerCell="{ column }">
-              <template v-if="column.key === 'nickname'">
-                <span> Name </span>
-              </template>
-            </template>
             <template #bodyCell="{ column, record }">
               <template v-if="column.key === 'nickname'">
-                <a>
-                  {{ record.nickname }}
-                </a>
+                {{ record.nickname }}
               </template>
               <template v-if="column.key === 'avatar'">
                 <a>

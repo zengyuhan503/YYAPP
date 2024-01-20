@@ -73,7 +73,9 @@ html {
 }
 .ant-input,
 .ant-input-search-button,
-.ant-select-selector,.ant-input-number-input-wrap,.ant-input-number-input {
+.ant-select-selector,
+.ant-input-number-input-wrap,
+.ant-input-number-input {
   height: 40px !important;
 }
 .ant-message-error span:last-child {
@@ -86,7 +88,11 @@ html {
   line-height: 38px !important;
   height: 38px !important;
 }
-.ant-select-selection-overflow-item .ant-select-selection-item{
+.ant-select-selection-overflow-item .ant-select-selection-item {
+  line-height: 30px !important;
+  height: 30px !important;
+}
+.ant-pagination-options .ant-select-selection-item {
   line-height: 30px !important;
   height: 30px !important;
 }
