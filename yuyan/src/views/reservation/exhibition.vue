@@ -49,7 +49,11 @@ const columns = [
     align: "center",
     dataIndex: "user",
     customRender: (record) => {
-      return record.text.nickname;
+      if(record.text){
+        return record.text.nickname;
+      }else{
+        return "-";
+      }
     },
   },
   {
@@ -58,7 +62,11 @@ const columns = [
     align: "center",
     dataIndex: "user",
     customRender: (record) => {
-      return record.text.phone;
+      if(record.text){
+        return record.text.phone;
+      }else{
+        return "-";
+      }
     },
   },
   {

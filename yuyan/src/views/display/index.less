@@ -48,7 +48,6 @@
                 cursor: pointer;
 
                 .cover {
-                    min-height: 180px;
                     background: linear-gradient(163deg, #EBEFF2 0%, #E6EBF0 100%);
                     position: relative;
                     width: 360px;
@@ -59,12 +58,22 @@
                     background: #FFFFFF;
                     border-radius: 3px;
 
+
+
                     img {
                         width: 100%;
                         position: relative;
                         z-index: 1;
                         width: 360px;
                         height: 180px;
+                    }
+
+                    &.cover2 {
+                        height: 130px;
+
+                        img {
+                            height: 130px;
+                        }
                     }
 
                     .updata {

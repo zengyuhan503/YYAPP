@@ -208,7 +208,7 @@ let options = [
                 redirect: null,
                 component: orderinfo,
                 meta: {
-                    showMenu: true,
+                    showMenu: false,
                     keepAlive: true,
                 }
             },

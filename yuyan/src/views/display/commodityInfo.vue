@@ -19,7 +19,7 @@ let formState = reactive({
   image: "",
   long_image: "",
   id: "",
-  goods_id: "",
+  goods_id: null,
 });
 const coverUploadList = ref([]);
 const imagersUploadList = ref([]);
@@ -43,22 +43,20 @@ const coverBeforeUpload = (file) => {
       const image = new Image();
       image.onload = async function () {
         const img = this as HTMLImageElement;
-        const targetAspectRatio = 2; // 目标比例，即 360:180，宽高比例为2:1
+        const targetAspectRatio = 720 / 260; // 目标比例，即 360:180，宽高比例为2:1
         let aspectRatio = img.width / img.height;
+        console.log(targetAspectRatio, aspectRatio);
         aspectRatio = Math.abs(aspectRatio - targetAspectRatio);
-        if (img.width < 360) {
-          message.error(
-            "请上传最小宽度为360的图片，图片比例为2:1，如360x180分辨率的图片"
-          );
+        if (img.width < 720) {
+          message.error("请上传最小宽度为720的图片,如720x260分辨率的图片");
           coverUploadList.value = [];
           return false;
         }
-        if (aspectRatio > 0.01) {
-          message.error("请上传宽高比例为2:1的图片，如360x180分辨率的图片");
+        if (aspectRatio > 0.1) {
+          message.error("请上传宽高比例为2:1的图片，如720x260分辨率的图片");
           coverUploadList.value = [];
           return false;
         }
-        // coverUploadList.value = [...(coverUploadList.value || []), file];
         formState.cover = src as string;
       };
       image.src = src as string;
@@ -114,7 +112,6 @@ let submitLoading = ref(false);
 const handleSubmit = () => {
   uploadImages()
     .then((res) => {
-      console.log(res);
       let params = {
         type: "2",
         url: formState.url,
@@ -131,14 +128,14 @@ const handleSubmit = () => {
         };
         editBanners(params).then((res) => {
           console.log(res);
-          message.success("添加成功");
-          router.push("/display/banners");
+          message.success("修改成功");
+          router.push("/display/commodity");
         });
       } else {
         createBanners(params).then((res) => {
           console.log(res);
           message.success("添加成功");
-          router.push("/display/banners");
+          router.push("/display/commodity");
         });
       }
 
@@ -201,18 +198,18 @@ const handleGetGoodsList = () => {
   };
   goodList(params).then((res) => {
     goodLists.value = res.data.data;
-    console.log(res.data)
+    console.log(res.data);
+    let query = route.query;
+    for (const key in query) {
+      formState[key] = query[key];
+      formState.goods_id = parseInt(formState.goods_id);
+    }
+    formState.cover = "https://dental.cdwuhu.com/" + query.image;
+    formState.imageUrl = "https://dental.cdwuhu.com/" + query.long_image;
   });
 };
 onMounted(() => {
   handleGetGoodsList();
-  let params = route.query;
-  for (const key in params) {
-    formState[key] = params[key];
-  }
-  formState.cover = "https://dental.cdwuhu.com/" + params.image;
-  formState.imageUrl = "https://dental.cdwuhu.com/" + params.long_image;
-  console.log(formState);
 });
 </script>
 

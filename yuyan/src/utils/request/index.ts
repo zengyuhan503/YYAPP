@@ -202,6 +202,10 @@ export const about_detail = () => apiGet("/web/about/detail", null);
 export const desc_edit = params => apiPost("/web/desc/edit", params);
 export const desc_detail = () => apiGet("/web/desc/detail", null);
 
-export const order_list=(params)=>apiGet('/web/order/lists',params)
-
+export const order_list = (params) => apiGet('/web/order/lists', params)
+export const order_ship = params => apiPost('/web/order/ship', params);
+export const order_cancel = params => apiPost('/web/order/close', params)
+export const order_open = params => apiPost('/web/order/open', params)
+export const order_info = params => apiGet('/web/order/detail', params)
+export const order_updateExpress = () => apiGet('/web/order/updateExpress',null)
 

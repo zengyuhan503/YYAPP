@@ -45,7 +45,7 @@ onMounted(() => {
     <div class="page-body">
       <div class="banners">
         <div class="item" @click="createBanner(null)">
-          <div class="cover">
+          <div class="cover cover2">
             <img src="../../assets/image/display-banner.png" alt="" />
             <div class="updata">
               <PlusOutlined />
@@ -63,7 +63,7 @@ onMounted(() => {
           @click="createBanner(item)"
           :key="index"
         >
-          <div class="cover">
+          <div class="cover cover2">
             <img :src="'https://dental.cdwuhu.com/' + item.image" alt="" />
           </div>
           <div class="info">
