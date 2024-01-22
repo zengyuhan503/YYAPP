@@ -85,7 +85,7 @@ let apiGet = (uri, params, token = null) => {
 }
 const apiUploadImage = (uri) => {
 	return new Promise((resolve, reject) => {
-		let url = "https://dental.cdwuhu.com/" + uri
+		let url = "https://dental.cdwuhu.com" + uri
 		wx.request({
 			url: url,
 			data: params,

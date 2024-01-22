@@ -137,12 +137,6 @@ function updateCountdown() {
   // 如果倒计时结束，停止更新
   if (timeDifference <= 0) {
     clearInterval(interval);
-    GetOrderInfo()
-    // setTimeout(() => {
-    //   wx.redirectTo({
-    //     url: "/pages/user/index",
-    //   });
-    // }, 2000);
   }
 }
 
@@ -234,6 +228,7 @@ const handleCancelOrder = () => {
 };
 
 onLoad((options) => {
+  console.log(options)
   orderid = options.id;
   handleGetOrderInfo();
 });

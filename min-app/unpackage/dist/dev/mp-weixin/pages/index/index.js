@@ -16,8 +16,8 @@ const _sfc_main = {
     common_vendor.ref(-1);
     common_vendor.ref(-1);
     let current = common_vendor.ref(0);
-    let info = common_vendor.ref([{}]);
-    let mode = common_vendor.ref("default");
+    common_vendor.ref([{}]);
+    common_vendor.ref("default");
     let dotsStyles = common_vendor.ref({
       backgroundColor: "rgba(255,255,255,0.5);",
       border: "2px rgba(255,255,255,0.5); solid",
@@ -29,9 +29,6 @@ const _sfc_main = {
     let banners = common_vendor.ref([]);
     const change = (e) => {
       current.value = e.detail.current;
-    };
-    const clickItem = (e) => {
-      current.value = e;
     };
     const handleToPopularScience = () => {
       common_vendor.wx$1.navigateTo({
@@ -89,17 +86,14 @@ const _sfc_main = {
         }),
         b: common_vendor.o(change),
         c: common_vendor.unref(swiperDotIndex),
-        d: common_vendor.o(clickItem),
-        e: common_vendor.p({
-          info: common_vendor.unref(info),
-          current: common_vendor.unref(current),
-          mode: common_vendor.unref(mode),
+        d: common_vendor.p({
+          info: common_vendor.unref(banners),
           ["dots-styles"]: common_vendor.unref(dotsStyles),
           field: "content"
         }),
-        f: common_vendor.o(handleToPopularScience),
-        g: common_vendor.o(handleToPopularScience2),
-        h: common_vendor.p({
+        e: common_vendor.o(handleToPopularScience),
+        f: common_vendor.o(handleToPopularScience2),
+        g: common_vendor.p({
           active: "home"
         })
       };

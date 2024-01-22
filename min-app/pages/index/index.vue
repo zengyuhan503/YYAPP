@@ -6,10 +6,7 @@
         <view>
           <uni-swiper-dot
             class="uni-swiper-dot-box"
-            @clickItem="clickItem"
-            :info="info"
-            :current="current"
-            :mode="mode"
+            :info="banners"
             :dots-styles="dotsStyles"
             field="content"
           >

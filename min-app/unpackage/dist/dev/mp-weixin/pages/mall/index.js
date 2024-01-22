@@ -1,8 +1,13 @@
 "use strict";
 const common_vendor = require("../../common/vendor.js");
 const utils_api_index = require("../../utils/api/index.js");
+if (!Array) {
+  const _easycom_uni_swiper_dot2 = common_vendor.resolveComponent("uni-swiper-dot");
+  _easycom_uni_swiper_dot2();
+}
+const _easycom_uni_swiper_dot = () => "../../uni_modules/uni-swiper-dot/components/uni-swiper-dot/uni-swiper-dot.js";
 if (!Math) {
-  navs();
+  (_easycom_uni_swiper_dot + navs)();
 }
 const navs = () => "../../components/navs/index.js";
 const _sfc_main = {
@@ -16,7 +21,7 @@ const _sfc_main = {
         showbanner.value = "https://dental.cdwuhu.com/" + res[0].image;
       });
     };
-    common_vendor.ref({
+    let dotsStyles = common_vendor.ref({
       backgroundColor: "rgba(255,255,255,0.5);",
       border: "2px rgba(255,255,255,0.5); solid",
       color: "#fff",
@@ -38,7 +43,7 @@ const _sfc_main = {
       });
     };
     let showbanner = common_vendor.ref("");
-    let swiperDotIndex = common_vendor.ref(null);
+    common_vendor.ref(null);
     const handleBannerChange = (e) => {
       let index = e.detail.current;
       showbanner.value = "https://dental.cdwuhu.com/" + banners.value[index].image;
@@ -85,7 +90,11 @@ const _sfc_main = {
           };
         }),
         c: common_vendor.o(handleBannerChange),
-        d: common_vendor.unref(swiperDotIndex),
+        d: common_vendor.p({
+          info: common_vendor.unref(banners),
+          ["dots-styles"]: common_vendor.unref(dotsStyles),
+          field: "content"
+        }),
         e: common_vendor.f(common_vendor.unref(cateList), (item, index, i0) => {
           return {
             a: "https://dental.cdwuhu.com/" + item.icon,

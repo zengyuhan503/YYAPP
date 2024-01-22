@@ -30,7 +30,6 @@ const _sfc_main = {
       timeouts.value = `${hours}:${minutes}:${seconds}`;
       if (timeDifference <= 0) {
         clearInterval(interval);
-        utils_api_index.GetOrderInfo();
       }
     }
     const handleMakePhoneCall = () => {
@@ -121,6 +120,7 @@ const _sfc_main = {
       });
     };
     common_vendor.onLoad((options) => {
+      console.log(options);
       orderid = options.id;
       handleGetOrderInfo();
     });

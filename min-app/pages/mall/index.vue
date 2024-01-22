@@ -6,26 +6,34 @@
         <view class="filter-back"></view>
       </view>
       <view class="page-banner">
-        <swiper
-          class="swiper-box"
-          @change="handleBannerChange"
-          :current="swiperDotIndex"
-          :circular="true"
-          indicator-active-color="#F9A143"
-        >
-          <swiper-item
-            v-for="(item, index) in banners"
-            @click="handleToBannerInfo(item)"
-            :key="index"
-            :item-id="index"
+        <view>
+          <uni-swiper-dot
+            class="uni-swiper-dot-box"
+            :info="banners"
+            :dots-styles="dotsStyles"
+            field="content"
           >
-            <image
-              :src="'https://dental.cdwuhu.com/' + item.image"
-              mode="widthFix"
-              class="swiper-image"
-            ></image>
-          </swiper-item>
-        </swiper>
+            <swiper
+              class="swiper-box"
+              @change="handleBannerChange"
+              :circular="true"
+              indicator-active-color="#F9A143"
+            >
+              <swiper-item
+                v-for="(item, index) in banners"
+                @click="handleToBannerInfo(item)"
+                :key="index"
+                :item-id="index"
+              >
+                <image
+                  :src="'https://dental.cdwuhu.com/' + item.image"
+                  mode="widthFix"
+                  class="swiper-image"
+                ></image>
+              </swiper-item>
+            </swiper>
+          </uni-swiper-dot>
+        </view>
       </view>
     </view>
     <view class="main">
@@ -178,6 +186,12 @@ swiper-item,
 swiper-box,
 uni-swiper-dot,
 .uni-swiper-dot-box {
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.uni-swiper__warp {
+  /* box-shadow: 0px -2px 20px 0px rgba(0, 0, 0, 0.2); */
   border-radius: 10px;
   overflow: hidden;
 }
