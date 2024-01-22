@@ -6,21 +6,26 @@
         <view class="filter-back"></view>
       </view>
       <view class="page-banner">
-        <uni-swiper-dot class="uni-swiper-dot-box" field="content">
-          <swiper
-            class="swiper-box"
-            @change="handleBannerChange"
-            :current="swiperDotIndex"
+        <swiper
+          class="swiper-box"
+          @change="handleBannerChange"
+          :current="swiperDotIndex"
+          :circular="true"
+          indicator-active-color="#F9A143"
+        >
+          <swiper-item
+            v-for="(item, index) in banners"
+            @click="handleToBannerInfo(item)"
+            :key="index"
+            :item-id="index"
           >
-            <swiper-item v-for="(item, index) in banners" @click="handleToBannerInfo(item)" :key="index" :item-id="index">
-              <image
-                :src="'https://dental.cdwuhu.com/' + item.image"
-                mode="widthFix"
-                class="swiper-image"
-              ></image>
-            </swiper-item>
-          </swiper>
-        </uni-swiper-dot>
+            <image
+              :src="'https://dental.cdwuhu.com/' + item.image"
+              mode="widthFix"
+              class="swiper-image"
+            ></image>
+          </swiper-item>
+        </swiper>
       </view>
     </view>
     <view class="main">
@@ -33,7 +38,7 @@
             :key="index"
             @click="handleChangeCate(item.id)"
           >
-            <image :src="'https://dental.cdwuhu.com/' + item.icon"  />
+            <image :src="'https://dental.cdwuhu.com/' + item.icon" />
             <view class="title">{{ item.title }}</view>
           </view>
         </view>
@@ -55,9 +60,15 @@
                 <span v-if="item.discount != '100.0'">¥{{ item.price }}</span>
               </view>
               <view class="price">¥{{ item.sale_price }}</view>
-              <view class="discount"  v-if="item.discount!='100.0'">
-                <image src="http://h5.dental.cdwuhu.com/static/image/mailtag.png" mode="widthFix" />
-                <view class="num"><text>{{parseInt( item.discount)/10 }}</text>折</view>
+              <view class="discount" v-if="item.discount != '100.0'">
+                <image
+                  src="http://h5.dental.cdwuhu.com/static/image/mailtag.png"
+                  mode="widthFix"
+                />
+                <view class="num"
+                  ><text>{{ parseInt(item.discount) / 10 }}</text
+                  >折</view
+                >
               </view>
             </div>
           </view>
@@ -80,6 +91,13 @@ const handleGetBanner = () => {
     showbanner.value = "https://dental.cdwuhu.com/" + res[0].image;
   });
 };
+let dotsStyles = ref({
+  backgroundColor: "rgba(255,255,255,0.5);",
+  border: "2px rgba(255,255,255,0.5); solid",
+  color: "#fff",
+  selectedBackgroundColor: "#F9A143",
+  selectedBorder: "2px #F9A143 solid",
+});
 let cateList = ref([]);
 let cateActive = ref(null);
 const handleGetCateList = () => {
@@ -98,7 +116,6 @@ let showbanner = ref("");
 let swiperDotIndex = ref(null);
 const handleBannerChange = (e) => {
   let index = e.detail.current;
-  console.log(index);
   showbanner.value = "https://dental.cdwuhu.com/" + banners.value[index].image;
 };
 let goodsList = ref([]);
@@ -137,12 +154,12 @@ onMounted(() => {
 @import url("./index.less");
 
 .swiper-box {
-  height: 180px !important;
+  height: calc((100vw - 30px) / (720 / 260)) !important;
 }
 
 .swiper-image {
   width: 100% !important;
-  height: 180px !important;
+  // height: 180px !important;
   background: #ffffff;
   box-shadow: 0px -2px 20px 0px rgba(0, 0, 0, 0.2);
   border-radius: 10px;

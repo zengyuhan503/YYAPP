@@ -102,7 +102,7 @@
     </div>
   </view>
   
-  <view class="" style="height: 100px"> </view>
+  <!-- <view class="" style="height: 50px"> </view> -->
 </template>
 
 <script setup>
@@ -227,6 +227,10 @@ const getinfos = (e) => {
 onLoad((e) => {
   wxInfo = e;
 });
+onShow(()=>{
+  handleGetOrderList();
+  handleServerGetUserInfo();
+})
 const handleEditInfo = () => {
   wx.navigateTo({
     url: "/pages/editUser/index",
@@ -302,10 +306,6 @@ const handleToOrderPage = (status) => {
     });
   }
 };
-onMounted(() => {
-  handleGetOrderList();
-  handleServerGetUserInfo();
-});
 </script>
 
 <style lang="less" scoped>

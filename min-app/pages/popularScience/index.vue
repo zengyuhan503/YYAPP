@@ -366,7 +366,7 @@ const handleCancelSub = () => {
       duration: 2000,
       icon: "none",
       success() {
-        uni.navigateTo({
+        uni.redirectTo({
           url: "/pages/index/index",
         });
       },

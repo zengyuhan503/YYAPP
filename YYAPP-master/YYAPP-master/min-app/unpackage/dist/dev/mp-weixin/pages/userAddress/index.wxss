@@ -1,0 +1,141 @@
+.page-content.data-v-7f8df939 {
+  width: 100%;
+  height: 100%;
+  padding: 15px 27px;
+}
+.main .items.data-v-7f8df939 {
+  padding: 14px 20px;
+  background: #FFFFFF;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+.main .items .name.data-v-7f8df939 {
+  font-weight: 400;
+  color: #172B4D;
+  line-height: 20px;
+}
+.main .items .phone.data-v-7f8df939 {
+  font-weight: 400;
+  color: #172B4D;
+  line-height: 20px;
+  margin: 4px 0;
+}
+.main .items .addres.data-v-7f8df939 {
+  font-size: 10px;
+  font-family: PingFangSC, PingFang SC;
+  font-weight: 400;
+  color: #B3BAC5;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.main .items .addres .default.data-v-7f8df939 {
+  width: 26px;
+  height: 14px;
+  background: #D44469;
+  border-radius: 7px;
+  margin-right: 10px;
+  text-align: center;
+  line-height: 14px;
+  font-size: 8px;
+  font-family: PingFangSC, PingFang SC;
+  font-weight: 400;
+  color: #FFFFFF;
+}
+.addr-form.data-v-7f8df939 {
+  height: 425px;
+  background: #FFFFFF;
+  border-radius: 10px;
+  padding: 20px;
+}
+.addr-form .label.data-v-7f8df939 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.addr-form .label > view.data-v-7f8df939:first-child {
+  font-size: 14px;
+  font-weight: 600;
+  color: #172B4D;
+  line-height: 20px;
+}
+.addr-form .label > view.data-v-7f8df939:last-child {
+  font-size: 12px;
+  font-weight: 400;
+  color: #172B4D;
+}
+.addr-form .form-box.data-v-7f8df939 {
+  margin-top: 13px;
+}
+.addr-form .form-box .item.data-v-7f8df939 {
+  position: relative;
+  height: 50px;
+  background: #F9F9F9;
+  border-radius: 25px;
+  margin-bottom: 15px;
+}
+.addr-form .form-box .item .prefix.data-v-7f8df939 {
+  position: absolute;
+  left: 19px;
+  top: 15px;
+}
+.addr-form .form-box .item .inputs.data-v-7f8df939 {
+  background: #F9F9F9;
+  border-radius: 25px;
+}
+.addr-form .form-box .item .inputs input.data-v-7f8df939 {
+  box-sizing: border-box;
+  width: 100%;
+  height: 50px;
+  padding: 0 46px;
+  font-size: 16px;
+}
+.addr-form .form-box .item .inputs textarea.data-v-7f8df939 {
+  padding: 17px 46px;
+}
+
+.action {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  padding-left: 14px;
+}
+.action .delete {
+  width: 40px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-flow: column;
+  margin-right: 14px;
+  cursor: pointer;
+}
+.action .delete .icons {
+  width: 40px;
+  height: 40px;
+  background: #d2516c;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.action .delete .icons image {
+  width: 20px;
+  height: 20px;
+}
+.action .delete .label {
+  font-size: 10px;
+  font-family: PingFangSC, PingFang SC;
+  font-weight: 400;
+  color: #d44469;
+}
+.loginOut {
+  margin-top: 15px;
+}
+.loginOut button {
+  background: #d44469;
+  border-color: #d44469;
+  width: 300px;
+  height: 44px;
+  border-radius: 10px;
+}

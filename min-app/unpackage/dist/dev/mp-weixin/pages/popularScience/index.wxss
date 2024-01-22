@@ -23,10 +23,9 @@
   top: 0;
 }
 .content .main {
-  padding: 20px;
+  padding: 10px;
   width: 100%;
   border-radius: 20px;
-  overflow: hidden;
 }
 .content .main.hasback {
   background: #FFFFFF;
@@ -217,7 +216,7 @@
   width: 28px;
 }
 .subscribeSuccess .subscribemodal .main {
-  padding: 15px;
+  padding: 10px;
   text-align: center;
 }
 .subscribeSuccess .subscribemodal .main image {
@@ -273,7 +272,7 @@
   width: 28px;
 }
 .cancelSubcribe .main {
-  padding: 15px;
+  padding: 10px;
   text-align: center;
 }
 .cancelSubcribe .main image {
@@ -313,10 +312,9 @@
   padding: 20px;
   width: 100%;
   border-radius: 20px;
-  overflow: hidden;
   background-repeat: no-repeat;
   background-size: 100% 100%;
-  height: 685px;
+  height: 650px;
 }
 .inner-inset {
   position: absolute;

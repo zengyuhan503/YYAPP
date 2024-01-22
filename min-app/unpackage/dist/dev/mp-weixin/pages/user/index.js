@@ -121,6 +121,10 @@ const _sfc_main = {
     common_vendor.onLoad((e) => {
       wxInfo = e;
     });
+    common_vendor.onShow(() => {
+      handleGetOrderList();
+      handleServerGetUserInfo();
+    });
     const handleEditInfo = () => {
       common_vendor.wx$1.navigateTo({
         url: "/pages/editUser/index"
@@ -195,10 +199,6 @@ const _sfc_main = {
         });
       }
     };
-    common_vendor.onMounted(() => {
-      handleGetOrderList();
-      handleServerGetUserInfo();
-    });
     return (_ctx, _cache) => {
       return common_vendor.e({
         a: !isLogin.value

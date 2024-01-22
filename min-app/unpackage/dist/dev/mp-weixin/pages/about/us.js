@@ -19,6 +19,7 @@ const _sfc_main = {
     common_vendor.onMounted(() => {
       utils_api_index.AboutUs().then((res) => {
         console.log(res);
+        aboutDescs.value = "https://dental.cdwuhu.com/" + res.image;
       });
     });
     const handleleft = () => {
@@ -26,8 +27,10 @@ const _sfc_main = {
         delta: 1
       });
     };
+    let height = common_vendor.ref(0);
     common_vendor.onShow((options) => {
       const res = common_vendor.wx$1.getMenuButtonBoundingClientRect();
+      console.log(res);
       height.value = res.height;
       refStyle.value["top"] = res.top + "px";
     });
@@ -39,7 +42,7 @@ const _sfc_main = {
           border: false,
           backgroundColor: "transparent",
           title: "关于我们",
-          height: _ctx.height,
+          height: common_vendor.unref(height),
           color: "#000000"
         }),
         c: common_vendor.s(common_vendor.unref(refStyle)),

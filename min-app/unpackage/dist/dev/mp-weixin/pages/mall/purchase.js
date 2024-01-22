@@ -42,7 +42,9 @@ const _sfc_main = {
     };
     common_vendor.watch(count, (newVal) => {
       console.log(newVal);
+      handleGetCalculate();
     });
+    let isHasAddress = false;
     const handleGetCalculate = () => {
       let params = {
         goods_id: goodsId.value,
@@ -50,10 +52,13 @@ const _sfc_main = {
       };
       utils_api_index.GetCalculate(params).then((res) => {
         goodsInfo.value = res;
-        console.log(res);
+        console.log(res.address);
         if (res.address != "") {
           addrForm.value = res.address;
           addrForm.value.is_default = "1";
+          isHasAddress = true;
+        } else {
+          isHasAddress = false;
         }
       });
     };
@@ -61,6 +66,8 @@ const _sfc_main = {
     const handleGetAddressList = () => {
       utils_api_index.GetAddressList().then((res) => {
         addressList.value = res;
+        if (res.length == 0)
+          return false;
         addressId.value = res.find((item) => item.is_default == "1").id;
       });
     };
@@ -73,18 +80,44 @@ const _sfc_main = {
       let params = {
         goods_id: goodsId.value,
         number: count.value,
-        address_id: addrForm.value.id,
+        address_id: isHasAddress ? addrForm.value.id : 0,
         remark: addrForm.value.remark,
         name: addrForm.value.name,
         phone: addrForm.value.phone,
         provinces: addrForm.value.provinces,
         address: addrForm.value.address,
-        is_default: addrForm.value.is_default
+        is_default: addrForm.value.is_default == "" ? 0 : addrForm.value.is_default
       };
+      console.log(params);
       utils_api_index.CreateOrder(params).then((res) => {
         console.log(res);
         order_id = res.order_id;
-        showSubscribeSuccess.value = true;
+        utils_api_index.CreateWxPay(res).then((res2) => {
+          console.log(res2);
+          common_vendor.wx$1.requestPayment({
+            timeStamp: res2.timeStamp,
+            nonceStr: res2.nonceStr,
+            package: res2.package,
+            signType: res2.signType,
+            paySign: res2.paySign,
+            success() {
+              showSubscribeSuccess.value = true;
+            },
+            fail(err) {
+              common_vendor.wx$1.showToast({
+                icon: "none",
+                title: "支付失败,即将前往订单详情",
+                duration: 2e3
+              });
+              setTimeout(() => {
+                common_vendor.index.navigateTo({
+                  url: "/pages/detail/unpaid?id=" + order_id
+                });
+              }, 2e3);
+              console.log(err);
+            }
+          });
+        });
       });
     };
     const handleOpenOrder = () => {
@@ -159,7 +192,7 @@ const _sfc_main = {
         }),
         z: common_vendor.unref(goodsInfo).sale_price != common_vendor.unref(goodsInfo).price
       }, common_vendor.unref(goodsInfo).sale_price != common_vendor.unref(goodsInfo).price ? {} : {}, {
-        A: common_vendor.t(common_vendor.unref(goodsInfo).sale_price),
+        A: common_vendor.t(common_vendor.unref(goodsInfo).total_price),
         B: common_vendor.o(handleToCreateOrder),
         C: common_vendor.unref(showSubscribeSuccess)
       }, common_vendor.unref(showSubscribeSuccess) ? {

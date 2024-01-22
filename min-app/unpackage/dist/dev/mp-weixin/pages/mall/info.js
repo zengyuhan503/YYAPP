@@ -45,8 +45,7 @@ const _sfc_main = {
         a: common_vendor.f(common_vendor.unref(covers), (item, index, i0) => {
           return {
             a: "https://dental.cdwuhu.com/" + item,
-            b: index,
-            c: common_vendor.o(($event) => _ctx.handleToBannerInfo(item), index)
+            b: index
           };
         }),
         b: common_vendor.p({

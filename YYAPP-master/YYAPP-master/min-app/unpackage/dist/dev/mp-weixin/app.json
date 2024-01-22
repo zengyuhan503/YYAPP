@@ -1,0 +1,28 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/index/bannerinfo",
+    "pages/user/index",
+    "pages/about/desc",
+    "pages/about/us",
+    "pages/userAddress/index",
+    "pages/editUser/index",
+    "pages/popularScience/index",
+    "pages/popularScience/index2",
+    "pages/detail/unpaid",
+    "pages/mall/purchase",
+    "pages/mall/info",
+    "pages/mall/index",
+    "pages/userAddress/add",
+    "pages/userAddress/edit",
+    "pages/order/all"
+  ],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "预颜口腔",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8"
+  },
+  "permission": {},
+  "usingComponents": {}
+}

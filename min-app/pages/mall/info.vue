@@ -7,7 +7,6 @@
           <swiper-item
             v-for="(item, index) in covers"
             :key="index"
-            @click="handleToBannerInfo(item)"
           >
             <image
               :src="'https://dental.cdwuhu.com/' + item"

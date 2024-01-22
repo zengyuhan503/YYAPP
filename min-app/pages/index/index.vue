@@ -3,29 +3,31 @@
     <view class="content">
       <view class="page-header"> 预颜口腔 </view>
       <view class="page-banner">
-        <uni-swiper-dot
-          class="uni-swiper-dot-box"
-          @clickItem="clickItem"
-          :info="info"
-          :current="current"
-          :mode="mode"
-          :dots-styles="dotsStyles"
-          field="content"
-        >
-          <swiper class="swiper-box" @change="change" :current="swiperDotIndex">
-            <swiper-item
-              v-for="(item, index) in banners"
-              :key="index"
-              @click="handleToBannerInfo(item)"
-            >
-              <image
-                :src="'https://dental.cdwuhu.com/' + item.image"
-                mode="widthFix"
-                class="swiper-image"
-              ></image>
-            </swiper-item>
-          </swiper>
-        </uni-swiper-dot>
+        <view>
+          <uni-swiper-dot
+            class="uni-swiper-dot-box"
+            @clickItem="clickItem"
+            :info="info"
+            :current="current"
+            :mode="mode"
+            :dots-styles="dotsStyles"
+            field="content"
+          >
+            <swiper class="swiper-box" @change="change" :current="swiperDotIndex">
+              <swiper-item
+                v-for="(item, index) in banners"
+                :key="index"
+                @click="handleToBannerInfo(item)"
+              >
+                <image
+                  :src="'https://dental.cdwuhu.com/' + item.image"
+                  mode="widthFix"
+                  class="swiper-image"
+                ></image>
+              </swiper-item>
+            </swiper>
+          </uni-swiper-dot>
+        </view>
       </view>
       <view class="yuyue">
         <view class="item" @click="handleToPopularScience">
@@ -93,7 +95,13 @@ let styleIndex = ref(-1);
 let current = ref(0);
 let info = ref([{}]);
 let mode = ref("default");
-let dotsStyles = ref({});
+let dotsStyles = ref({
+  backgroundColor: "rgba(255,255,255,0.5);",
+  border: "2px rgba(255,255,255,0.5); solid",
+  color: "#fff",
+  selectedBackgroundColor: "#F9A143",
+  selectedBorder: "2px #F9A143 solid",
+});
 let swiperDotIndex = ref(0);
 let banners = ref([]);
 const change = (e) => {
@@ -156,7 +164,7 @@ onMounted(() => {
 </style>
 <style>
 .uni-swiper__warp {
-  box-shadow: 0px -2px 20px 0px rgba(0, 0, 0, 0.2);
+  /* box-shadow: 0px -2px 20px 0px rgba(0, 0, 0, 0.2); */
   border-radius: 10px;
   overflow: hidden;
 }

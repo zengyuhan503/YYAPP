@@ -1,3 +1,12 @@
+.deteBody.data-v-29cd71d4 {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 9999;
+}
 .deteElement.data-v-29cd71d4 {
   height: 500px;
   background: #ffffff;
@@ -6,7 +15,7 @@
   position: absolute;
   bottom: 0;
   width: 100%;
-  z-index: 111;
+  z-index: 10000;
 }
 .head.data-v-29cd71d4 {
   display: flex;
@@ -131,7 +140,15 @@
   text-align: center;
   margin-top: 30px;
 }
-.okTime image.data-v-29cd71d4 {
+.okTime view.data-v-29cd71d4 {
   width: 300px;
   height: 44px;
+  background: #d44469;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #ffffff;
+  line-height: 44px;
+  text-align: center;
+  margin: auto;
 }

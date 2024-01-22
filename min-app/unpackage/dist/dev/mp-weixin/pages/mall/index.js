@@ -1,13 +1,8 @@
 "use strict";
 const common_vendor = require("../../common/vendor.js");
 const utils_api_index = require("../../utils/api/index.js");
-if (!Array) {
-  const _easycom_uni_swiper_dot2 = common_vendor.resolveComponent("uni-swiper-dot");
-  _easycom_uni_swiper_dot2();
-}
-const _easycom_uni_swiper_dot = () => "../../uni_modules/uni-swiper-dot/components/uni-swiper-dot/uni-swiper-dot.js";
 if (!Math) {
-  (_easycom_uni_swiper_dot + navs)();
+  navs();
 }
 const navs = () => "../../components/navs/index.js";
 const _sfc_main = {
@@ -21,6 +16,13 @@ const _sfc_main = {
         showbanner.value = "https://dental.cdwuhu.com/" + res[0].image;
       });
     };
+    common_vendor.ref({
+      backgroundColor: "rgba(255,255,255,0.5);",
+      border: "2px rgba(255,255,255,0.5); solid",
+      color: "#fff",
+      selectedBackgroundColor: "#F9A143",
+      selectedBorder: "2px #F9A143 solid"
+    });
     let cateList = common_vendor.ref([]);
     let cateActive = common_vendor.ref(null);
     const handleGetCateList = () => {
@@ -39,7 +41,6 @@ const _sfc_main = {
     let swiperDotIndex = common_vendor.ref(null);
     const handleBannerChange = (e) => {
       let index = e.detail.current;
-      console.log(index);
       showbanner.value = "https://dental.cdwuhu.com/" + banners.value[index].image;
     };
     let goodsList = common_vendor.ref([]);
@@ -85,10 +86,7 @@ const _sfc_main = {
         }),
         c: common_vendor.o(handleBannerChange),
         d: common_vendor.unref(swiperDotIndex),
-        e: common_vendor.p({
-          field: "content"
-        }),
-        f: common_vendor.f(common_vendor.unref(cateList), (item, index, i0) => {
+        e: common_vendor.f(common_vendor.unref(cateList), (item, index, i0) => {
           return {
             a: "https://dental.cdwuhu.com/" + item.icon,
             b: common_vendor.t(item.title),
@@ -97,7 +95,7 @@ const _sfc_main = {
             e: common_vendor.o(($event) => handleChangeCate(item.id), index)
           };
         }),
-        g: common_vendor.f(common_vendor.unref(goodsList), (item, index, i0) => {
+        f: common_vendor.f(common_vendor.unref(goodsList), (item, index, i0) => {
           return common_vendor.e({
             a: "https://dental.cdwuhu.com/" + item.head_image,
             b: common_vendor.t(item.title),
@@ -114,7 +112,7 @@ const _sfc_main = {
             i: common_vendor.o(($event) => handleToInfo(item), index)
           });
         }),
-        h: common_vendor.p({
+        g: common_vendor.p({
           active: "mall"
         })
       };

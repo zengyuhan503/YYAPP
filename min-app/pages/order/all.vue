@@ -6,8 +6,12 @@
           <div class="cate">
             <div>商品类型</div>
             <div class="type" v-if="item.status == 0">待付款</div>
+            <div class="type" v-if="item.status == 1">待收货</div>
             <div class="type" v-if="item.status == 2">待收货</div>
+            <div class="type" v-if="item.status == 3">已收货</div>
             <div class="type cancel" v-if="item.status == 4">已完成</div>
+            <div class="type cancel" v-if="item.status == -1">已关闭</div>
+            <div class="type cancel" v-if="item.status == -2">已关闭</div>
           </div>
           <div class="info">
             <div class="cover">
@@ -30,6 +34,15 @@ import { ref, onMounted } from "vue";
 import { onLaunch, onShow, onLoad } from "@dcloudio/uni-app";
 import { GetOrderList } from "../../utils/api/index";
 let status = ref(0);
+let orderStr = ref({
+  0: "待付款",
+  1: "待发货",
+  2: "待收货",
+  3: "已收货",
+  4: "完成订单",
+  "-1": "已关闭",
+  all: "全部订单",
+});
 let orderList = ref([]);
 onLoad((option) => {
   status.value = option.status;
@@ -62,14 +75,9 @@ const handleGetOrderList = (status) => {
   });
 };
 const handleToOrderInfo = (item) => {
-  if (item.status == 0) {
-    uni.navigateTo({
-      url: "/pages/detail/unpaid?id=" + item.id,
-    });
-  }
-  // uni.navigateTo({
-  //   url: "",
-  // });
+  uni.navigateTo({
+    url: "/pages/detail/unpaid?id=" + item.id,
+  });
 };
 </script>
 

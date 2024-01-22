@@ -26,7 +26,7 @@ let refStyle = ref({
 onMounted(() => {
   AboutUs().then((res) => {
     console.log(res);
-    // aboutDescs.value = "https://dental.cdwuhu.com/" + res.image;
+    aboutDescs.value = "https://dental.cdwuhu.com/" + res.image;
   });
 });
 
@@ -35,8 +35,10 @@ const handleleft = () => {
     delta: 1,
   });
 };
+let height = ref(0);
 onShow((options) => {
   const res = wx.getMenuButtonBoundingClientRect();
+  console.log(res);
   height.value = res.height;
   refStyle.value["top"] = res.top + "px";
 });

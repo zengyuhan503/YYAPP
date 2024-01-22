@@ -3,7 +3,10 @@ const common_vendor = require("../../common/vendor.js");
 const _sfc_main = {
   __name: "bannerinfo",
   setup(__props) {
-    let info = common_vendor.ref("");
+    let info = common_vendor.ref({
+      long_image: "",
+      url: ""
+    });
     common_vendor.onLoad((options) => {
       console.log(options);
       info.value = options;

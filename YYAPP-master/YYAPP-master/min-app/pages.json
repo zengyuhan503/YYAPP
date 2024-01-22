@@ -1,0 +1,143 @@
+{
+	"pages": [
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/index/bannerinfo",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/user/index",
+			"style": {
+				"navigationBarTitleText": "预颜口腔",
+				"backgroundColorTop": "#D44469",
+				"navigationBarBackgroundColor": "#D44469",
+				"backgroundColor": "#D44469",
+				"navigationBarTextStyle": "white"
+			}
+		},
+		{
+			"path": "pages/about/desc",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/about/us",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/userAddress/index",
+			"style": {
+				"navigationBarTitleText": "地址管理",
+				"backgroundColorTop": "#D44469",
+				"navigationBarBackgroundColor": "#D44469",
+				"backgroundColor": "#D44469",
+				"navigationBarTextStyle": "white"
+			}
+		},
+		{
+			"path": "pages/editUser/index",
+			"style": {
+				"navigationBarTitleText": "个人信息",
+				"backgroundColorTop": "#D44469",
+				"navigationBarBackgroundColor": "#D44469",
+				"backgroundColor": "#D44469",
+				"navigationBarTextStyle": "white"
+			}
+		},
+		{
+			"path": "pages/popularScience/index",
+			"style": {
+				"navigationStyle": "custom",
+				"navigationBarTitleText": "科普馆预约",
+				"navigationBarTextStyle": "white"
+			}
+		},
+		{
+			"path": "pages/popularScience/index2",
+			"style": {
+				"navigationStyle": "custom",
+				"navigationBarTitleText": "看诊预约",
+				"navigationBarTextStyle": "white"
+			}
+		},
+		{
+			"path": "pages/detail/unpaid",
+			"style": {
+				"navigationBarTitleText": "订单详情",
+				"backgroundColorTop": "#D44469",
+				"navigationBarBackgroundColor": "#D44469",
+				"backgroundColor": "#D44469",
+				"navigationBarTextStyle": "white"
+			}
+		},
+		{
+			"path": "pages/mall/purchase",
+			"style": {
+				"navigationBarTitleText": "预颜口腔",
+				"backgroundColorTop": "#D44469",
+				"navigationBarBackgroundColor": "#D44469",
+				"backgroundColor": "#D44469",
+				"navigationBarTextStyle": "white"
+			}
+		},
+		{
+			"path": "pages/mall/info",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/mall/index",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/userAddress/add",
+			"style": {
+				"navigationBarTitleText": "添加地址",
+				"backgroundColorTop": "#D44469",
+				"navigationBarBackgroundColor": "#D44469",
+				"backgroundColor": "#D44469",
+				"navigationBarTextStyle": "white"
+			}
+		},
+		{
+			"path": "pages/userAddress/edit",
+			"style": {
+				"navigationBarTitleText": "修改地址",
+				"backgroundColorTop": "#D44469",
+				"navigationBarBackgroundColor": "#D44469",
+				"backgroundColor": "#D44469",
+				"navigationBarTextStyle": "white"
+			}
+		},
+		{
+			"path": "pages/order/all",
+			"style": {
+				"navigationBarTitleText": "全部订单",
+				"backgroundColorTop": "#D44469",
+				"navigationBarBackgroundColor": "#D44469",
+				"backgroundColor": "#D44469",
+				"navigationBarTextStyle": "white"
+			}
+		}
+	],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "预颜口腔",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8"
+	},
+	"uniIdRouter": {}
+}

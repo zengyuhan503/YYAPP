@@ -21,6 +21,7 @@ let apiPost = (uri, params, token = null) => {
             reject();
           } else {
             common_vendor.index.showToast({
+              icon: "none",
               title: res.data.msg,
               duration: 2e3
             });
@@ -70,6 +71,7 @@ let apiGet = (uri, params, token = null) => {
             reject();
           } else {
             common_vendor.index.showToast({
+              icon: "none",
               title: res.data.msg,
               duration: 2e3
             });
@@ -106,14 +108,18 @@ const GetGoodsInfo = (params) => apiGet("/api/goods/detail", params, getUserToke
 const GetCalculate = (params) => apiGet("/api/order/calculate", params, getUserToken);
 const CreateOrder = (params) => apiPost("/api/order/create", params, getUserToken);
 const GetCateList = (params) => apiGet("/api/goods_category/lists", params, getUserToken);
+const CreateWxPay = (params) => apiPost("/api/order/pay", params, getUserToken);
 const GetOrderList = (params) => apiGet("/api/order/lists", params, getUserToken);
-const GetOrderInfo = (params) => apiGet("/api//order/detail", params, getUserToken);
+const GetOrderInfo = (params) => apiGet("/api/order/detail", params, getUserToken);
+const CancelOrder = (params) => apiPost("/api/order/cancel", params, getUserToken);
 exports.AboutDesc = AboutDesc;
 exports.AboutUs = AboutUs;
 exports.CancelBookingPlans = CancelBookingPlans;
+exports.CancelOrder = CancelOrder;
 exports.CreateAddress = CreateAddress;
 exports.CreateBookingPlans = CreateBookingPlans;
 exports.CreateOrder = CreateOrder;
+exports.CreateWxPay = CreateWxPay;
 exports.EditAddress = EditAddress;
 exports.EditUserInfo = EditUserInfo;
 exports.GetAddressList = GetAddressList;

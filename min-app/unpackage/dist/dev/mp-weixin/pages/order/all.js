@@ -5,6 +5,15 @@ const _sfc_main = {
   __name: "all",
   setup(__props) {
     let status = common_vendor.ref(0);
+    common_vendor.ref({
+      0: "待付款",
+      1: "待发货",
+      2: "待收货",
+      3: "已收货",
+      4: "完成订单",
+      "-1": "已关闭",
+      all: "全部订单"
+    });
     let orderList = common_vendor.ref([]);
     common_vendor.onLoad((option) => {
       status.value = option.status;
@@ -37,11 +46,9 @@ const _sfc_main = {
       });
     };
     const handleToOrderInfo = (item) => {
-      if (item.status == 0) {
-        common_vendor.index.navigateTo({
-          url: "/pages/detail/unpaid?id=" + item.id
-        });
-      }
+      common_vendor.index.navigateTo({
+        url: "/pages/detail/unpaid?id=" + item.id
+      });
     };
     return (_ctx, _cache) => {
       return {
@@ -49,16 +56,24 @@ const _sfc_main = {
           return common_vendor.e({
             a: item.status == 0
           }, item.status == 0 ? {} : {}, {
-            b: item.status == 2
+            b: item.status == 1
+          }, item.status == 1 ? {} : {}, {
+            c: item.status == 2
           }, item.status == 2 ? {} : {}, {
-            c: item.status == 4
+            d: item.status == 3
+          }, item.status == 3 ? {} : {}, {
+            e: item.status == 4
           }, item.status == 4 ? {} : {}, {
-            d: "https://dental.cdwuhu.com/" + item.goods_image,
-            e: common_vendor.t(item.goods_name),
-            f: common_vendor.t(item.num),
-            g: common_vendor.t(item.real_price),
-            h: common_vendor.o(($event) => handleToOrderInfo(item), index),
-            i: index
+            f: item.status == -1
+          }, item.status == -1 ? {} : {}, {
+            g: item.status == -2
+          }, item.status == -2 ? {} : {}, {
+            h: "https://dental.cdwuhu.com/" + item.goods_image,
+            i: common_vendor.t(item.goods_name),
+            j: common_vendor.t(item.num),
+            k: common_vendor.t(item.real_price),
+            l: common_vendor.o(($event) => handleToOrderInfo(item), index),
+            m: index
           });
         })
       };

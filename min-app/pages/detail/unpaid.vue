@@ -1,8 +1,8 @@
 <template>
   <view class="page-content">
     <view class="detail-status">
-      <view class="label">待支付</view>
-      <view class="timeout"
+      <view class="label">{{ str[orderInfo.status] }}</view>
+      <view class="timeout" v-if="orderInfo.status == 0"
         >请在 <text>{{ timeouts }}</text> 内支付</view
       >
     </view>
@@ -13,11 +13,13 @@
           <view class="btns"> 查看物流 </view>
         </view>
         <view class="info">
-          <view class="name"> 快递公司： <text>2023/12/11 13:50</text> </view>
+          <view class="name">
+            快递公司： <text>{{ orderInfo.ship_company }}</text>
+          </view>
           <view class="phone">
-            快递单号： <text>1234567890</text>
-            <text @click="handleCopy" class="copy">复制</text></view
-          >
+            快递单号： <text>{{ orderInfo.ship_number }}</text>
+            <text @click="handleCopy" class="copy">复制</text>
+          </view>
         </view>
       </view>
       <view class="address">
@@ -66,7 +68,7 @@
       取消订单
     </view>
     <view class="refund-order" v-if="orderInfo.status !== 0">
-      如需退款，请 <text>致电门店</text>
+      如需退款，请 <text @click="handleMakePhoneCall">致电门店</text>
     </view>
     <view class="pays-content" v-if="orderInfo.status == 0">
       <view class="pays">
@@ -101,52 +103,140 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import { onLaunch, onShow, onLoad } from "@dcloudio/uni-app";
-import { GetOrderInfo } from "../../utils/api/index";
+import { GetOrderInfo, CancelOrder, CreateWxPay } from "../../utils/api/index";
 import moment from "moment";
+let str = ref({
+  0: "待付款",
+  1: "待发货",
+  2: "待收货",
+  3: "已收货",
+  4: "完成订单",
+  "-1": "已关闭",
+  "-2": "已关闭",
+  all: "全部订单",
+});
 let orderid = null;
 let orderInfo = ref({});
 let showCancel = ref(false);
-onLoad((options) => {
-  orderid = options.id;
-  handleGetOrderInfo();
-});
 let timeouts = ref("");
+let interval = null;
+function updateCountdown() {
+  const expiredTime = orderInfo.value.expired_time;
+  // 获取当前时间戳
+  const currentTime = moment().unix();
+
+  // 计算差值
+  const timeDifference = expiredTime - currentTime;
+
+  // 将差值转换为时分秒格式
+  const duration = moment.duration(timeDifference, "seconds");
+  const hours = duration.hours();
+  const minutes = duration.minutes();
+  const seconds = duration.seconds();
+  timeouts.value = `${hours}:${minutes}:${seconds}`;
+  // 如果倒计时结束，停止更新
+  if (timeDifference <= 0) {
+    clearInterval(interval);
+    GetOrderInfo()
+    // setTimeout(() => {
+    //   wx.redirectTo({
+    //     url: "/pages/user/index",
+    //   });
+    // }, 2000);
+  }
+}
+
+const handleMakePhoneCall = () => {
+  uni.makePhoneCall({
+    phoneNumber: "15522756996", //仅为示例
+  });
+};
+const handleToCreateOrder = () => {
+  let params = {
+    order_id: orderid,
+  };
+  CreateWxPay(params).then((res) => {
+    console.log(res);
+    wx.requestPayment({
+      timeStamp: res.timeStamp,
+      nonceStr: res.nonceStr,
+      package: res.package,
+      signType: "MD5",
+      paySign: res.paySign,
+      success(res) {
+        console.log(res);
+        wx.showToast({
+          icon: "success",
+          title: "支付成功",
+          duration: 2000,
+        });
+        setTimeout(() => {
+          handleGetOrderInfo();
+        }, 2000);
+      },
+      fail(err) {
+        wx.showToast({
+          icon: "error",
+          title: "支付失败",
+          duration: 2000,
+        });
+        setTimeout(() => {
+          handleGetOrderInfo();
+        }, 2000);
+        console.log(err);
+      },
+    });
+  });
+};
 const handleGetOrderInfo = () => {
   let params = {
     order_id: orderid,
   };
   GetOrderInfo(params).then((res) => {
-    console.log(res);
     orderInfo.value = res;
-    const currentTime = moment();
-    const createTimeMoment = moment(res.create_time, "YYYY-MM-DD HH:mm:ss");
-    const timeDifferenceSeconds = createTimeMoment.diff(currentTime, "seconds");
-
-    // 计算倒计时小时、分钟和秒数
-    const hours = Math.floor(Math.abs(timeDifferenceSeconds) / 3600);
-    const minutes = Math.floor((Math.abs(timeDifferenceSeconds) % 3600) / 60);
-    const seconds = Math.abs(timeDifferenceSeconds) % 60;
-
-    // 将时间差格式化为 "HH:mm:ss"
-    const formattedCountdown = `${
-      timeDifferenceSeconds >= 0 ? "" : "-"
-    } ${hours.toString().padStart(2, "0")}:${minutes
-      .toString()
-      .padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
-
-    console.log(formattedCountdown);
-    timeouts.value = formattedCountdown;
+    clearInterval(interval);
+    interval = null;
+    interval = setInterval(updateCountdown, 1000);
+    updateCountdown();
   });
 };
 const handleCopy = () => {
   uni.setClipboardData({
-    data: "1234567890",
+    data: orderInfo.ship_number,
     success: function () {
-      console.log("success");
+      uni.showToast({
+        icon: "none",
+        title: "复制成功",
+        duration: 2000,
+      });
     },
   });
 };
-const handleCancelOrder = () => {};
+const handleCancelOrder = () => {
+  let params = {
+    order_id: orderid,
+  };
+  CancelOrder(params).then((res) => {
+    console.log(res);
+    uni.showToast({
+      icon: "success",
+      duration: 2000,
+      title: "取消成功",
+      success() {
+        setTimeout(() => {
+          wx.redirectTo({
+            url: "/pages/user/index",
+          });
+        }, 2000);
+      },
+    });
+  });
+};
+
+onLoad((options) => {
+  orderid = options.id;
+  handleGetOrderInfo();
+});
 </script>
 
 <style lang="less" scoped>

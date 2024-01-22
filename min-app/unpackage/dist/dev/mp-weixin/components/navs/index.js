@@ -13,7 +13,7 @@ const _sfc_main = {
         detail: "/pages/mall/index",
         user: "/pages/user/index"
       };
-      common_vendor.wx$1.navigateTo({
+      common_vendor.wx$1.redirectTo({
         url: uri[route],
         fail: (err) => {
           console.log(err);
@@ -21,7 +21,7 @@ const _sfc_main = {
       });
     };
     const handleGetUserProfile = (res) => {
-      common_vendor.wx$1.navigateTo({
+      common_vendor.wx$1.redirectTo({
         url: `/pages/user/index`,
         fail: (err) => {
           console.log(err);

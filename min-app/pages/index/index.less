@@ -1,6 +1,6 @@
 .page-content {
     width: 100%;
-    height: 100%;
+    height: 70%;
     position: relative;
 }
 
@@ -23,14 +23,20 @@
     }
 
     .page-banner {
-        padding:10px 15px;
+        padding: 10px 15px;
         border-radius: 10px;
         overflow: hidden;
-        margin-top: 10%;
+        margin-top: 33px;
+
+        &>view {
+            box-shadow: 0px 1px 10px 0px rgba(0, 0, 0, 0.04);
+            border-radius: 10px;
+        }
     }
 
     .yuyue {
         padding: 10px 15px;
+        padding-top: 0;
         display: flex;
         justify-content: space-between;
 
@@ -131,9 +137,10 @@
 
     .text {
         margin-left: 15px;
+        padding-right: 10px;
         color: #71AFA6;
         text-align: center;
-		flex: 1;
+        flex: 1;
 
         .text1 {
             font-size: 23px;
@@ -148,14 +155,13 @@
 }
 
 .swiper-box {
-    height: 180px !important;
+    // height: 180px !important;
 }
 
 .swiper-image {
     width: 100% !important;
-    height: 180px !important;
-    background: #FFFFFF;
-    box-shadow: 0px -2px 20px 0px rgba(0, 0, 0, 0.2);
+    // height: 180px !important;
+    // box-shadow: 0px -2px 20px 0px rgba(0, 0, 0, 0.2);
     border-radius: 10px;
     overflow: hidden;
 }

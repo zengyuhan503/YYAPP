@@ -1,5 +1,6 @@
 .page-content {
     width: 100%;
+    height: 100%;
 }
 
 .banner-back {
@@ -39,10 +40,10 @@
 }
 
 .page-banner {
-    padding: 15px;
+    padding: 10px;
     border-radius: 10px;
     overflow: hidden;
-    margin-top: 25%;
+    margin-top: 22%;
     position: relative;
     z-index: 12;
 }
@@ -52,23 +53,24 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    min-height: calc(100% - 250PX);
+    min-height: calc(100% - 350PX);
 
     .sider {
         width: 112px;
+        height: calc(100vh - 350PX);
 
         .items {
             .item {
                 height: 61px;
                 display: flex;
-                justify-content: center;
+                justify-content: flex-start;
                 align-items: center;
                 flex-flow: column;
                 position: relative;
 
                 &.active {
                     background: #FFFFFF;
-                    border-radius: 10px;
+                    border-radius: 10px 0 0 10px;
 
                 }
 
@@ -100,24 +102,23 @@
         flex: 1;
         padding: 10px;
         background: #FFFFFF;
-        padding-bottom: 100px;
         overflow: auto;
         box-sizing: border-box;
-        height: 100%;
+        height: calc(100vh - 400PX);
 
         .items {
             margin-left: -3px;
             margin-right: -3px;
             display: flex;
-            justify-content: space-between;
-            align-items: center;
+            justify-content: flex-start;
+            align-items: flex-start;
             flex-wrap: wrap;
             margin-bottom: 10px;
             min-height: 100%;
 
             .item {
                 width: 50%;
-                padding: 3px;
+                padding: 6px;
                 margin-bottom: 20px;
                 position: relative;
 
@@ -162,24 +163,26 @@
 
                 .price {
                     font-size: 14px;
-                    font-weight: bold;
+                    font-weight: 700;
                     color: #172B4D;
                     line-height: 17px;
                 }
 
                 .discount {
                     position: absolute;
-                    bottom: 0;
-                    right: 0;
+                    bottom: 6px;
+                    right: 6px;
                     width: 55px;
+                    height: 20px;
 
                     image {
                         width: 55px;
+                        height: 20px !important;
                     }
 
                     .num {
                         width: 100%;
-                        height: 96%;
+                        height: 20px;
                         font-size: 11px;
                         font-weight: 600;
                         color: #FFFFFF;
@@ -189,7 +192,8 @@
                         display: flex;
                         justify-content: center;
                         align-items: center;
-                        text{
+
+                        text {
                             font-size: 16px;
                         }
                     }
@@ -306,7 +310,6 @@
 
 .pays {
     width: 100%;
-    height: 50px;
     background: rgba(249, 249, 249, 0.94);
     box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.3);
     backdrop-filter: blur(20px);
@@ -318,12 +321,15 @@
     justify-content: space-between;
     align-items: center;
     padding: 0 16px;
+    padding-bottom: env(safe-area-inset-bottom);
 
     .price {
+        height: 50px;
         font-size: 12px;
         font-family: PingFangSC, PingFang SC;
         font-weight: 400;
         color: rgba(111, 111, 111, 0.4);
+        line-height: 50px;
 
         text.num {
             font-size: 22px;
@@ -524,6 +530,7 @@ view {
         height: 300px;
         overflow-y: auto;
         padding: 22px 13px;
+        width: 100%;
 
         .items {
             width: 100%;

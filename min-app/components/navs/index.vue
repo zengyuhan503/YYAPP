@@ -41,7 +41,7 @@ const navTo = (route) => {
     detail: "/pages/mall/index",
     user: "/pages/user/index",
   };
-  wx.navigateTo({
+  wx.redirectTo({
     url: uri[route],
     fail: (err) => {
       console.log(err);
@@ -49,7 +49,7 @@ const navTo = (route) => {
   });
 };
 const handleGetUserProfile = (res) => {
-  wx.navigateTo({
+  wx.redirectTo({
     url: `/pages/user/index`,
     fail: (err) => {
       console.log(err);

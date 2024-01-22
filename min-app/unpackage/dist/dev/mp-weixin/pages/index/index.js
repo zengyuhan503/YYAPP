@@ -18,7 +18,13 @@ const _sfc_main = {
     let current = common_vendor.ref(0);
     let info = common_vendor.ref([{}]);
     let mode = common_vendor.ref("default");
-    let dotsStyles = common_vendor.ref({});
+    let dotsStyles = common_vendor.ref({
+      backgroundColor: "rgba(255,255,255,0.5);",
+      border: "2px rgba(255,255,255,0.5); solid",
+      color: "#fff",
+      selectedBackgroundColor: "#F9A143",
+      selectedBorder: "2px #F9A143 solid"
+    });
     let swiperDotIndex = common_vendor.ref(0);
     let banners = common_vendor.ref([]);
     const change = (e) => {

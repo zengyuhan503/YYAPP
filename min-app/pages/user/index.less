@@ -77,7 +77,7 @@
         justify-content: space-between;
         align-items: center;
         padding: 0 10px;
-        padding-bottom: 30px;
+        padding-bottom: 16px;
 
         .item {
             text-align: center;
@@ -100,13 +100,13 @@
 }
 
 .helps {
-    padding: 13px 20px;
+    padding: 30px 20px;
     background-color: #FFFFFF;
     border-radius: 10px;
     margin-top: 10px;
 
     .items {
-        padding: 30px 0;
+        padding: 0px 0;
 
         .item {
             display: flex;
@@ -114,6 +114,11 @@
             align-items: center;
             align-items: center;
             height: 23px;
+            margin-bottom: 30px;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
 
             image {
                 width: 23px;
@@ -128,15 +133,13 @@
                 align-items: center;
             }
 
-            margin-bottom: 30px;
         }
     }
 }
 
 .loginOut {
-    margin-top: 50px;
+    margin-top: 10px;
     text-align: center;
-
     button {
         width: 300px;
         background: #D44469;

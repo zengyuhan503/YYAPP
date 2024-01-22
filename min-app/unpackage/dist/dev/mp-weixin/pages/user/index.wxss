@@ -65,7 +65,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 0 10px;
-  padding-bottom: 30px;
+  padding-bottom: 16px;
 }
 .orders .items .item.data-v-79e6a490 {
   text-align: center;
@@ -83,13 +83,13 @@
   margin-top: 5px;
 }
 .helps.data-v-79e6a490 {
-  padding: 13px 20px;
+  padding: 30px 20px;
   background-color: #FFFFFF;
   border-radius: 10px;
   margin-top: 10px;
 }
 .helps .items.data-v-79e6a490 {
-  padding: 30px 0;
+  padding: 0px 0;
 }
 .helps .items .item.data-v-79e6a490 {
   display: flex;
@@ -97,6 +97,9 @@
   align-items: center;
   height: 23px;
   margin-bottom: 30px;
+}
+.helps .items .item.data-v-79e6a490:last-child {
+  margin-bottom: 0;
 }
 .helps .items .item image.data-v-79e6a490 {
   width: 23px;
@@ -110,7 +113,7 @@
   align-items: center;
 }
 .loginOut.data-v-79e6a490 {
-  margin-top: 50px;
+  margin-top: 10px;
   text-align: center;
 }
 .loginOut button.data-v-79e6a490 {

@@ -1,6 +1,6 @@
 .page-content.data-v-1cf27b2a {
   width: 100%;
-  height: 100%;
+  height: 70%;
   position: relative;
 }
 .content.data-v-1cf27b2a {
@@ -24,10 +24,15 @@
   padding: 10px 15px;
   border-radius: 10px;
   overflow: hidden;
-  margin-top: 10%;
+  margin-top: 33px;
+}
+.content .page-banner > view.data-v-1cf27b2a {
+  box-shadow: 0px 1px 10px 0px rgba(0, 0, 0, 0.04);
+  border-radius: 10px;
 }
 .content .yuyue.data-v-1cf27b2a {
   padding: 10px 15px;
+  padding-top: 0;
   display: flex;
   justify-content: space-between;
 }
@@ -110,6 +115,7 @@
 }
 .homeImage .text.data-v-1cf27b2a {
   margin-left: 15px;
+  padding-right: 10px;
   color: #71AFA6;
   text-align: center;
   flex: 1;
@@ -122,14 +128,8 @@
   font-size: 20px;
   font-weight: 400;
 }
-.swiper-box.data-v-1cf27b2a {
-  height: 180px !important;
-}
 .swiper-image.data-v-1cf27b2a {
   width: 100% !important;
-  height: 180px !important;
-  background: #FFFFFF;
-  box-shadow: 0px -2px 20px 0px rgba(0, 0, 0, 0.2);
   border-radius: 10px;
   overflow: hidden;
 }
@@ -139,7 +139,7 @@
 
 
 .uni-swiper__warp {
-  box-shadow: 0px -2px 20px 0px rgba(0, 0, 0, 0.2);
+  /* box-shadow: 0px -2px 20px 0px rgba(0, 0, 0, 0.2); */
   border-radius: 10px;
   overflow: hidden;
 }

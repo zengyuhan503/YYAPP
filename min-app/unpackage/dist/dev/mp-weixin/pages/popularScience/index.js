@@ -218,7 +218,7 @@ const _sfc_main = {
           duration: 2e3,
           icon: "none",
           success() {
-            common_vendor.index.navigateTo({
+            common_vendor.index.redirectTo({
               url: "/pages/index/index"
             });
           }

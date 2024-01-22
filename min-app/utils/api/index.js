@@ -19,6 +19,7 @@ let apiPost = (uri, params, token = null) => {
 						reject()
 					} else {
 						uni.showToast({
+							icon: "none",
 							title: res.data.msg,
 							duration: 2000
 						});
@@ -69,6 +70,7 @@ let apiGet = (uri, params, token = null) => {
 						reject()
 					} else {
 						uni.showToast({
+							icon: "none",
 							title: res.data.msg,
 							duration: 2000
 						});
@@ -95,12 +97,12 @@ const apiUploadImage = (uri) => {
 				if (res.data.code == 200) {
 					resolve(res.data.data)
 				} else {
-					console.log(res.data.code)
 					if (res.data.code == 203) {
 						tokenfFail()
 						reject()
 					} else {
 						uni.showToast({
+							icon: "none",
 							title: res.data.msg,
 							duration: 2000
 						});
@@ -144,9 +146,10 @@ export const CancelBookingPlans = (params) => apiPost('/api/booking_order/cancel
 export const GetGoodsList = (params) => apiGet('/api/goods/lists', params, getUserToken)
 export const GetGoodsInfo = (params) => apiGet("/api/goods/detail", params, getUserToken)
 
-export const GetCalculate =params=>apiGet('/api/order/calculate',params,getUserToken)
-export const CreateOrder=params=>apiPost('/api/order/create',params,getUserToken) 
+export const GetCalculate = params => apiGet('/api/order/calculate', params, getUserToken)
+export const CreateOrder = params => apiPost('/api/order/create', params, getUserToken)
 export const GetCateList = (params) => apiGet('/api/goods_category/lists', params, getUserToken)
-export const CreateWxPay=params=>apiPost('/api/order/pay',params,getUserToken)
+export const CreateWxPay = params => apiPost('/api/order/pay', params, getUserToken)
 export const GetOrderList = (params) => apiGet("/api/order/lists", params, getUserToken)
-export const GetOrderInfo = (params) => apiGet("/api//order/detail", params, getUserToken)
+export const GetOrderInfo = (params) => apiGet("/api/order/detail", params, getUserToken)
+export const CancelOrder = (params) => apiPost("/api/order/cancel", params, getUserToken)

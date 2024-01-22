@@ -1,72 +1,77 @@
 <template>
-  <view class="deteElement">
-    <view class="head">
-      <view class="title">选择时间</view>
-      <view class="close" @click="closePopup">
-        <uni-icons type="closeempty" size="30"></uni-icons>
+  <view class="deteBody">
+    <view class="deteElement">
+      <view class="head">
+        <view class="title">选择时间</view>
+        <view class="close" @click="closePopup">
+          <uni-icons type="closeempty" size="30"></uni-icons>
+        </view>
       </view>
-    </view>
-    <view class="days">
-      <view class="calendar">
-        <view class="weekdays">
-          <!-- 显示星期 -->
-          <view v-for="weekday in generatedWeekdays" :key="weekday">
-            <view>
-              {{ weekday }}
+      <view class="days">
+        <view class="calendar">
+          <view class="weekdays">
+            <!-- 显示星期 -->
+            <view v-for="weekday in generatedWeekdays" :key="weekday">
+              <view>
+                {{ weekday }}
+              </view>
+            </view>
+          </view>
+          <view class="dates">
+            <!-- 显示日期 -->
+            <view
+              v-for="(date, index) in weekDates"
+              :key="index"
+              @click="handleGetBooking_plans_detail(date)"
+            >
+              <view :class="{ today: date.time == actDayTime }">{{
+                index == 0 ? "今" : date.day
+              }}</view>
             </view>
           </view>
         </view>
-        <view class="dates">
-          <!-- 显示日期 -->
+      </view>
+      <view class="activeday"
+        ><image src="../static/image/dateicon.png" mode="widthFix" /> 08月13日
+      </view>
+      <view class="tiems" v-if="hasTimes.length != 0">
+        <view class="label">上午</view>
+        <view class="items">
           <view
-            v-for="(date, index) in weekDates"
-            :key="index"
-            @click="handleGetBooking_plans_detail(date)"
+            @click="handleSelectDay(item)"
+            v-for="(item, i = 0) in hasTimes"
+            v-show="parseInt(item.index) < 7"
+            :key="i"
+            class="item"
+            :class="{ active: actTime == item.index }"
           >
-            <view :class="{ today: date.time == actDayTime }">{{
-              index == 0 ? "今" : date.day
-            }}</view>
+            {{ item.start_time }} - {{ item.end_time }}
+          </view>
+        </view>
+        <view class="label" v-show="hasTimes.some((item) => parseInt(item.index) > 7)"
+          >下午</view
+        >
+        <view class="items">
+          <view
+            @click="handleSelectDay(item)"
+            v-for="(item, i = 0) in hasTimes"
+            v-show="parseInt(item.index) > 7"
+            :key="i"
+            class="item"
+            :class="{ active: actTime == item.index }"
+          >
+            {{ item.start_time }} - {{ item.end_time }}
           </view>
         </view>
       </view>
-    </view>
-    <view class="activeday"
-      ><image src="../static/image/dateicon.png" mode="widthFix" /> 08月13日
-    </view>
-    <view class="tiems" v-if="hasTimes.length != 0">
-      <view class="label">上午</view>
-      <view class="items">
-        <view
-          @click="handleSelectDay(item)"
-          v-for="(item, i = 0) in hasTimes"
-          v-show="parseInt(item.index) < 7"
-          :key="i"
-          class="item"
-          :class="{ active: actTime == item.index }"
-        >
-          {{ item.start_time }} - {{ item.end_time }}
-        </view>
+      <view class="tiems" v-else>
+        <view class="no_times"> 今日预约已满，请选择其他日期 </view>
       </view>
-      <view class="label" v-show="hasTimes.some(item=>parseInt(item.index)>7)">下午</view>
-      <view class="items">
-        <view
-          @click="handleSelectDay(item)"
-          v-for="(item, i = 0) in hasTimes"
-          v-show="parseInt(item.index) > 7"
-          :key="i"
-          class="item"
-          :class="{ active: actTime == item.index }"
-        >
-          {{ item.start_time }} - {{ item.end_time }}
-        </view>
-      </view>
+      <div class="okTime">
+        <view @click="handleConfirm">确定</view>
+        <!-- <image src="https://dental.cdwuhu.com/static/image/confirm.png" mode="" @click="handleConfirm" /> -->
+      </div>
     </view>
-    <view class="tiems" v-else>
-      <view class="no_times"> 今日预约已满，请选择其他日期 </view>
-    </view>
-    <div class="okTime">
-      <image src="../static/image/confirm.png" mode="" @click="handleConfirm" />
-    </div>
   </view>
 </template>
 
@@ -149,8 +154,8 @@ const handleGetBooking_plans_detail = (date = null) => {
   };
   booking_plans_detail(params).then((res) => {
     // hasTimes.value = [{ ...res }];
-	console.log(res)
-		if(res.length==0) return false
+    console.log(res);
+    if (res.length == 0) return false;
     let indexs = res.index.split(",");
     hasTimes.value = times.value.filter((item) => indexs.includes(item.index));
   });
@@ -174,6 +179,15 @@ onMounted(() => {
 });
 </script>
 <style lang="less" scoped>
+.deteBody {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 9999;
+}
 .deteElement {
   height: 500px;
   background: #ffffff;
@@ -182,7 +196,7 @@ onMounted(() => {
   position: absolute;
   bottom: 0;
   width: 100%;
-  z-index: 111;
+  z-index: 10000;
 }
 .head {
   display: flex;
@@ -308,9 +322,22 @@ onMounted(() => {
 .okTime {
   text-align: center;
   margin-top: 30px;
-  image {
+  // image {
+  //   width: 300px;
+  //   height: 44px;
+  // }
+  view {
     width: 300px;
     height: 44px;
+    background: #d44469;
+    border-radius: 10px;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 600;
+    color: #ffffff;
+    line-height: 44px;
+    text-align: center;
+    margin: auto;
   }
 }
 </style>

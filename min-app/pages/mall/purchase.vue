@@ -25,8 +25,7 @@
         <view class="addr-form">
           <view class="label">
             <view class="">新增收获地址</view>
-            <view class="radios"
-              >
+            <view class="radios">
               <radio-group @change="handleChangeRadio">
                 <radio color="#d44469" :checked="addrForm.is_default == 1" value="1" />
                 设为默认地址
@@ -140,7 +139,7 @@
         >
         <text style="margin-right: 16px" v-else>惊喜价</text>
         <text style="color: #f9a143"> ¥</text>
-        <text class="num"> {{ goodsInfo.sale_price }}</text>
+        <text class="num"> {{ goodsInfo.total_price }}</text>
       </view>
       <view class="btns" @click="handleToCreateOrder"> 支付 </view>
     </view>
@@ -201,7 +200,9 @@ const bindRegionChange = (e) => {
 };
 watch(count, (newVal) => {
   console.log(newVal);
+  handleGetCalculate();
 });
+let isHasAddress = false;
 const handleGetCalculate = () => {
   let params = {
     goods_id: goodsId.value,
@@ -209,10 +210,13 @@ const handleGetCalculate = () => {
   };
   GetCalculate(params).then((res) => {
     goodsInfo.value = res;
-    console.log(res);
+    console.log(res.address);
     if (res.address != "") {
       addrForm.value = res.address;
       addrForm.value.is_default = "1";
+      isHasAddress = true;
+    } else {
+      isHasAddress = false;
     }
   });
 };
@@ -220,6 +224,7 @@ let addressList = ref([]);
 const handleGetAddressList = () => {
   GetAddressList().then((res) => {
     addressList.value = res;
+    if (res.length == 0) return false;
     addressId.value = res.find((item) => item.is_default == "1").id;
   });
 };
@@ -232,21 +237,44 @@ const handleToCreateOrder = () => {
   let params = {
     goods_id: goodsId.value,
     number: count.value,
-    address_id: addrForm.value.id,
+    address_id: isHasAddress ? addrForm.value.id : 0,
     remark: addrForm.value.remark,
     name: addrForm.value.name,
     phone: addrForm.value.phone,
     provinces: addrForm.value.provinces,
     address: addrForm.value.address,
-    is_default: addrForm.value.is_default,
+    is_default: addrForm.value.is_default == "" ? 0 : addrForm.value.is_default,
   };
+  console.log(params);
   CreateOrder(params).then((res) => {
     console.log(res);
-    order_id=res.order_id
-    showSubscribeSuccess.value = true;
-    // CreateWxPay(res).then((res2) => {
-    //   console.log(res2);
-    // });
+    order_id = res.order_id;
+    CreateWxPay(res).then((res2) => {
+      console.log(res2);
+      wx.requestPayment({
+        timeStamp: res2.timeStamp,
+        nonceStr: res2.nonceStr,
+        package: res2.package,
+        signType: res2.signType,
+        paySign: res2.paySign,
+        success() {
+          showSubscribeSuccess.value = true;
+        },
+        fail(err) {
+          wx.showToast({
+            icon: "none",
+            title: "支付失败,即将前往订单详情",
+            duration: 2000,
+          });
+          setTimeout(() => {
+            uni.navigateTo({
+              url: "/pages/detail/unpaid?id=" + order_id,
+            });
+          }, 2000);
+          console.log(err);
+        },
+      });
+    });
   });
 };
 const handleOpenOrder = () => {

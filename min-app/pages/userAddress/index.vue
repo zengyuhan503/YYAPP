@@ -107,7 +107,7 @@ const handleEditAdd = (item) => {
   let url = `/pages/userAddress/edit${querys}`;
   console.log(url);
   uni.navigateTo({
-     url:url
+    url: url,
   });
 };
 const handleDelete = (item) => {

@@ -216,20 +216,20 @@ const _sfc_main = {
           duration: 2e3,
           icon: "none",
           success() {
-            common_vendor.index.navigateTo({
+            common_vendor.index.redirectTo({
               url: "/pages/index/index"
             });
           }
         });
         popularForm.value = {
-          name: "张三",
-          gender: "0",
-          phone: "17628082116",
-          date: "2024-01-05",
-          date_index: "5",
-          age: "1",
-          type: "2",
-          number: "1"
+          name: "",
+          gender: "",
+          phone: "",
+          date: "",
+          date_index: "",
+          age: "",
+          type: "",
+          number: ""
         };
         hasSubscribe.value = false;
       });
