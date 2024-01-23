@@ -3,9 +3,9 @@
     <view class="main">
       <view class="addr-form">
         <view class="label">
-          <view class="">新增收获地址</view>
+          <view class="">新增收货地址</view>
           <view class="">
-            <radio-group @change="handleChangeRadio">
+            <radio-group @change="handleChangeRadio" @click="handleClickRadio">
               <radio color="#d44469" value="1" :checked="addrForm.is_default == 1" />
               设为默认地址
             </radio-group>
@@ -31,7 +31,7 @@
               />
             </div>
             <div class="inputs">
-              <input v-model="addrForm.phone" type="text" placeholder="收获电话" />
+              <input v-model="addrForm.phone" type="text" placeholder="收货电话" />
             </div>
           </view>
           <view class="item">
@@ -65,7 +65,7 @@
                 name=""
                 id=""
                 v-model="addrForm.address"
-                placeholder="收获地址"
+                placeholder="收货地址"
                 cols="30"
                 style="height: 100px"
                 rows="10"
@@ -103,7 +103,11 @@ const bindRegionChange = (e) => {
 };
 const handleChangeRadio = (e) => {
   console.log(e);
-  addrForm.value.is_default = e.detail.value;
+  // addrForm.value.is_default = e.detail.value;
+};
+
+const handleClickRadio = () => {
+  addrForm.value.is_default = !addrForm.value.is_default;
 };
 const submitUpdata = () => {
   let params = {

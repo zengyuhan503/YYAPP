@@ -4,10 +4,7 @@
       <!-- <image :src="'https://dental.cdwuhu.com/' + goodsInfo.head_image" mode="widthFix" /> -->
       <uni-swiper-dot class="uni-swiper-dot-box" :mode="mode" field="content">
         <swiper class="swiper-box">
-          <swiper-item
-            v-for="(item, index) in covers"
-            :key="index"
-          >
+          <swiper-item v-for="(item, index) in covers" :key="index">
             <image
               :src="'https://dental.cdwuhu.com/' + item"
               mode="widthFix"
@@ -32,13 +29,16 @@
             </view>
           </view>
           <view class="discounts" v-if="goodsInfo.sale_price != goodsInfo.price">
-            <image src="http://h5.dental.cdwuhu.com/static/image/discounts.png" mode="" />
-            <view class="text"
-              >立省¥ <text>{{ goodsInfo.price - goodsInfo.sale_price }}</text></view
+            <!-- <image src="http://h5.dental.cdwuhu.com/static/image/discounts.png" mode="" /> -->
+            <view class="text">
+              立省 ¥ <text>{{ goodsInfo.price - goodsInfo.sale_price }}</text></view
             >
           </view>
           <view class="discounts" v-else>
-            <image src="http://h5.dental.cdwuhu.com/static/image/discounts1.png" mode="" />
+            <image
+              src="http://h5.dental.cdwuhu.com/static/image/discounts1.png"
+              mode=""
+            />
             <view class="text">预颜臻选</view>
           </view>
         </view>
@@ -56,11 +56,9 @@
       </view>
       <view class="pays">
         <view class="price">
-          <text style="margin-right: 16px" v-if="goodsInfo.sale_price != goodsInfo.price"
-            >折扣价</text
-          >
-          <text style="margin-right: 16px" v-else>惊喜价</text
-          ><text style="color: #f9a143"> ¥</text>
+          <text v-if="goodsInfo.sale_price != goodsInfo.price">折后价</text>
+          <text style="" v-else>惊喜价</text>
+          <text style="color: #f9a143; display: inline"> ¥</text>
           <text class="num"> {{ goodsInfo.sale_price }}</text>
         </view>
         <view class="btns" @click="handleToCreateOrder"> 购买 </view>

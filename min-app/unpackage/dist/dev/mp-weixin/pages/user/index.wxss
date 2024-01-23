@@ -33,6 +33,7 @@
   font-size: 20px;
   font-weight: 600;
   color: #172B4D;
+  line-height: 28px;
 }
 .user-info .desc .link.data-v-79e6a490 {
   font-size: 14px;
@@ -60,7 +61,7 @@
   line-height: 25px;
 }
 .orders .items.data-v-79e6a490 {
-  margin-top: 20px;
+  margin-top: 22px;
   display: flex;
   justify-content: space-between;
   align-items: center;

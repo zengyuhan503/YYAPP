@@ -8,6 +8,7 @@ import {
   order_cancel,
   order_updateExpress,
   order_open,
+  expresss,
 } from "@/utils/request/index";
 import { message, Modal } from "ant-design-vue";
 let router = useRouter();
@@ -26,22 +27,26 @@ const columns = [
     dataIndex: "order_no",
     align: "center",
     key: "order_no",
+    ellipsis: true,
   },
   {
     title: "商品缩略图",
     dataIndex: "goods_image",
     align: "center",
     key: "goods_image",
+    ellipsis: true,
   },
   {
     title: "商品名称",
     key: "goods_name",
     align: "center",
     dataIndex: "goods_name",
+    ellipsis: true,
   },
   {
     title: "数量",
     key: "num",
+    ellipsis: true,
     align: "center",
     dataIndex: "num",
   },
@@ -50,18 +55,21 @@ const columns = [
     key: "real_price",
     align: "center",
     dataIndex: "real_price",
+    ellipsis: true,
   },
   {
     title: "下单时间",
     key: "create_time",
     align: "center",
     dataIndex: "create_time",
+    ellipsis: true,
   },
 
   {
     title: "物流单号",
     key: "order_no",
     align: "center",
+    ellipsis: true,
     dataIndex: "order_no",
   },
   {
@@ -69,11 +77,13 @@ const columns = [
     key: "ship_state",
     align: "center",
     dataIndex: "ship_state",
+    ellipsis: true,
   },
   {
     title: "操作",
     align: "center",
     key: "action",
+    width: 460,
   },
 ];
 const columns2 = [
@@ -81,6 +91,7 @@ const columns2 = [
     title: "订单编号",
     dataIndex: "order_no",
     align: "center",
+    ellipsis: true,
     key: "order_no",
   },
   {
@@ -88,11 +99,13 @@ const columns2 = [
     dataIndex: "goods_image",
     align: "center",
     key: "goods_image",
+    ellipsis: true,
   },
   {
     title: "商品名称",
     key: "goods_name",
     align: "center",
+    ellipsis: true,
     dataIndex: "goods_name",
   },
   {
@@ -100,17 +113,20 @@ const columns2 = [
     key: "num",
     align: "center",
     dataIndex: "num",
+    ellipsis: true,
   },
   {
     title: "实际支付",
     key: "real_price",
     align: "center",
     dataIndex: "real_price",
+    ellipsis: true,
   },
   {
     title: "下单时间",
     key: "create_time",
     align: "center",
+    ellipsis: true,
     dataIndex: "create_time",
   },
   {
@@ -118,23 +134,27 @@ const columns2 = [
     key: "name",
     align: "center",
     dataIndex: "name",
+    ellipsis: true,
   },
   {
     title: "收货人电话",
     key: "phone",
     align: "center",
     dataIndex: "phone",
+    ellipsis: true,
   },
   {
     title: "收货人地址",
     key: "address",
     align: "center",
+    ellipsis: true,
     dataIndex: "address",
   },
   {
     title: "操作",
     align: "center",
     key: "action",
+    width: 360,
   },
 ];
 
@@ -144,53 +164,62 @@ const columns3 = [
     dataIndex: "order_no",
     align: "center",
     key: "order_no",
+    ellipsis: true,
   },
   {
     title: "商品缩略图",
     dataIndex: "goods_image",
     align: "center",
     key: "goods_image",
+    ellipsis: true,
   },
   {
     title: "商品名称",
     key: "goods_name",
     align: "center",
     dataIndex: "goods_name",
+    ellipsis: true,
   },
   {
     title: "数量",
     key: "num",
     align: "center",
     dataIndex: "num",
+    ellipsis: true,
   },
   {
     title: "实际支付",
     key: "real_price",
     align: "center",
     dataIndex: "real_price",
+    ellipsis: true,
   },
   {
     title: "下单时间",
     key: "create_time",
     align: "center",
     dataIndex: "create_time",
+    ellipsis: true,
   },
   {
     title: "订单状态",
     key: "status",
     align: "center",
     dataIndex: "status",
+    ellipsis: true,
   },
   {
     title: "订单地址",
     key: "address",
     align: "center",
     dataIndex: "address",
+    ellipsis: true,
   },
   {
     title: "操作",
     align: "center",
     key: "action",
+    width: 360,
   },
 ];
 let columnsTables = ref([]);
@@ -255,8 +284,8 @@ const handleCopyAddress = (record) => {
 let shipOpen = ref(false);
 
 let shipformState = ref({
-  ship_company: "",
-  ship_number: "",
+  ship_company: null,
+  ship_number: null,
 });
 let shiporderId = "";
 const handleShip = (record) => {
@@ -280,9 +309,11 @@ const handleShipOk = () => {
     return false;
   }
   order_ship(params).then((res) => {
-    if (res.code == 200) {
+    if (res) {
       message.success("操作成功");
+      shipOpen.value = false;
       getList();
+      handleCancelShip();
     }
   });
 };
@@ -300,10 +331,8 @@ const handleCloseOrder = (record) => {
         order_id: record.id,
       };
       order_cancel(params).then((res) => {
-        if (res.code == 200) {
-          message.success("操作成功");
-          getList();
-        }
+        message.success("操作成功");
+        getList();
       });
     },
     onCancel() {
@@ -326,10 +355,8 @@ const handleOpenOrder = (record) => {
         order_id: record.id,
       };
       order_open(params).then((res) => {
-        if (res.code == 200) {
-          message.success("操作成功");
-          getList();
-        }
+        message.success("操作成功");
+        getList();
       });
     },
     onCancel() {
@@ -352,10 +379,8 @@ const handleOverOrder = (record) => {
         order_id: record.id,
       };
       order_cancel(params).then((res) => {
-        if (res.code == 200) {
-          message.success("操作成功");
-          getList();
-        }
+        message.success("操作成功");
+        getList();
       });
     },
     onCancel() {
@@ -374,11 +399,20 @@ const handleToInfo = (record) => {
 };
 const handleUpdateShip = () => {
   order_updateExpress().then(() => {
+    message.success("已更新物流信息");
     getList();
+  });
+};
+let expressList = ref([]);
+const getExpresss = () => {
+  expresss().then((res) => {
+    console.log(res);
+    expressList.value = res.data;
   });
 };
 onMounted(() => {
   getList();
+  getExpresss();
 });
 </script>
 
@@ -431,40 +465,100 @@ onMounted(() => {
                 <span v-if="record.status == -1">已关闭</span>
               </template>
               <template v-else-if="column.key === 'action'">
-                <a-button type="link" @click="handleUpdateShip()" v-if="tabActive == 2"
-                  >更新物流信息</a-button
-                >
-                <a-divider v-if="tabActive == 2" type="vertical" />
-                <a-button type="link" @click="handleCopyAddress(record)"
-                  >复制地址</a-button
-                >
-                <a-divider type="vertical" />
-                <a-button
-                  type="link"
-                  @click="handleShip(record)"
-                  v-if="record.status == 1"
-                  >发货
-                </a-button>
-                <a-button type="link" @click="handleOverOrder(record)" v-else
-                  >送达
-                </a-button>
-                <a-divider type="vertical" />
-                <a-button
-                  danger
-                  type="link"
-                  v-if="record.status != -1"
-                  @click="handleCloseOrder(record)"
-                >
-                  关闭
-                </a-button>
-                <a-button
-                  danger
-                  type="link"
-                  v-if="record.status == -1"
-                  @click="handleOpenOrder(record)"
-                >
-                  打开
-                </a-button>
+                <template v-if="tabActive == 1">
+                  <div>
+                    <a-button type="link" @click="handleCopyAddress(record)">
+                      复制地址
+                    </a-button>
+                    <a-divider type="vertical" />
+                    <a-button
+                      type="link"
+                      @click="handleShip(record)"
+                      v-if="record.status == 1"
+                      >发货
+                    </a-button>
+                    <a-divider type="vertical" />
+                    <a-button
+                      danger
+                      type="link"
+                      v-if="record.status != -1"
+                      @click="handleCloseOrder(record)"
+                    >
+                      关闭
+                    </a-button>
+                    <a-button
+                      danger
+                      type="link"
+                      v-if="record.status == -1"
+                      @click="handleOpenOrder(record)"
+                    >
+                      打开
+                    </a-button>
+                  </div>
+                </template>
+                <template v-if="tabActive == 2">
+                  <a-button type="link" @click="handleUpdateShip()">物流详情</a-button>
+                  <a-divider type="vertical" />
+                  <a-button type="link" @click="handleCopyAddress(record)">
+                    复制地址
+                  </a-button>
+                  <a-divider type="vertical" />
+                  <a-button type="link" @click="handleOverOrder(record)">送达 </a-button>
+                  <a-divider type="vertical" />
+                  <a-button
+                    danger
+                    type="link"
+                    v-if="record.status != -1"
+                    @click="handleCloseOrder(record)"
+                  >
+                    关闭
+                  </a-button>
+                  <a-button
+                    danger
+                    type="link"
+                    v-if="record.status == -1"
+                    @click="handleOpenOrder(record)"
+                  >
+                    打开
+                  </a-button>
+                </template>
+                <template v-if="tabActive == 4">
+                  <a-button type="link" @click="handleCopyAddress(record)">
+                    复制地址
+                  </a-button>
+                  <a-divider type="vertical" />
+                  <a-button
+                    type="link"
+                    :disabled="record.status < 0 || record.status > 2"
+                    v-if="record.ship_number == ''"
+                    @click="handleShip(record)"
+                    >发货
+                  </a-button>
+                  <a-button
+                    type="link"
+                    :disabled="record.status < 0 || record.status > 2"
+                    v-else
+                    @click="handleOverOrder(record)"
+                    >送达
+                  </a-button>
+                  <a-divider type="vertical" />
+                  <a-button
+                    danger
+                    type="link"
+                    v-if="record.status != -1"
+                    @click="handleCloseOrder(record)"
+                  >
+                    关闭
+                  </a-button>
+                  <a-button
+                    danger
+                    type="link"
+                    v-if="record.status == -1"
+                    @click="handleOpenOrder(record)"
+                  >
+                    打开
+                  </a-button>
+                </template>
               </template>
             </template>
           </a-table>
@@ -486,7 +580,15 @@ onMounted(() => {
           autocomplete="off"
         >
           <a-form-item label="快递公司" name="ship_company">
-            <a-input v-model:value="shipformState.ship_company" />
+            <!-- <a-input v-model:value="shipformState.ship_company" /> -->
+            <a-select ref="select" v-model:value="shipformState.ship_company">
+              <a-select-option
+                v-for="(value, key) in expressList"
+                :key="key"
+                :value="key"
+                >{{ value }}</a-select-option
+              >
+            </a-select>
           </a-form-item>
           <a-form-item label="快递单号" name="ship_company">
             <a-input v-model:value="shipformState.ship_number" />

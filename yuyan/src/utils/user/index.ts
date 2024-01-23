@@ -1,4 +1,5 @@
 
+import { useRouter } from 'vue-router';
 export function logout() {
   localStorage.removeItem('yuyan-user')
 }

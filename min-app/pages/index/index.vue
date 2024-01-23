@@ -7,7 +7,9 @@
           <uni-swiper-dot
             class="uni-swiper-dot-box"
             :info="banners"
+            :current="swiperDotIndex"
             :dots-styles="dotsStyles"
+            mode="round"
             field="content"
           >
             <swiper class="swiper-box" @change="change" :current="swiperDotIndex">
@@ -28,30 +30,25 @@
       </view>
       <view class="yuyue">
         <view class="item" @click="handleToPopularScience">
-          <view class="title">科普馆预约</view>
-          <view class="desc">了解更多科普知识</view>
-          <image
-            class="yuyueimg"
-            src="http://h5.dental.cdwuhu.com/static/image/yuyue1.png"
-            mode="widthFix"
-          >
+          <view class="text">
+            <view class="title">科普馆预约</view>
+            <view class="desc">了解更多科普知识</view>
+          </view>
+          <image class="yuyueimg" src="../../static/image/bj1.png" mode="widthFix">
           </image>
           <view class="yuyue-btn">
-            <image
-              src="http://h5.dental.cdwuhu.com/static/image/yuyue-btn1.png"
-              mode=""
-            ></image>
+            <image src="http://h5.dental.cdwuhu.com/static/image/yuyue-btn1.png" mode="">
+            </image>
             <view class=""> 预约 </view>
           </view>
         </view>
+        <view class="step"></view>
         <view class="item item2" @click="handleToPopularScience2">
-          <view class="title">看诊预约</view>
-          <view class="desc">专业团队一触即达</view>
-          <image
-            class="yuyueimg"
-            src="http://h5.dental.cdwuhu.com/static/image/yuyue2.png"
-            mode="widthFix"
-          >
+          <view class="text">
+            <view class="title">看诊预约</view>
+            <view class="desc">专业团队一触即达</view>
+          </view>
+          <image class="yuyueimg" src="../../static/image/bj2.png" mode="widthFix">
           </image>
           <view class="yuyue-btn">
             <image
@@ -72,7 +69,7 @@
             ></image>
           </view>
           <view class="text">
-            <view class="text1"> 成长大道 </view>
+            <view class="text1"> 科普互动 </view>
             <view class="text2"> 即将推出 </view>
           </view>
         </view>
@@ -102,7 +99,7 @@ let dotsStyles = ref({
 let swiperDotIndex = ref(0);
 let banners = ref([]);
 const change = (e) => {
-  current.value = e.detail.current;
+  swiperDotIndex.value = e.detail.current;
 };
 
 const clickItem = (e) => {
@@ -162,7 +159,17 @@ onMounted(() => {
 <style>
 .uni-swiper__warp {
   /* box-shadow: 0px -2px 20px 0px rgba(0, 0, 0, 0.2); */
+
   border-radius: 10px;
   overflow: hidden;
+}
+.uni-swiper__dots-item {
+  width: 10px !important;
+  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.2);
+  height: 4px !important;
+}
+
+.swiper-box {
+  height: calc((100vw - 30px) / (720 / 360)) !important;
 }
 </style>

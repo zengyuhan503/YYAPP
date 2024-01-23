@@ -12,6 +12,7 @@ const _sfc_main = {
       3: "已收货",
       4: "完成订单",
       "-1": "已关闭",
+      "-3": "已关闭",
       all: "全部订单"
     });
     let orderList = common_vendor.ref([]);
@@ -68,12 +69,14 @@ const _sfc_main = {
           }, item.status == -1 ? {} : {}, {
             g: item.status == -2
           }, item.status == -2 ? {} : {}, {
-            h: "https://dental.cdwuhu.com/" + item.goods_image,
-            i: common_vendor.t(item.goods_name),
-            j: common_vendor.t(item.num),
-            k: common_vendor.t(item.real_price),
-            l: common_vendor.o(($event) => handleToOrderInfo(item), index),
-            m: index
+            h: item.status == -3
+          }, item.status == -3 ? {} : {}, {
+            i: "https://dental.cdwuhu.com/" + item.goods_image,
+            j: common_vendor.t(item.goods_name),
+            k: common_vendor.t(item.num),
+            l: common_vendor.t(item.real_price),
+            m: common_vendor.o(($event) => handleToOrderInfo(item), index),
+            n: index
           });
         })
       };

@@ -13,6 +13,8 @@ const layout = reactive({
 let formState = reactive({
   remark: "",
   url: "",
+  image: "",
+  long_image: "",
   cover: "",
   imageUrl: "",
   id: "",

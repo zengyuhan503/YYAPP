@@ -133,10 +133,12 @@ onMounted(() => {
   border-color: none;
 }
 .form .uni-forms-item {
-  /* border-bottom: 1px solid #f7f7f7; */
+  border-bottom: 1px solid #f7f7f7;
+  overflow: hidden;
   height: 56px;
   background: #ffffff;
   padding: 0 15px;
+  margin-bottom: 0;
 }
 .form .uni-forms-item > view {
   height: 56px;

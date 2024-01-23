@@ -12,6 +12,7 @@
             <div class="type cancel" v-if="item.status == 4">已完成</div>
             <div class="type cancel" v-if="item.status == -1">已关闭</div>
             <div class="type cancel" v-if="item.status == -2">已关闭</div>
+            <div class="type cancel" v-if="item.status == -3">已关闭</div>
           </div>
           <div class="info">
             <div class="cover">
@@ -41,6 +42,7 @@ let orderStr = ref({
   3: "已收货",
   4: "完成订单",
   "-1": "已关闭",
+  "-3": "已关闭",
   all: "全部订单",
 });
 let orderList = ref([]);

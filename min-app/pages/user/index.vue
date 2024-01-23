@@ -3,7 +3,11 @@
     <view class="main">
       <view class="user-info">
         <view class="portrait">
-          <image src="http://h5.dental.cdwuhu.com/static/image/logo.png" v-if="!isLogin" mode="" />
+          <image
+            src="http://h5.dental.cdwuhu.com/static/image/logo.png"
+            v-if="!isLogin"
+            mode=""
+          />
           <image :src="userInfo.avatar" v-else mode="" />
         </view>
         <view class="desc" @click="handleEditInfo" v-if="isLogin">
@@ -37,25 +41,37 @@
         <view class="items">
           <view class="item" @click="handleToAddress">
             <view class="label">
-              <image src="http://h5.dental.cdwuhu.com/static/icon/help1.png" mode="" /><text>地址管理</text>
+              <image
+                src="http://h5.dental.cdwuhu.com/static/icon/help1.png"
+                mode=""
+              /><text>地址管理</text>
             </view>
             <uni-icons type="right" size="18" color="#B3BAC5"></uni-icons>
           </view>
           <view class="item" @click="handleToAboutDesc">
             <view class="label">
-              <image src="http://h5.dental.cdwuhu.com/static/icon/help2.png" mode="" /><text>医生介绍</text>
+              <image
+                src="http://h5.dental.cdwuhu.com/static/icon/help2.png"
+                mode=""
+              /><text>医生介绍</text>
             </view>
             <uni-icons type="right" size="18" color="#B3BAC5"></uni-icons>
           </view>
           <view class="item" @click="handleToAboutUs">
             <view class="label">
-              <image src="http://h5.dental.cdwuhu.com/static/icon/help3.png" mode="" /><text>关于我们</text>
+              <image
+                src="http://h5.dental.cdwuhu.com/static/icon/help3.png"
+                mode=""
+              /><text>关于我们</text>
             </view>
             <uni-icons type="right" size="18" color="#B3BAC5"></uni-icons>
           </view>
           <view class="item" @click="showCtUs = true">
             <view class="label">
-              <image src="http://h5.dental.cdwuhu.com/static/icon/help4.png" mode="" /><text>联系我们</text>
+              <image
+                src="http://h5.dental.cdwuhu.com/static/icon/help4.png"
+                mode=""
+              /><text>联系我们</text>
             </view>
             <uni-icons type="right" size="18" color="#B3BAC5"></uni-icons>
           </view>
@@ -84,7 +100,7 @@
         </button>
       </view>
     </view>
-    <navs active="user"/>
+    <navs active="user" />
   </view>
   <view class="contus" v-if="showCtUs">
     <div class="contus_body">
@@ -101,7 +117,7 @@
       </div>
     </div>
   </view>
-  
+
   <!-- <view class="" style="height: 50px"> </view> -->
 </template>
 
@@ -227,10 +243,10 @@ const getinfos = (e) => {
 onLoad((e) => {
   wxInfo = e;
 });
-onShow(()=>{
+onShow(() => {
   handleGetOrderList();
   handleServerGetUserInfo();
-})
+});
 const handleEditInfo = () => {
   wx.navigateTo({
     url: "/pages/editUser/index",

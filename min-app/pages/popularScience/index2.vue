@@ -1,8 +1,8 @@
 <template>
   <view class="page-content page-content2">
-    <Header title="科普馆预约" />
+    <Header title="看诊预约馆" />
     <view class="content">
-      <view class="main main1 hasback">
+      <view class="main main1 main2 hasback">
         <view class="hastag">
           <view>
             <view class="tag1"></view>
@@ -21,7 +21,7 @@
           ></image>
         </view>
         <view class="main-title"> 看诊预约 </view>
-        <view class="main-desc"> 一句话描述去首页看banner，20个字 </view>
+        <view class="main-desc"> 让孩子们游戏化看牙，让成年人舒适化看牙 </view>
         <view class="popularForm">
           <view class="formInput">
             <image src="http://h5.dental.cdwuhu.com/static/image/name.png" />
@@ -62,10 +62,11 @@
                 </view>
               </view>
             </view>
-            <view class="formItem">
+            <view class="formI tem">
               <picker
                 bindchange="bindPickerChange"
                 mode="date"
+                :end="endTime"
                 :value="selectror"
                 :disabled="hasSubscribe"
                 @change="handleSelectCount"
@@ -178,6 +179,7 @@ import {
   CreateBookingPlans,
   CancelBookingPlans,
 } from "../../utils/api/index";
+let endTime = ref(moment().format("YYYY-MM-DD"));
 let showDate = ref(false);
 let hasSubscribe = ref(false);
 let showCancel = ref(false);
@@ -301,6 +303,7 @@ const handleChangeFrom = () => {
 };
 let isSubmit = ref(false);
 const handleShowPopup = () => {
+  if (hasSubscribe.value) return false;
   showDate.value = true;
 };
 const handleClosePopup = () => {
@@ -319,12 +322,14 @@ const handleSelectTimes = (date, actDayTime) => {
   showDate.value = false;
   handleChangeFrom();
 };
+let agenum = null;
 let selectror = ref(1);
 const handleSelectCount = (e) => {
   const birthdate = moment(e.detail.value);
   const currentDate = moment();
   const age = currentDate.diff(birthdate, "years");
-  popularForm.value.age = age;
+  agenum = age;
+  popularForm.value.age = age + "岁";
   handleChangeFrom();
 };
 let hasTimes = ref([]);
@@ -340,7 +345,8 @@ const handleGetPlans = () => {
         popularForm.value.name = res.name;
         popularForm.value.phone = res.phone;
         popularForm.value.gender = res.gender;
-        popularForm.value.age = res.age;
+        popularForm.value.age = res.age + "岁";
+        agenum = res.age;
         let date = times.value.find((obj) => obj.index == res.time_index);
         selectTime = {
           date: res.booking_time,
@@ -367,7 +373,7 @@ const handleSubmit = () => {
     phone: popularForm.value.phone,
     date: selectTime.date,
     date_index: selectTime.index,
-    age: popularForm.value.age,
+    age: agenum,
     type: "1",
   };
   CreateBookingPlans(params).then((res) => {
@@ -405,12 +411,13 @@ const handleCancelSub = () => {
   });
 };
 const handleChangeGenders = (type) => {
+  if (hasSubscribe.value) return false;
   popularForm.value.gender = type;
 };
 onMounted(() => {
   handleGetPlans();
   let phone = uni.getStorageSync("yy-phone");
-
+  console.log(phone);
   if (phone) {
     popularForm.value.phone = phone;
   }

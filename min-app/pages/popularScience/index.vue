@@ -14,10 +14,9 @@
           </view>
           <view class="main-title"> 科普馆邀请函 </view>
           <view class="main-desc">
-            这里是文字内容介绍，总字数不超过200个字，长文字介绍，文字介绍，总文字介绍，总文字介绍，总总字数不超过200个字，长文字介绍总字数不超过200个字，长文字介绍总字数不超过200个字，长文字
+            牙齿是人体最坚硬的器官，但为何容易生病？你知道它的疾病如何影响其他器官吗？又是否了解我们日常食物中哪些对牙齿有危害？预颜口腔科普馆让您与孩子听到、看到、摸到、学到口腔健康知识，轻松领悟保护口腔健康的关键。这个好玩、有趣、又涨知识的打卡地，期待您和孩子的共同探索~
           </view>
         </view>
-        <view class="solid"> </view>
         <view class="popularForm">
           <view class="formInput">
             <image src="http://h5.dental.cdwuhu.com/static/image/name.png" />
@@ -298,7 +297,7 @@ const handleSelectTimes = (date, actDayTime) => {
 };
 let selectror = ref(1);
 const handleSelectCount = (e) => {
-  popularForm.value.number = e.detail.value + "人";
+  popularForm.value.number = parseInt(e.detail.value) + 1 + "人";
   handleChangeFrom();
 };
 let hasTimes = ref([]);

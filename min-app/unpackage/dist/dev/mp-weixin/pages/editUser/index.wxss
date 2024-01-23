@@ -31,7 +31,7 @@
   background: transparent !important;
   border-radius: 5px;
   box-sizing: border-box;
-  color: #000;
+  color: #8993A4 !important;
   cursor: pointer;
   display: block;
   font-size: 18px;
@@ -65,10 +65,12 @@
   border-color: none;
 }
 .form .uni-forms-item {
-  /* border-bottom: 1px solid #f7f7f7; */
+  border-bottom: 1px solid #f7f7f7;
+  overflow: hidden;
   height: 56px;
   background: #ffffff;
   padding: 0 15px;
+  margin-bottom: 0;
 }
 .form .uni-forms-item > view {
   height: 56px;

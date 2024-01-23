@@ -1,15 +1,12 @@
 <script setup lang="ts">
-import { reactive, ref, watch, onMounted } from "vue";
-import { UserOutlined, UnlockOutlined } from "@ant-design/icons-vue";
+import { reactive, ref } from "vue";
 import { useRouter, useRoute } from "vue-router";
-import { userList, changeUserStatus } from "@/utils/request/index";
+import { changeUserStatus, exitUserStatus } from "@/utils/request/index";
 import { Modal, message } from "ant-design-vue";
-let searchStatus = ref(false);
+let submitLoading = ref(false);
 let router = useRouter();
 let route = useRoute();
-let remark = ref("");
 let info = reactive({ ...route.query });
-console.log(info);
 
 const handleDisabledUser = () => {
   Modal.confirm({
@@ -19,10 +16,9 @@ const handleDisabledUser = () => {
       changeUserStatus({
         user_id: info.id as string,
         status: "2",
-      }).then((res) => {
+      }).then(() => {
         message.success("操作成功");
         info.status = "2";
-        console.log(res);
       });
     },
   });
@@ -43,6 +39,22 @@ const handleEnableUser = () => {
     },
   });
 };
+const handleSubmit = () => {
+  let params = {
+    ...info,
+    user_id: info.id,
+  };
+  exitUserStatus(params)
+    .then((res) => {
+      console.log(res);
+      message.success("操作成功");
+      setTimeout(() => {
+        router.go(-1);
+      }, 1000);
+    })
+    .catch((err) => {});
+  console.log(params);
+};
 </script>
 
 <template>
@@ -58,7 +70,9 @@ const handleEnableUser = () => {
         <p class="title">
           用户信息
           <a-button @click="handleEnableUser" v-if="info.status == '2'">启用</a-button>
-          <a-button @click="handleDisabledUser" v-if="info.status == '1'">停用</a-button>
+          <a-button danger @click="handleDisabledUser" v-if="info.status == '1'"
+            >停用</a-button
+          >
         </p>
         <div class="page-info">
           <a-row :gutter="112">
@@ -83,11 +97,17 @@ const handleEnableUser = () => {
               </a-row>
             </a-col>
             <a-col :span="6">
-              <img :src="(info.avatar as string)" alt="" />
+              <img :src="'https://dental.cdwuhu.com/' +(info.avatar as string)" alt="" />
             </a-col>
           </a-row>
         </div>
       </div>
+    </div>
+    <div class="submit-footer">
+      <a-button style="margin-right: 10px" @click="router.go(-1)"> 取 消 </a-button>
+      <a-button type="primary" :loading="submitLoading" @click="handleSubmit"
+        >提 交</a-button
+      >
     </div>
   </div>
 </template>

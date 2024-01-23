@@ -15,7 +15,7 @@ const _sfc_main = {
   setup(__props) {
     common_vendor.ref(-1);
     common_vendor.ref(-1);
-    let current = common_vendor.ref(0);
+    common_vendor.ref(0);
     common_vendor.ref([{}]);
     common_vendor.ref("default");
     let dotsStyles = common_vendor.ref({
@@ -28,7 +28,7 @@ const _sfc_main = {
     let swiperDotIndex = common_vendor.ref(0);
     let banners = common_vendor.ref([]);
     const change = (e) => {
-      current.value = e.detail.current;
+      swiperDotIndex.value = e.detail.current;
     };
     const handleToPopularScience = () => {
       common_vendor.wx$1.navigateTo({
@@ -88,7 +88,9 @@ const _sfc_main = {
         c: common_vendor.unref(swiperDotIndex),
         d: common_vendor.p({
           info: common_vendor.unref(banners),
+          current: common_vendor.unref(swiperDotIndex),
           ["dots-styles"]: common_vendor.unref(dotsStyles),
+          mode: "round",
           field: "content"
         }),
         e: common_vendor.o(handleToPopularScience),

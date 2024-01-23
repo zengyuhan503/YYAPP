@@ -24,6 +24,7 @@ let disPrice = computed(() => {
 });
 const head_image = ref([]);
 const deputy_image = ref([]);
+const deputy_image_show = ref(["", "", "", ""]);
 const detail_image = ref([]);
 const coverBeforeUpload = (file) => {
   const isLt = file.size / 1024 / 1024 < 10;
@@ -59,7 +60,10 @@ const coverBeforeUpload = (file) => {
   }
   return false;
 };
-
+let upindex = 0;
+const coverBeforeChange = (e) => {
+  upindex = e;
+};
 const coverBeforeUpload2 = (file) => {
   const isLt = file.size / 1024 / 1024 < 10;
   if (!isLt) {
@@ -88,12 +92,26 @@ const coverBeforeUpload2 = (file) => {
           return false;
         }
       };
+      if (upindex == 0) upindex = deputy_image.value.length;
+      file.upindex = upindex;
+      deputy_image.value[deputy_image.value.length - 1] = file;
+      // deputy_image.value.push(file);
+      deputy_image_show.value[upindex - 1] = src as string;
       image.src = src as string;
+      upindex = 0;
     };
   }
   return false;
 };
-
+const handleRm = (index) => {
+  deputy_image.value.splice(index, 1);
+  deputy_image_show.value[index] = "";
+};
+const handleRemoveimage = (res) => {
+  console.log(res);
+  let index = res.upindex;
+  deputy_image_show.value[index] = "";
+};
 const imageBeforeUpload = (file) => {
   const isLt = file.size / 1024 / 1024 < 50;
   if (!isLt) {
@@ -142,7 +160,7 @@ const handleSubmit = () => {
       let imgs = ciimgs.map((item) => item.data);
       let params = {
         head_image: head_image.data,
-        deputy_image: imgs.join(','),
+        deputy_image: imgs.join(","),
         detail_image: detail_image.data,
         price: formState.price,
         category_id: formState.category_id.join(","),
@@ -151,14 +169,11 @@ const handleSubmit = () => {
         discount: formState.discount + "",
       };
       createGoods(params).then((res) => {
-        console.log(res);
-        if (res.code == 200) {
-          message.success("操作成功");
-          router.push({
-            path: "/commodity/list",
-            query: { active: 2 },
-          });
-        }
+        message.success("操作成功");
+        router.push({
+          path: "/commodity/list",
+          query: { active: 2 },
+        });
       });
     });
   });
@@ -262,7 +277,8 @@ onMounted(() => {
                       name="file"
                       v-model:file-list="deputy_image"
                       :before-upload="coverBeforeUpload2"
-                      :maxCount="5"
+                      :maxCount="4"
+                      @remove="handleRemoveimage"
                     >
                       <a-button type="primary">
                         <PlusOutlined />
@@ -325,7 +341,13 @@ onMounted(() => {
             <a-row :gutter="180">
               <a-col :span="8">
                 <a-form-item label="商品原价（必填）">
-                  <a-input v-model:value="formState.price" />
+                  <a-input-number
+                    style="width: 100%"
+                    id="inputNumber"
+                    v-model:value="formState.price"
+                    :min="1"
+                    :max="999.99"
+                  />
                 </a-form-item>
                 <div class="form-upload form-price">
                   <p>
@@ -346,8 +368,8 @@ onMounted(() => {
                     :min="1"
                     :max="100"
                     :formatter="(value) => `${value}%`"
-                    :parser="(value) => value.replace('%', '')"
                   />
+                  %
                 </a-form-item>
               </a-col>
               <a-col :span="8">
@@ -366,8 +388,115 @@ onMounted(() => {
       <div class="goods-show">
         <div class="cover-show">
           <p>商品主图（缩略预览）</p>
-          <div>
+          <div class="covers">
             <img :src="formState.cover" mode="" />
+          </div>
+          <div class="ci-banners" v-if="false">
+            <div class="item" @click="coverBeforeChange(1)">
+              <a-button
+                type="primary"
+                @click="handleRm(0)"
+                v-show="deputy_image_show[0] != ''"
+                class="rm"
+              >
+                删除
+              </a-button>
+              <img v-if="deputy_image_show[0] != ''" :src="deputy_image_show[0]" alt="" />
+
+              <div v-else>
+                <a-upload
+                  name="file"
+                  v-model:file-list="deputy_image"
+                  :before-upload="coverBeforeUpload2"
+                  :showUploadList="false"
+                  action="0"
+                  :maxCount="4"
+                >
+                  <a-button type="primary">
+                    <PlusOutlined />
+                    上传
+                  </a-button>
+                </a-upload>
+              </div>
+            </div>
+            <div class="item" @click="coverBeforeChange(2)">
+              <a-button
+                type="primary"
+                @click="handleRm(1)"
+                v-show="deputy_image_show[1] != ''"
+                class="rm"
+              >
+                删除
+              </a-button>
+              <img v-if="deputy_image_show[1] != ''" :src="deputy_image_show[1]" alt="" />
+              <div v-else>
+                <a-upload
+                  name="file"
+                  v-model:file-list="deputy_image"
+                  :before-upload="coverBeforeUpload2"
+                  :showUploadList="false"
+                  action="1"
+                  :maxCount="4"
+                >
+                  <a-button type="primary">
+                    <PlusOutlined />
+                    上传
+                  </a-button>
+                </a-upload>
+              </div>
+            </div>
+            <div class="item" @click="coverBeforeChange(3)">
+              <a-button
+                type="primary"
+                @click="handleRm(2)"
+                v-show="deputy_image_show[2] != ''"
+                class="rm"
+              >
+                删除
+              </a-button>
+              <img v-if="deputy_image_show[2] != ''" :src="deputy_image_show[2]" alt="" />
+              <div v-else>
+                <a-upload
+                  name="file"
+                  v-model:file-list="deputy_image"
+                  :before-upload="coverBeforeUpload2"
+                  :showUploadList="false"
+                  action="2"
+                  :maxCount="4"
+                >
+                  <a-button type="primary">
+                    <PlusOutlined />
+                    上传
+                  </a-button>
+                </a-upload>
+              </div>
+            </div>
+            <div class="item" @click="coverBeforeChange(4)">
+              <a-button
+                type="primary"
+                @click="handleRm(3)"
+                v-show="deputy_image_show[3] != ''"
+                class="rm"
+              >
+                删除
+              </a-button>
+              <img v-if="deputy_image_show[3] != ''" :src="deputy_image_show[3]" alt="" />
+              <div v-else>
+                <a-upload
+                  name="file"
+                  v-model:file-list="deputy_image"
+                  :before-upload="coverBeforeUpload2"
+                  :showUploadList="false"
+                  action="3"
+                  :maxCount="4"
+                >
+                  <a-button type="primary">
+                    <PlusOutlined />
+                    上传
+                  </a-button>
+                </a-upload>
+              </div>
+            </div>
           </div>
         </div>
         <div class="long-show">
@@ -393,5 +522,8 @@ onMounted(() => {
 <style>
 .login-form .ant-message {
   position: absolute;
+}
+.ci-banners .ant-upload-list {
+  display: none !important;
 }
 </style>

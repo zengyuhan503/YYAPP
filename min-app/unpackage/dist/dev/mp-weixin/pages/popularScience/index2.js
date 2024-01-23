@@ -9,6 +9,7 @@ const DateElement = () => "../../components/DateElement.js";
 const _sfc_main = {
   __name: "index2",
   setup(__props) {
+    let endTime = common_vendor.ref(common_vendor.hooks().format("YYYY-MM-DD"));
     let showDate = common_vendor.ref(false);
     let hasSubscribe = common_vendor.ref(false);
     let showCancel = common_vendor.ref(false);
@@ -132,6 +133,8 @@ const _sfc_main = {
     };
     let isSubmit = common_vendor.ref(false);
     const handleShowPopup = () => {
+      if (hasSubscribe.value)
+        return false;
       showDate.value = true;
     };
     const handleClosePopup = () => {
@@ -150,12 +153,14 @@ const _sfc_main = {
       showDate.value = false;
       handleChangeFrom();
     };
+    let agenum = null;
     let selectror = common_vendor.ref(1);
     const handleSelectCount = (e) => {
       const birthdate = common_vendor.hooks(e.detail.value);
       const currentDate = common_vendor.hooks();
       const age = currentDate.diff(birthdate, "years");
-      popularForm.value.age = age;
+      agenum = age;
+      popularForm.value.age = age + "岁";
       handleChangeFrom();
     };
     common_vendor.ref([]);
@@ -171,7 +176,8 @@ const _sfc_main = {
             popularForm.value.name = res.name;
             popularForm.value.phone = res.phone;
             popularForm.value.gender = res.gender;
-            popularForm.value.age = res.age;
+            popularForm.value.age = res.age + "岁";
+            agenum = res.age;
             let date = times.value.find((obj) => obj.index == res.time_index);
             selectTime = {
               date: res.booking_time,
@@ -197,7 +203,7 @@ const _sfc_main = {
         phone: popularForm.value.phone,
         date: selectTime.date,
         date_index: selectTime.index,
-        age: popularForm.value.age,
+        age: agenum,
         type: "1"
       };
       utils_api_index.CreateBookingPlans(params).then((res) => {
@@ -235,11 +241,14 @@ const _sfc_main = {
       });
     };
     const handleChangeGenders = (type) => {
+      if (hasSubscribe.value)
+        return false;
       popularForm.value.gender = type;
     };
     common_vendor.onMounted(() => {
       handleGetPlans();
       let phone = common_vendor.index.getStorageSync("yy-phone");
+      console.log(phone);
       if (phone) {
         popularForm.value.phone = phone;
       }
@@ -247,7 +256,7 @@ const _sfc_main = {
     return (_ctx, _cache) => {
       return common_vendor.e({
         a: common_vendor.p({
-          title: "科普馆预约"
+          title: "看诊预约馆"
         }),
         b: common_vendor.unref(hasSubscribe),
         c: common_vendor.o(handleChangeFrom),
@@ -264,38 +273,39 @@ const _sfc_main = {
         n: common_vendor.o(handleChangeFrom),
         o: common_vendor.unref(popularForm).age,
         p: common_vendor.o(($event) => common_vendor.unref(popularForm).age = $event.detail.value),
-        q: common_vendor.unref(selectror),
-        r: common_vendor.unref(hasSubscribe),
-        s: common_vendor.o(handleSelectCount),
-        t: common_vendor.o(handleChangeFrom),
-        v: common_vendor.unref(popularForm).date,
-        w: common_vendor.o(($event) => common_vendor.unref(popularForm).date = $event.detail.value),
-        x: common_vendor.o(handleShowPopup),
-        y: !common_vendor.unref(hasSubscribe)
+        q: common_vendor.unref(endTime),
+        r: common_vendor.unref(selectror),
+        s: common_vendor.unref(hasSubscribe),
+        t: common_vendor.o(handleSelectCount),
+        v: common_vendor.o(handleChangeFrom),
+        w: common_vendor.unref(popularForm).date,
+        x: common_vendor.o(($event) => common_vendor.unref(popularForm).date = $event.detail.value),
+        y: common_vendor.o(handleShowPopup),
+        z: !common_vendor.unref(hasSubscribe)
       }, !common_vendor.unref(hasSubscribe) ? common_vendor.e({
-        z: common_vendor.unref(isSubmit)
+        A: common_vendor.unref(isSubmit)
       }, common_vendor.unref(isSubmit) ? {
-        A: common_vendor.o(handleSubmit)
+        B: common_vendor.o(handleSubmit)
       } : {}) : {
-        B: common_vendor.o(($event) => common_vendor.isRef(showCancel) ? showCancel.value = true : showCancel = true)
+        C: common_vendor.o(($event) => common_vendor.isRef(showCancel) ? showCancel.value = true : showCancel = true)
       }, {
-        C: common_vendor.unref(showDate)
+        D: common_vendor.unref(showDate)
       }, common_vendor.unref(showDate) ? {
-        D: common_vendor.o(handleSelectTimes),
-        E: common_vendor.o(handleClosePopup),
-        F: common_vendor.p({
+        E: common_vendor.o(handleSelectTimes),
+        F: common_vendor.o(handleClosePopup),
+        G: common_vendor.p({
           type: "1"
         })
       } : {}, {
-        G: common_vendor.unref(showSubscribeSuccess)
+        H: common_vendor.unref(showSubscribeSuccess)
       }, common_vendor.unref(showSubscribeSuccess) ? {
-        H: common_vendor.o(($event) => common_vendor.isRef(showSubscribeSuccess) ? showSubscribeSuccess.value = false : showSubscribeSuccess = false),
-        I: common_vendor.o(($event) => common_vendor.isRef(showSubscribeSuccess) ? showSubscribeSuccess.value = false : showSubscribeSuccess = false)
+        I: common_vendor.o(($event) => common_vendor.isRef(showSubscribeSuccess) ? showSubscribeSuccess.value = false : showSubscribeSuccess = false),
+        J: common_vendor.o(($event) => common_vendor.isRef(showSubscribeSuccess) ? showSubscribeSuccess.value = false : showSubscribeSuccess = false)
       } : {}, {
-        J: common_vendor.unref(showCancel)
+        K: common_vendor.unref(showCancel)
       }, common_vendor.unref(showCancel) ? {
-        K: common_vendor.o(($event) => common_vendor.isRef(showCancel) ? showCancel.value = false : showCancel = false),
-        L: common_vendor.o(handleCancelSub)
+        L: common_vendor.o(($event) => common_vendor.isRef(showCancel) ? showCancel.value = false : showCancel = false),
+        M: common_vendor.o(handleCancelSub)
       } : {});
     };
   }

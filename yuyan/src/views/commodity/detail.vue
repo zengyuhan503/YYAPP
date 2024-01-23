@@ -17,6 +17,7 @@ let formState = reactive({
   imageUrl: null,
   desc: null,
   price: null,
+  deputy_image: null,
   discount: 100,
   category_id: [],
 });
@@ -142,8 +143,7 @@ const handleSubmit = () => {
     console.log(res);
     let head_image = res[0];
     let detail_image = res[1];
-    uploadImages2().then((ciimgs) => {
-      console.log(ciimgs);
+    uploadImages2().then((ciimgs: Array<any>) => {
       let imgs = ciimgs.map((item) => item);
       let params = {
         goods_id: query.id,
@@ -157,14 +157,11 @@ const handleSubmit = () => {
         discount: formState.discount + "",
       };
       EditGoods(params).then((res) => {
-        console.log(res);
-        if (res.code == 200) {
-          message.success("操作成功");
-          router.push({
-            path: "/commodity/list",
-            query: { active: 2 },
-          });
-        }
+        message.success("操作成功");
+        router.push({
+          path: "/commodity/list",
+          query: { active: 2 },
+        });
       });
     });
   });

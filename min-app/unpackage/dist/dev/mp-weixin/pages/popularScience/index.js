@@ -151,7 +151,7 @@ const _sfc_main = {
     };
     let selectror = common_vendor.ref(1);
     const handleSelectCount = (e) => {
-      popularForm.value.number = e.detail.value + "人";
+      popularForm.value.number = parseInt(e.detail.value) + 1 + "人";
       handleChangeFrom();
     };
     common_vendor.ref([]);

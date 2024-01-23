@@ -11,6 +11,20 @@ let remark = ref("");
 let orderInfo = ref({
   express: [],
   category: [],
+  create_time: null,
+  name: null,
+  user_id: null,
+  phone: null,
+  address: null,
+  ship_company: null,
+  ship_number: null,
+  real_price: null,
+  goods_name: null,
+  goods_id: null,
+  price: null,
+  discount_rate: null,
+  num: null,
+  goods_image: null,
 });
 const textToCopy = ref("这是要复制的文本");
 const copyText = async () => {

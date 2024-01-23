@@ -1,6 +1,6 @@
 let apiPost = (uri, params, token = null) => {
 	return new Promise((resolve, reject) => {
-		let url = "https://dental.cdwuhu.com/" + uri
+		let url = "https://dental.cdwuhu.com" + uri
 		wx.request({
 			url: url,
 			data: params,
@@ -34,25 +34,27 @@ let apiPost = (uri, params, token = null) => {
 }
 
 const tokenfFail = () => {
-	uni.showToast({
-		title: '登录失效，请重新登录',
-		icon: "none",
-		duration: 2000
-	});
 	uni.removeStorageSync('yy-token');
 	uni.removeStorageSync('yy-userinfo');
 	var pages = getCurrentPages();
 	var currentPage = pages[pages.length - 1];
 	var currentRoute = currentPage.route;
 	if (currentRoute == 'pages/user/index') return false;
-
-	wx.navigateTo({
-		url: "/pages/user/index",
+	uni.showToast({
+		title: '登录失效，请重新登录',
+		icon: "none",
+		duration: 2000
 	});
+	setTimeout(() => {
+		wx.navigateTo({
+			url: "/pages/user/index",
+		});
+	}, 2000);
 }
 let apiGet = (uri, params, token = null) => {
 	return new Promise((resolve, reject) => {
-		let url = "https://dental.cdwuhu.com/" + uri
+
+		let url = "https://dental.cdwuhu.com" + uri
 		wx.request({
 			url: url,
 			data: params,
@@ -64,7 +66,6 @@ let apiGet = (uri, params, token = null) => {
 				if (res.data.code == 200) {
 					resolve(res.data.data)
 				} else {
-					console.log(res.data.code)
 					if (res.data.code == 203) {
 						tokenfFail()
 						reject()
@@ -120,22 +121,22 @@ function getUserToken() {
 	let token = uni.getStorageSync('yy-token');
 	return token
 }
-export const GetIndexBanner = (params) => apiGet("api/common/banner", params, null)
-export const GetServerUserInfo = (params) => apiGet('api/user/getUser', params, getUserToken)
-export const GetUserInfo = (params) => apiPost('api/user/wechat', params)
-export const GetUserPhone = (params) => apiPost('api/user/phone', params, getUserToken)
+export const GetIndexBanner = (params) => apiGet("/api/common/banner", params, null)
+export const GetServerUserInfo = (params) => apiGet('/api/user/getUser', params, getUserToken)
+export const GetUserInfo = (params) => apiPost('/api/user/wechat', params)
+export const GetUserPhone = (params) => apiPost('/api/user/phone', params, getUserToken)
 
 export const EditUserInfo = (params) => apiPost('/api/user/edit', params, getUserToken)
 export const uploadImage = (params) => apiUploadImage('/api/upload', params)
 
 
-export const GetAddressList = () => apiGet('api/user/address/lists', null, getUserToken)
-export const CreateAddress = (params) => apiPost('api/user/address/add', params, getUserToken)
-export const RmAddress = (params) => apiPost('api/user/address/delete', params, getUserToken)
-export const EditAddress = (params) => apiPost('api/user/address/edit', params, getUserToken)
+export const GetAddressList = () => apiGet('/api/user/address/lists', null, getUserToken)
+export const CreateAddress = (params) => apiPost('/api/user/address/add', params, getUserToken)
+export const RmAddress = (params) => apiPost('/api/user/address/delete', params, getUserToken)
+export const EditAddress = (params) => apiPost('/api/user/address/edit', params, getUserToken)
 
-export const AboutDesc = () => apiGet('api/common/desc', null, null)
-export const AboutUs = () => apiGet('api/common/about', null, null)
+export const AboutDesc = () => apiGet('/api/common/desc', null, null)
+export const AboutUs = () => apiGet('/api/common/about', null, null)
 
 export const booking_plans = (params) => apiGet('/api/booking_plan/lists?type=' + params.type, null, getUserToken)
 export const booking_plans_detail = (params) => apiGet('/api/booking_plan/detail', params, getUserToken)

@@ -43,9 +43,10 @@ const _sfc_main = {
       });
     };
     let showbanner = common_vendor.ref("");
-    common_vendor.ref(null);
+    let swiperDotIndex = common_vendor.ref(0);
     const handleBannerChange = (e) => {
       let index = e.detail.current;
+      swiperDotIndex.value = index;
       showbanner.value = "https://dental.cdwuhu.com/" + banners.value[index].image;
     };
     let goodsList = common_vendor.ref([]);
@@ -92,7 +93,9 @@ const _sfc_main = {
         c: common_vendor.o(handleBannerChange),
         d: common_vendor.p({
           info: common_vendor.unref(banners),
+          current: common_vendor.unref(swiperDotIndex),
           ["dots-styles"]: common_vendor.unref(dotsStyles),
+          mode: "round",
           field: "content"
         }),
         e: common_vendor.f(common_vendor.unref(cateList), (item, index, i0) => {

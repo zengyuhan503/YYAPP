@@ -10,7 +10,9 @@
           <uni-swiper-dot
             class="uni-swiper-dot-box"
             :info="banners"
+            :current="swiperDotIndex"
             :dots-styles="dotsStyles"
+            mode="round"
             field="content"
           >
             <swiper
@@ -121,9 +123,10 @@ const handleGetCateList = () => {
   });
 };
 let showbanner = ref("");
-let swiperDotIndex = ref(null);
+let swiperDotIndex = ref(0);
 const handleBannerChange = (e) => {
   let index = e.detail.current;
+  swiperDotIndex.value = index;
   showbanner.value = "https://dental.cdwuhu.com/" + banners.value[index].image;
 };
 let goodsList = ref([]);
@@ -172,6 +175,12 @@ onMounted(() => {
   box-shadow: 0px -2px 20px 0px rgba(0, 0, 0, 0.2);
   border-radius: 10px;
   overflow: hidden;
+}
+
+.uni-swiper__dots-item {
+  width: 10px !important;
+  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.2);
+  height: 4px !important;
 }
 
 .uni-swiper-dot-box > view > view {

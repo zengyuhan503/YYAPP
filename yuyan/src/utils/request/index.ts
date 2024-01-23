@@ -11,6 +11,7 @@
 import axios from 'axios'
 import { message } from 'ant-design-vue';
 import { logout } from '@/utils/user/index'
+import router from '@/router/index'
 
 message.config({
     top: `150px`,
@@ -20,7 +21,7 @@ message.config({
 });
 const deleteApi = axios.delete // delete 关键词
 
-// axios.defaults.baseURL = 'http://82.156.23.181/';
+axios.defaults.baseURL = 'https://dental.cdwuhu.com';
 axios.defaults.timeout = 1000 * 600;
 axios.interceptors.request.use(
     config => {
@@ -38,26 +39,27 @@ axios.interceptors.request.use(
 );
 axios.interceptors.response.use(
     response => {
-        if (response.data.code == 301) {
+        if (response.data.code == 203) {
             localStorage.removeItem('userInfo');
             message.error('登陆信息过期或失效，请重新登陆！');
+            router.push('/login')
+            return false
         }
         if (response.data.code == undefined) return response;
         if (response.data.code !== 200) {
             message.error(response.data.msg);
+            return false
         }
         return response.data;
     },
     err => {
-        if (err.response == undefined) {
-            message.error('网络错误，请刷新重试或者检查网络');
-        }
         var statusCode = err.response.status;
+        console.log(err)
         switch (statusCode) {
             case 400:
                 message.error('请求错误');
                 break;
-            case 401:
+            case 203:
                 message.error('未授权，请登录');
                 logout()
                 break;
@@ -119,8 +121,7 @@ export const changeUserStatus = (params: {
     user_id: string,
     status: string
 }) => apiPost('/web/user/changeStatus', params)
-
-
+export const exitUserStatus = params => apiPost('/web/user/edit', params);
 export const bannerList = (params: {
     type: number
 }) => apiGet('/web/banner/lists', params)
@@ -207,5 +208,6 @@ export const order_ship = params => apiPost('/web/order/ship', params);
 export const order_cancel = params => apiPost('/web/order/close', params)
 export const order_open = params => apiPost('/web/order/open', params)
 export const order_info = params => apiGet('/web/order/detail', params)
-export const order_updateExpress = () => apiGet('/web/order/updateExpress',null)
+export const order_updateExpress = () => apiGet('/web/order/updateExpress', null)
 
+export const expresss=()=>apiGet('/web/express',null)

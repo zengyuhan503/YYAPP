@@ -75,7 +75,7 @@ html {
 .ant-input-search-button,
 .ant-select-selector,
 .ant-input-number-input-wrap,
-.ant-input-number-input {
+.ant-input-number-input ,.ant-select-selection-search-input{
   height: 40px !important;
 }
 .ant-message-error span:last-child {
@@ -84,7 +84,7 @@ html {
 .ant-message-success {
   color: #52c41a;
 }
-.ant-select-selection-item {
+.ant-select-selection-item,.ant-select-selection-search-input {
   line-height: 38px !important;
   height: 38px !important;
 }

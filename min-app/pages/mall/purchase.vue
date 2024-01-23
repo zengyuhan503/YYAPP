@@ -24,9 +24,9 @@
       <view class="address">
         <view class="addr-form">
           <view class="label">
-            <view class="">新增收获地址</view>
+            <view class="">新增收货地址</view>
             <view class="radios">
-              <radio-group @change="handleChangeRadio">
+              <radio-group @change="handleChangeRadio" @click="handleClickRadio">
                 <radio color="#d44469" :checked="addrForm.is_default == 1" value="1" />
                 设为默认地址
               </radio-group>
@@ -52,7 +52,7 @@
                 />
               </div>
               <div class="inputs">
-                <input v-model="addrForm.phone" type="text" placeholder="收获电话" />
+                <input v-model="addrForm.phone" type="text" placeholder="收货电话" />
               </div>
             </view>
             <view class="item">
@@ -85,7 +85,7 @@
                   name=""
                   id=""
                   v-model="addrForm.address"
-                  placeholder="收获地址"
+                  placeholder="收货地址"
                   cols="30"
                   style="height: 100px"
                   rows="10"
@@ -135,7 +135,7 @@
     <view class="pays">
       <view class="price">
         <text style="margin-right: 16px" v-if="goodsInfo.sale_price != goodsInfo.price"
-          >折扣价</text
+          >折后价</text
         >
         <text style="margin-right: 16px" v-else>惊喜价</text>
         <text style="color: #f9a143"> ¥</text>
@@ -190,7 +190,10 @@ onLoad((option) => {
 });
 const handleChangeRadio = (e) => {
   console.log(e);
-  addrForm.value.is_default = e.detail.value;
+  // addrForm.value.is_default = e.detail.value;
+};
+const handleClickRadio = () => {
+  addrForm.value.is_default = !addrForm.value.is_default;
 };
 
 const bindRegionChange = (e) => {

@@ -33,7 +33,9 @@ const _sfc_main = {
     });
     const handleChangeRadio = (e) => {
       console.log(e);
-      addrForm.value.is_default = e.detail.value;
+    };
+    const handleClickRadio = () => {
+      addrForm.value.is_default = !addrForm.value.is_default;
     };
     const bindRegionChange = (e) => {
       let detail = e.detail;
@@ -151,26 +153,27 @@ const _sfc_main = {
         g: common_vendor.o(($event) => count.value++),
         h: common_vendor.unref(addrForm).is_default == 1,
         i: common_vendor.o(handleChangeRadio),
-        j: common_vendor.unref(addrForm).name,
-        k: common_vendor.o(($event) => common_vendor.unref(addrForm).name = $event.detail.value),
-        l: common_vendor.unref(addrForm).phone,
-        m: common_vendor.o(($event) => common_vendor.unref(addrForm).phone = $event.detail.value),
-        n: common_vendor.unref(addrForm).provinces,
-        o: common_vendor.o(bindRegionChange),
-        p: common_vendor.unref(addrForm).address,
-        q: common_vendor.o(($event) => common_vendor.unref(addrForm).address = $event.detail.value),
-        r: common_vendor.p({
+        j: common_vendor.o(handleClickRadio),
+        k: common_vendor.unref(addrForm).name,
+        l: common_vendor.o(($event) => common_vendor.unref(addrForm).name = $event.detail.value),
+        m: common_vendor.unref(addrForm).phone,
+        n: common_vendor.o(($event) => common_vendor.unref(addrForm).phone = $event.detail.value),
+        o: common_vendor.unref(addrForm).provinces,
+        p: common_vendor.o(bindRegionChange),
+        q: common_vendor.unref(addrForm).address,
+        r: common_vendor.o(($event) => common_vendor.unref(addrForm).address = $event.detail.value),
+        s: common_vendor.p({
           type: "right",
           size: "18"
         }),
-        s: common_vendor.o(open),
-        t: common_vendor.o(closePopup),
-        v: common_vendor.p({
+        t: common_vendor.o(open),
+        v: common_vendor.o(closePopup),
+        w: common_vendor.p({
           type: "left",
           size: "30",
           color: "#000000"
         }),
-        w: common_vendor.f(common_vendor.unref(addressList), (item, index, i0) => {
+        x: common_vendor.f(common_vendor.unref(addressList), (item, index, i0) => {
           return common_vendor.e({
             a: common_vendor.t(item.name),
             b: common_vendor.t(item.phone),
@@ -183,21 +186,21 @@ const _sfc_main = {
             h: common_vendor.o(($event) => handleSelectAddress(item), index)
           });
         }),
-        x: common_vendor.sr(popup, "bcb386f7-1", {
+        y: common_vendor.sr(popup, "bcb386f7-1", {
           "k": "popup"
         }),
-        y: common_vendor.p({
+        z: common_vendor.p({
           ["background-color"]: "#fff",
           type: "bottom"
         }),
-        z: common_vendor.unref(goodsInfo).sale_price != common_vendor.unref(goodsInfo).price
+        A: common_vendor.unref(goodsInfo).sale_price != common_vendor.unref(goodsInfo).price
       }, common_vendor.unref(goodsInfo).sale_price != common_vendor.unref(goodsInfo).price ? {} : {}, {
-        A: common_vendor.t(common_vendor.unref(goodsInfo).total_price),
-        B: common_vendor.o(handleToCreateOrder),
-        C: common_vendor.unref(showSubscribeSuccess)
+        B: common_vendor.t(common_vendor.unref(goodsInfo).total_price),
+        C: common_vendor.o(handleToCreateOrder),
+        D: common_vendor.unref(showSubscribeSuccess)
       }, common_vendor.unref(showSubscribeSuccess) ? {
-        D: common_vendor.o(handleToUser),
-        E: common_vendor.o(handleOpenOrder)
+        E: common_vendor.o(handleToUser),
+        F: common_vendor.o(handleOpenOrder)
       } : {});
     };
   }

@@ -101,11 +101,13 @@ const columns2 = ref([
     dataIndex: "desc",
     align: "center",
     key: "desc",
+    width: 420,
   },
   {
     title: "操作",
     align: "center",
     key: "action",
+    width: 320,
   },
 ]);
 
@@ -225,9 +227,10 @@ const handleRmCate = (record) => {
     content: "已经存在商品的分类不能被删除，分类被删除后将无法恢复，请谨慎操作",
     onOk() {
       rmCategorys(params).then((res) => {
-        if (res.code !== 200) return false;
-        message.success("操作成功");
-        handleGetGoodsCategorys();
+        if (res) {
+          message.success("操作成功");
+          handleGetGoodsCategorys();
+        }
       });
     },
     onCancel() {
@@ -310,11 +313,9 @@ const handleChangeStatus = (record) => {
         goods_id: record.id,
       };
       changeGoodsStatus(params).then((res) => {
-        console.log(res);
-        if (res.code == 200) {
-          message.success("操作成功");
-          handleGetGoodsList();
-        }
+        if(!res) return false
+        message.success("操作成功");
+        handleGetGoodsList();
       });
     },
     onCancel() {
@@ -324,8 +325,8 @@ const handleChangeStatus = (record) => {
   });
 };
 onMounted(() => {
-  let queractive = route.query.active;
-  queractive && (tabActive.value = queractive);
+  let queractive = route.query.active as string;
+  queractive && (tabActive.value = parseInt(queractive));
   handleGetGoodsCategorys();
   handleGetGoodsList();
 });

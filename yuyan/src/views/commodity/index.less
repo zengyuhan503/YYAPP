@@ -284,7 +284,7 @@
         width: 360px;
         margin-right: 18px;
 
-        div {
+        div.covers {
             width: 360px;
             height: 360px;
             background: linear-gradient(163deg, #EBEFF2 0%, #E6EBF0 100%);
@@ -295,6 +295,35 @@
         img {
             width: 100%;
         }
+
+        .ci-banners {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            width: 360px;
+            margin-top: 35px;
+
+            .item {
+                width: 180px;
+                height: 180px;
+                background: linear-gradient(163deg, #EBEFF2 0%, #E6EBF0 100%);
+                border-radius: 3px 3px 0px 0px;
+                border: 1px solid #CACACA;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                position: relative;
+                img{
+                    width: 100%;
+                }
+                .rm{
+                    position: absolute;
+                    left: 50%;
+                    top: 50%;
+                    transform: translateX(-50%) translateY(-50%);
+                }
+            }
+        }
     }
 
     .long-show {
@@ -302,7 +331,7 @@
 
         div {
             width: 750px;
-            height: 447px;
+            min-height: 755px;
             background: #E8EDF1;
 
             img {
