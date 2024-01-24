@@ -2,7 +2,12 @@
 import { ref, reactive, onMounted } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import { PlusOutlined, UploadOutlined } from "@ant-design/icons-vue";
-import { imageUpLoad, createBanners, editBanners, desc_detail } from "@/utils/request/index";
+import {
+  imageUpLoad,
+  createBanners,
+  editBanners,
+  desc_detail,
+} from "@/utils/request/index";
 import { message } from "ant-design-vue";
 import { about_detail, desc_edit } from "@/utils/request/index";
 let router = useRouter();
@@ -22,6 +27,7 @@ const imageBeforeUpload = (file) => {
   const isLt = file.size / 1024 / 1024 < 50;
   if (!isLt) {
     message.error(`图片不能超过5MB`);
+    coverUploadList.value = [];
     return false;
   }
   const isPNG = file.type === "image/png" || file.type === "image/jpeg";
@@ -39,10 +45,12 @@ const imageBeforeUpload = (file) => {
         const img = this as HTMLImageElement;
         if (img.width != 750) {
           message.error(`请上传宽度为750px长图`);
+          coverUploadList.value = [];
           return false;
         }
         if (img.height > 2000) {
           message.error(`请上传高度不能超过2000px的长图`);
+          coverUploadList.value = [];
           return false;
         }
         imagersUploadList.value = [...(imagersUploadList.value || []), file];
@@ -62,7 +70,7 @@ const handleSubmit = () => {
   uploadImages()
     .then((res) => {
       console.log(res);
-      handleEditDetail(res)
+      handleEditDetail(res);
     })
     .catch((err) => {
       //   message.error(err);
@@ -102,13 +110,13 @@ const handleGetInfo = () => {
     detail.desc = res.data.desc as string;
     detail.image = res.data.image as string;
     formState.desc = detail.desc;
-    formState.image = "https://dental.cdwuhu.com/"+detail.image;
+    formState.image = "https://dental.cdwuhu.com/" + detail.image;
   });
 };
 const handleEditDetail = (res) => {
   let params = {
     desc: formState.desc,
-    image: res[0]
+    image: res[0],
   };
   desc_edit(params).then((res) => {
     console.log(res);
@@ -165,14 +173,17 @@ onMounted(() => {
             </a-row>
           </a-form>
         </div>
-        
       </div>
       <a-divider orientation="left">实例</a-divider>
-        <div class="banners" style="padding: 20px">
-          <div class="cover">
-            <img style="width: 700px;" v-show="formState.image != ''" :src="formState.image" />
-          </div>
+      <div class="banners" style="padding: 20px">
+        <div class="cover">
+          <img
+            style="width: 700px"
+            v-show="formState.image != ''"
+            :src="formState.image"
+          />
         </div>
+      </div>
       <div class="submit-footer">
         <a-button style="margin-right: 10px" @click="router.go(-1)"> 取 消 </a-button>
         <a-button type="primary" :loading="submitLoading" @click="handleSubmit"

@@ -112,7 +112,7 @@ const _sfc_main = {
                 duration: 2e3
               });
               setTimeout(() => {
-                common_vendor.index.navigateTo({
+                common_vendor.index.redirectTo({
                   url: "/pages/detail/unpaid?id=" + order_id
                 });
               }, 2e3);
@@ -123,12 +123,12 @@ const _sfc_main = {
       });
     };
     const handleOpenOrder = () => {
-      common_vendor.index.navigateTo({
+      common_vendor.index.redirectTo({
         url: "/pages/detail/unpaid?id=" + order_id
       });
     };
     const handleToUser = () => {
-      common_vendor.index.navigateTo({
+      common_vendor.index.redirectTo({
         url: "/pages/user/index"
       });
     };

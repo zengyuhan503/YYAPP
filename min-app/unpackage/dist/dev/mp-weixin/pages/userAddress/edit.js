@@ -45,7 +45,7 @@ const _sfc_main = {
           icon: "success",
           duration: 2e3,
           success() {
-            common_vendor.wx$1.navigateTo({
+            common_vendor.wx$1.redirectTo({
               url: "/pages/userAddress/index"
             });
           }

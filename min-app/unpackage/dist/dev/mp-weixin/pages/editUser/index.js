@@ -94,7 +94,7 @@ const _sfc_main = {
         alignmentFormData.value.phone = common_vendor.index.getStorageSync("yy-phone");
       } catch (error) {
         common_vendor.index.removeStorageSync("yy-userinfo");
-        common_vendor.wx$1.navigateTo({
+        common_vendor.wx$1.redirectTo({
           url: "/pages/user/index"
         });
       }

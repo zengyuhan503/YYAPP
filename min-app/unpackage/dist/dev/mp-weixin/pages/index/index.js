@@ -67,7 +67,6 @@ const _sfc_main = {
     const handleToBannerInfo = (item) => {
       let querys = objectToQueryString(item);
       let url = "/pages/index/bannerinfo" + querys;
-      console.log(url);
       common_vendor.index.navigateTo({
         url
       });

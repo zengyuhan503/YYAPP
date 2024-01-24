@@ -44,7 +44,7 @@ onMounted(() => {
     </div>
     <div class="page-body">
       <div class="banners">
-        <div class="item" @click="createBanner(null)">
+        <div class="item" @click="createBanner(null)"  v-show="banners.length < 6">
           <div class="cover cover2">
             <img src="../../assets/image/display-banner.png" alt="" />
             <div class="updata">

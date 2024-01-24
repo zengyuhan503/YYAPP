@@ -100,6 +100,7 @@
   border-radius: 20px;
   position: relative;
   top: -6px;
+  padding: 20px;
 }
 .popularForm {
   margin-top: 20px;
@@ -272,7 +273,7 @@
   width: 28px;
 }
 .cancelSubcribe .main {
-  padding: 10px;
+  padding: 5px;
   text-align: center;
 }
 .cancelSubcribe .main image {
@@ -341,5 +342,5 @@
 }
 .content-top {
   height: 380px;
-  padding: 10px;
+  padding: 20px;
 }

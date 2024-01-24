@@ -13,6 +13,11 @@
   color: #FFFFFF;
   margin-bottom: 5px;
 }
+.detail-status .desc.data-v-2550a99d {
+  font-size: 12px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.5);
+}
 .detail-status .timeout.data-v-2550a99d {
   font-size: 12px;
   font-weight: 400;
@@ -170,6 +175,7 @@
   font-weight: 400;
   color: rgba(111, 111, 111, 0.6);
   text-align: center;
+  margin-top: 40px;
 }
 .refund-order text.data-v-2550a99d {
   text-decoration: underline;
@@ -278,4 +284,23 @@
   margin: auto;
   margin-top: 50px;
   margin-bottom: 20px;
+}
+.ships.data-v-2550a99d {
+  height: 400px;
+  overflow: auto;
+  padding: 20px;
+  background: #FFFFFF;
+}
+.ships > view.data-v-2550a99d {
+  color: #000;
+  font-size: 14px;
+  line-height: 20px;
+  margin-bottom: 10px;
+}
+.ships > view text.data-v-2550a99d {
+  color: rgba(0, 0, 0, 0.7);
+}
+.ships .ship_items .ship_item.data-v-2550a99d {
+  padding-top: 10px;
+  padding-left: 10px;
 }

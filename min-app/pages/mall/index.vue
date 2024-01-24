@@ -62,7 +62,7 @@
             @click="handleToInfo(item)"
           >
             <view class="cover">
-              <image :src="'https://dental.cdwuhu.com/' + item.head_image" />
+              <image :src="'https://dental.cdwuhu.com/' + item.head_image"   mode="widthFix"/>
             </view>
             <div class="info">
               <view class="title">{{ item.title }}</view>
@@ -203,5 +203,11 @@ uni-swiper-dot,
   /* box-shadow: 0px -2px 20px 0px rgba(0, 0, 0, 0.2); */
   border-radius: 10px;
   overflow: hidden;
+}
+
+.uni-swiper__dots-item {
+  width: 10px !important;
+  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.2);
+  height: 4px !important;
 }
 </style>

@@ -39,9 +39,9 @@ const _sfc_main = {
           ["left-icon"]: "left",
           border: false,
           backgroundColor: "transparent",
-          title: "医生介绍",
+          title: "",
           height: common_vendor.unref(height),
-          color: "#000000"
+          color: "#ffffff"
         }),
         c: common_vendor.s(common_vendor.unref(refStyle)),
         d: common_vendor.unref(aboutDescs)

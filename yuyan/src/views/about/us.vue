@@ -22,11 +22,13 @@ const imageBeforeUpload = (file) => {
   const isLt = file.size / 1024 / 1024 < 50;
   if (!isLt) {
     message.error(`图片不能超过5MB`);
+    coverUploadList.value = [];
     return false;
   }
   const isPNG = file.type === "image/png" || file.type === "image/jpeg";
   if (!isPNG) {
     message.error(`请上传 JPG/PNG 的图片`);
+    coverUploadList.value = [];
     return false;
   }
   if (isPNG) {
@@ -39,10 +41,12 @@ const imageBeforeUpload = (file) => {
         const img = this as HTMLImageElement;
         if (img.width != 750) {
           message.error(`请上传宽度为750px长图`);
+          coverUploadList.value = [];
           return false;
         }
         if (img.height > 2000) {
           message.error(`请上传高度不能超过2000px的长图`);
+          coverUploadList.value = [];
           return false;
         }
         imagersUploadList.value = [...(imagersUploadList.value || []), file];

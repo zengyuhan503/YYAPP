@@ -13,6 +13,12 @@
         margin-bottom: 5px;
     }
 
+    .desc {
+        font-size: 12px;
+        font-weight: 400;
+        color: rgba(255, 255, 255, 0.5);
+    }
+
     .timeout {
         font-size: 12px;
         font-weight: 400;
@@ -200,6 +206,7 @@
     font-weight: 400;
     color: rgba(111, 111, 111, 0.6);
     text-align: center;
+    margin-top: 40px;
 
     text {
         text-decoration: underline;
@@ -328,5 +335,31 @@
         margin: auto;
         margin-top: 50px;
         margin-bottom: 20px;
+    }
+}
+
+.ships {
+    height: 400px;
+    overflow: auto;
+    padding: 20px;
+    background: #FFFFFF;
+
+    &>view {
+        color: #000;
+        font-size: 14px;
+        line-height: 20px;
+
+        text {
+            color: rgba(0, 0, 0, 0.7);
+        }
+
+        margin-bottom: 10px;
+    }
+
+    .ship_items {
+        .ship_item {
+            padding-top: 10px;
+            padding-left: 10px;
+        }
     }
 }

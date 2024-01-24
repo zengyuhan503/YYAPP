@@ -127,7 +127,7 @@ const submitUpdata = () => {
       icon: "success",
       duration: 2000,
       success() {
-        wx.navigateTo({
+        wx.redirectTo({
           url: "/pages/userAddress/index",
         });
       },

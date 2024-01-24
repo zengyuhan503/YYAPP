@@ -48,9 +48,9 @@ const columns = [
     align: "center",
     dataIndex: "user",
     customRender: (record) => {
-      if(record.text){
+      if (record.text) {
         return record.text.nickname;
-      }else{
+      } else {
         return "-";
       }
     },
@@ -61,9 +61,9 @@ const columns = [
     align: "center",
     dataIndex: "user",
     customRender: (record) => {
-      if(record.text){
+      if (record.text) {
         return record.text.phone;
-      }else{
+      } else {
         return "-";
       }
     },
@@ -121,7 +121,7 @@ const handleSignin = (record) => {
 const handleCancelReservation = (record) => {
   Modal.confirm({
     title: "取消该用户预约?",
-    content:"请确认该客户已无法到店，且已告知客户。",
+    content: "请确认该客户已无法到店，且已告知客户。",
     onOk() {
       console.log("OK");
       let params = {

@@ -48,7 +48,7 @@ const tokenfFail = () => {
     duration: 2e3
   });
   setTimeout(() => {
-    common_vendor.wx$1.navigateTo({
+    common_vendor.wx$1.reLaunch({
       url: "/pages/user/index"
     });
   }, 2e3);

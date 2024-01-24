@@ -172,7 +172,7 @@ const _sfc_main = {
         console.log(res);
         try {
           let status = res.status;
-          if (status != 2) {
+          if (status == 0) {
             popularForm.value.name = res.name;
             popularForm.value.phone = res.phone;
             popularForm.value.gender = res.gender;

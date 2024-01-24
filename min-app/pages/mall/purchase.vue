@@ -98,6 +98,7 @@
       <view class="changeaddress" @click="open">
         选择其他地址 <uni-icons class="icon" type="right" size="18"></uni-icons>
       </view>
+      <view class="" style="height: 100px"></view>
       <uni-popup ref="popup" background-color="#fff" type="bottom">
         <view class="slectaddress">
           <view class="title">
@@ -134,11 +135,9 @@
     </view>
     <view class="pays">
       <view class="price">
-        <text style="margin-right: 16px" v-if="goodsInfo.sale_price != goodsInfo.price"
-          >折后价</text
-        >
-        <text style="margin-right: 16px" v-else>惊喜价</text>
-        <text style="color: #f9a143"> ¥</text>
+        <text v-if="goodsInfo.sale_price != goodsInfo.price">折后价</text>
+        <text style="" v-else>惊喜价</text>
+        <text style="color: #f9a143; display: inline"> ¥</text>
         <text class="num"> {{ goodsInfo.total_price }}</text>
       </view>
       <view class="btns" @click="handleToCreateOrder"> 支付 </view>
@@ -270,7 +269,7 @@ const handleToCreateOrder = () => {
             duration: 2000,
           });
           setTimeout(() => {
-            uni.navigateTo({
+            uni.redirectTo({
               url: "/pages/detail/unpaid?id=" + order_id,
             });
           }, 2000);
@@ -281,12 +280,12 @@ const handleToCreateOrder = () => {
   });
 };
 const handleOpenOrder = () => {
-  uni.navigateTo({
+  uni.redirectTo({
     url: "/pages/detail/unpaid?id=" + order_id,
   });
 };
 const handleToUser = () => {
-  uni.navigateTo({
+  uni.redirectTo({
     url: "/pages/user/index",
   });
 };

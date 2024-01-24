@@ -49,7 +49,7 @@ const handleEditNickname = () => {
   let params = {
     ...alignmentFormData.value,
   };
-  params.avatar=params.avatar.replace('https://dental.cdwuhu.com/','')
+  params.avatar = params.avatar.replace("https://dental.cdwuhu.com/", "");
   EditUserInfo(params).then((res) => {
     console.log(res);
     uni.showToast({
@@ -62,7 +62,7 @@ const handleEditNickname = () => {
 const handleServerGetUserInfo = () => {
   GetServerUserInfo().then((res) => {
     console.log(res);
-    alignmentFormData.value.avatar =  "https://dental.cdwuhu.com/" + res.avatar;
+    alignmentFormData.value.avatar = "https://dental.cdwuhu.com/" + res.avatar;
     alignmentFormData.value.nickname = res.nickname;
   });
 };
@@ -116,7 +116,7 @@ onMounted(() => {
     alignmentFormData.value.phone = uni.getStorageSync("yy-phone");
   } catch (error) {
     uni.removeStorageSync("yy-userinfo");
-    wx.navigateTo({
+    wx.redirectTo({
       url: "/pages/user/index",
     });
   }

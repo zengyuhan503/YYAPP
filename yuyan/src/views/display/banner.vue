@@ -20,7 +20,7 @@ const getList = () => {
   bannerList(params)
     .then((result) => {
       let data = result.data;
-      banners.value =data.data;
+      banners.value = data.data;
     })
     .catch((err) => {});
 };
@@ -34,17 +34,12 @@ onMounted(() => {
     <div class="page-head">
       <div class="page-info">
         <p class="title" style="margin-bottom: 16px">首页banner配置</p>
-        <p>
-          最多可以配置6个banner，每个banner可以配一张长图或者一个链接。<span
-            style="color: #d44469"
-            >完全为空的banner，不会展示在小程序上。</span
-          >
-        </p>
+        <p>最多可以配置6个banner，每个banner可以配一张长图或者一个链接。</p>
       </div>
     </div>
     <div class="page-body">
       <div class="banners">
-        <div class="item" @click="createBanner(null)">
+        <div class="item" @click="createBanner(null)" v-show="banners.length < 6">
           <div class="cover">
             <img src="../../assets/image/display-banner.png" alt="" />
             <div class="updata">
@@ -72,15 +67,6 @@ onMounted(() => {
           </div>
           <p class="staus">{{ item.url == "" ? "长图" : "链接" }}</p>
         </div>
-
-        <!-- <a-row :gutter="24">
-          <a-col :span="8" v-for="(item, index) in banners" :key="index">
-           
-          </a-col>
-          <a-col :span="8">
-           
-          </a-col>
-        </a-row> -->
       </div>
     </div>
   </div>

@@ -271,9 +271,11 @@ const handleGetGoodsList = () => {
   });
 };
 const handleUploadIcon = (file) => {
-  const isPNG = file.type === "image/png" || file.type === "image/jpeg";
+  const isPNG = file.type === "image/png";
   if (!isPNG) {
-    message.error(`请上传 JPG/PNG 的图片`);
+    message.error(`请上传.PNG 的图片`);
+    cateForm.iconFiles = [];
+    editCateForm.value.iconFiles = [];
     return false;
   }
   if (isPNG) {
@@ -285,7 +287,9 @@ const handleUploadIcon = (file) => {
       image.onload = async function () {
         const img = this as HTMLImageElement;
         if (img.width !== 256 || img.height !== 256) {
-          message.error("请上传255x255分辨率的图片");
+          message.error("请上传至少256x256分辨率的图片");
+          cateForm.iconFiles = [];
+          editCateForm.value.iconFiles = [];
           return false;
         }
         cateForm.icon = src as string;
@@ -296,7 +300,6 @@ const handleUploadIcon = (file) => {
     return false;
   }
 };
-const handleUploadImage = () => {};
 const toCreate = () => {
   router.push("/commodity/create");
 };
@@ -313,7 +316,7 @@ const handleChangeStatus = (record) => {
         goods_id: record.id,
       };
       changeGoodsStatus(params).then((res) => {
-        if(!res) return false
+        if (!res) return false;
         message.success("操作成功");
         handleGetGoodsList();
       });

@@ -46,14 +46,13 @@ const tokenfFail = () => {
 		duration: 2000
 	});
 	setTimeout(() => {
-		wx.navigateTo({
+		wx.reLaunch({
 			url: "/pages/user/index",
 		});
 	}, 2000);
 }
 let apiGet = (uri, params, token = null) => {
 	return new Promise((resolve, reject) => {
-
 		let url = "https://dental.cdwuhu.com" + uri
 		wx.request({
 			url: url,

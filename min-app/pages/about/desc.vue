@@ -5,10 +5,10 @@
         left-icon="left"
         :border="false"
         backgroundColor="transparent"
-        title="医生介绍"
+        title=""
         :height="height"
         @clickLeft="handleleft"
-        color="#000000"
+        color="#ffffff"
       />
     </div>
     <image :src="aboutDescs" mode="widthFix" />
@@ -53,7 +53,6 @@ onMounted(() => {
   text-align: center;
   height: 33px;
   line-height: 33px;
-  padding: 8px 17px;
   position: absolute;
 }
 .page-content {

@@ -2,6 +2,15 @@
   <view class="page-content">
     <view class="detail-status">
       <view class="label">{{ str[orderInfo.status] }}</view>
+      <view class="desc" v-if="orderInfo.status == 1"
+        >感谢您使用，物流信息会在发货后更新。</view
+      >
+      <view class="desc" v-if="orderInfo.status == 2"
+        >已发货请您及时签收查看物流信息。</view
+      >
+      <view class="desc" v-if="orderInfo.status == 3">感谢你使用预颜小程序</view>
+      <view class="desc" v-if="orderInfo.status == 4">感谢你使用预颜小程序</view>
+      <view class="desc" v-if="orderInfo.status < 0">感谢你使用预颜小程序</view>
       <view class="timeout" v-if="orderInfo.status == 0"
         >请在 <text>{{ timeouts }}</text> 内支付</view
       >
@@ -10,7 +19,7 @@
       <view class="distribution" v-if="orderInfo.status == 2">
         <view class="label">
           <view class="name"> 物流信息 </view>
-          <view class="btns"> 查看物流 </view>
+          <view class="btns" @click="handleOpenShip"> 查看物流 </view>
         </view>
         <view class="info">
           <view class="name">
@@ -69,6 +78,7 @@
     </view>
     <view class="refund-order" v-if="orderInfo.status !== 0">
       如需退款，请 <text @click="handleMakePhoneCall">致电门店</text>
+      <view style="height: 40px"></view>
     </view>
     <view class="pays-content" v-if="orderInfo.status == 0">
       <view class="pays">
@@ -98,11 +108,43 @@
       <view class="btns" @click="handleCancelOrder">取消该订单</view>
     </view>
   </view>
+  <uni-popup ref="popup" background-color="#fff" type="bottom">
+    <view class="ships">
+      <view
+        >快递公司： <text>{{ orderInfo.ship_company }}</text></view
+      >
+      <view
+        >快递单号： <text>{{ orderInfo.ship_number }}</text></view
+      >
+      <view
+        >当前状态： <text>{{ orderInfo.ship_state }}</text></view
+      >
+      <view class="ship_items" v-if="orderInfo.express">
+        物流详情：
+        <view
+          class="ship_item"
+          style="text-align: center"
+          v-if="orderInfo.express.state == -1"
+        >
+          <text>{{ orderInfo.express.data }}</text>
+        </view>
+        <view v-else>
+          <view
+            class="ship_item"
+            v-for="(item, index) in orderInfo.express.data"
+            :key="index"
+          >
+            <text style="margin-right: 10px">[{{ item.time }}]</text> - {{ item.context }}
+          </view>
+        </view>
+      </view>
+    </view>
+  </uni-popup>
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
-import { onLaunch, onShow, onLoad } from "@dcloudio/uni-app";
+import { ref, onMounted, onUnmounted } from "vue";
+import { onLaunch, onShow } from "@dcloudio/uni-app";
 import { GetOrderInfo, CancelOrder, CreateWxPay } from "../../utils/api/index";
 import moment from "moment";
 let str = ref({
@@ -111,10 +153,12 @@ let str = ref({
   2: "待收货",
   3: "已收货",
   4: "完成订单",
-  "-1": "已关闭",
-  "-2": "已关闭",
+  "-1": "已取消",
+  "-2": "已取消",
+  "-3": "已取消",
   all: "全部订单",
 });
+let popup = ref(null);
 let orderid = null;
 let orderInfo = ref({});
 let showCancel = ref(false);
@@ -196,13 +240,16 @@ const handleGetOrderInfo = () => {
 };
 const handleCopy = () => {
   uni.setClipboardData({
-    data: orderInfo.ship_number,
+    data: orderInfo.value.ship_number + "",
     success: function () {
       uni.showToast({
         icon: "none",
         title: "复制成功",
         duration: 2000,
       });
+    },
+    fail: function (err) {
+      console.log(err);
     },
   });
 };
@@ -226,9 +273,14 @@ const handleCancelOrder = () => {
     });
   });
 };
-
+const handleOpenShip = () => {
+  popup.value.open();
+};
+onUnmounted(() => {
+  popup.value.close();
+});
 onLoad((options) => {
-  console.log(options)
+  console.log(options);
   orderid = options.id;
   handleGetOrderInfo();
 });

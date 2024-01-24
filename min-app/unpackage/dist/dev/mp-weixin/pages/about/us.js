@@ -12,27 +12,25 @@ if (!Math) {
 const _sfc_main = {
   __name: "us",
   setup(__props) {
-    let aboutDescs = common_vendor.ref("");
-    let refStyle = common_vendor.ref({
-      top: "46px"
-    });
-    common_vendor.onMounted(() => {
-      utils_api_index.AboutUs().then((res) => {
-        console.log(res);
-        aboutDescs.value = "https://dental.cdwuhu.com/" + res.image;
-      });
-    });
     const handleleft = () => {
       common_vendor.index.navigateBack({
         delta: 1
       });
     };
+    let refStyle = common_vendor.ref({
+      top: "46px"
+    });
     let height = common_vendor.ref(0);
     common_vendor.onShow((options) => {
       const res = common_vendor.wx$1.getMenuButtonBoundingClientRect();
-      console.log(res);
       height.value = res.height;
       refStyle.value["top"] = res.top + "px";
+    });
+    let aboutDescs = common_vendor.ref("");
+    common_vendor.onMounted(() => {
+      utils_api_index.AboutUs().then((res) => {
+        aboutDescs.value = "https://dental.cdwuhu.com/" + res.image;
+      });
     });
     return (_ctx, _cache) => {
       return {
@@ -41,9 +39,9 @@ const _sfc_main = {
           ["left-icon"]: "left",
           border: false,
           backgroundColor: "transparent",
-          title: "关于我们",
+          title: "",
           height: common_vendor.unref(height),
-          color: "#000000"
+          color: "#ffffff"
         }),
         c: common_vendor.s(common_vendor.unref(refStyle)),
         d: common_vendor.unref(aboutDescs)

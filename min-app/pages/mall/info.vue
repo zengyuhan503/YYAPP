@@ -1,5 +1,16 @@
 <template>
   <view class="page-content">
+    <div class="page-header" :style="refStyle">
+      <uni-nav-bar
+        left-icon="left"
+        :border="false"
+        backgroundColor="transparent"
+        title=""
+        :height="height"
+        @clickLeft="handleleft"
+        color="#ffffff"
+      />
+    </div>
     <div class="covers">
       <!-- <image :src="'https://dental.cdwuhu.com/' + goodsInfo.head_image" mode="widthFix" /> -->
       <uni-swiper-dot class="uni-swiper-dot-box" :mode="mode" field="content">
@@ -70,15 +81,26 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import { onLaunch, onShow, onLoad } from "@dcloudio/uni-app";
-import { GetGoodsInfo } from "../../utils/api";
+import { GetGoodsInfo, GetOrderList } from "../../utils/api";
 let goodsId = ref(null);
 let goodsInfo = ref({});
 let mode = ref("default");
+
+let refStyle = ref({
+  top: "46px",
+});
+let height = ref(0);
 onLoad((option) => {
   goodsId.value = option.id;
   console.log(goodsId.value);
   handleGetOrderInfo();
 });
+
+const handleleft = () => {
+  uni.navigateBack({
+    delta: 1,
+  });
+};
 let covers = ref([]);
 const handleGetOrderInfo = () => {
   let params = {
@@ -93,12 +115,47 @@ const handleGetOrderInfo = () => {
     covers.value = newArr;
   });
 };
+let orderList = {
+  0: [],
+  2: [],
+  4: [],
+  all: [],
+};
 const handleToCreateOrder = () => {
-  console.log(1111);
+  if (orderList["0"].length != 0) {
+    uni.showToast({
+      title: "你当前还有待付款订单，请前往个人中心查看",
+      duration: 2000,
+      icon: "none",
+    });
+    return false;
+  }
   uni.navigateTo({
     url: "/pages/mall/purchase?id=" + goodsInfo.value.id,
   });
 };
+
+const handleGetOrderList = () => {
+  let params = {
+    page: 1,
+    page_size: 1000,
+    status: "all",
+  };
+  GetOrderList(params).then((res) => {
+    console.log(res);
+
+    let list = res.data;
+    orderList["0"] = list.filter((item) => item.status == 0);
+    orderList["2"] = list.filter((item) => item.status == 2);
+    orderList["all"] = list;
+  });
+};
+onShow((options) => {
+  const res = wx.getMenuButtonBoundingClientRect();
+  height.value = res.height;
+  refStyle.value["top"] = res.top + "px";
+  handleGetOrderList();
+});
 </script>
 
 <style lang="less" scoped>
@@ -135,5 +192,17 @@ uni-swiper-dot,
 .uni-swiper-dot-box {
   border-radius: 10px;
   overflow: hidden;
+}
+
+.page-header {
+  width: 100%;
+  z-index: 1001;
+  font-size: 17px;
+  font-weight: 500;
+  color: #ffffff;
+  text-align: center;
+  height: 33px;
+  line-height: 33px;
+  position: absolute;
 }
 </style>

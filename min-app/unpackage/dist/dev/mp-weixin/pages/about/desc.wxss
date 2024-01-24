@@ -7,7 +7,6 @@
   text-align: center;
   height: 33px;
   line-height: 33px;
-  padding: 8px 17px;
   position: absolute;
 }
 .page-content image.data-v-f3762785 {

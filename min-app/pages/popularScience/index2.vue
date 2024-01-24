@@ -22,7 +22,7 @@
         </view>
         <view class="main-title"> 看诊预约 </view>
         <view class="main-desc"> 让孩子们游戏化看牙，让成年人舒适化看牙 </view>
-        <view class="popularForm">
+        <view class="popularForm" style="padding: 0 5px">
           <view class="formInput">
             <image src="http://h5.dental.cdwuhu.com/static/image/name.png" />
             <input
@@ -62,7 +62,7 @@
                 </view>
               </view>
             </view>
-            <view class="formI tem">
+            <view class="formItem">
               <picker
                 bindchange="bindPickerChange"
                 mode="date"
@@ -341,7 +341,7 @@ const handleGetPlans = () => {
     console.log(res);
     try {
       let status = res.status;
-      if (status != 2) {
+      if (status == 0) {
         popularForm.value.name = res.name;
         popularForm.value.phone = res.phone;
         popularForm.value.gender = res.gender;

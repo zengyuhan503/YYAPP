@@ -143,7 +143,6 @@ function objectToQueryString(obj) {
 const handleToBannerInfo = (item) => {
   let querys = objectToQueryString(item);
   let url = "/pages/index/bannerinfo" + querys;
-  console.log(url);
   uni.navigateTo({
     url: url,
   });

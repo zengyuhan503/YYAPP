@@ -33,11 +33,13 @@ const coverBeforeUpload = (file) => {
   const isLt = file.size / 1024 / 1024 < 10;
   if (!isLt) {
     message.error(`图片不能超过1MB`);
+    head_image.value = [];
     return false;
   }
   const isPNG = file.type === "image/png" || file.type === "image/jpeg";
   if (!isPNG) {
     message.error(`请上传 JPG/PNG 的图片`);
+    head_image.value = [];
     return false;
   }
   if (isPNG) {
@@ -50,10 +52,12 @@ const coverBeforeUpload = (file) => {
         // 这里this.width和this.height是图片的宽高px
         if (image.width < 800) {
           message.error("请上传最小800*800px的正方形图片");
+          head_image.value = [];
           return false;
         }
         if (image.width - image.height > 2) {
           message.error("请上传最小800*800px的正方形图片");
+          head_image.value = [];
           return false;
         }
         formState.cover = src as string;
@@ -68,11 +72,13 @@ const coverBeforeUpload2 = (file) => {
   const isLt = file.size / 1024 / 1024 < 10;
   if (!isLt) {
     message.error(`图片不能超过1MB`);
+    deputy_image.value = [];
     return false;
   }
   const isPNG = file.type === "image/png" || file.type === "image/jpeg";
   if (!isPNG) {
     message.error(`请上传 JPG/PNG 的图片`);
+    deputy_image.value = [];
     return false;
   }
   if (isPNG) {
@@ -85,10 +91,12 @@ const coverBeforeUpload2 = (file) => {
         // 这里this.width和this.height是图片的宽高px
         if (image.width < 800) {
           message.error("请上传最小800*800px的正方形图片");
+          deputy_image.value = [];
           return false;
         }
         if (image.width - image.height > 2) {
           message.error("请上传最小800*800px的正方形图片");
+          deputy_image.value = [];
           return false;
         }
       };
@@ -102,11 +110,13 @@ const imageBeforeUpload = (file) => {
   const isLt = file.size / 1024 / 1024 < 50;
   if (!isLt) {
     message.error(`图片不能超过5MB`);
+    detail_image.value = [];
     return false;
   }
   const isPNG = file.type === "image/png" || file.type === "image/jpeg";
   if (!isPNG) {
     message.error(`请上传 JPG/PNG 的图片`);
+    detail_image.value = [];
     return false;
   }
   if (isPNG) {
@@ -119,10 +129,12 @@ const imageBeforeUpload = (file) => {
         const img = this as HTMLImageElement;
         if (img.width != 750) {
           message.error(`请上传宽度为750px长图`);
+          detail_image.value = [];
           return false;
         }
         if (img.height > 2000) {
           message.error(`请上传高度不能超过2000px的长图`);
+          detail_image.value = [];
           return false;
         }
         formState.imageUrl = src as string;
@@ -220,7 +232,7 @@ const uploadImages = () => {
         } else {
           ress.push(query.detail_image);
         }
-        resolve(res);
+        resolve(ress);
       })
       .catch((err) => {
         reject(err);
@@ -300,7 +312,7 @@ onMounted(() => {
                       name="file"
                       v-model:file-list="deputy_image"
                       :before-upload="coverBeforeUpload2"
-                      :maxCount="1"
+                      :maxCount="4"
                     >
                       <a-button type="primary">
                         <PlusOutlined />

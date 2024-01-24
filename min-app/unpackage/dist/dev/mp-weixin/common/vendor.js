@@ -14248,6 +14248,7 @@ exports.onLaunch = onLaunch;
 exports.onLoad = onLoad;
 exports.onMounted = onMounted;
 exports.onShow = onShow;
+exports.onUnmounted = onUnmounted;
 exports.p = p;
 exports.ref = ref;
 exports.resolveComponent = resolveComponent;
