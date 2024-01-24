@@ -1,7 +1,0 @@
-.page-header {
-  width: 100%;
-  z-index: 1001;
-}
-.uni-navbar__header-btns {
-  float: left;
-}

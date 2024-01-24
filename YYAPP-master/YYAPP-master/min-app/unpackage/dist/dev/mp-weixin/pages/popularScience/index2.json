@@ -1,9 +1,0 @@
-{
-  "navigationStyle": "custom",
-  "navigationBarTitleText": "看诊预约",
-  "navigationBarTextStyle": "white",
-  "usingComponents": {
-    "header": "../../components/header/index",
-    "date-element": "../../components/DateElement"
-  }
-}
