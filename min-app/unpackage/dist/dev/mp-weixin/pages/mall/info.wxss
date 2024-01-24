@@ -122,7 +122,6 @@
   width: 100%;
 }
 .main .content .items .item .info.data-v-6f02fc2b {
-  margin-top: 10px;
   display: flex;
   justify-content: space-between;
   flex-flow: column;
@@ -155,18 +154,18 @@
 .main .content .items .item .discount.data-v-6f02fc2b {
   position: absolute;
   bottom: 6px;
-  right: 6px;
+  right: 12px;
   width: 55px;
   height: 20px;
 }
 .main .content .items .item .discount image.data-v-6f02fc2b {
-  width: 55px;
+  width: 63px;
   height: 20px !important;
 }
 .main .content .items .item .discount .num.data-v-6f02fc2b {
   width: 100%;
   height: 20px;
-  font-size: 11px;
+  font-size: 9px;
   font-weight: 600;
   color: #FFFFFF;
   position: absolute;

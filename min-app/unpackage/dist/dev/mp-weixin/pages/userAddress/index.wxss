@@ -21,6 +21,7 @@
   margin: 4px 0;
 }
 .main .items .addres.data-v-7f8df939 {
+  width: 100%;
   font-size: 10px;
   font-family: PingFangSC, PingFang SC;
   font-weight: 400;
@@ -28,6 +29,9 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .main .items .addres .default.data-v-7f8df939 {
   width: 26px;

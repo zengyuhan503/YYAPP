@@ -83,7 +83,7 @@
   font-size: 17px;
   font-family: PingFangSC, PingFang SC;
   font-weight: 400;
-  color: #000000;
+  color: rgba(0, 0, 0, 0.3) !important;
 }
 .form .uni-forms-item button {
   padding: 0;

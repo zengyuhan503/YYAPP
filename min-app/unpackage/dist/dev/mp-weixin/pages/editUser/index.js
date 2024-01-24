@@ -37,14 +37,17 @@ const _sfc_main = {
     };
     const handleServerGetUserInfo = () => {
       utils_api_index.GetServerUserInfo().then((res) => {
-        console.log(res);
-        alignmentFormData.value.avatar = "https://dental.cdwuhu.com/" + res.avatar;
+        console.log(res.avatar.indexOf("thirdwx.qlogo"));
+        if (res.avatar.indexOf("thirdwx.qlogo") == -1) {
+          alignmentFormData.value.avatar = "https://dental.cdwuhu.com/" + res.avatar;
+        } else {
+          alignmentFormData.value.avatar = res.avatar;
+        }
         alignmentFormData.value.nickname = res.nickname;
       });
     };
     const handlebindchooseavatar = (e) => {
       let avatar = e.detail.avatarUrl;
-      console.log(avatar);
       common_vendor.index.uploadFile({
         url: "https://dental.cdwuhu.com/api/upload",
         //仅为示例，非真实的接口地址
@@ -59,10 +62,10 @@ const _sfc_main = {
             avatar: url.data
           };
           utils_api_index.EditUserInfo(params).then((res) => {
-            console.log(res);
             common_vendor.index.showToast({
               title: "修改成功",
-              duration: 2e3
+              duration: 2e3,
+              icon: "success"
             });
             handleServerGetUserInfo();
           });
@@ -83,7 +86,12 @@ const _sfc_main = {
             ...alignmentFormData.value
           };
           utils_api_index.EditUserInfo(params2).then((res2) => {
-            console.log(res2);
+            common_vendor.index.showToast({
+              title: "修改成功",
+              duration: 2e3,
+              icon: "success"
+            });
+            handleServerGetUserInfo();
           });
         });
       }
@@ -106,6 +114,8 @@ const _sfc_main = {
         c: common_vendor.o(handleEditNickname),
         d: common_vendor.o(($event) => common_vendor.unref(alignmentFormData).nickname = $event),
         e: common_vendor.p({
+          inputBorder: false,
+          color: "rgba(0, 0, 0, 0.3)",
           placeholder: "请输入姓名",
           modelValue: common_vendor.unref(alignmentFormData).nickname
         }),
@@ -115,6 +125,9 @@ const _sfc_main = {
         g: common_vendor.o(($event) => common_vendor.unref(alignmentFormData).phone = $event),
         h: common_vendor.p({
           disabled: true,
+          type: "number",
+          inputBorder: false,
+          color: "rgba(0, 0, 0, 0.3)",
           placeholder: "请输入手机号",
           modelValue: common_vendor.unref(alignmentFormData).phone
         }),

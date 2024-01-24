@@ -32,7 +32,11 @@
         </view>
       </view>
       <view class="activeday"
-        ><image src="../static/image/dateicon.png" mode="widthFix" /> 08月13日
+        ><image
+          src="http://h5.dental.cdwuhu.com/static/image/dateicon.png"
+          mode="widthFix"
+        />
+        08月13日
       </view>
       <view class="tiems" v-if="hasTimes.length != 0">
         <view class="label">上午</view>

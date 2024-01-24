@@ -62,6 +62,7 @@
                 </view>
               </view>
             </view>
+          <view class="step"></view>
             <view class="formItem">
               <picker
                 bindchange="bindPickerChange"
@@ -112,11 +113,7 @@
             /> -->
           <view v-if="!hasSubscribe">
             <view @click="handleSubmit" class="submitbtn" v-if="isSubmit">预约</view>
-            <image
-              src="http://h5.dental.cdwuhu.com/static/image/confirm-disable.png"
-              v-else
-              mode="widthFix"
-            />
+            <view  class="submitbtn disabled" v-else>预约</view>
           </view>
           <view v-else>
             <view class="cancel" @click="showCancel = true">取消预约</view>
@@ -301,7 +298,7 @@ const handleChangeFrom = () => {
     isSubmit.value = false;
   }
 };
-let isSubmit = ref(false);
+let isSubmit = ref(true);
 const handleShowPopup = () => {
   if (hasSubscribe.value) return false;
   showDate.value = true;
@@ -359,6 +356,7 @@ const handleGetPlans = () => {
       } else {
         hasSubscribe.value = false;
       }
+      handleChangeFrom()
       console.log(popularForm.value);
     } catch (error) {
       console.log(error);

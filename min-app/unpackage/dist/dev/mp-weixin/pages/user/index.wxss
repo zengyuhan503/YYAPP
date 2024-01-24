@@ -70,6 +70,7 @@
 }
 .orders .items .item.data-v-79e6a490 {
   text-align: center;
+  min-width: 70px;
 }
 .orders .items .item image.data-v-79e6a490 {
   width: 27px;

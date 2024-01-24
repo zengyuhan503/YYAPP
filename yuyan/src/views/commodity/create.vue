@@ -338,6 +338,8 @@ onMounted(() => {
                   <a-textarea
                     v-model:value="formState.desc"
                     placeholder="Basic usage"
+                    :showCount="true"
+                    :maxlength="200"
                     :rows="80"
                   />
                 </a-form-item>

@@ -76,7 +76,15 @@
     <view class="close-order" v-if="orderInfo.status == 0" @click="showCancel = true">
       取消订单
     </view>
-    <view class="refund-order" v-if="orderInfo.status !== 0">
+    <view
+      class="refund-order"
+      v-if="
+        orderInfo.status == 1 ||
+        orderInfo.status == 2 ||
+        orderInfo.status == 3 ||
+        orderInfo == 4
+      "
+    >
       如需退款，请 <text @click="handleMakePhoneCall">致电门店</text>
       <view style="height: 40px"></view>
     </view>
@@ -144,7 +152,7 @@
 
 <script setup>
 import { ref, onMounted, onUnmounted } from "vue";
-import { onLaunch, onShow } from "@dcloudio/uni-app";
+import { onLaunch, onShow, onLoad } from "@dcloudio/uni-app";
 import { GetOrderInfo, CancelOrder, CreateWxPay } from "../../utils/api/index";
 import moment from "moment";
 let str = ref({
@@ -153,7 +161,7 @@ let str = ref({
   2: "待收货",
   3: "已收货",
   4: "完成订单",
-  "-1": "已取消",
+  "-1": "已关闭",
   "-2": "已取消",
   "-3": "已取消",
   all: "全部订单",
@@ -244,7 +252,7 @@ const handleCopy = () => {
     success: function () {
       uni.showToast({
         icon: "none",
-        title: "复制成功",
+        title: "单号复制成功",
         duration: 2000,
       });
     },
@@ -277,10 +285,9 @@ const handleOpenShip = () => {
   popup.value.open();
 };
 onUnmounted(() => {
-  popup.value.close();
+  popup.value?.close();
 });
 onLoad((options) => {
-  console.log(options);
   orderid = options.id;
   handleGetOrderInfo();
 });

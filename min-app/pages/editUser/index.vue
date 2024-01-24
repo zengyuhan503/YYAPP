@@ -16,8 +16,10 @@
           <uni-forms-item label="姓名" class="items">
             <uni-easyinput
               class="easyinput"
+              :inputBorder="false"
               v-model="alignmentFormData.nickname"
               @change="handleEditNickname"
+              color="rgba(0, 0, 0, 0.3)"
               placeholder="请输入姓名"
             />
           </uni-forms-item>
@@ -26,6 +28,9 @@
               <uni-easyinput
                 class="easyinput"
                 disabled
+                type="number"
+                :inputBorder="false"
+                color="rgba(0, 0, 0, 0.3)"
                 v-model="alignmentFormData.phone"
                 placeholder="请输入手机号"
               />
@@ -61,14 +66,18 @@ const handleEditNickname = () => {
 };
 const handleServerGetUserInfo = () => {
   GetServerUserInfo().then((res) => {
-    console.log(res);
-    alignmentFormData.value.avatar = "https://dental.cdwuhu.com/" + res.avatar;
+    console.log(res.avatar.indexOf("thirdwx.qlogo"));
+    if (res.avatar.indexOf("thirdwx.qlogo") == -1) {
+      alignmentFormData.value.avatar = "https://dental.cdwuhu.com/" + res.avatar;
+    } else {
+      alignmentFormData.value.avatar = res.avatar;
+    }
+
     alignmentFormData.value.nickname = res.nickname;
   });
 };
 const handlebindchooseavatar = (e) => {
   let avatar = e.detail.avatarUrl;
-  console.log(avatar);
   uni.uploadFile({
     url: "https://dental.cdwuhu.com/api/upload", //仅为示例，非真实的接口地址
     filePath: avatar,
@@ -82,10 +91,10 @@ const handlebindchooseavatar = (e) => {
         avatar: url.data,
       };
       EditUserInfo(params).then((res) => {
-        console.log(res);
         uni.showToast({
           title: "修改成功",
           duration: 2000,
+          icon: "success",
         });
         handleServerGetUserInfo();
       });
@@ -105,7 +114,12 @@ const getinfos = (e) => {
         ...alignmentFormData.value,
       };
       EditUserInfo(params).then((res) => {
-        console.log(res);
+        uni.showToast({
+          title: "修改成功",
+          duration: 2000,
+          icon: "success",
+        });
+        handleServerGetUserInfo();
       });
     });
   }
@@ -151,7 +165,7 @@ onMounted(() => {
   font-size: 17px;
   font-family: PingFangSC, PingFang SC;
   font-weight: 400;
-  color: #000000;
+  color: rgba(0, 0, 0, 0.3) !important;
 }
 .form .uni-forms-item button {
   padding: 0;

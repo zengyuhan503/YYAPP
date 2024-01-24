@@ -56,6 +56,9 @@
   font-weight: 600;
   color: #172B4D;
   margin-bottom: 3px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .main .items .info .desc .count.data-v-4284604b {
   font-size: 12px;
@@ -67,9 +70,12 @@
 .main .items .info .desc .price.data-v-4284604b {
   font-size: 16px;
   font-weight: 600;
-  color: #D44469;
   text-align: right;
-}
-.main .items .info .desc.cancel .price.data-v-4284604b {
   color: #c0c0c0;
+}
+.main .items .info .desc .price.cancel.data-v-4284604b {
+  text-decoration: line-through;
+}
+.main .items .info .desc .price.active.data-v-4284604b {
+  color: #D44469;
 }

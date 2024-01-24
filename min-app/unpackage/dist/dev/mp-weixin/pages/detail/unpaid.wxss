@@ -148,6 +148,9 @@
 .main .commodity .info .desc .name.data-v-2550a99d {
   font-size: 14px;
   font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .main .commodity .info .desc .count.data-v-2550a99d {
   font-size: 12px;

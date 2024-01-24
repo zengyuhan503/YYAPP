@@ -21,7 +21,9 @@
             <div class="desc">
               <div class="title">{{ item.goods_name }}</div>
               <div class="count">x {{ item.num }}</div>
-              <div class="price">实际支付 ¥{{ item.real_price }}</div>
+              <div class="price" :class="getClassStatus(item.status)">
+                实际支付 ¥{{ item.real_price }}
+              </div>
             </div>
           </div>
         </div>
@@ -42,10 +44,20 @@ let orderStr = ref({
   3: "已收货",
   4: "完成订单",
   "-1": "已关闭",
-  "-3": "已关闭",
+  "-2": "已取消",
+  "-3": "已取消",
   all: "全部订单",
 });
 let orderList = ref([]);
+const getClassStatus = (status) => {
+  let str = {
+    0: "active",
+    "-1": "cancel",
+    "-2": "cancel",
+    "-3": "cancel",
+  };
+  return str[status] || "";
+};
 onLoad((option) => {
   status.value = option.status;
   console.log(status.value);

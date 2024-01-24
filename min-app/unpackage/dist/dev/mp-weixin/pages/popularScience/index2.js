@@ -131,7 +131,7 @@ const _sfc_main = {
         isSubmit.value = false;
       }
     };
-    let isSubmit = common_vendor.ref(false);
+    let isSubmit = common_vendor.ref(true);
     const handleShowPopup = () => {
       if (hasSubscribe.value)
         return false;
@@ -190,6 +190,7 @@ const _sfc_main = {
           } else {
             hasSubscribe.value = false;
           }
+          handleChangeFrom();
           console.log(popularForm.value);
         } catch (error) {
           console.log(error);

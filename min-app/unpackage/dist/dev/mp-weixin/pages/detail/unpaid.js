@@ -18,7 +18,7 @@ const _sfc_main = {
       2: "待收货",
       3: "已收货",
       4: "完成订单",
-      "-1": "已取消",
+      "-1": "已关闭",
       "-2": "已取消",
       "-3": "已取消",
       all: "全部订单"
@@ -103,7 +103,7 @@ const _sfc_main = {
         success: function() {
           common_vendor.index.showToast({
             icon: "none",
-            title: "复制成功",
+            title: "单号复制成功",
             duration: 2e3
           });
         },
@@ -136,10 +136,10 @@ const _sfc_main = {
       popup.value.open();
     };
     common_vendor.onUnmounted(() => {
-      popup.value.close();
+      var _a;
+      (_a = popup.value) == null ? void 0 : _a.close();
     });
-    onLoad((options) => {
-      console.log(options);
+    common_vendor.onLoad((options) => {
       orderid = options.id;
       handleGetOrderInfo();
     });
@@ -180,8 +180,8 @@ const _sfc_main = {
       }, common_vendor.unref(orderInfo).status == 0 ? {
         y: common_vendor.o(($event) => common_vendor.isRef(showCancel) ? showCancel.value = true : showCancel = true)
       } : {}, {
-        z: common_vendor.unref(orderInfo).status !== 0
-      }, common_vendor.unref(orderInfo).status !== 0 ? {
+        z: common_vendor.unref(orderInfo).status == 1 || common_vendor.unref(orderInfo).status == 2 || common_vendor.unref(orderInfo).status == 3 || common_vendor.unref(orderInfo) == 4
+      }, common_vendor.unref(orderInfo).status == 1 || common_vendor.unref(orderInfo).status == 2 || common_vendor.unref(orderInfo).status == 3 || common_vendor.unref(orderInfo) == 4 ? {
         A: common_vendor.o(handleMakePhoneCall)
       } : {}, {
         B: common_vendor.unref(orderInfo).status == 0

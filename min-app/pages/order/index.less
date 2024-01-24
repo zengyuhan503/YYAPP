@@ -65,6 +65,9 @@
                     font-weight: 600;
                     color: #172B4D;
                     margin-bottom: 3px;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
                 }
 
                 .count {
@@ -78,15 +81,19 @@
                 .price {
                     font-size: 16px;
                     font-weight: 600;
-                    color: #D44469;
                     text-align: right;
-                }
+                    color: rgba(192, 192, 192, 1);
 
-                &.cancel {
-                    .price {
-                        color: rgba(192, 192, 192, 1);
+                    &.cancel {
+                        text-decoration: line-through;
+                    }
+
+                    &.active {
+                        color: #D44469;
                     }
                 }
+
+
             }
 
         }

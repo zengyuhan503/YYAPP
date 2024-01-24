@@ -12,10 +12,20 @@ const _sfc_main = {
       3: "已收货",
       4: "完成订单",
       "-1": "已关闭",
-      "-3": "已关闭",
+      "-2": "已取消",
+      "-3": "已取消",
       all: "全部订单"
     });
     let orderList = common_vendor.ref([]);
+    const getClassStatus = (status2) => {
+      let str = {
+        0: "active",
+        "-1": "cancel",
+        "-2": "cancel",
+        "-3": "cancel"
+      };
+      return str[status2] || "";
+    };
     common_vendor.onLoad((option) => {
       status.value = option.status;
       console.log(status.value);
@@ -75,8 +85,9 @@ const _sfc_main = {
             j: common_vendor.t(item.goods_name),
             k: common_vendor.t(item.num),
             l: common_vendor.t(item.real_price),
-            m: common_vendor.o(($event) => handleToOrderInfo(item), index),
-            n: index
+            m: common_vendor.n(getClassStatus(item.status)),
+            n: common_vendor.o(($event) => handleToOrderInfo(item), index),
+            o: index
           });
         })
       };

@@ -54,6 +54,7 @@
                 />
               </view>
             </view>
+            <view class="step"></view>
             <view class="formItem">
               <picker
                 bindchange="bindPickerChange"
@@ -79,7 +80,7 @@
             </view>
           </view>
         </view>
-        <view class="submit-btns">
+        <view class="submit-btns" style="padding: 0 30px;">
           <!-- <image
             src="http://h5.dental.cdwuhu.com/static/image/confirm.png"
             @click="handleSubmit"
@@ -88,11 +89,7 @@
           /> -->
           <view v-if="!hasSubscribe">
             <view @click="handleSubmit" class="submitbtn" v-if="isSubmit">预约</view>
-            <image
-              src="http://h5.dental.cdwuhu.com/static/image/confirm-disable.png"
-              v-else
-              mode="widthFix"
-            />
+            <view  class="submitbtn disabled" v-else>预约</view>
           </view>
           <view v-else>
             <view class="cancel" @click="showCancel = true">取消预约</view>

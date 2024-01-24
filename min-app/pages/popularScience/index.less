@@ -157,13 +157,13 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            width: 140px;
+            width: 100%;
             height: 50px;
             background: #F9F9F9;
             border-radius: 25px;
 
             &>view {
-                width: 70px;
+                flex: 1;
                 height: 50px;
                 border-radius: 25px;
                 text-align: center;
@@ -196,7 +196,10 @@
         align-items: center;
 
         .formItem {
-            width: 45%;
+            flex: 1;
+        }
+        .step{
+            width: 20px;
         }
     }
 }
@@ -211,7 +214,7 @@
 
     view.submitbtn {
         margin: auto;
-        width: 80%;
+        width: 100%;
         height: 44px;
         background: #D44469;
         border-radius: 10px;
@@ -220,6 +223,12 @@
         color: #FFFFFF;
         text-align: center;
         line-height: 44px;
+    }
+
+    view.disabled {
+        height: 44px;
+        background: rgba(111, 111, 111, 0.4);
+        border-radius: 10px;
     }
 
     .cancel {
