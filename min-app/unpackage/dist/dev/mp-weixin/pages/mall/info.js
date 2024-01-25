@@ -16,9 +16,17 @@ const _sfc_main = {
   setup(__props) {
     let goodsId = common_vendor.ref(null);
     let goodsInfo = common_vendor.ref({});
-    let mode = common_vendor.ref("default");
+    common_vendor.ref("default");
     let refStyle = common_vendor.ref({
       top: "46px"
+    });
+    let swiperDotIndex = common_vendor.ref(0);
+    let dotsStyles = common_vendor.ref({
+      backgroundColor: "rgba(255,255,255,0.5);",
+      border: "2px rgba(255,255,255,0.5); solid",
+      color: "#fff",
+      selectedBackgroundColor: "#F9A143",
+      selectedBorder: "2px #F9A143 solid"
     });
     let height = common_vendor.ref(0);
     common_vendor.onLoad((option) => {
@@ -32,6 +40,10 @@ const _sfc_main = {
       });
     };
     let covers = common_vendor.ref([]);
+    const handleBannerChange = (e) => {
+      let index = e.detail.current;
+      swiperDotIndex.value = index;
+    };
     const handleGetOrderInfo = () => {
       let params = {
         goods_id: goodsId.value
@@ -102,28 +114,32 @@ const _sfc_main = {
             b: index
           };
         }),
-        e: common_vendor.p({
-          mode: common_vendor.unref(mode),
+        e: common_vendor.o(handleBannerChange),
+        f: common_vendor.p({
+          info: common_vendor.unref(covers),
+          current: common_vendor.unref(swiperDotIndex),
+          ["dots-styles"]: common_vendor.unref(dotsStyles),
+          mode: "round",
           field: "content"
         }),
-        f: common_vendor.unref(goodsInfo).sale_price != common_vendor.unref(goodsInfo).price
+        g: common_vendor.unref(goodsInfo).sale_price != common_vendor.unref(goodsInfo).price
       }, common_vendor.unref(goodsInfo).sale_price != common_vendor.unref(goodsInfo).price ? {
-        g: common_vendor.t(common_vendor.unref(goodsInfo).sale_price),
-        h: common_vendor.t(common_vendor.unref(goodsInfo).price)
+        h: common_vendor.t(common_vendor.unref(goodsInfo).sale_price),
+        i: common_vendor.t(common_vendor.unref(goodsInfo).price)
       } : {
-        i: common_vendor.t(common_vendor.unref(goodsInfo).sale_price)
+        j: common_vendor.t(common_vendor.unref(goodsInfo).sale_price)
       }, {
-        j: common_vendor.unref(goodsInfo).sale_price != common_vendor.unref(goodsInfo).price
+        k: common_vendor.unref(goodsInfo).sale_price != common_vendor.unref(goodsInfo).price
       }, common_vendor.unref(goodsInfo).sale_price != common_vendor.unref(goodsInfo).price ? {
-        k: common_vendor.t(common_vendor.unref(goodsInfo).price - common_vendor.unref(goodsInfo).sale_price)
+        l: common_vendor.t(common_vendor.unref(goodsInfo).price - common_vendor.unref(goodsInfo).sale_price)
       } : {}, {
-        l: common_vendor.t(common_vendor.unref(goodsInfo).title),
-        m: common_vendor.t(common_vendor.unref(goodsInfo).desc),
-        n: "https://dental.cdwuhu.com/" + common_vendor.unref(goodsInfo).detail_image,
-        o: common_vendor.unref(goodsInfo).sale_price != common_vendor.unref(goodsInfo).price
+        m: common_vendor.t(common_vendor.unref(goodsInfo).title),
+        n: common_vendor.t(common_vendor.unref(goodsInfo).desc),
+        o: "https://dental.cdwuhu.com/" + common_vendor.unref(goodsInfo).detail_image,
+        p: common_vendor.unref(goodsInfo).sale_price != common_vendor.unref(goodsInfo).price
       }, common_vendor.unref(goodsInfo).sale_price != common_vendor.unref(goodsInfo).price ? {} : {}, {
-        p: common_vendor.t(common_vendor.unref(goodsInfo).sale_price),
-        q: common_vendor.o(handleToCreateOrder)
+        q: common_vendor.t(common_vendor.unref(goodsInfo).sale_price),
+        r: common_vendor.o(handleToCreateOrder)
       });
     };
   }

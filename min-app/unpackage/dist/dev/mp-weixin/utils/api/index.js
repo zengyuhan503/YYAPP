@@ -35,6 +35,8 @@ let apiPost = (uri, params, token = null) => {
   });
 };
 const tokenfFail = () => {
+  let token = common_vendor.index.getStorageSync("yy-token");
+  let str = token ? "登录失效，请重新登录" : "你当前未登录，请登录后尝试";
   common_vendor.index.removeStorageSync("yy-token");
   common_vendor.index.removeStorageSync("yy-userinfo");
   var pages = getCurrentPages();
@@ -43,7 +45,7 @@ const tokenfFail = () => {
   if (currentRoute == "pages/user/index")
     return false;
   common_vendor.index.showToast({
-    title: "登录失效，请重新登录",
+    title: str,
     icon: "none",
     duration: 2e3
   });

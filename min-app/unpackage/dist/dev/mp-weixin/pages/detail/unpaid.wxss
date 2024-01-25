@@ -293,6 +293,12 @@
   overflow: auto;
   padding: 20px;
   background: #FFFFFF;
+  border-radius: 10px 10px 0 0;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  left: 0;
+  padding-bottom: 50px;
 }
 .ships > view.data-v-2550a99d {
   color: #000;
@@ -306,4 +312,9 @@
 .ships .ship_items .ship_item.data-v-2550a99d {
   padding-top: 10px;
   padding-left: 10px;
+}
+
+
+uni-transition view {
+  padding-bottom: 0 !important;
 }

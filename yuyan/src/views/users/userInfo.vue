@@ -61,6 +61,14 @@ const handleSubmit = () => {
   <div class="page-content">
     <div class="page-head">
       <div class="page-info">
+        <div style="margin-bottom: 20px">
+          <a-breadcrumb>
+            <a-breadcrumb-item to="">
+              <router-link to="/user/lists">注册用户管理</router-link>
+            </a-breadcrumb-item>
+            <a-breadcrumb-item>注册用户详情</a-breadcrumb-item>
+          </a-breadcrumb>
+        </div>
         <p class="title" style="margin-bottom: 16px">注册用户详情</p>
         <!-- <p>在小程序中注册后的用户都会在以下列表中显</p> -->
       </div>

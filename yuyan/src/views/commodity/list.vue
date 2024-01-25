@@ -153,7 +153,7 @@ const handleOk = () => {
     return false;
   }
   let params = new FormData();
-  params.append("limit_image", cateForm.iconFiles[0].originFileObj);
+  params.append("limit_image", cateForm.iconFiles[0]);
   imageUpLoad(params).then((res) => {
     let params2 = {
       title: cateForm.title,
@@ -177,7 +177,7 @@ const handleEditOk = async () => {
     let icon = "";
     if (editCateForm.value.iconFiles.length != 0) {
       let params = new FormData();
-      params.append("limit_image", editCateForm.value.iconFiles[0].originFileObj);
+      params.append("limit_image", editCateForm.value.iconFiles[0]);
       icon = (await imageUpLoad(params)).data;
     } else {
       icon = editCateForm.value.icon.replace("https://dental.cdwuhu.com/", "");
@@ -195,7 +195,7 @@ const handleEditOk = async () => {
     });
   } else {
     let params = new FormData();
-    params.append("limit_image", cateForm.iconFiles[0].originFileObj);
+    params.append("limit_image", cateForm.iconFiles[0]);
     imageUpLoad(params).then((res) => {
       let params2 = {
         title: editCateForm.value.title,
@@ -295,6 +295,7 @@ const handleUploadIcon = (file) => {
         cateForm.icon = src as string;
         editCateForm.value.icon = src as string;
       };
+      cateForm.iconFiles = [...(cateForm.iconFiles || []), file];
       image.src = src as string;
     };
     return false;
@@ -430,7 +431,7 @@ onMounted(() => {
         </div>
         <div>
           <a-upload
-            v-model:file-list="cateForm.iconFiles"
+            :file-list="cateForm.iconFiles"
             name="avatar"
             :maxCount="1"
             list-type="picture-card"
@@ -472,7 +473,7 @@ onMounted(() => {
         </div>
         <div>
           <a-upload
-            v-model:file-list="editCateForm.iconFiles"
+            :file-list="editCateForm.iconFiles"
             name="avatar"
             :maxCount="1"
             list-type="picture-card"

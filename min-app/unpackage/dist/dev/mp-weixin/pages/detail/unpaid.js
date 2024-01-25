@@ -215,7 +215,6 @@ const _sfc_main = {
           "k": "popup"
         }),
         P: common_vendor.p({
-          ["background-color"]: "#fff",
           type: "bottom"
         })
       });

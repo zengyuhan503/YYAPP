@@ -3,7 +3,7 @@ import { reactive, ref, watch, onMounted, createVNode } from "vue";
 import { useRouter } from "vue-router";
 import { Modal } from "ant-design-vue";
 import { PlusOutlined } from "@ant-design/icons-vue";
-import { bannerList } from "@/utils/request/index";
+import { bannerList, RmBanner } from "@/utils/request/index";
 let router = useRouter();
 let searchStatus = ref(false);
 let createBanner = (item: any) => {
@@ -23,6 +23,23 @@ const getList = () => {
       banners.value = data.data;
     })
     .catch((err) => {});
+};
+const handleRmBanner = (item) => {
+  let params = {
+    banner_id: item.id,
+  };
+  Modal.confirm({
+    title: "你确定要删除当前Banner吗",
+    onOk() {
+      RmBanner(params).then((res) => {
+        getList();
+      });
+    },
+    onCancel() {
+      console.log("Cancel");
+    },
+    class: "test",
+  });
 };
 onMounted(() => {
   getList();
@@ -50,22 +67,22 @@ onMounted(() => {
             <p class="position">NO.N</p>
             <p class="note">备注信息（不展示在小程序）</p>
           </div>
-          <p class="staus">无/长图/链接</p>
+          <p class="staus">
+            <span>无/长图/链接</span>
+          </p>
         </div>
-        <div
-          class="item"
-          v-for="(item, index) in banners"
-          @click="createBanner(item)"
-          :key="index"
-        >
-          <div class="cover">
+        <div class="item" v-for="(item, index) in banners" :key="index">
+          <div class="cover" @click="createBanner(item)">
             <img :src="'https://dental.cdwuhu.com/' + item.image" alt="" />
           </div>
-          <div class="info">
+          <div class="info" @click="createBanner(item)">
             <p class="position">NO.{{ index + 1 }}</p>
             <p class="note">{{ item.remark }}</p>
           </div>
-          <p class="staus">{{ item.url == "" ? "长图" : "链接" }}</p>
+          <p class="staus">
+            <span>{{ item.url == "" ? "长图" : "链接" }}</span>
+            <a-button @click="handleRmBanner(item)" danger type="text">刪除</a-button>
+          </p>
         </div>
       </div>
     </div>

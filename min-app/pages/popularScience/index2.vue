@@ -1,6 +1,6 @@
 <template>
   <view class="page-content page-content2">
-    <Header title="看诊预约馆" />
+    <Header title="看诊预约" />
     <view class="content">
       <view class="main main1 main2 hasback">
         <view class="hastag">

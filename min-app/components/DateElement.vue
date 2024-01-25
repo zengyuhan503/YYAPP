@@ -36,7 +36,7 @@
           src="http://h5.dental.cdwuhu.com/static/image/dateicon.png"
           mode="widthFix"
         />
-        08月13日
+        {{ moment(actDay).format("MM月DD日") }}
       </view>
       <view class="tiems" v-if="hasTimes.length != 0">
         <view class="label">上午</view>
@@ -53,8 +53,8 @@
           </view>
         </view>
         <view class="label" v-show="hasTimes.some((item) => parseInt(item.index) > 7)"
-          >下午</view
-        >
+          >下午
+        </view>
         <view class="items">
           <view
             @click="handleSelectDay(item)"
@@ -138,27 +138,28 @@ const renderDays = () => {
   actDayTime.value = moment().startOf("days").valueOf();
 };
 let actDayTime = ref(0);
-let actDay;
+let actDay = ref("");
 let actTimeItem = ref(null);
 let actTime = ref(0);
 const handleSelectDay = (item) => {
   actTime.value = item.index;
   actTimeItem.value = item;
+  console.log(actTimeItem.value);
 };
 const handleGetBooking_plans_detail = (date = null) => {
-  actDay = moment().format("YYYY-MM-DD");
+  hasTimes.value = [];
+  actDay.value = moment().format("YYYY-MM-DD");
   actDayTime.value = moment().startOf("days").valueOf();
   if (date != null) {
-    actDay = moment(date.time).format("YYYY-MM-DD");
+    actDay.value = moment(date.time).format("YYYY-MM-DD");
     actDayTime.value = date.time;
   }
   let params = {
-    date: actDay,
+    date: actDay.value,
     type: props.type,
   };
   booking_plans_detail(params).then((res) => {
     // hasTimes.value = [{ ...res }];
-    console.log(res);
     if (res.length == 0) return false;
     let indexs = res.index.split(",");
     hasTimes.value = times.value.filter((item) => indexs.includes(item.index));

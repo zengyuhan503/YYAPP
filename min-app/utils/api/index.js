@@ -34,6 +34,8 @@ let apiPost = (uri, params, token = null) => {
 }
 
 const tokenfFail = () => {
+	let token = uni.getStorageSync('yy-token');
+	let str = token ? '登录失效，请重新登录' : '你当前未登录，请登录后尝试'
 	uni.removeStorageSync('yy-token');
 	uni.removeStorageSync('yy-userinfo');
 	var pages = getCurrentPages();
@@ -41,7 +43,7 @@ const tokenfFail = () => {
 	var currentRoute = currentPage.route;
 	if (currentRoute == 'pages/user/index') return false;
 	uni.showToast({
-		title: '登录失效，请重新登录',
+		title: str,
 		icon: "none",
 		duration: 2000
 	});

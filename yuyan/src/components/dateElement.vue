@@ -359,6 +359,7 @@ const saveTimes = () => {
     message.error("请设置完整信息在保存");
     return false;
   }
+
   let day = moment(activeTimes * 1000).format("YYYY-MM-DD");
   let params = {
     date: day,
@@ -366,7 +367,7 @@ const saveTimes = () => {
     type: props.type,
     is_limit: timeForm.value.is_limit,
   };
-  pickerDayDatas.value.push(activeTimes);
+  let isPicker = pickerDayDatas.value.findIndex((item) => item == activeTimes);
   let isHas = hastime.findIndex(
     (obj) => moment(obj.date).valueOf() / 1000 == activeTimes
   );
@@ -375,10 +376,30 @@ const saveTimes = () => {
     title: `已保存设${moment(activeTimes * 1000).format("YYYY年MM月DD日")}置?`,
     content: "点击确定后自动跳到下一日期设置",
     onOk() {
+      console.log(timeForm.value.index);
       if (isHas != -1) {
-        hastime[isHas] = params;
+        if (timeForm.value.index.length == 0) {
+          // pickerDayDatas.value.push(activeTimes);
+          hastime.splice(isHas, 1);
+        } else {
+          hastime[isHas] = params;
+        }
       } else {
         hastime.push(params);
+      }
+      if (isPicker != -1) {
+        if (timeForm.value.index.length == 0) {
+          // pickerDayDatas.value.push(activeTimes);
+          pickerDayDatas.value.splice(isPicker, 1);
+        } else {
+          if (timeForm.value.index.length == 1 && timeForm.value.index[0] == "0") {
+            pickerDayDatas.value.splice(isPicker, 1);
+          } else {
+            pickerDayDatas.value[isPicker] = activeTimes;
+          }
+        }
+      } else {
+        pickerDayDatas.value.push(activeTimes);
       }
       let day =
         moment(activeTimes * 1000)
@@ -394,19 +415,21 @@ const saveTimes = () => {
 };
 let submitLoading = ref(false);
 const handleSubmit = () => {
-  let date=hastime.map(item=>{
-    const newItem={...item};
-    delete newItem.id;
-    return newItem
-  })
+  let date = hastime
+    .filter((item) => item.index !== "0")
+    .map((item) => {
+      const newItem = { ...item };
+      delete newItem.id;
+      return newItem;
+    });
   let params = {
     date: date,
-    type:props.type
+    type: props.type,
   };
   booking_plan_edit(params).then((res) => {
     console.log(res);
     message.success("提交成功");
-    getList()
+    getList();
   });
 };
 // 初始渲染

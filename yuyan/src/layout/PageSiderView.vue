@@ -8,7 +8,7 @@ let collapsed = inject("collapsed");
 <template>
   <div class="layout-sider">
     <div class="menu-logo">
-      <!-- <img src="../assets/image/logo.png" alt=""> -->
+      <img src="../assets/image/logo.png" alt="">
     </div>
     <div class="menu">
       <Menus />

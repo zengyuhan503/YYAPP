@@ -178,6 +178,30 @@
 .main .content .items .item .discount .num text.data-v-43c06b56 {
   font-size: 16px;
 }
+@media screen and (max-width: 376px) {
+.main .content .items .item .discount.data-v-43c06b56 {
+    width: 50px !important;
+}
+.main .content .items .item .discount image.data-v-43c06b56 {
+    width: 55px;
+    height: 20px !important;
+}
+}
+@media screen and (max-width: 370px) {
+.discount.data-v-43c06b56 {
+    width: 39px !important;
+}
+.discount image.data-v-43c06b56 {
+    width: 39px !important;
+    height: 14px !important;
+}
+.discount .num.data-v-43c06b56 {
+    font-size: 6 !important;
+}
+.discount .num text.data-v-43c06b56 {
+    font-size: 9 !important;
+}
+}
 .covers.data-v-43c06b56 {
   width: 100%;
 }
@@ -216,10 +240,17 @@
   min-width: 102px;
   height: 32px;
   position: relative;
+  padding: 0 11px;
+}
+.info-main .discounts.hasback.data-v-43c06b56 {
   background-image: url("http://h5.dental.cdwuhu.com/static/image/discounts.png");
   background-repeat: no-repeat;
   background-size: 100% 100%;
-  padding: 0 11px;
+}
+.info-main .discounts.hasback2.data-v-43c06b56 {
+  background-image: url("http://h5.dental.cdwuhu.com/static/image/discounts1.png");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
 }
 .info-main .discounts image.data-v-43c06b56 {
   width: 100%;
@@ -594,6 +625,7 @@ uni-swiper-dot,
 }
 .uni-swiper__dots-item {
   width: 10px !important;
-  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.2);
-  height: 4px !important;
+  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.2) !important;
+  height: 3px !important;
+  margin-left: 4px !important;
 }

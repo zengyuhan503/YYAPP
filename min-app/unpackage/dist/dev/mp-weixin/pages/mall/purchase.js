@@ -83,7 +83,7 @@ const _sfc_main = {
         goods_id: goodsId.value,
         number: count.value,
         address_id: isHasAddress ? addrForm.value.id : 0,
-        remark: addrForm.value.remark,
+        remark: addrForm.value.remark || "",
         name: addrForm.value.name,
         phone: addrForm.value.phone,
         provinces: addrForm.value.provinces,

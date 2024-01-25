@@ -23,6 +23,17 @@ let formState = reactive({
 });
 const coverUploadList = ref([]);
 const imagersUploadList = ref([]);
+const handleReset = () => {
+  Object.keys(formState).forEach((key) => {
+    if (key == "category_id") {
+      formState[key] = [];
+    } else {
+      formState[key] = "";
+    }
+  });
+  coverUploadList.value = [];
+  imagersUploadList.value = [];
+};
 const coverBeforeUpload = (file) => {
   const isLt = file.size / 1024 / 1024 < 20;
   if (!isLt) {
@@ -32,7 +43,6 @@ const coverBeforeUpload = (file) => {
   const isPNG = file.type === "image/png" || file.type === "image/jpeg";
   if (!isPNG) {
     message.error(`请上传 JPG/PNG 的图片`);
-    coverUploadList.value = [];
     return false;
   }
   if (isPNG) {
@@ -57,6 +67,8 @@ const coverBeforeUpload = (file) => {
           coverUploadList.value = [];
           return false;
         }
+        
+        coverUploadList.value = [...(coverUploadList.value || []), file];
         formState.cover = src as string;
       };
       image.src = src as string;
@@ -156,7 +168,7 @@ const uploadImages = () => {
     if (coverUploadList.value.length > 0) {
       let coverFormData = new FormData();
       uploadTypes.push("cover");
-      coverFormData.append("limit_image", coverUploadList.value[0].originFileObj);
+      coverFormData.append("limit_image", coverUploadList.value[0]);
       uploads.push(imageUpLoad(coverFormData));
     } else {
       uploads.push([]);
@@ -217,13 +229,24 @@ onMounted(() => {
   <div class="page-content">
     <div class="page-head">
       <div class="page-info">
-        <p class="title" style="margin-bottom: 16px">首页banner配置</p>
+        <div style="margin-bottom: 20px">
+          <a-breadcrumb>
+            <a-breadcrumb-item to="">
+              <router-link to="/display/banners">商店banner配置</router-link>
+            </a-breadcrumb-item>
+            <a-breadcrumb-item>商店banner配置详情</a-breadcrumb-item>
+          </a-breadcrumb>
+        </div>
+        <p class="title" style="margin-bottom: 16px">商店banner配置详情</p>
         <p>最多可以配置6个banner，每个banner可以配一张长图或者一个链接。</p>
       </div>
     </div>
     <div class="page-body">
       <div class="page-main">
-        <p class="title">NO.1 （必填部分）</p>
+        <p class="title">
+          商店banner配置详情
+          <a-button @click="handleReset">清空</a-button>
+        </p>
         <div class="page-form">
           <a-form :model="formState" v-bind="layout">
             <a-row :gutter="180">
@@ -234,7 +257,7 @@ onMounted(() => {
                 <a-form-item label="主页banner图（必填）">
                   <a-upload
                     name="file"
-                    v-model:file-list="coverUploadList"
+                    :file-list="coverUploadList"
                     :before-upload="coverBeforeUpload"
                     @remove="handleRemoveCover"
                     :maxCount="1"

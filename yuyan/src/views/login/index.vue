@@ -16,6 +16,7 @@ const loginLoading = ref(false);
 const submitLogin = () => {
   if (formData.account == "" || formData.password == "") {
     message.error("请填写正确的登录信息");
+    return false;
   }
   let params = {
     ...formData,
@@ -41,7 +42,11 @@ const submitLogin = () => {
       <div class="page-header"></div>
       <div class="page-content">
         <div class="login-form" id="login-content">
-          <p class="title">预颜小程序后台</p>
+          <p class="title">
+            <img src="../../assets/image/logo1.png" alt="" />预颜小程序后台
+          </p>
+          <p class="desc">预颜小程序后台 是服务于 预颜微信小程序</p>
+          <p class="label">账户密码登录</p>
           <div class="login-input">
             <a-input
               v-model:value="formData.account"

@@ -22,13 +22,38 @@ let formState = reactive({
   category_id: [],
 });
 
-let disPrice = computed(() => {
-  let val = formState.price * (formState.discount / 100);
-  return val;
-});
+watch(
+  () => formState.discount,
+  (newVal) => {
+    console.log(newVal);
+    formState.discount = parseInt(newVal+'');
+  }
+);
 const head_image = ref([]);
 const deputy_image = ref([]);
 const detail_image = ref([]);
+const handleReset = () => {
+  Object.keys(formState).forEach((key) => {
+    if (key == "category_id") {
+      formState[key] = [];
+    } else {
+      formState[key] = null;
+    }
+  });
+
+  head_image.value = [];
+  deputy_image.value = [];
+  detail_image.value = [];
+};
+
+let disPrice = computed(() => {
+  let val = (formState.price * (formState.discount / 100)).toFixed(2);
+  return val;
+});
+let diference = computed(() => {
+  let val = (formState.price * (formState.discount / 100)).toFixed(2);
+  return (formState.price - parseFloat(val)).toFixed(2);
+});
 const coverBeforeUpload = (file) => {
   const isLt = file.size / 1024 / 1024 < 10;
   if (!isLt) {
@@ -62,6 +87,7 @@ const coverBeforeUpload = (file) => {
         }
         formState.cover = src as string;
       };
+      head_image.value = [...(head_image.value || []), file];
       image.src = src as string;
     };
   }
@@ -100,6 +126,7 @@ const coverBeforeUpload2 = (file) => {
           return false;
         }
       };
+      deputy_image.value = [...(deputy_image.value || []), file];
       image.src = src as string;
     };
   }
@@ -139,6 +166,7 @@ const imageBeforeUpload = (file) => {
         }
         formState.imageUrl = src as string;
       };
+      detail_image.value = [...(detail_image.value || []), file];
       image.src = src as string;
     };
   }
@@ -188,7 +216,7 @@ const uploadImages2 = () => {
     for (let i = 0; i < deputy_image.value.length; i++) {
       const item = deputy_image.value[i];
       let uploadParams = new FormData();
-      uploadParams.append("limit_image", item.originFileObj);
+      uploadParams.append("limit_image", item);
       arr.push(imageUpLoad(uploadParams));
     }
     Promise.all(arr).then((res) => {
@@ -206,12 +234,12 @@ const uploadImages = () => {
     let up1 = false;
     let up3 = false;
     if (head_image.value.length != 0) {
-      uploadParams.append("limit_image", head_image.value[0].originFileObj);
+      uploadParams.append("limit_image", head_image.value[0]);
       uploads.push(imageUpLoad(uploadParams));
       up1 = true;
     }
     if (detail_image.value.length != 0) {
-      uploadParams2.append("limit_image", detail_image.value[0].originFileObj);
+      uploadParams2.append("limit_image", detail_image.value[0]);
       uploads.push(imageUpLoad(uploadParams2));
       up3 = true;
     }
@@ -268,6 +296,15 @@ onMounted(() => {
   <div class="page-content">
     <div class="page-head">
       <div class="page-info">
+        
+        <div style="margin-bottom: 20px">
+          <a-breadcrumb>
+            <a-breadcrumb-item to="">
+              <router-link to="/commodity/list">商品管理</router-link>
+            </a-breadcrumb-item>
+            <a-breadcrumb-item>商品详情</a-breadcrumb-item>
+          </a-breadcrumb>
+        </div>
         <p class="title" style="margin-bottom: 16px">商品详情</p>
         <p>每个商品必须上传一张主图，最多上传5张。</p>
       </div>
@@ -284,7 +321,7 @@ onMounted(() => {
       <div class="page-main">
         <p class="title">
           信息填写
-          <a-button>清空</a-button>
+          <!-- <a-button @click="handleReset">清空</a-button> -->
         </p>
         <div class="page-form" style="width: 100%">
           <a-form :model="formState" v-bind="layout">
@@ -297,7 +334,7 @@ onMounted(() => {
                   <a-form-item label="商品主头图（必填）">
                     <a-upload
                       name="file"
-                      v-model:file-list="head_image"
+                      :file-list="head_image"
                       :before-upload="coverBeforeUpload"
                       :maxCount="1"
                     >
@@ -310,7 +347,7 @@ onMounted(() => {
                   <a-form-item label="商品次头图（选填）">
                     <a-upload
                       name="file"
-                      v-model:file-list="deputy_image"
+                      :file-list="deputy_image"
                       :before-upload="coverBeforeUpload2"
                       :maxCount="4"
                     >
@@ -344,7 +381,7 @@ onMounted(() => {
                 <a-form-item label="长图（必填）">
                   <a-upload
                     name="file"
-                    v-model:file-list="detail_image"
+                    :file-list="detail_image"
                     :before-upload="imageBeforeUpload"
                     :maxCount="1"
                   >
@@ -384,7 +421,7 @@ onMounted(() => {
                   </p>
                   <p>
                     <span class="label">价格差：</span
-                    ><span class="price">{{ formState.price - disPrice }} ¥</span>
+                    ><span class="price">{{ diference }} ¥</span>
                   </p>
                 </div>
               </a-col>
@@ -395,9 +432,8 @@ onMounted(() => {
                     v-model:value="formState.discount"
                     :min="1"
                     :max="100"
-                    :formatter="(value) => `${value}%`"
-                    :parser="(value) => value.replace('%', '')"
                   />
+                  <span class="unit">%</span>
                 </a-form-item>
               </a-col>
               <a-col :span="8">
@@ -416,7 +452,7 @@ onMounted(() => {
       <div class="goods-show">
         <div class="cover-show">
           <p>商品主图（缩略预览）</p>
-          <div>
+          <div class="covers">
             <img :src="formState.cover" mode="" />
           </div>
         </div>

@@ -116,7 +116,7 @@
       <view class="btns" @click="handleCancelOrder">取消该订单</view>
     </view>
   </view>
-  <uni-popup ref="popup" background-color="#fff" type="bottom">
+  <uni-popup ref="popup" type="bottom">
     <view class="ships">
       <view
         >快递公司： <text>{{ orderInfo.ship_company }}</text></view
@@ -295,4 +295,9 @@ onLoad((options) => {
 
 <style lang="less" scoped>
 @import url("./index.less");
+</style>
+<style>
+uni-transition view {
+  padding-bottom: 0 !important;
+}
 </style>

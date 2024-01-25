@@ -147,6 +147,7 @@ export const editBanners = (params: {
     image: string,
     long_image?: string,
 }) => apiPost('/web/banner/edit', params)
+export const RmBanner = (params) => apiPost('/web/banner/delete', params)
 
 
 

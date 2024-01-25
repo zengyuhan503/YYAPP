@@ -143,6 +143,7 @@ const handleCancelReservation = (record) => {
 };
 const changeTables = (status) => {
   tabActive.value = status;
+  getList()
 };
 const getList = () => {
   let params = {
@@ -249,6 +250,7 @@ onMounted(() => {
                     v-model:value="record.contact_status"
                     @change="handleChangeContact(record)"
                   >
+                  {{ record.contact_status }}
                     <a-select-option :value="0">未联系</a-select-option>
                     <a-select-option :value="1">已联系</a-select-option>
                     <a-select-option :value="2">未接通</a-select-option>

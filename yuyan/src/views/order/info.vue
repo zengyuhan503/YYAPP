@@ -59,6 +59,14 @@ onMounted(() => {
   <div class="page-content">
     <div class="page-head">
       <div class="page-info">
+        <div style="margin-bottom: 20px">
+          <a-breadcrumb>
+            <a-breadcrumb-item to="">
+              <router-link to="/order/orders">订单管理</router-link>
+            </a-breadcrumb-item>
+            <a-breadcrumb-item>订单详情</a-breadcrumb-item>
+          </a-breadcrumb>
+        </div>
         <p class="title" style="margin-bottom: 16px">
           订单编号<span style="color: #1890ff">G123456</span>
         </p>

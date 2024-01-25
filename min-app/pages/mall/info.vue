@@ -13,8 +13,15 @@
     </div>
     <div class="covers">
       <!-- <image :src="'https://dental.cdwuhu.com/' + goodsInfo.head_image" mode="widthFix" /> -->
-      <uni-swiper-dot class="uni-swiper-dot-box" :mode="mode" field="content">
-        <swiper class="swiper-box">
+      <uni-swiper-dot
+        class="uni-swiper-dot-box"
+        :info="covers"
+        :current="swiperDotIndex"
+        :dots-styles="dotsStyles"
+        mode="round"
+        field="content"
+      >
+        <swiper class="swiper-box" @change="handleBannerChange">
           <swiper-item v-for="(item, index) in covers" :key="index">
             <image
               :src="'https://dental.cdwuhu.com/' + item"
@@ -30,26 +37,29 @@
         <view class="info">
           <view class="price" v-if="goodsInfo.sale_price != goodsInfo.price">
             <view>
-              折后价 ¥ <text>{{ goodsInfo.sale_price }}</text>
+              折后价 ¥ <text style="font-weight: 600">{{ goodsInfo.sale_price }}</text>
             </view>
             <view>日常价 ¥ {{ goodsInfo.price }}</view>
           </view>
           <view class="price" v-else>
             <view>
-              惊喜价 ¥ <text>{{ goodsInfo.sale_price }}</text>
+              惊喜价 ¥ <text style="font-weight: 600">{{ goodsInfo.sale_price }}</text>
             </view>
           </view>
-          <view class="discounts" v-if="goodsInfo.sale_price != goodsInfo.price">
+          <view class="discounts hasback" v-if="goodsInfo.sale_price != goodsInfo.price">
             <!-- <image src="http://h5.dental.cdwuhu.com/static/image/discounts.png" mode="" /> -->
             <view class="text">
-              立省 ¥ <text>{{ goodsInfo.price - goodsInfo.sale_price }}</text></view
+              立省 ¥
+              <text style="font-weight: 600">{{
+                goodsInfo.price - goodsInfo.sale_price
+              }}</text></view
             >
           </view>
-          <view class="discounts" v-else>
-            <image
+          <view class="discounts hasback2" v-else>
+            <!-- <image
               src="http://h5.dental.cdwuhu.com/static/image/discounts1.png"
               mode=""
-            />
+            /> -->
             <view class="text">预颜臻选</view>
           </view>
         </view>
@@ -89,6 +99,15 @@ let mode = ref("default");
 let refStyle = ref({
   top: "46px",
 });
+
+let swiperDotIndex = ref(0);
+let dotsStyles = ref({
+  backgroundColor: "rgba(255,255,255,0.5);",
+  border: "2px rgba(255,255,255,0.5); solid",
+  color: "#fff",
+  selectedBackgroundColor: "#F9A143",
+  selectedBorder: "2px #F9A143 solid",
+});
 let height = ref(0);
 onLoad((option) => {
   goodsId.value = option.id;
@@ -102,6 +121,11 @@ const handleleft = () => {
   });
 };
 let covers = ref([]);
+
+const handleBannerChange = (e) => {
+  let index = e.detail.current;
+  swiperDotIndex.value = index;
+};
 const handleGetOrderInfo = () => {
   let params = {
     goods_id: goodsId.value,
@@ -204,5 +228,11 @@ uni-swiper-dot,
   height: 33px;
   line-height: 33px;
   position: absolute;
+}
+
+.uni-swiper__dots-item {
+  width: 10px !important;
+  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.2);
+  height: 4px !important;
 }
 </style>

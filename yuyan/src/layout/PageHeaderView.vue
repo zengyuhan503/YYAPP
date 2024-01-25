@@ -37,16 +37,9 @@ let user = ref({
     refresh_token_exp: 0,
   },
 });
-// user.value = {
-//   ...userStore().getInfo,
-// };
-const subscribe = userStore().$subscribe((m, states) => {
-  let state = {
-    ...(states.info as info),
-  };
-  user.value = state;
-  console.log(state);
-});
+user.value = {
+  ...userStore().getInfo,
+};
 </script>
 
 <template>

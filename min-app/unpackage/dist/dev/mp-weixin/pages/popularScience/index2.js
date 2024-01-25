@@ -257,7 +257,7 @@ const _sfc_main = {
     return (_ctx, _cache) => {
       return common_vendor.e({
         a: common_vendor.p({
-          title: "看诊预约馆"
+          title: "看诊预约"
         }),
         b: common_vendor.unref(hasSubscribe),
         c: common_vendor.o(handleChangeFrom),

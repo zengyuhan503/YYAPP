@@ -54,7 +54,7 @@
           </view>
 
           <view class="item">
-            <div class="prefix" style="left: 19px; top: 17px">
+            <div class="prefix" style="left: 19px; top: 25px">
               <image
                 src="http://h5.dental.cdwuhu.com/static/icon/icon1.png"
                 style="width: 19px; height: 15px"

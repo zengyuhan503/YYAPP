@@ -207,7 +207,10 @@ uni-swiper-dot,
 
 .uni-swiper__dots-item {
   width: 10px !important;
-  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.2);
-  height: 4px !important;
+  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.2) !important;
+  height: 3px !important;
+  margin-left: 4px !important;
 }
+
+
 </style>

@@ -142,6 +142,7 @@ const handleCancelReservation = (record) => {
 };
 const changeTables = (status) => {
   tabActive.value = status;
+  getList();
 };
 const getList = () => {
   let params = {

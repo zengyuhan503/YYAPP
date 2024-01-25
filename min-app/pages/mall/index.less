@@ -206,6 +206,36 @@
     }
 }
 
+@media screen and (max-width: 376px) {
+    .main .content .items .item .discount {
+        width: 50px !important;
+
+        image {
+            width: 55px;
+            height: 20px !important;
+        }
+    }
+}
+
+@media screen and (max-width: 370px) {
+    .discount {
+        width: 39px !important;
+
+        image {
+            width: 39px !important;
+            height: 14px !important;
+        }
+
+        .num {
+            font-size: 6 !important;
+
+            text {
+                font-size: 9 !important;
+            }
+        }
+    }
+}
+
 .covers {
     width: 100%;
 
@@ -251,10 +281,20 @@
         min-width: 102px;
         height: 32px;
         position: relative;
-        background-image: url("http://h5.dental.cdwuhu.com/static/image/discounts.png");
-        background-repeat: no-repeat;
-        background-size: 100% 100%;
+
         padding: 0 11px;
+
+        &.hasback {
+            background-image: url("http://h5.dental.cdwuhu.com/static/image/discounts.png");
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+        }
+
+        &.hasback2 {
+            background-image: url("http://h5.dental.cdwuhu.com/static/image/discounts1.png");
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+        }
 
         image {
             width: 100%;
