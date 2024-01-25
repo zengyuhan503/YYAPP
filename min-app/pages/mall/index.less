@@ -58,11 +58,11 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    min-height: calc(100% - 350PX);
+    min-height: calc(100% - 250PX);
 
     .sider {
         width: 112px;
-        height: calc(100vh - 350PX);
+        height: calc(100vh - 250PX);
 
         .items {
             .item {
@@ -109,7 +109,7 @@
         background: #FFFFFF;
         overflow: auto;
         box-sizing: border-box;
-        height: calc(100vh - 400PX);
+        height: calc(100vh - 250PX);
 
         .items {
             margin-left: -3px;
@@ -209,7 +209,7 @@
 @media screen and (max-width: 376px) {
     .main .content .items .item .discount {
         width: 50px !important;
-
+        right: 10px !important;
         image {
             width: 55px;
             height: 20px !important;
@@ -218,9 +218,9 @@
 }
 
 @media screen and (max-width: 370px) {
-    .discount {
+    .main .content .items .item .discount {
         width: 39px !important;
-
+        right: 6px !important;
         image {
             width: 39px !important;
             height: 14px !important;
