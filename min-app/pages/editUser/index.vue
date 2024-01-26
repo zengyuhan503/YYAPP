@@ -113,6 +113,7 @@ const getinfos = (e) => {
       let params = {
         ...alignmentFormData.value,
       };
+      params.avatar = params.avatar.replace("https://dental.cdwuhu.com/", "");
       EditUserInfo(params).then((res) => {
         uni.showToast({
           title: "修改成功",

@@ -56,15 +56,15 @@ const coverBeforeUpload = (file) => {
         const targetAspectRatio = 2; // 目标比例，即 360:180，宽高比例为2:1
         let aspectRatio = img.width / img.height;
         aspectRatio = Math.abs(aspectRatio - targetAspectRatio);
-        if (img.width < 360) {
+        if (img.width < 720) {
           message.error(
-            "请上传最小宽度为360的图片，图片比例为2:1，如360x180分辨率的图片"
+            "请上传最小宽度为720的图片，图片比例为2:1，如720*360分辨率的图片"
           );
           coverUploadList.value = [];
           return false;
         }
         if (aspectRatio > 0.01) {
-          message.error("请上传宽高比例为2:1的图片，如360x180分辨率的图片");
+          message.error("请上传宽高比例为2:1的图片，如720*360分辨率的图片");
           coverUploadList.value = [];
           return false;
         }

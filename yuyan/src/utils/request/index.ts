@@ -185,6 +185,7 @@ export const changeGoodsStatus = (params) => apiPost('/web/goods/changeStatus', 
 export const rmCategorys = (params: {
     category_id: string,
 }) => apiPost('web/goods_category/delete', params)
+export const rmGoods = params => apiPost('/web/goods/delete', params)
 
 export const imageUpLoad = (params) => apiPost('/web/upload', params, {
     headers: {
@@ -207,6 +208,7 @@ export const desc_detail = () => apiGet("/web/desc/detail", null);
 export const order_list = (params) => apiGet('/web/order/lists', params)
 export const order_ship = params => apiPost('/web/order/ship', params);
 export const order_cancel = params => apiPost('/web/order/close', params)
+export const order_finish = params => apiPost('/web/order/finish', params)
 export const order_open = params => apiPost('/web/order/open', params)
 export const order_info = params => apiGet('/web/order/detail', params)
 export const order_updateExpress = () => apiGet('/web/order/updateExpress', null)

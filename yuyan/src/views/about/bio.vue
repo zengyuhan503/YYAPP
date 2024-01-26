@@ -66,8 +66,8 @@ let submitLoading = ref(false);
 const handleSubmit = () => {
   uploadImages()
     .then((res) => {
-      console.log(res);
       handleEditDetail(res);
+      message.success('操作成功')
     })
     .catch((err) => {
       //   message.error(err);

@@ -19,14 +19,14 @@ let formState = reactive({
   price: null,
   deputy_image: null,
   discount: 100,
-  category_id: [],
+  category_id: ["13"],
 });
 
 watch(
   () => formState.discount,
   (newVal) => {
     console.log(newVal);
-    formState.discount = parseInt(newVal+'');
+    formState.discount = parseInt(newVal + "");
   }
 );
 const head_image = ref([]);
@@ -178,20 +178,24 @@ const handleSubmit = () => {
     message.error("请全部填写后再确定");
     return false;
   }
-  submitLoading.value = true;
+  // submitLoading.value = true;
   uploadImages().then((res) => {
     console.log(res);
     let head_image = res[0];
     let detail_image = res[1];
-    uploadImages2().then((ciimgs: Array<any>) => {
-      let imgs = ciimgs.map((item) => item);
+    uploadImages2().then((ciimgs: [any]) => {
+      console.log(ciimgs);
+      let imgs = ciimgs ? ciimgs.map((item) => item.data) : null;
+      let cid = [...formState.category_id, "13"];
+      cid = Array.from(new Set(cid));
+
       let params = {
         goods_id: query.id,
         head_image: head_image,
-        deputy_image: imgs.join(","),
+        deputy_image: imgs ? imgs.join(",") : imgs,
         detail_image: detail_image,
         price: formState.price,
-        category_id: formState.category_id.join(","),
+        category_id: cid.join(","),
         title: formState.title,
         desc: formState.desc,
         discount: formState.discount + "",
@@ -280,7 +284,8 @@ const handleGetGoodsCategorys = () => {
 onMounted(() => {
   handleGetGoodsCategorys();
   query = route.query;
-  formState.category_id = query.category_id.split(",");
+  let cid = [...query.category_id.split(","), "13"];
+  formState.category_id = Array.from(new Set(cid));
   formState.cover = "https://dental.cdwuhu.com/" + query.head_image;
   formState.imageUrl = "https://dental.cdwuhu.com/" + query.detail_image;
   formState.title = query.title;
@@ -296,7 +301,6 @@ onMounted(() => {
   <div class="page-content">
     <div class="page-head">
       <div class="page-info">
-        
         <div style="margin-bottom: 20px">
           <a-breadcrumb>
             <a-breadcrumb-item to="">
@@ -358,9 +362,6 @@ onMounted(() => {
                     </a-upload>
                   </a-form-item>
                 </div>
-                <p style="text-align: right; color: rgba(111, 111, 111, 0.4)">
-                  如需精准排序请在下方上传
-                </p>
               </a-col>
               <a-col :span="8">
                 <a-form-item label="商品类别（选填）">

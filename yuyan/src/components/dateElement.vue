@@ -72,7 +72,10 @@
                     :key="i"
                   >
                     <div class="time-checkbox">
-                      <a-checkbox :disabled="activeDay == ''" :value="item.index">
+                      <a-checkbox
+                        :disabled="activeDay == '' || is_disabled"
+                        :value="item.index"
+                      >
                         {{ item.start_time }} - {{ item.end_time }}
                       </a-checkbox>
                     </div>
@@ -90,7 +93,10 @@
                     :key="i"
                   >
                     <div class="time-checkbox">
-                      <a-checkbox :disabled="activeDay == ''" :value="item.index">
+                      <a-checkbox
+                        :disabled="activeDay == '' || is_disabled"
+                        :value="item.index"
+                      >
                         {{ item.start_time }} - {{ item.end_time }}
                       </a-checkbox>
                     </div>
@@ -105,6 +111,7 @@
             <p>说明：人数限制后，每时段最多预约20人</p>
             <div>
               人数限制：<a-radio-group
+                :disabled="is_disabled"
                 v-model:value="timeForm.is_limit"
                 name="radioGroup"
               >
@@ -114,8 +121,11 @@
             </div>
           </div>
           <div class="footer-right">
-            <a-button>清空</a-button>
-            <a-button type="primary" style="margin-left: 8px" @click="saveTimes"
+            <a-button
+              type="primary"
+              :disabled="activeDay == '' || is_disabled"
+              style="margin-left: 8px"
+              @click="saveTimes"
               >保存</a-button
             >
           </div>
@@ -141,6 +151,7 @@ import {
 import moment from "moment";
 import { booking_plan, booking_plan_edit } from "@/utils/request/index";
 import { message, Modal } from "ant-design-vue";
+import { timeStamp } from "console";
 
 let props = defineProps({
   type: Number,
@@ -177,6 +188,7 @@ let checkboxs = ref([
 ]);
 let pmCheckbox = ref([]);
 let activeTimes = null;
+let is_disabled = ref(false);
 const handleActive = (node: { timestamp: moment.MomentInput }) => {
   pickerDayActives.value = [];
   pickerDayActives.value.push(node.timestamp);
@@ -184,7 +196,16 @@ const handleActive = (node: { timestamp: moment.MomentInput }) => {
   activeTimes = times;
   const date = moment(times * 1000).format("YYYY年M月D日");
   activeDay.value = date + "";
-
+  const today = new Date();
+  const eightDaysLater = new Date(today);
+  eightDaysLater.setDate(today.getDate() + 7);
+  eightDaysLater.setHours(0, 0, 0, 0);
+  const timestamp = eightDaysLater.getTime() / 1000;
+  if (timestamp > times) {
+    is_disabled.value = true;
+  } else {
+    is_disabled.value = false;
+  }
   setTimes(node.timestamp);
 };
 let updateTimes = [];
@@ -251,18 +272,7 @@ function renderCalendar(year: number, month: number) {
     let dateObject = null;
     for (let j = 0; j < 7; j++) {
       if (i === 0 && j < daysFromLastMonth) {
-        // 上个月的日期
-        day = lastMonthDays[j];
-
-        dateObject = {
-          day: day,
-          timestamp: new Date(year, month, day).setHours(0, 0, 0, 0) / 1000,
-          isToday:
-            today.getFullYear() === year &&
-            today.getMonth() === month &&
-            day === today.getDate(),
-        };
-        matrix.push(dateObject);
+        matrix.push({});
       } else if (dayCount < currentMonthDays.length) {
         // 当前月的日期
         day = currentMonthDays[dayCount];

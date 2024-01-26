@@ -20,7 +20,7 @@ let formState = reactive({
   desc: null,
   price: null,
   discount: 100,
-  category_id: [],
+  category_id: [13],
 });
 
 watch(
@@ -124,10 +124,6 @@ const coverBeforeUpload2 = (file) => {
           return false;
         }
       };
-      // if (upindex == 0) upindex = deputy_image.value.length;
-      // file.upindex = upindex;
-      // deputy_image.value[deputy_image.value.length - 1] = file;
-      // deputy_image.value.push(file);
       deputy_image.value = [...(deputy_image.value || []), file];
       deputy_image_show.value[upindex - 1] = src as string;
       image.src = src as string;
@@ -186,37 +182,61 @@ const imageBeforeUpload = (file) => {
 };
 let submitLoading = ref(false);
 const handleSubmit = () => {
-  if (Object.values(formState).includes(null) || Object.values(formState).includes("")) {
+  let key = "imageUrl";
+  let can = true;
+  Object.keys(formState).forEach((prop) => {
+    if (formState[prop] === null && formState[prop] === "") {
+      console.log(prop);
+      can = false;
+    }
+  });
+  if (!can) {
     message.error("请全部填写后再确定");
     return false;
   }
   submitLoading.value = true;
-  uploadImages().then((res) => {
-    let head_image = res[0];
-    let detail_image = res[1];
-    uploadImages2().then((ciimgs) => {
-      let imgs = ciimgs.map((item) => item.data);
-      let params = {
-        head_image: head_image.data,
-        deputy_image: imgs.join(","),
-        detail_image: detail_image.data,
-        price: formState.price,
-        category_id: formState.category_id.join(","),
-        title: formState.title,
-        desc: formState.desc,
-        discount: formState.discount + "",
-      };
-      createGoods(params).then((res) => {
-        message.success("操作成功");
-        router.push({
-          path: "/commodity/list",
-          query: { active: 2 },
-        });
+  uploadImages()
+    .then((res) => {
+      let head_image = res[0];
+      let detail_image = res[1];
+      uploadImages2().then((ciimgs) => {
+        let imgs = ciimgs ? ciimgs.map((item) => item.data) : null;
+        let cid = [...formState.category_id, "13"];
+        cid = Array.from(new Set(cid));
+        let params = {
+          head_image: head_image.data,
+          deputy_image: imgs ? imgs.join(",") : imgs,
+          detail_image: detail_image.data,
+          price: formState.price,
+          category_id: cid.join(","),
+          title: formState.title,
+          desc: formState.desc,
+          discount: formState.discount + "",
+        };
+        if (imgs == null) {
+          delete params.deputy_image;
+        }
+        createGoods(params)
+          .then((res) => {
+            message.success("操作成功");
+            router.push({
+              path: "/commodity/list",
+              query: { active: 2 },
+            });
+          })
+          .catch(() => {
+            submitLoading.value = false;
+          });
       });
+    })
+    .catch(() => {
+      submitLoading.value = false;
     });
-  });
 };
 const uploadImages2 = () => {
+  if (deputy_image.value.length == 0) {
+    return Promise.resolve(null);
+  }
   let arr = [];
   for (let i = 0; i < deputy_image.value.length; i++) {
     const item = deputy_image.value[i];
@@ -228,13 +248,10 @@ const uploadImages2 = () => {
 };
 const uploadImages = () => {
   return new Promise((resolve, reject) => {
-    if (
-      head_image.value.length == 0 ||
-      deputy_image.value.length == 0 ||
-      detail_image.value.length == 0
-    ) {
+    if (head_image.value.length == 0 || detail_image.value.length == 0) {
       message.error("请上传完整的信息，包括图片");
       reject("请上传完整的信息，包括图片");
+      submitLoading.value = false;
     }
     let uploads = [];
     let uploadParams = new FormData();
@@ -333,9 +350,6 @@ onMounted(() => {
                     </a-upload>
                   </a-form-item>
                 </div>
-                <p style="text-align: right; color: rgba(111, 111, 111, 0.4)">
-                  如需精准排序请在下方上传
-                </p>
               </a-col>
               <a-col :span="8">
                 <a-form-item label="商品类别（选填）">

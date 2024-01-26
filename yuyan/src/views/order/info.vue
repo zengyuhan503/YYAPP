@@ -9,7 +9,7 @@ let route = useRoute();
 let router = useRouter();
 let remark = ref("");
 let orderInfo = ref({
-  express: [],
+  express: null,
   category: [],
   create_time: null,
   name: null,
@@ -24,6 +24,7 @@ let orderInfo = ref({
   price: null,
   discount_rate: null,
   num: null,
+  out_trade_no: null,
   goods_image: null,
 });
 const textToCopy = ref("这是要复制的文本");
@@ -68,7 +69,7 @@ onMounted(() => {
           </a-breadcrumb>
         </div>
         <p class="title" style="margin-bottom: 16px">
-          订单编号<span style="color: #1890ff">G123456</span>
+          订单编号<span style="color: #1890ff">{{ orderInfo.out_trade_no }}</span>
         </p>
         <p>下单时间：{{ orderInfo.create_time }}</p>
         <!-- <p>在小程序中注册后的用户都会在以下列表中显</p> -->
@@ -133,13 +134,17 @@ onMounted(() => {
                   <span>快递单号：</span>{{ orderInfo.ship_number }}
                   <a-button type="link" @click="copyText">复制</a-button>
                 </p>
-                <div v-if="orderInfo.express.length > 0">
-                  <div v-for="(item, index) in orderInfo.express" :key="index">
-                    <p><span>物流状态：</span></p>
-                    <p>{{ item.state }}</p>
+                <div v-if="orderInfo.express?.state != -1">
+                  <p>
+                    <span>物流状态：{{ orderInfo.express?.state }}</span>
+                  </p>
+                  <div class="ship_items" v-if="orderInfo.express?.data">
+                    <div v-for="(item, index) in orderInfo.express.data" :key="index">
+                      <p>[{{ item.time }}][{{ item.areaCode }}]{{ item.context }}</p>
+                    </div>
                   </div>
                 </div>
-                <p v-else>暂无物流信息</p>
+                <p v-else>{{ orderInfo.express?.data }}</p>
               </div>
             </a-col>
           </a-row>

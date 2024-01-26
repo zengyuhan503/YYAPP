@@ -4,11 +4,19 @@
       <view class="addr-form">
         <view class="label">
           <view class="">新增收货地址</view>
-          <view class="">
-            <radio-group @change="handleChangeRadio" @click="handleClickRadio">
-              <radio color="#d44469" value="1"  :checked="addrForm.is_default == 1"/>
+          <view class="selectBox" @click="handleClickRadio">
+            <!-- <radio-group @change="handleChangeRadio" @click="handleClickRadio">
+              <radio color="#d44469" value="1" :checked="addrForm.is_default == 1" />
               设为默认地址
-            </radio-group>
+            </radio-group> -->
+            <view class="selects">
+              <image
+                v-show="addrForm.is_default"
+                src="../../static/image/default.png"
+                mode="widthFix"
+              />
+            </view>
+            <view class="text">设为默认地址</view>
           </view>
         </view>
         <div class="form-box">
@@ -110,7 +118,7 @@ const submitUpdata = () => {
   // });
   let params = {
     ...addrForm.value,
-    is_default:  addrForm.value.is_default==1 ? 1 : 0,
+    is_default: addrForm.value.is_default == 1 ? 1 : 0,
     address_id: editid,
   };
   if (Object.values(params).includes("")) {
@@ -141,7 +149,7 @@ onLoad((option) => {
   addrForm.value.phone = option.phone;
   addrForm.value.name = option.name;
   addrForm.value.provinces = option.provinces;
-  addrForm.value.is_default = option.is_default;
+  addrForm.value.is_default = option.is_default == "1" ? true : false;
   editid = option.id;
   console.log(option);
 });

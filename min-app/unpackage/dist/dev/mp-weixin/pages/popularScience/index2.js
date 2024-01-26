@@ -189,6 +189,10 @@ const _sfc_main = {
             hasSubscribe.value = true;
           } else {
             hasSubscribe.value = false;
+            let phone = common_vendor.index.getStorageSync("yy-phone");
+            if (phone) {
+              popularForm.value.phone = phone;
+            }
           }
           handleChangeFrom();
           console.log(popularForm.value);
@@ -223,9 +227,11 @@ const _sfc_main = {
           duration: 2e3,
           icon: "none",
           success() {
-            common_vendor.index.redirectTo({
-              url: "/pages/index/index"
-            });
+            setTimeout(() => {
+              common_vendor.index.redirectTo({
+                url: "/pages/index/index"
+              });
+            }, 2e3);
           }
         });
         popularForm.value = {
@@ -248,11 +254,6 @@ const _sfc_main = {
     };
     common_vendor.onMounted(() => {
       handleGetPlans();
-      let phone = common_vendor.index.getStorageSync("yy-phone");
-      console.log(phone);
-      if (phone) {
-        popularForm.value.phone = phone;
-      }
     });
     return (_ctx, _cache) => {
       return common_vendor.e({

@@ -80,16 +80,10 @@
             </view>
           </view>
         </view>
-        <view class="submit-btns" style="padding: 0 30px;">
-          <!-- <image
-            src="http://h5.dental.cdwuhu.com/static/image/confirm.png"
-            @click="handleSubmit"
-            v-if="isSubmit"
-            mode="widthFix"
-          /> -->
+        <view class="submit-btns" style="padding: 0 30px">
           <view v-if="!hasSubscribe">
             <view @click="handleSubmit" class="submitbtn" v-if="isSubmit">预约</view>
-            <view  class="submitbtn disabled" v-else>预约</view>
+            <view class="submitbtn disabled" v-else>预约</view>
           </view>
           <view v-else>
             <view class="cancel" @click="showCancel = true">取消预约</view>
@@ -121,7 +115,8 @@
         <view class="title">预约成功</view>
         <view class="desc">感谢您的预约，请及时到店～</view>
       </view>
-      <view class="btns">查看我的预约</view>
+      <view class="btns" @click="showSubscribeSuccess = false">查看我的预约</view>
+  
     </view>
   </view>
 
@@ -274,6 +269,7 @@ const handleChangeFrom = () => {
 };
 let isSubmit = ref(false);
 const handleShowPopup = () => {
+  if (hasSubscribe.value) return false;
   showDate.value = true;
 };
 const handleClosePopup = () => {
@@ -321,9 +317,12 @@ const handleGetPlans = () => {
         popularForm.value.date = str;
       } else {
         hasSubscribe.value = false;
+        let phone = uni.getStorageSync("yy-phone");
+        if (phone) {
+          popularForm.value.phone = phone;
+        }
       }
     } catch (error) {
-      console.log(error);
       popularForm.value = {
         name: "",
         phone: "",
@@ -348,7 +347,8 @@ const handleSubmit = () => {
     number: popularForm.value.number.replace("人", ""),
   };
   CreateBookingPlans(params).then((res) => {
-    console.log(res);
+    showSubscribeSuccess.value = true;
+    hasSubscribe.value = true;
   });
 };
 const handleCancelSub = () => {
@@ -362,9 +362,11 @@ const handleCancelSub = () => {
       duration: 2000,
       icon: "none",
       success() {
+       setTimeout(() => {
         uni.redirectTo({
           url: "/pages/index/index",
         });
+       }, 2000);
       },
     });
 
@@ -381,12 +383,6 @@ const handleCancelSub = () => {
 };
 onMounted(() => {
   handleGetPlans();
-
-  let phone = uni.getStorageSync("yy-phone");
-
-  if (phone) {
-    popularForm.value.phone = phone;
-  }
 });
 </script>
 <style lang="less">

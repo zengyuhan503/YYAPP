@@ -254,6 +254,7 @@
 }
 .cancelSubcribe .close image.data-v-2550a99d {
   width: 28px;
+  height: 28px;
 }
 .cancelSubcribe .main.data-v-2550a99d {
   padding: 15px;
@@ -261,6 +262,7 @@
 }
 .cancelSubcribe .main image.data-v-2550a99d {
   width: 160px;
+  height: 160px;
 }
 .cancelSubcribe .main .title.data-v-2550a99d {
   font-size: 24px;

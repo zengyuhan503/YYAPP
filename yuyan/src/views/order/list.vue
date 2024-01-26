@@ -6,6 +6,7 @@ import {
   order_list,
   order_ship,
   order_cancel,
+  order_finish,
   order_updateExpress,
   order_open,
   expresss,
@@ -24,10 +25,11 @@ let goodsCategoryList = ref([]);
 const columns = [
   {
     title: "订单编号",
-    dataIndex: "order_no",
+    dataIndex: "out_trade_no",
     align: "center",
-    key: "order_no",
+    key: "out_trade_no",
     ellipsis: true,
+    width: 250,
   },
   {
     title: "商品缩略图",
@@ -35,6 +37,7 @@ const columns = [
     align: "center",
     key: "goods_image",
     ellipsis: true,
+    width: 130,
   },
   {
     title: "商品名称",
@@ -42,6 +45,7 @@ const columns = [
     align: "center",
     dataIndex: "goods_name",
     ellipsis: true,
+    width: 130,
   },
   {
     title: "数量",
@@ -49,6 +53,7 @@ const columns = [
     ellipsis: true,
     align: "center",
     dataIndex: "num",
+    width: 80,
   },
   {
     title: "实际支付",
@@ -56,6 +61,7 @@ const columns = [
     align: "center",
     dataIndex: "real_price",
     ellipsis: true,
+    width: 100,
   },
   {
     title: "下单时间",
@@ -63,14 +69,16 @@ const columns = [
     align: "center",
     dataIndex: "create_time",
     ellipsis: true,
+    width: 150,
   },
 
   {
     title: "物流单号",
-    key: "order_no",
+    key: "ship_number",
     align: "center",
     ellipsis: true,
-    dataIndex: "order_no",
+    dataIndex: "ship_number",
+    width: 150,
   },
   {
     title: "物流信息",
@@ -83,16 +91,17 @@ const columns = [
     title: "操作",
     align: "center",
     key: "action",
-    width: 460,
+    width: 400,
   },
 ];
 const columns2 = [
   {
     title: "订单编号",
-    dataIndex: "order_no",
+    dataIndex: "out_trade_no",
     align: "center",
     ellipsis: true,
-    key: "order_no",
+    key: "out_trade_no",
+    width: 250,
   },
   {
     title: "商品缩略图",
@@ -100,6 +109,7 @@ const columns2 = [
     align: "center",
     key: "goods_image",
     ellipsis: true,
+    width: 130,
   },
   {
     title: "商品名称",
@@ -107,6 +117,7 @@ const columns2 = [
     align: "center",
     ellipsis: true,
     dataIndex: "goods_name",
+    width: 130,
   },
   {
     title: "数量",
@@ -114,6 +125,7 @@ const columns2 = [
     align: "center",
     dataIndex: "num",
     ellipsis: true,
+    width: 80,
   },
   {
     title: "实际支付",
@@ -121,6 +133,7 @@ const columns2 = [
     align: "center",
     dataIndex: "real_price",
     ellipsis: true,
+    width: 100,
   },
   {
     title: "下单时间",
@@ -128,6 +141,7 @@ const columns2 = [
     align: "center",
     ellipsis: true,
     dataIndex: "create_time",
+    width: 150,
   },
   {
     title: "收货人",
@@ -161,10 +175,11 @@ const columns2 = [
 const columns3 = [
   {
     title: "订单编号",
-    dataIndex: "order_no",
+    dataIndex: "out_trade_no",
     align: "center",
-    key: "order_no",
+    key: "out_trade_no",
     ellipsis: true,
+    width: 250,
   },
   {
     title: "商品缩略图",
@@ -172,6 +187,7 @@ const columns3 = [
     align: "center",
     key: "goods_image",
     ellipsis: true,
+    width: 130,
   },
   {
     title: "商品名称",
@@ -179,6 +195,7 @@ const columns3 = [
     align: "center",
     dataIndex: "goods_name",
     ellipsis: true,
+    width: 130,
   },
   {
     title: "数量",
@@ -186,6 +203,7 @@ const columns3 = [
     align: "center",
     dataIndex: "num",
     ellipsis: true,
+    width: 80,
   },
   {
     title: "实际支付",
@@ -193,6 +211,7 @@ const columns3 = [
     align: "center",
     dataIndex: "real_price",
     ellipsis: true,
+    width: 100,
   },
   {
     title: "下单时间",
@@ -200,6 +219,7 @@ const columns3 = [
     align: "center",
     dataIndex: "create_time",
     ellipsis: true,
+    width: 150,
   },
   {
     title: "订单状态",
@@ -207,13 +227,14 @@ const columns3 = [
     align: "center",
     dataIndex: "status",
     ellipsis: true,
+    width: 150,
   },
   {
     title: "订单地址",
     key: "address",
     align: "center",
     dataIndex: "address",
-    ellipsis: true,
+    width: 150,
   },
   {
     title: "操作",
@@ -225,7 +246,6 @@ const columns3 = [
 let columnsTables = ref([]);
 columnsTables.value = columns2;
 watch(tabActive, (newVal) => {
-  console.log(newVal);
   let data = {
     1: columns2,
     2: columns,
@@ -378,7 +398,7 @@ const handleOverOrder = (record) => {
       let params = {
         order_id: record.id,
       };
-      order_cancel(params).then((res) => {
+      order_finish(params).then((res) => {
         message.success("操作成功");
         getList();
       });
@@ -439,7 +459,12 @@ onMounted(() => {
     </div>
     <div class="page-body">
       <div class="page-table">
-        <p class="title">商品列表</p>
+        <p class="title">
+          商品列表
+          <a-button type="link" v-if="tabActive == 2" @click="handleUpdateShip()"
+            >刷新全部物流</a-button
+          >
+        </p>
         <div class="tables">
           <a-table
             :columns="columnsTables"
@@ -448,9 +473,9 @@ onMounted(() => {
             :pagination="pagination"
           >
             <template #bodyCell="{ column, record }">
-              <template v-if="column.key === 'order_no'">
+              <template v-if="column.key === 'out_trade_no'">
                 <a-button type="link" @click="handleToInfo(record)">{{
-                  record.order_no
+                  record.out_trade_no
                 }}</a-button>
               </template>
               <template v-if="column.key === 'goods_image'">
@@ -497,7 +522,9 @@ onMounted(() => {
                   </div>
                 </template>
                 <template v-if="tabActive == 2">
-                  <a-button type="link" @click="handleUpdateShip()">物流详情</a-button>
+                  <a-button type="link" v-if="tabActive == 2" @click="handleToInfo(record)"
+                    >物流详情</a-button
+                  >
                   <a-divider type="vertical" />
                   <a-button type="link" @click="handleCopyAddress(record)">
                     复制地址

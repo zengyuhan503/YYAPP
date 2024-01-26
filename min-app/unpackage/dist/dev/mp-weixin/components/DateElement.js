@@ -71,6 +71,15 @@ const _sfc_main = {
       actTimeItem.value = item;
       console.log(actTimeItem.value);
     };
+    const handleShowAm = () => {
+      let isHasAm = hasTimes.value.some((item) => parseInt(item.index) < 7);
+      return isHasAm;
+    };
+    const handleShowPm = () => {
+      let isHasAm = hasTimes.value.some((item) => parseInt(item.index) > 7);
+      console.log(isHasAm);
+      return isHasAm;
+    };
     const handleGetBooking_plans_detail = (date = null) => {
       hasTimes.value = [];
       actDay.value = common_vendor.hooks().format("YYYY-MM-DD");
@@ -88,6 +97,13 @@ const _sfc_main = {
           return false;
         let indexs = res.index.split(",");
         hasTimes.value = times.value.filter((item) => indexs.includes(item.index));
+        const currentTime = common_vendor.hooks();
+        const filteredArray = hasTimes.value.filter((obj) => {
+          const endTime = common_vendor.hooks(obj.end_time, "HH:mm");
+          return currentTime.isBefore(endTime);
+        });
+        console.log(filteredArray);
+        hasTimes.value = filteredArray;
       });
     };
     const handleConfirm = () => {
@@ -131,7 +147,8 @@ const _sfc_main = {
         e: common_vendor.t(common_vendor.unref(common_vendor.hooks)(common_vendor.unref(actDay)).format("MM月DD日")),
         f: common_vendor.unref(hasTimes).length != 0
       }, common_vendor.unref(hasTimes).length != 0 ? {
-        g: common_vendor.f(common_vendor.unref(hasTimes), (item, i = 0, i0) => {
+        g: handleShowAm(),
+        h: common_vendor.f(common_vendor.unref(hasTimes), (item, i = 0, i0) => {
           return {
             a: common_vendor.t(item.start_time),
             b: common_vendor.t(item.end_time),
@@ -141,8 +158,8 @@ const _sfc_main = {
             f: common_vendor.unref(actTime) == item.index ? 1 : ""
           };
         }),
-        h: common_vendor.unref(hasTimes).some((item) => parseInt(item.index) > 7),
-        i: common_vendor.f(common_vendor.unref(hasTimes), (item, i = 0, i0) => {
+        i: handleShowPm(),
+        j: common_vendor.f(common_vendor.unref(hasTimes), (item, i = 0, i0) => {
           return {
             a: common_vendor.t(item.start_time),
             b: common_vendor.t(item.end_time),
@@ -153,7 +170,7 @@ const _sfc_main = {
           };
         })
       } : {}, {
-        j: common_vendor.o(handleConfirm)
+        k: common_vendor.o(handleConfirm)
       });
     };
   }

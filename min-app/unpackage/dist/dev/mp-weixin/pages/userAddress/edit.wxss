@@ -96,6 +96,27 @@
 }
 .addr-form .form-box .item .inputs textarea.data-v-788d9103 {
   padding: 17px 46px;
+  width: 100%;
+  box-sizing: border-box;
+  padding-right: 10px;
+}
+.selectBox.data-v-788d9103 {
+  display: flex;
+  align-items: center;
+}
+.selectBox .selects.data-v-788d9103 {
+  width: 20px;
+  height: 20px;
+  border-radius: 50px;
+  border: 1px solid #D44469;
+  margin-right: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.selectBox .selects image.data-v-788d9103 {
+  width: 18px;
+  height: 18px;
 }
 .page-content.data-v-788d9103 {
   padding: 15px;

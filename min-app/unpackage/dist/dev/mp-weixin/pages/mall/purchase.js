@@ -31,22 +31,28 @@ const _sfc_main = {
       handleGetCalculate();
       handleGetAddressList();
     });
-    const handleChangeRadio = (e) => {
-      console.log(e);
-    };
     const handleClickRadio = () => {
       addrForm.value.is_default = !addrForm.value.is_default;
     };
     const bindRegionChange = (e) => {
       let detail = e.detail;
       let value = detail.value;
+      if (addrForm.value.provinces == value.join("-"))
+        return false;
       addrForm.value.provinces = value.join("-");
+      handleOnChangeForm();
     };
     common_vendor.watch(count, (newVal) => {
-      console.log(newVal);
       handleGetCalculate();
     });
     let isHasAddress = false;
+    const handleOnChangeForm = () => {
+      if (!isCanChange)
+        return false;
+      addrForm.value.id = 0;
+      console.log(addrForm.value);
+    };
+    let isCanChange = false;
     const handleGetCalculate = () => {
       let params = {
         goods_id: goodsId.value,
@@ -54,7 +60,6 @@ const _sfc_main = {
       };
       utils_api_index.GetCalculate(params).then((res) => {
         goodsInfo.value = res;
-        console.log(res.address);
         if (res.address != "") {
           addrForm.value = res.address;
           addrForm.value.is_default = "1";
@@ -62,6 +67,7 @@ const _sfc_main = {
         } else {
           isHasAddress = false;
         }
+        isCanChange = true;
       });
     };
     let addressList = common_vendor.ref([]);
@@ -90,12 +96,9 @@ const _sfc_main = {
         address: addrForm.value.address,
         is_default: addrForm.value.is_default == "" ? 0 : addrForm.value.is_default
       };
-      console.log(params);
       utils_api_index.CreateOrder(params).then((res) => {
-        console.log(res);
         order_id = res.order_id;
         utils_api_index.CreateWxPay(res).then((res2) => {
-          console.log(res2);
           common_vendor.wx$1.requestPayment({
             timeStamp: res2.timeStamp,
             nonceStr: res2.nonceStr,
@@ -151,17 +154,17 @@ const _sfc_main = {
       }, {
         f: common_vendor.t(count.value),
         g: common_vendor.o(($event) => count.value++),
-        h: common_vendor.unref(addrForm).is_default == 1,
-        i: common_vendor.o(handleChangeRadio),
-        j: common_vendor.o(handleClickRadio),
+        h: common_vendor.unref(addrForm).is_default,
+        i: common_vendor.o(handleClickRadio),
+        j: common_vendor.o([($event) => common_vendor.unref(addrForm).name = $event.detail.value, handleOnChangeForm]),
         k: common_vendor.unref(addrForm).name,
-        l: common_vendor.o(($event) => common_vendor.unref(addrForm).name = $event.detail.value),
+        l: common_vendor.o([($event) => common_vendor.unref(addrForm).phone = $event.detail.value, handleOnChangeForm]),
         m: common_vendor.unref(addrForm).phone,
-        n: common_vendor.o(($event) => common_vendor.unref(addrForm).phone = $event.detail.value),
+        n: common_vendor.o([($event) => common_vendor.unref(addrForm).provinces = $event.detail.value, handleOnChangeForm]),
         o: common_vendor.unref(addrForm).provinces,
         p: common_vendor.o(bindRegionChange),
-        q: common_vendor.unref(addrForm).address,
-        r: common_vendor.o(($event) => common_vendor.unref(addrForm).address = $event.detail.value),
+        q: common_vendor.o([($event) => common_vendor.unref(addrForm).address = $event.detail.value, handleOnChangeForm]),
+        r: common_vendor.unref(addrForm).address,
         s: common_vendor.p({
           type: "right",
           size: "18"

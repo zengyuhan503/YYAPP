@@ -25,11 +25,19 @@
         <view class="addr-form">
           <view class="label">
             <view class="">新增收货地址</view>
-            <view class="radios">
-              <radio-group @change="handleChangeRadio" @click="handleClickRadio">
-                <radio color="#d44469" :checked="addrForm.is_default == 1" value="1" />
-                设为默认地址
-              </radio-group>
+            <view class="selectBox" @click="handleClickRadio">
+              <!-- <radio-group @change="handleChangeRadio" @click="handleClickRadio">
+              <radio color="#d44469" value="1" :checked="addrForm.is_default == 1" />
+              设为默认地址
+            </radio-group> -->
+              <view class="selects">
+                <image
+                  v-show="addrForm.is_default"
+                  src="../../static/image/default.png"
+                  mode="widthFix"
+                />
+              </view>
+              <view class="text">设为默认地址</view>
             </view>
           </view>
           <div class="form-box">
@@ -41,7 +49,12 @@
                 />
               </div>
               <div class="inputs">
-                <input v-model="addrForm.name" type="text" placeholder="收货人名" />
+                <input
+                  @input="handleOnChangeForm"
+                  v-model="addrForm.name"
+                  type="text"
+                  placeholder="收货人名"
+                />
               </div>
             </view>
             <view class="item">
@@ -52,7 +65,12 @@
                 />
               </div>
               <div class="inputs">
-                <input v-model="addrForm.phone" type="text" placeholder="收货电话" />
+                <input
+                  @input="handleOnChangeForm"
+                  v-model="addrForm.phone"
+                  type="text"
+                  placeholder="收货电话"
+                />
               </div>
             </view>
             <view class="item">
@@ -68,7 +86,12 @@
                   />
                 </div>
                 <div class="inputs">
-                  <input type="text" :value="addrForm.provinces" placeholder="省市区" />
+                  <input
+                    @input="handleOnChangeForm"
+                    type="text"
+                    v-model="addrForm.provinces"
+                    placeholder="省市区"
+                  />
                 </div>
               </picker>
             </view>
@@ -82,6 +105,7 @@
               </div>
               <div class="inputs">
                 <textarea
+                  @input="handleOnChangeForm"
                   name=""
                   id=""
                   v-model="addrForm.address"
@@ -187,10 +211,7 @@ onLoad((option) => {
   handleGetCalculate();
   handleGetAddressList();
 });
-const handleChangeRadio = (e) => {
-  console.log(e);
-  // addrForm.value.is_default = e.detail.value;
-};
+const handleChangeRadio = (e) => {};
 const handleClickRadio = () => {
   addrForm.value.is_default = !addrForm.value.is_default;
 };
@@ -198,13 +219,21 @@ const handleClickRadio = () => {
 const bindRegionChange = (e) => {
   let detail = e.detail;
   let value = detail.value;
+  if (addrForm.value.provinces == value.join("-")) return false;
   addrForm.value.provinces = value.join("-");
+  handleOnChangeForm();
 };
 watch(count, (newVal) => {
-  console.log(newVal);
   handleGetCalculate();
 });
 let isHasAddress = false;
+
+const handleOnChangeForm = () => {
+  if (!isCanChange) return false;
+  addrForm.value.id = 0;
+  console.log(addrForm.value);
+};
+let isCanChange = false;
 const handleGetCalculate = () => {
   let params = {
     goods_id: goodsId.value,
@@ -212,7 +241,6 @@ const handleGetCalculate = () => {
   };
   GetCalculate(params).then((res) => {
     goodsInfo.value = res;
-    console.log(res.address);
     if (res.address != "") {
       addrForm.value = res.address;
       addrForm.value.is_default = "1";
@@ -220,6 +248,7 @@ const handleGetCalculate = () => {
     } else {
       isHasAddress = false;
     }
+    isCanChange = true;
   });
 };
 let addressList = ref([]);
@@ -240,19 +269,16 @@ const handleToCreateOrder = () => {
     goods_id: goodsId.value,
     number: count.value,
     address_id: isHasAddress ? addrForm.value.id : 0,
-    remark: addrForm.value.remark||'',
+    remark: addrForm.value.remark || "",
     name: addrForm.value.name,
     phone: addrForm.value.phone,
     provinces: addrForm.value.provinces,
     address: addrForm.value.address,
     is_default: addrForm.value.is_default == "" ? 0 : addrForm.value.is_default,
   };
-  console.log(params);
   CreateOrder(params).then((res) => {
-    console.log(res);
     order_id = res.order_id;
     CreateWxPay(res).then((res2) => {
-      console.log(res2);
       wx.requestPayment({
         timeStamp: res2.timeStamp,
         nonceStr: res2.nonceStr,

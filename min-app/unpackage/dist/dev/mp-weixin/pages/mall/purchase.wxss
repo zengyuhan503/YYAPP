@@ -58,6 +58,12 @@
 .main .sider.data-v-bcb386f7 {
   width: 112px;
   height: calc(100vh - 250PX);
+  overflow: auto;
+}
+.main .sider.data-v-bcb386f7::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
 }
 .main .sider .items .item.data-v-bcb386f7 {
   height: 61px;
@@ -81,8 +87,8 @@
   left: 0;
 }
 .main .sider .items .item image.data-v-bcb386f7 {
-  width: 22px;
-  height: 22px;
+  width: 26px;
+  height: 26px;
 }
 .main .sider .items .item .title.data-v-bcb386f7 {
   font-size: 14px;
@@ -97,12 +103,18 @@
   box-sizing: border-box;
   height: calc(100vh - 250PX);
 }
+.main .content.data-v-bcb386f7::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
 .main .content .items.data-v-bcb386f7 {
   margin-left: -3px;
   margin-right: -3px;
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
+  align-content: flex-start;
   flex-wrap: wrap;
   margin-bottom: 10px;
   min-height: 100%;
@@ -190,7 +202,7 @@
 }
 @media screen and (max-width: 370px) {
 .main .content .items .item .discount.data-v-bcb386f7 {
-    width: 39px !important;
+    width: 45px !important;
     right: 6px !important;
 }
 .main .content .items .item .discount image.data-v-bcb386f7 {
@@ -198,10 +210,10 @@
     height: 14px !important;
 }
 .main .content .items .item .discount .num.data-v-bcb386f7 {
-    font-size: 6 !important;
+    font-size: 6px !important;
 }
 .main .content .items .item .discount .num text.data-v-bcb386f7 {
-    font-size: 9 !important;
+    font-size: 9px !important;
 }
 }
 .covers.data-v-bcb386f7 {
@@ -463,6 +475,9 @@
 }
 .addr-form .form-box .item .inputs textarea.data-v-bcb386f7 {
   padding: 17px 46px;
+  width: 100%;
+  box-sizing: border-box;
+  padding-right: 10px;
 }
 .changeaddress.data-v-bcb386f7 {
   text-align: center;
@@ -559,6 +574,7 @@
 }
 .subscribeSuccess .subscribemodal .close image.data-v-bcb386f7 {
   width: 28px;
+  height: 28px;
 }
 .subscribeSuccess .subscribemodal .submain.data-v-bcb386f7 {
   padding: 15px;
@@ -566,6 +582,7 @@
 }
 .subscribeSuccess .subscribemodal .submain image.data-v-bcb386f7 {
   width: 160px;
+  height: 160px;
 }
 .subscribeSuccess .subscribemodal .submain .title.data-v-bcb386f7 {
   font-size: 24px;
@@ -591,4 +608,22 @@
   color: #FFFFFF;
   margin: auto;
   margin-top: 50px;
+}
+.selectBox.data-v-bcb386f7 {
+  display: flex;
+  align-items: center;
+}
+.selectBox .selects.data-v-bcb386f7 {
+  width: 20px;
+  height: 20px;
+  border-radius: 50px;
+  border: 1px solid #D44469;
+  margin-right: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.selectBox .selects image.data-v-bcb386f7 {
+  width: 18px;
+  height: 18px;
 }

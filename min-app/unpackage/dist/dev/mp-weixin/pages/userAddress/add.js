@@ -10,7 +10,7 @@ const _sfc_main = {
       phone: "",
       provinces: "",
       address: "",
-      is_default: ""
+      is_default: true
     });
     const bindRegionChange = (e) => {
       console.log(e);
@@ -19,16 +19,13 @@ const _sfc_main = {
       addrForm.value.provinces = value.join("-");
       console.log(addrForm.value);
     };
-    const handleChangeRadio = (e) => {
-      console.log(e);
-    };
     const handleClickRadio = () => {
       addrForm.value.is_default = !addrForm.value.is_default;
     };
     const submitUpdata = () => {
       let params = {
         ...addrForm.value,
-        is_default: addrForm.value.is_default == 1 ? 1 : 0
+        is_default: addrForm.value.is_default ? 1 : 0
       };
       if (Object.values(params).includes("")) {
         common_vendor.index.showToast({
@@ -43,9 +40,11 @@ const _sfc_main = {
           icon: "success",
           duration: 2e3,
           success() {
-            common_vendor.wx$1.redirectTo({
-              url: "/pages/userAddress/index"
-            });
+            setTimeout(() => {
+              common_vendor.wx$1.redirectTo({
+                url: "/pages/userAddress/index"
+              });
+            }, 2e3);
           }
         });
       });
@@ -59,18 +58,17 @@ const _sfc_main = {
     });
     return (_ctx, _cache) => {
       return {
-        a: common_vendor.unref(addrForm).is_default == 1,
-        b: common_vendor.o(handleChangeRadio),
-        c: common_vendor.o(handleClickRadio),
-        d: common_vendor.unref(addrForm).name,
-        e: common_vendor.o(($event) => common_vendor.unref(addrForm).name = $event.detail.value),
-        f: common_vendor.unref(addrForm).phone,
-        g: common_vendor.o(($event) => common_vendor.unref(addrForm).phone = $event.detail.value),
-        h: common_vendor.unref(addrForm).provinces,
-        i: common_vendor.o(bindRegionChange),
-        j: common_vendor.unref(addrForm).address,
-        k: common_vendor.o(($event) => common_vendor.unref(addrForm).address = $event.detail.value),
-        l: common_vendor.o(submitUpdata)
+        a: common_vendor.unref(addrForm).is_default,
+        b: common_vendor.o(handleClickRadio),
+        c: common_vendor.unref(addrForm).name,
+        d: common_vendor.o(($event) => common_vendor.unref(addrForm).name = $event.detail.value),
+        e: common_vendor.unref(addrForm).phone,
+        f: common_vendor.o(($event) => common_vendor.unref(addrForm).phone = $event.detail.value),
+        g: common_vendor.unref(addrForm).provinces,
+        h: common_vendor.o(bindRegionChange),
+        i: common_vendor.unref(addrForm).address,
+        j: common_vendor.o(($event) => common_vendor.unref(addrForm).address = $event.detail.value),
+        k: common_vendor.o(submitUpdata)
       };
     };
   }

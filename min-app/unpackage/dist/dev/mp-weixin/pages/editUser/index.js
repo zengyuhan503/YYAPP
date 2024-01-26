@@ -85,6 +85,7 @@ const _sfc_main = {
           let params2 = {
             ...alignmentFormData.value
           };
+          params2.avatar = params2.avatar.replace("https://dental.cdwuhu.com/", "");
           utils_api_index.EditUserInfo(params2).then((res2) => {
             common_vendor.index.showToast({
               title: "修改成功",

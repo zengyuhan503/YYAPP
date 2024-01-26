@@ -34,7 +34,7 @@
             <view class="title">科普馆预约</view>
             <view class="desc">了解更多科普知识</view>
           </view>
-          <image class="yuyueimg" src="../../static/image/bj1.png" mode="widthFix">
+          <image class="yuyueimg" src="http://h5.dental.cdwuhu.com/static/image/bj1.png" mode="widthFix">
           </image>
           <view class="yuyue-btn">
             <image src="http://h5.dental.cdwuhu.com/static/image/yuyue-btn1.png" mode="">
@@ -48,7 +48,7 @@
             <view class="title">看诊预约</view>
             <view class="desc">专业团队一触即达</view>
           </view>
-          <image class="yuyueimg" src="../../static/image/bj2.png" mode="widthFix">
+          <image class="yuyueimg" src="http://h5.dental.cdwuhu.com/static/image/bj2.png" mode="widthFix">
           </image>
           <view class="yuyue-btn">
             <image

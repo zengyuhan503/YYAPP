@@ -11,6 +11,7 @@ import {
   rmCategorys,
   goodList,
   changeGoodsStatus,
+  rmGoods,
 } from "@/utils/request/index";
 let router = useRouter();
 let route = useRoute();
@@ -101,7 +102,7 @@ const columns2 = ref([
     dataIndex: "desc",
     align: "center",
     key: "desc",
-    width: 420,
+    width: 300,
   },
   {
     title: "操作",
@@ -296,6 +297,7 @@ const handleUploadIcon = (file) => {
         editCateForm.value.icon = src as string;
       };
       cateForm.iconFiles = [...(cateForm.iconFiles || []), file];
+      editCateForm.value.iconFiles = [...(cateForm.iconFiles || []), file];
       image.src = src as string;
     };
     return false;
@@ -317,6 +319,26 @@ const handleChangeStatus = (record) => {
         goods_id: record.id,
       };
       changeGoodsStatus(params).then((res) => {
+        if (!res) return false;
+        message.success("操作成功");
+        handleGetGoodsList();
+      });
+    },
+    onCancel() {
+      console.log("Cancel");
+    },
+    class: "test",
+  });
+};
+const handleRmGoods = (record) => {
+  let title = "你确定要删除当前商品吗";
+  Modal.confirm({
+    title: title,
+    onOk() {
+      let params = {
+        goods_id: record.id,
+      };
+      rmGoods(params).then((res) => {
         if (!res) return false;
         message.success("操作成功");
         handleGetGoodsList();
@@ -372,7 +394,13 @@ onMounted(() => {
               <template v-else-if="column.key === 'action'">
                 <a-button type="link" @click="handleEditCate(record)">编辑</a-button>
                 <a-divider type="vertical" />
-                <a-button danger type="link" @click="handleRmCate(record)">删除</a-button>
+                <a-button
+                  danger
+                  type="link"
+                  :disabled="record.title == '全部商品'"
+                  @click="handleRmCate(record)"
+                  >删除</a-button
+                >
               </template>
             </template>
           </a-table>
@@ -408,6 +436,13 @@ onMounted(() => {
                 <a-button v-else type="link" @click="handleChangeStatus(record)"
                   >上架</a-button
                 >
+                <!-- <a-button
+                  danger
+                  :disabled="record.status != 1"
+                  type="link"
+                  @click="handleRmGoods(record)"
+                  >删除</a-button
+                > -->
               </template>
             </template>
           </a-table>
@@ -422,7 +457,11 @@ onMounted(() => {
     >
       <div class="modal-form">
         <div>
-          <a-input v-model:value="cateForm.title" placeholder="请输入分类名称" />
+          <a-input
+            v-model:value="cateForm.title"
+            :maxlength="4"
+            placeholder="请输入分类名称"
+          />
           <p class="desc">
             1.分类名称4个中文字以内。<br />
             2.icon只支持PNG格式<br />

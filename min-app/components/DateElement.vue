@@ -39,7 +39,7 @@
         {{ moment(actDay).format("MM月DD日") }}
       </view>
       <view class="tiems" v-if="hasTimes.length != 0">
-        <view class="label">上午</view>
+        <view class="label" v-show="handleShowAm()">上午</view>
         <view class="items">
           <view
             @click="handleSelectDay(item)"
@@ -52,7 +52,7 @@
             {{ item.start_time }} - {{ item.end_time }}
           </view>
         </view>
-        <view class="label" v-show="hasTimes.some((item) => parseInt(item.index) > 7)"
+        <view class="label" v-show="handleShowPm()"
           >下午
         </view>
         <view class="items">
@@ -146,6 +146,15 @@ const handleSelectDay = (item) => {
   actTimeItem.value = item;
   console.log(actTimeItem.value);
 };
+const handleShowAm = () => {
+  let isHasAm = hasTimes.value.some((item) => parseInt(item.index) < 7);
+  return isHasAm;
+};
+const handleShowPm = () => {
+  let isHasAm = hasTimes.value.some((item) => parseInt(item.index) > 7);
+  console.log(isHasAm)
+  return isHasAm;
+};
 const handleGetBooking_plans_detail = (date = null) => {
   hasTimes.value = [];
   actDay.value = moment().format("YYYY-MM-DD");
@@ -159,10 +168,16 @@ const handleGetBooking_plans_detail = (date = null) => {
     type: props.type,
   };
   booking_plans_detail(params).then((res) => {
-    // hasTimes.value = [{ ...res }];
     if (res.length == 0) return false;
     let indexs = res.index.split(",");
     hasTimes.value = times.value.filter((item) => indexs.includes(item.index));
+    const currentTime = moment();
+    const filteredArray = hasTimes.value.filter((obj) => {
+      const endTime = moment(obj.end_time, "HH:mm"); // 将结束时间字符串解析为 Moment 对象
+      return currentTime.isBefore(endTime); // 检查当前时间是否在结束时间之前
+    });
+    console.log(filteredArray);
+    hasTimes.value = filteredArray;
   });
 };
 const handleConfirm = () => {
@@ -292,6 +307,11 @@ onMounted(() => {
     display: grid;
     overflow: auto;
     grid-auto-flow: column;
+    &::-webkit-scrollbar {
+      display: none;
+      width: 0;
+      height: 0;
+    }
     .item {
       width: 140px;
       height: 42px;

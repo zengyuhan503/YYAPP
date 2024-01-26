@@ -62,7 +62,7 @@
                 </view>
               </view>
             </view>
-          <view class="step"></view>
+            <view class="step"></view>
             <view class="formItem">
               <picker
                 bindchange="bindPickerChange"
@@ -113,7 +113,7 @@
             /> -->
           <view v-if="!hasSubscribe">
             <view @click="handleSubmit" class="submitbtn" v-if="isSubmit">预约</view>
-            <view  class="submitbtn disabled" v-else>预约</view>
+            <view class="submitbtn disabled" v-else>预约</view>
           </view>
           <view v-else>
             <view class="cancel" @click="showCancel = true">取消预约</view>
@@ -355,8 +355,12 @@ const handleGetPlans = () => {
         hasSubscribe.value = true;
       } else {
         hasSubscribe.value = false;
+        let phone = uni.getStorageSync("yy-phone");
+        if (phone) {
+          popularForm.value.phone = phone;
+        }
       }
-      handleChangeFrom()
+      handleChangeFrom();
       console.log(popularForm.value);
     } catch (error) {
       console.log(error);
@@ -390,9 +394,11 @@ const handleCancelSub = () => {
       duration: 2000,
       icon: "none",
       success() {
+       setTimeout(() => {
         uni.redirectTo({
           url: "/pages/index/index",
         });
+       }, 2000);
       },
     });
     popularForm.value = {
@@ -414,11 +420,6 @@ const handleChangeGenders = (type) => {
 };
 onMounted(() => {
   handleGetPlans();
-  let phone = uni.getStorageSync("yy-phone");
-  console.log(phone);
-  if (phone) {
-    popularForm.value.phone = phone;
-  }
 });
 </script>
 <style lang="less">

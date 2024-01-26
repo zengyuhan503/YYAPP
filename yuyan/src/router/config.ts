@@ -120,16 +120,7 @@ let options = [
             showMenu: true
         },
         children: [
-            {
-                path: '/reservation/diagnose',
-                name: '看诊预约管理',
-                redirect: null,
-                component: diagnose,
-                meta: {
-                    showMenu: true,
-                    keepAlive: false,
-                }
-            },
+
             {
                 path: '/reservation/exhibition',
                 name: '展馆预约管理',
@@ -140,6 +131,16 @@ let options = [
                     keepAlive: true,
                 }
             },
+            {
+                path: '/reservation/diagnose',
+                name: '看诊预约管理',
+                redirect: null,
+                component: diagnose,
+                meta: {
+                    showMenu: true,
+                    keepAlive: false,
+                }
+            }
 
         ]
     },

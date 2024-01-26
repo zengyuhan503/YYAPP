@@ -134,8 +134,8 @@ const handleGetOrderInfo = () => {
     goodsInfo.value = res;
     let newArr = [res.head_image];
     let dimg = res.deputy_image;
-    dimg = dimg.split(",");
-    newArr.push(...dimg);
+    dimg = dimg === "" ? [] : dimg.split(",");
+    newArr.push(...dimg); 
     covers.value = newArr;
   });
 };

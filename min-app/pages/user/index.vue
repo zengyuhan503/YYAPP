@@ -293,6 +293,7 @@ const handleGetOrderList = () => {
     let list = res.data;
     orderList["0"] = list.filter((item) => item.status == 0);
     orderList["2"] = list.filter((item) => item.status == 2);
+    orderList["4"] = list.filter((item) => item.status == 4);
     orderList["all"] = list;
   });
 };

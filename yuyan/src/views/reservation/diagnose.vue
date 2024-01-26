@@ -8,6 +8,7 @@ import {
   booking_changeStatus,
   booking_changeContactStatus,
 } from "@/utils/request/index";
+import moment from "moment";
 let router = useRouter();
 let searchStatus = ref(false);
 let tabActive = ref(1);
@@ -69,10 +70,25 @@ const columns = [
     },
   },
   {
-    title: "预约人数",
-    key: "number",
+    title: "性别",
+    key: "gender",
     align: "center",
-    dataIndex: "number",
+    dataIndex: "gender",
+    customRender: (record) => {
+      return record.text == 1 ? "男" : "女";
+    },
+  },
+  {
+    title: "生日",
+    key: "birthday",
+    align: "center",
+    dataIndex: "birthday",
+  },
+  {
+    title: "年龄",
+    key: "age",
+    align: "center",
+    dataIndex: "age",
   },
   {
     title: "状态",
@@ -173,6 +189,10 @@ const setContactStatus = (status) => {
   };
   return text[status];
 };
+let days = ref({
+  day: moment().format("YYYY年MM月DD日"),
+  nextDay: moment().add(6,'days').format("YYYY年MM月DD日"),
+});
 onMounted(() => {
   getList();
 });
@@ -194,7 +214,7 @@ onMounted(() => {
           :loading="searchStatus"
         />
         <div class="page-desc" v-if="tabActive == 2">
-          <p class="label">今日：2024年01月11日 可操作2024年01月18日后的日期</p>
+          <p class="label">今日：{{days.day}} 可操作{{days.nextDay}}后的日期</p>
           <p>请按时提前设置时间管理，如未设置时间管理，则用户端无法成功预约</p>
         </div>
       </div>

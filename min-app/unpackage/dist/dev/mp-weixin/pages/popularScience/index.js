@@ -131,6 +131,8 @@ const _sfc_main = {
     };
     let isSubmit = common_vendor.ref(false);
     const handleShowPopup = () => {
+      if (hasSubscribe.value)
+        return false;
       showDate.value = true;
     };
     const handleClosePopup = () => {
@@ -178,9 +180,12 @@ const _sfc_main = {
             popularForm.value.date = str;
           } else {
             hasSubscribe.value = false;
+            let phone = common_vendor.index.getStorageSync("yy-phone");
+            if (phone) {
+              popularForm.value.phone = phone;
+            }
           }
         } catch (error) {
-          console.log(error);
           popularForm.value = {
             name: "",
             phone: "",
@@ -204,7 +209,8 @@ const _sfc_main = {
         number: popularForm.value.number.replace("人", "")
       };
       utils_api_index.CreateBookingPlans(params).then((res) => {
-        console.log(res);
+        showSubscribeSuccess.value = true;
+        hasSubscribe.value = true;
       });
     };
     const handleCancelSub = () => {
@@ -218,9 +224,11 @@ const _sfc_main = {
           duration: 2e3,
           icon: "none",
           success() {
-            common_vendor.index.redirectTo({
-              url: "/pages/index/index"
-            });
+            setTimeout(() => {
+              common_vendor.index.redirectTo({
+                url: "/pages/index/index"
+              });
+            }, 2e3);
           }
         });
         popularForm.value = {
@@ -236,10 +244,6 @@ const _sfc_main = {
     };
     common_vendor.onMounted(() => {
       handleGetPlans();
-      let phone = common_vendor.index.getStorageSync("yy-phone");
-      if (phone) {
-        popularForm.value.phone = phone;
-      }
     });
     return (_ctx, _cache) => {
       return common_vendor.e({
@@ -283,12 +287,13 @@ const _sfc_main = {
       } : {}, {
         D: common_vendor.unref(showSubscribeSuccess)
       }, common_vendor.unref(showSubscribeSuccess) ? {
-        E: common_vendor.o(($event) => common_vendor.isRef(showSubscribeSuccess) ? showSubscribeSuccess.value = false : showSubscribeSuccess = false)
+        E: common_vendor.o(($event) => common_vendor.isRef(showSubscribeSuccess) ? showSubscribeSuccess.value = false : showSubscribeSuccess = false),
+        F: common_vendor.o(($event) => common_vendor.isRef(showSubscribeSuccess) ? showSubscribeSuccess.value = false : showSubscribeSuccess = false)
       } : {}, {
-        F: common_vendor.unref(showCancel)
+        G: common_vendor.unref(showCancel)
       }, common_vendor.unref(showCancel) ? {
-        G: common_vendor.o(($event) => common_vendor.isRef(showCancel) ? showCancel.value = false : showCancel = false),
-        H: common_vendor.o(handleCancelSub)
+        H: common_vendor.o(($event) => common_vendor.isRef(showCancel) ? showCancel.value = false : showCancel = false),
+        I: common_vendor.o(handleCancelSub)
       } : {});
     };
   }

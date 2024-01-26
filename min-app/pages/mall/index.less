@@ -63,6 +63,14 @@
     .sider {
         width: 112px;
         height: calc(100vh - 250PX);
+        overflow: auto;
+
+        &::-webkit-scrollbar {
+            display: none;
+            width: 0;
+            height: 0;
+
+        }
 
         .items {
             .item {
@@ -90,8 +98,8 @@
                 }
 
                 image {
-                    width: 22px;
-                    height: 22px;
+                    width: 26px;
+                    height: 26px;
                 }
 
                 .title {
@@ -111,12 +119,20 @@
         box-sizing: border-box;
         height: calc(100vh - 250PX);
 
+        &::-webkit-scrollbar {
+            display: none;
+            width: 0;
+            height: 0;
+
+        }
+
         .items {
             margin-left: -3px;
             margin-right: -3px;
             display: flex;
             justify-content: flex-start;
             align-items: flex-start;
+            align-content: flex-start;
             flex-wrap: wrap;
             margin-bottom: 10px;
             min-height: 100%;
@@ -210,6 +226,7 @@
     .main .content .items .item .discount {
         width: 50px !important;
         right: 10px !important;
+
         image {
             width: 55px;
             height: 20px !important;
@@ -219,18 +236,19 @@
 
 @media screen and (max-width: 370px) {
     .main .content .items .item .discount {
-        width: 39px !important;
+        width: 45px !important;
         right: 6px !important;
+
         image {
             width: 39px !important;
             height: 14px !important;
         }
 
         .num {
-            font-size: 6 !important;
+            font-size: 6px !important;
 
             text {
-                font-size: 9 !important;
+                font-size: 9px !important;
             }
         }
     }
@@ -546,6 +564,9 @@
 
                 textarea {
                     padding: 17px 46px;
+                    width: 100%;
+                    box-sizing: border-box;
+                    padding-right: 10px;
                 }
             }
         }
@@ -665,6 +686,7 @@ view {
 
             image {
                 width: 28px;
+                height: 28px;
             }
         }
 
@@ -674,6 +696,7 @@ view {
 
             image {
                 width: 160px;
+                height: 160px;
             }
 
             .title {
@@ -703,6 +726,28 @@ view {
             color: #FFFFFF;
             margin: auto;
             margin-top: 50px;
+        }
+    }
+}
+
+
+.selectBox {
+    display: flex;
+    align-items: center;
+
+    .selects {
+        width: 20px;
+        height: 20px;
+        border-radius: 50px;
+        border: 1px solid #D44469;
+        margin-right: 4px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        image {
+            width: 18px;
+            height: 18px;
         }
     }
 }
