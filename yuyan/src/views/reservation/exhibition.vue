@@ -17,6 +17,22 @@ let contact_status = ref("0");
 const onSearch = () => {
   getList();
 };
+let checkboxs = [
+  { start_time: "06:00", end_time: "07:00", is_limit: 0, index: "1" },
+  { start_time: "07:00", end_time: "08:00", is_limit: 0, index: "2" },
+  { start_time: "08:00", end_time: "09:00", is_limit: 0, index: "3" },
+  { start_time: "09:00", end_time: "10:00", is_limit: 0, index: "4" },
+  { start_time: "10:00", end_time: "11:00", is_limit: 0, index: "5" },
+  { start_time: "11:00", end_time: "12:00", is_limit: 0, index: "6" },
+  { start_time: "12:00", end_time: "13:00", is_limit: 0, index: "7" },
+  { start_time: "13:00", end_time: "14:00", is_limit: 0, index: "8" },
+  { start_time: "14:00", end_time: "15:00", is_limit: 0, index: "9" },
+  { start_time: "15:00", end_time: "16:00", is_limit: 0, index: "10" },
+  { start_time: "16:00", end_time: "17:00", is_limit: 0, index: "11" },
+  { start_time: "17:00", end_time: "18:00", is_limit: 0, index: "12" },
+  { start_time: "18:00", end_time: "19:00", is_limit: 0, index: "13" },
+  { start_time: "19:00", end_time: "20:00", is_limit: 0, index: "14" },
+];
 let dateElementRef=ref(null)
 const columns = [
   {
@@ -42,6 +58,14 @@ const columns = [
     key: "booking_time",
     align: "center",
     dataIndex: "booking_time",
+    customRender: (record) => {
+      let str = record.text;
+      let times = checkboxs.filter((item) => item.index == record.record.time_index);
+      if (times.length!=0) {
+        str += `  ${times[0].start_time} - ${times[0].end_time}  `;
+      }
+      return str
+    },
   
   },
   {
