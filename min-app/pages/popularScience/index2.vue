@@ -188,6 +188,7 @@ let popularForm = ref({
   date: "",
   date_index: "",
   age: "",
+  birthday: "",
   type: "1",
 });
 let times = ref([
@@ -323,6 +324,7 @@ let agenum = null;
 let selectror = ref(1);
 const handleSelectCount = (e) => {
   const birthdate = moment(e.detail.value);
+  popularForm.value.birthday = birthdate.format("YYYY-MM-DD日");
   const currentDate = moment();
   const age = currentDate.diff(birthdate, "years");
   agenum = age;
@@ -342,6 +344,7 @@ const handleGetPlans = () => {
         popularForm.value.name = res.name;
         popularForm.value.phone = res.phone;
         popularForm.value.gender = res.gender;
+        popularForm.value.birthday = res.birthday;
         popularForm.value.age = res.age + "岁";
         agenum = res.age;
         let date = times.value.find((obj) => obj.index == res.time_index);
@@ -373,6 +376,7 @@ const handleSubmit = () => {
     name: popularForm.value.name,
     gender: popularForm.value.gender,
     phone: popularForm.value.phone,
+    birthday: popularForm.value.birthday,
     date: selectTime.date,
     date_index: selectTime.index,
     age: agenum,
@@ -394,11 +398,11 @@ const handleCancelSub = () => {
       duration: 2000,
       icon: "none",
       success() {
-       setTimeout(() => {
-        uni.redirectTo({
-          url: "/pages/index/index",
-        });
-       }, 2000);
+        setTimeout(() => {
+          uni.redirectTo({
+            url: "/pages/index/index",
+          });
+        }, 2000);
       },
     });
     popularForm.value = {

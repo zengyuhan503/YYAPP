@@ -108,6 +108,9 @@ const columns = [
     key: "birthday",
     align: "center",
     dataIndex: "birthday",
+    customRender: (record) => {
+      return record.text? moment(record.text).format('YYYY/MM/DD'):""
+    },
   },
   {
     title: "年龄",
