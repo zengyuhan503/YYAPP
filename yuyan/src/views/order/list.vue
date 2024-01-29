@@ -30,6 +30,7 @@ const columns = [
     key: "out_trade_no",
     ellipsis: true,
     width: 250,
+    fixed: 'left'
   },
   {
     title: "商品缩略图",
@@ -71,6 +72,31 @@ const columns = [
     ellipsis: true,
     width: 150,
   },
+  {
+    title: "收货人",
+    key: "name",
+    align: "center",
+    dataIndex: "name",
+    ellipsis: true,
+    width: 200,
+  },
+  {
+    title: "收货人电话",
+    key: "phone",
+    align: "center",
+    dataIndex: "phone",
+    ellipsis: true,
+    width: 200,
+  },
+
+  {
+    title: "物流公司",
+    key: "ship_company",
+    align: "center",
+    ellipsis: true,
+    dataIndex: "ship_company",
+    width: 150,
+  },
 
   {
     title: "物流单号",
@@ -86,12 +112,13 @@ const columns = [
     align: "center",
     dataIndex: "ship_state",
     ellipsis: true,
+    width: 200,
   },
   {
     title: "操作",
     align: "center",
     key: "action",
-    width: 400,
+    width: 400, fixed: 'right',
   },
 ];
 const columns2 = [
@@ -168,6 +195,7 @@ const columns2 = [
     title: "操作",
     align: "center",
     key: "action",
+    fixed: 'right',
     width: 360,
   },
 ];
@@ -470,6 +498,7 @@ onMounted(() => {
             :columns="columnsTables"
             :data-source="orderList"
             @change="handlePageChange"
+            :scroll="{ x: 1300, y: 1000 }"
             :pagination="pagination"
           >
             <template #bodyCell="{ column, record }">
@@ -522,7 +551,10 @@ onMounted(() => {
                   </div>
                 </template>
                 <template v-if="tabActive == 2">
-                  <a-button type="link" v-if="tabActive == 2" @click="handleToInfo(record)"
+                  <a-button
+                    type="link"
+                    v-if="tabActive == 2"
+                    @click="handleToInfo(record)"
                     >物流详情</a-button
                   >
                   <a-divider type="vertical" />

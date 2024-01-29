@@ -8,7 +8,7 @@
     "urlCheck": false,
     "es6": true,
     "postcss": true,
-    "minified": true,
+    "minified": false,
     "newFeature": true,
     "bigPackageSizeSupport": true,
     "coverView": true,
@@ -32,7 +32,8 @@
       "outputPath": ""
     },
     "disableUseStrict": false,
-    "useCompilerPlugins": false
+    "useCompilerPlugins": false,
+    "minifyWXML": true
   },
   "compileType": "miniprogram",
   "libVersion": "3.2.4",

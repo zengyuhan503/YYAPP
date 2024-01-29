@@ -171,7 +171,7 @@ const _sfc_main = {
         o: common_vendor.t(common_vendor.unref(orderInfo).phone),
         p: common_vendor.t(common_vendor.unref(orderInfo).address),
         q: common_vendor.t(common_vendor.unref(orderInfo).create_time),
-        r: common_vendor.t(common_vendor.unref(orderInfo).order_no),
+        r: common_vendor.t(common_vendor.unref(orderInfo).out_trade_no),
         s: "https://dental.cdwuhu.com/" + common_vendor.unref(orderInfo).goods_image,
         t: common_vendor.t(common_vendor.unref(orderInfo).goods_name),
         v: common_vendor.t(common_vendor.unref(orderInfo).num),

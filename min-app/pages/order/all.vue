@@ -6,7 +6,7 @@
           <div class="cate">
             <div>商品类型</div>
             <div class="type" v-if="item.status == 0">待付款</div>
-            <div class="type" v-if="item.status == 1">待收货</div>
+            <div class="type" v-if="item.status == 1">待发货</div>
             <div class="type" v-if="item.status == 2">待收货</div>
             <div class="type" v-if="item.status == 3">已收货</div>
             <div class="type cancel" v-if="item.status == 4">已完成</div>

@@ -50,7 +50,7 @@
             下单时间： <text>{{ orderInfo.create_time }}</text>
           </view>
           <view class="phone">
-            订单编号： <text>{{ orderInfo.order_no }}</text>
+            订单编号： <text>{{ orderInfo.out_trade_no }}</text>
           </view>
         </view>
       </view>
