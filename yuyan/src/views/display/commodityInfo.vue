@@ -63,11 +63,11 @@ const coverBeforeUpload = (file) => {
           return false;
         }
         if (aspectRatio > 0.1) {
-          message.error("请上传宽高比例为2:1的图片，如720x260分辨率的图片");
+          message.error("请上传宽高比例正确的图片，如最低720x260分辨率的图片");
           coverUploadList.value = [];
           return false;
         }
-        
+
         coverUploadList.value = [...(coverUploadList.value || []), file];
         formState.cover = src as string;
       };
@@ -301,7 +301,7 @@ onMounted(() => {
                   <p style="color: rgba(0, 0, 0, 0.85)">说明</p>
                   <p>
                     1.主页banner图（必填）<br />
-                    2.banner图上传要求：360PX *180PX 。格式JPG/PNG。小于2M。<br />
+                    2.banner图上传要求：720PX * 260PX 。格式JPG/PNG。小于2M。<br />
                     3.长图与链接只能二选一<br />
                     4.长图的上传要求：宽度750PX。长度低于2000PX。格式JPG/PNG。小于5M。
                   </p>
@@ -310,20 +310,22 @@ onMounted(() => {
             </a-row>
           </a-form>
         </div>
-        <a-divider orientation="left">实例</a-divider>
-        <div class="banners" style="padding: 20px">
-          <a-row :gutter="25">
-            <a-col :span="8">
-              <div class="item">
-                <div class="cover">
-                  <img v-show="formState.cover != ''" :src="formState.cover" />
-                </div>
-              </div>
-            </a-col>
-            <a-col :span="16">
-              <img class="imageUrl" :src="formState.imageUrl" alt="" />
-            </a-col>
-          </a-row>
+      </div>
+
+      <div class=" bannersinfo" style="padding: 20px 0">
+        <div class="item">
+          <div class="title">
+            <p>商店banner展示</p>
+          </div>
+          <div class="cover">
+            <img v-show="formState.cover != ''" :src="formState.cover" />
+          </div>
+        </div>
+        <div class="long-image">
+          <div class="title">
+            <p>商店banner展示</p>
+          </div>
+          <img class="imageUrl" :src="formState.imageUrl" alt="" />
         </div>
       </div>
       <div class="submit-footer">

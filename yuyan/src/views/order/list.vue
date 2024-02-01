@@ -11,6 +11,7 @@ import {
   order_open,
   expresss,
 } from "@/utils/request/index";
+import moment from "moment";
 import { message, Modal } from "ant-design-vue";
 let router = useRouter();
 let route = useRoute();
@@ -30,7 +31,7 @@ const columns = [
     key: "out_trade_no",
     ellipsis: true,
     width: 250,
-    fixed: 'left'
+    fixed: "left",
   },
   {
     title: "商品缩略图",
@@ -70,7 +71,12 @@ const columns = [
     align: "center",
     dataIndex: "create_time",
     ellipsis: true,
-    width: 150,
+    width: 200,
+    sorter: (a, b) => {
+      let at = a.create_time;
+      let bt = b.create_time;
+      return moment(bt).valueOf() - moment(at).valueOf();
+    },
   },
   {
     title: "收货人",
@@ -105,6 +111,13 @@ const columns = [
     ellipsis: true,
     dataIndex: "ship_number",
     width: 150,
+    customRender(record) {
+      if (record.record.ship_code == "ziti") {
+        return "自提方式暂无单号";
+      } else {
+        return record.text;
+      }
+    },
   },
   {
     title: "物流信息",
@@ -113,14 +126,23 @@ const columns = [
     dataIndex: "ship_state",
     ellipsis: true,
     width: 200,
+    customRender(record) {
+      if (record.record.ship_code == "ziti") {
+        return "等待自提中";
+      } else {
+        return record.text;
+      }
+    },
   },
   {
     title: "操作",
     align: "center",
     key: "action",
-    width: 400, fixed: 'right',
+    width: 400,
+    fixed: "right",
   },
 ];
+// 待发货
 const columns2 = [
   {
     title: "订单编号",
@@ -168,7 +190,12 @@ const columns2 = [
     align: "center",
     ellipsis: true,
     dataIndex: "create_time",
-    width: 150,
+    width: 200,
+    sorter: (a, b) => {
+      let at = a.create_time;
+      let bt = b.create_time;
+      return moment(bt).valueOf() - moment(at).valueOf();
+    },
   },
   {
     title: "收货人",
@@ -195,11 +222,11 @@ const columns2 = [
     title: "操作",
     align: "center",
     key: "action",
-    fixed: 'right',
+    fixed: "right",
     width: 360,
   },
 ];
-
+// 全部
 const columns3 = [
   {
     title: "订单编号",
@@ -208,6 +235,7 @@ const columns3 = [
     key: "out_trade_no",
     ellipsis: true,
     width: 250,
+    fixed: "left",
   },
   {
     title: "商品缩略图",
@@ -247,7 +275,28 @@ const columns3 = [
     align: "center",
     dataIndex: "create_time",
     ellipsis: true,
-    width: 150,
+    width: 200,
+    sorter: (a, b) => {
+      let at = a.create_time;
+      let bt = b.create_time;
+      return moment(bt).valueOf() - moment(at).valueOf();
+    },
+  },
+  {
+    title: "收货人",
+    key: "name",
+    align: "center",
+    dataIndex: "name",
+    ellipsis: true,
+    width: 200,
+  },
+  {
+    title: "收货人电话",
+    key: "phone",
+    align: "center",
+    dataIndex: "phone",
+    ellipsis: true,
+    width: 200,
   },
   {
     title: "订单状态",
@@ -262,13 +311,14 @@ const columns3 = [
     key: "address",
     align: "center",
     dataIndex: "address",
-    width: 150,
+    width: 360,
   },
   {
     title: "操作",
     align: "center",
     key: "action",
-    width: 360,
+    width: 300,
+    fixed: "right",
   },
 ];
 let columnsTables = ref([]);
@@ -489,8 +539,8 @@ onMounted(() => {
       <div class="page-table">
         <p class="title">
           商品列表
-          <a-button type="link" v-if="tabActive == 2" @click="handleUpdateShip()"
-            >刷新全部物流</a-button
+          <a-button type="primary" v-if="tabActive == 2" @click="handleUpdateShip()"
+            >刷新物流</a-button
           >
         </p>
         <div class="tables">
@@ -645,12 +695,16 @@ onMounted(() => {
                 v-for="(value, key) in expressList"
                 :key="key"
                 :value="key"
-                >{{ value }}</a-select-option
               >
+                {{ value }}
+              </a-select-option>
             </a-select>
           </a-form-item>
           <a-form-item label="快递单号" name="ship_company">
-            <a-input v-model:value="shipformState.ship_number" />
+            <a-input
+              v-model:value="shipformState.ship_number"
+              placeholder="自提方式不用填写单号"
+            />
           </a-form-item>
         </a-form>
       </div>

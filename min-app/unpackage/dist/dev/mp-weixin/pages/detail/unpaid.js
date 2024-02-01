@@ -97,6 +97,12 @@ const _sfc_main = {
         updateCountdown();
       });
     };
+    const handleToGoodsInfo = () => {
+      console.log(orderInfo);
+      common_vendor.index.navigateTo({
+        url: "/pages/mall/info?id=" + orderInfo.value.goods_id
+      });
+    };
     const handleCopy = () => {
       common_vendor.index.setClipboardData({
         data: orderInfo.value.ship_number + "",
@@ -161,49 +167,62 @@ const _sfc_main = {
         h: common_vendor.t(common_vendor.unref(timeouts))
       } : {}, {
         i: common_vendor.unref(orderInfo).status == 2
-      }, common_vendor.unref(orderInfo).status == 2 ? {
-        j: common_vendor.o(handleOpenShip),
-        k: common_vendor.t(common_vendor.unref(orderInfo).ship_company),
-        l: common_vendor.t(common_vendor.unref(orderInfo).ship_number),
-        m: common_vendor.o(handleCopy)
+      }, common_vendor.unref(orderInfo).status == 2 ? common_vendor.e({
+        j: common_vendor.unref(orderInfo).ship_code != "ziti"
+      }, common_vendor.unref(orderInfo).ship_code != "ziti" ? {
+        k: common_vendor.o(handleOpenShip)
       } : {}, {
-        n: common_vendor.t(common_vendor.unref(orderInfo).name),
-        o: common_vendor.t(common_vendor.unref(orderInfo).phone),
-        p: common_vendor.t(common_vendor.unref(orderInfo).address),
-        q: common_vendor.t(common_vendor.unref(orderInfo).create_time),
-        r: common_vendor.t(common_vendor.unref(orderInfo).out_trade_no),
-        s: "https://dental.cdwuhu.com/" + common_vendor.unref(orderInfo).goods_image,
-        t: common_vendor.t(common_vendor.unref(orderInfo).goods_name),
-        v: common_vendor.t(common_vendor.unref(orderInfo).num),
-        w: common_vendor.t(common_vendor.unref(orderInfo).real_price),
-        x: common_vendor.unref(orderInfo).status == 0
+        l: common_vendor.t(common_vendor.unref(orderInfo).ship_company),
+        m: common_vendor.unref(orderInfo).ship_code != "ziti"
+      }, common_vendor.unref(orderInfo).ship_code != "ziti" ? {
+        n: common_vendor.t(common_vendor.unref(orderInfo).ship_number)
+      } : common_vendor.e({
+        o: common_vendor.unref(orderInfo).status == 2
+      }, common_vendor.unref(orderInfo).status == 2 ? {} : {}, {
+        p: common_vendor.unref(orderInfo).status == 4
+      }, common_vendor.unref(orderInfo).status == 4 ? {} : {}), {
+        q: common_vendor.unref(orderInfo).ship_code != "ziti"
+      }, common_vendor.unref(orderInfo).ship_code != "ziti" ? {
+        r: common_vendor.o(handleCopy)
+      } : {}) : {}, {
+        s: common_vendor.t(common_vendor.unref(orderInfo).name),
+        t: common_vendor.t(common_vendor.unref(orderInfo).phone),
+        v: common_vendor.t(common_vendor.unref(orderInfo).address),
+        w: common_vendor.t(common_vendor.unref(orderInfo).create_time),
+        x: common_vendor.t(common_vendor.unref(orderInfo).out_trade_no),
+        y: "https://dental.cdwuhu.com/" + common_vendor.unref(orderInfo).goods_image,
+        z: common_vendor.t(common_vendor.unref(orderInfo).goods_name),
+        A: common_vendor.t(common_vendor.unref(orderInfo).num),
+        B: common_vendor.t(common_vendor.unref(orderInfo).real_price),
+        C: common_vendor.o(handleToGoodsInfo),
+        D: common_vendor.unref(orderInfo).status == 0
       }, common_vendor.unref(orderInfo).status == 0 ? {
-        y: common_vendor.o(($event) => common_vendor.isRef(showCancel) ? showCancel.value = true : showCancel = true)
+        E: common_vendor.o(($event) => common_vendor.isRef(showCancel) ? showCancel.value = true : showCancel = true)
       } : {}, {
-        z: common_vendor.unref(orderInfo).status == 1 || common_vendor.unref(orderInfo).status == 2 || common_vendor.unref(orderInfo).status == 3 || common_vendor.unref(orderInfo) == 4
+        F: common_vendor.unref(orderInfo).status == 1 || common_vendor.unref(orderInfo).status == 2 || common_vendor.unref(orderInfo).status == 3 || common_vendor.unref(orderInfo) == 4
       }, common_vendor.unref(orderInfo).status == 1 || common_vendor.unref(orderInfo).status == 2 || common_vendor.unref(orderInfo).status == 3 || common_vendor.unref(orderInfo) == 4 ? {
-        A: common_vendor.o(handleMakePhoneCall)
+        G: common_vendor.o(handleMakePhoneCall)
       } : {}, {
-        B: common_vendor.unref(orderInfo).status == 0
+        H: common_vendor.unref(orderInfo).status == 0
       }, common_vendor.unref(orderInfo).status == 0 ? {
-        C: common_vendor.t(common_vendor.unref(orderInfo).real_price),
-        D: common_vendor.o(handleToCreateOrder)
+        I: common_vendor.t(common_vendor.unref(orderInfo).real_price),
+        J: common_vendor.o(handleToCreateOrder)
       } : {}, {
-        E: common_vendor.unref(showCancel)
+        K: common_vendor.unref(showCancel)
       }, common_vendor.unref(showCancel) ? {
-        F: common_vendor.o(($event) => common_vendor.isRef(showCancel) ? showCancel.value = false : showCancel = false),
-        G: common_vendor.o(handleCancelOrder)
+        L: common_vendor.o(($event) => common_vendor.isRef(showCancel) ? showCancel.value = false : showCancel = false),
+        M: common_vendor.o(handleCancelOrder)
       } : {}, {
-        H: common_vendor.t(common_vendor.unref(orderInfo).ship_company),
-        I: common_vendor.t(common_vendor.unref(orderInfo).ship_number),
-        J: common_vendor.t(common_vendor.unref(orderInfo).ship_state),
-        K: common_vendor.unref(orderInfo).express
+        N: common_vendor.t(common_vendor.unref(orderInfo).ship_company),
+        O: common_vendor.t(common_vendor.unref(orderInfo).ship_number),
+        P: common_vendor.t(common_vendor.unref(orderInfo).ship_state),
+        Q: common_vendor.unref(orderInfo).express
       }, common_vendor.unref(orderInfo).express ? common_vendor.e({
-        L: common_vendor.unref(orderInfo).express.state == -1
+        R: common_vendor.unref(orderInfo).express.state == -1
       }, common_vendor.unref(orderInfo).express.state == -1 ? {
-        M: common_vendor.t(common_vendor.unref(orderInfo).express.data)
+        S: common_vendor.t(common_vendor.unref(orderInfo).express.data)
       } : {
-        N: common_vendor.f(common_vendor.unref(orderInfo).express.data, (item, index, i0) => {
+        T: common_vendor.f(common_vendor.unref(orderInfo).express.data, (item, index, i0) => {
           return {
             a: common_vendor.t(item.time),
             b: common_vendor.t(item.context),
@@ -211,10 +230,10 @@ const _sfc_main = {
           };
         })
       }) : {}, {
-        O: common_vendor.sr(popup, "2550a99d-0", {
+        U: common_vendor.sr(popup, "2550a99d-0", {
           "k": "popup"
         }),
-        P: common_vendor.p({
+        V: common_vendor.p({
           type: "bottom"
         })
       });

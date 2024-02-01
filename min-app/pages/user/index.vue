@@ -232,6 +232,7 @@ const getinfos = (e) => {
                 uni.setStorageSync("yy-phone", res);
               });
               handleServerGetUserInfo();
+              handleGetOrderList();
             });
           }
         },

@@ -20,6 +20,7 @@ let formState = reactive({
   deputy_image: null,
   discount: 100,
   category_id: ["13"],
+  id: null,
 });
 
 watch(
@@ -31,6 +32,7 @@ watch(
 );
 const head_image = ref([]);
 const deputy_image = ref([]);
+const deputy_image_show = ref(["", "", "", ""]);
 const detail_image = ref([]);
 const handleReset = () => {
   Object.keys(formState).forEach((key) => {
@@ -127,12 +129,21 @@ const coverBeforeUpload2 = (file) => {
         }
       };
       deputy_image.value = [...(deputy_image.value || []), file];
+      if (upindex == 0) upindex = deputy_image.value.length;
+      deputy_image_show.value[upindex - 1] = src as string;
       image.src = src as string;
+      upindex = 0;
     };
   }
   return false;
 };
 
+const handleRemoveimage = (res) => {
+  let index = deputy_image.value.findIndex((item) => item.uid == res.uid);
+  deputy_image.value.splice(index, 1);
+  deputy_image_show.value.splice(index, 1);
+};
+let upindex = 0;
 const imageBeforeUpload = (file) => {
   const isLt = file.size / 1024 / 1024 < 50;
   if (!isLt) {
@@ -167,7 +178,7 @@ const imageBeforeUpload = (file) => {
         formState.imageUrl = src as string;
       };
       detail_image.value = [...(detail_image.value || []), file];
-      image.src = src as string;
+      formState.imageUrl = src as string;
     };
   }
   return false;
@@ -184,8 +195,7 @@ const handleSubmit = () => {
     let head_image = res[0];
     let detail_image = res[1];
     uploadImages2().then((ciimgs: [any]) => {
-      console.log(ciimgs);
-      let imgs = ciimgs ? ciimgs.map((item) => item.data) : null;
+      let imgs = ciimgs ? ciimgs : null;
       let cid = [...formState.category_id, "13"];
       cid = Array.from(new Set(cid));
 
@@ -284,6 +294,7 @@ const handleGetGoodsCategorys = () => {
 onMounted(() => {
   handleGetGoodsCategorys();
   query = route.query;
+  console.log(query);
   let cid = [...query.category_id.split(","), "13"];
   formState.category_id = Array.from(new Set(cid));
   formState.cover = "https://dental.cdwuhu.com/" + query.head_image;
@@ -293,7 +304,13 @@ onMounted(() => {
   formState.discount = parseInt(query.discount);
   formState.price = query.price;
   formState.desc = query.desc;
-  console.log(query);
+  formState.id = query.id;
+  // deputy_image.value.push('deputy_image');
+  if (Array.isArray(formState.deputy_image)) {
+    deputy_image_show.value = formState.deputy_image.map((item) => {
+      return "https://dental.cdwuhu.com/" + item;
+    });
+  }
 });
 </script>
 
@@ -309,7 +326,9 @@ onMounted(() => {
             <a-breadcrumb-item>商品详情</a-breadcrumb-item>
           </a-breadcrumb>
         </div>
-        <p class="title" style="margin-bottom: 16px">商品详情</p>
+        <p class="title" style="margin-bottom: 16px">
+          商品详情 <span style="color: #1890ff">{{ formState.id }}</span>
+        </p>
         <p>每个商品必须上传一张主图，最多上传5张。</p>
       </div>
       <div class="page-text">
@@ -322,10 +341,9 @@ onMounted(() => {
       </div>
     </div>
     <div class="page-body">
-      <div class="page-main">
+      <!-- <div class="page-main">
         <p class="title">
           信息填写
-          <!-- <a-button @click="handleReset">清空</a-button> -->
         </p>
         <div class="page-form" style="width: 100%">
           <a-form :model="formState" v-bind="layout">
@@ -354,6 +372,7 @@ onMounted(() => {
                       :file-list="deputy_image"
                       :before-upload="coverBeforeUpload2"
                       :maxCount="4"
+                      @remove="handleRemoveimage"
                     >
                       <a-button type="primary">
                         <PlusOutlined />
@@ -405,7 +424,7 @@ onMounted(() => {
             </a-row>
           </a-form>
         </div>
-      </div>
+      </div> -->
       <div class="page-main" style="margin-top: 20px">
         <p class="title">价格填写</p>
         <div class="page-form" style="width: 100%">
@@ -450,11 +469,65 @@ onMounted(() => {
           </a-form>
         </div>
       </div>
+      <div class="page-main">
+        <p class="title">信息填写</p>
+        <div class="page-form" style="width: 100%">
+          <a-form :model="formState" v-bind="layout">
+            <a-row :gutter="180">
+              <a-col :span="8">
+                <a-form-item label="商品描述">
+                  <div class="form-text">
+                    <p>{{ formState.title }}</p>
+                  </div>
+                </a-form-item>
+              </a-col>
+              <a-col :span="8">
+                <a-form-item label="商品类别（选填）">
+                  <a-select
+                    ref="select"
+                    v-model:value="formState.category_id"
+                    mode="multiple"
+                  >
+                    <a-select-option
+                      :value="item.id + ''"
+                      v-for="(item, index) in goodsCategoryList"
+                      :key="index"
+                    >
+                      {{ item.title }}
+                    </a-select-option>
+                  </a-select>
+                </a-form-item>
+              </a-col>
+              <a-col :span="8">
+                <a-form-item label="商品描述">
+                  <div class="form-text">
+                    <p>{{ formState.desc }}</p>
+                  </div>
+                </a-form-item>
+              </a-col>
+            </a-row>
+          </a-form>
+        </div>
+      </div>
       <div class="goods-show">
         <div class="cover-show">
           <p>商品主图（缩略预览）</p>
           <div class="covers">
             <img :src="formState.cover" mode="" />
+          </div>
+          <div class="ci-banners">
+            <div class="item">
+              <img :src="deputy_image_show[0]" alt="" />
+            </div>
+            <div class="item">
+              <img :src="deputy_image_show[1]" alt="" />
+            </div>
+            <div class="item">
+              <img :src="deputy_image_show[2]" alt="" />
+            </div>
+            <div class="item">
+              <img :src="deputy_image_show[3]" alt="" />
+            </div>
           </div>
         </div>
         <div class="long-show">

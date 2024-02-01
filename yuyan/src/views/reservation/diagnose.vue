@@ -31,7 +31,14 @@ let checkboxs = [
 ];
 let searchVal = ref("");
 let contact_status = ref("0");
+const pagination = reactive({
+  total: 0,
+  current: 1,
+  pageSize: 6,
+  hideOnSinglePage: true,
+});
 const onSearch = () => {
+  pagination.current = 1;
   getList();
 };
 let dateElementRef = ref(null);
@@ -62,10 +69,20 @@ const columns = [
     customRender: (record) => {
       let str = record.text;
       let times = checkboxs.filter((item) => item.index == record.record.time_index);
-      if (times.length!=0) {
+      if (times.length != 0) {
         str += `  ${times[0].start_time} - ${times[0].end_time}  `;
       }
-      return str
+      return str;
+    },
+    sorter: (a, b) => {
+      let astr = a;
+      let times = checkboxs.filter((item) => item.index == astr.time_index);
+      let ats = `${a.booking_time} ${times[0].start_time}`;
+
+      let bstr = b;
+      let btimes = checkboxs.filter((item) => item.index == bstr.time_index);
+      let bts = `${b.booking_time} ${btimes[0].start_time}`;
+      return moment(bts).valueOf() - moment(ats).valueOf();
     },
   },
   {
@@ -109,7 +126,7 @@ const columns = [
     align: "center",
     dataIndex: "birthday",
     customRender: (record) => {
-      return record.text? moment(record.text).format('YYYY/MM/DD'):""
+      return record.text ? moment(record.text).format("YYYY/MM/DD") : "";
     },
   },
   {
@@ -123,6 +140,25 @@ const columns = [
     key: "status",
     align: "center",
     dataIndex: "status",
+    filters: [
+      {
+        text: "待到店",
+        value: "0",
+      },
+      {
+        text: "已到达",
+        value: "1",
+      },
+      {
+        text: "已取消",
+        value: "2",
+      },
+      {
+        text: "已过期",
+        value: "3",
+      },
+    ],
+    onFilter: (value, record) => record.status == value,
   },
   {
     title: "操作",
@@ -185,13 +221,18 @@ const handleCancelReservation = (record) => {
   });
 };
 const changeTables = (status) => {
+  pagination.current = 1;
   tabActive.value = status;
+  getList();
+};
+const handlePageChange = (page) => {
+  pagination.current = page.current;
   getList();
 };
 const getList = () => {
   let params = {
-    page: 1,
-    page_size: 10000,
+    page: pagination.current,
+    page_size: pagination.pageSize,
     type: 1,
     keywords: searchVal.value,
   };
@@ -255,7 +296,12 @@ onMounted(() => {
       <div class="page-table" v-if="tabActive == 1">
         <p class="title">预约用户清单</p>
         <div class="tables">
-          <a-table :columns="columns" :data-source="dataSource" :pagination="false">
+          <a-table
+            :columns="columns"
+            :data-source="dataSource"
+            @change="handlePageChange"
+            :pagination="pagination"
+          >
             <template #bodyCell="{ column, record }">
               <template v-if="column.key === 'name'">
                 {{ record.name }}

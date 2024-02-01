@@ -19,15 +19,24 @@
       <view class="distribution" v-if="orderInfo.status == 2">
         <view class="label">
           <view class="name"> 物流信息 </view>
-          <view class="btns" @click="handleOpenShip"> 查看物流 </view>
+          <view class="btns" v-if="orderInfo.ship_code != 'ziti'" @click="handleOpenShip">
+            查看物流
+          </view>
         </view>
         <view class="info">
           <view class="name">
             快递公司： <text>{{ orderInfo.ship_company }}</text>
           </view>
           <view class="phone">
-            快递单号： <text>{{ orderInfo.ship_number }}</text>
-            <text @click="handleCopy" class="copy">复制</text>
+            快递单号：
+            <text v-if="orderInfo.ship_code != 'ziti'">{{ orderInfo.ship_number }}</text>
+            <text v-else>
+              <template v-if="orderInfo.status == 2"> 等待自提中 </template>
+              <template v-if="orderInfo.status == 4"> 已自提 </template>
+            </text>
+            <text @click="handleCopy" v-if="orderInfo.ship_code != 'ziti'" class="copy"
+              >复制</text
+            >
           </view>
         </view>
       </view>
@@ -54,7 +63,7 @@
           </view>
         </view>
       </view>
-      <view class="commodity">
+      <view class="commodity" @click="handleToGoodsInfo">
         <view class="label">
           <view class="name"> 商品信息 </view>
         </view>
@@ -244,6 +253,12 @@ const handleGetOrderInfo = () => {
     interval = null;
     interval = setInterval(updateCountdown, 1000);
     updateCountdown();
+  });
+};
+const handleToGoodsInfo = () => {
+  console.log(orderInfo);
+  uni.navigateTo({
+    url: "/pages/mall/info?id=" + orderInfo.value.goods_id,
   });
 };
 const handleCopy = () => {

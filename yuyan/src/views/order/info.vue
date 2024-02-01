@@ -12,6 +12,7 @@ let orderInfo = ref({
   express: null,
   category: [],
   create_time: null,
+  avatar: null,
   name: null,
   user_id: null,
   phone: null,
@@ -26,6 +27,8 @@ let orderInfo = ref({
   num: null,
   out_trade_no: null,
   goods_image: null,
+  ship_code: null,
+  status: null,
 });
 const textToCopy = ref("这是要复制的文本");
 const copyText = async () => {
@@ -102,7 +105,10 @@ onMounted(() => {
               </a-row>
             </a-col>
             <a-col :span="6">
-              <img src="" alt="" />
+              <div class="avatar">
+                <img :src="'https://dental.cdwuhu.com/' + orderInfo.avatar" alt="" />
+                <p>用户头像</p>
+              </div>
             </a-col>
           </a-row>
         </div>
@@ -131,20 +137,37 @@ onMounted(() => {
               <div>
                 <p><span>快递公司：</span>{{ orderInfo.ship_company }}</p>
                 <p>
-                  <span>快递单号：</span>{{ orderInfo.ship_number }}
-                  <a-button type="link" @click="copyText">复制</a-button>
+                  <span>快递单号：</span
+                  ><template v-if="orderInfo.ship_code == 'ziti'"
+                    >自提方式暂无单号
+                  </template>
+                  <template v-else>
+                    {{ orderInfo.ship_number }}
+                  </template>
+                  <a-button
+                    v-if="orderInfo.ship_number != ''"
+                    type="link"
+                    @click="copyText"
+                    >复制</a-button
+                  >
                 </p>
-                <div v-if="orderInfo.express?.state != -1">
-                  <p>
-                    <span>物流状态：{{ orderInfo.express?.state }}</span>
-                  </p>
-                  <div class="ship_items" v-if="orderInfo.express?.data">
-                    <div v-for="(item, index) in orderInfo.express.data" :key="index">
-                      <p>[{{ item.time }}][{{ item.areaCode }}]{{ item.context }}</p>
+                <template v-if="orderInfo.ship_code == 'ziti'">
+                  <p v-if="orderInfo.status == 4"><span>物流状态：</span>已自提</p>
+                  <p v-if="orderInfo.status == 2"><span>物流状态：</span>等待自提中</p>
+                </template>
+                <template v-else>
+                  <div v-if="orderInfo.express?.state != -1">
+                    <p>
+                      <span>物流状态：{{ orderInfo.express?.state }}</span>
+                    </p>
+                    <div class="ship_items" v-if="orderInfo.express?.data">
+                      <div v-for="(item, index) in orderInfo.express.data" :key="index">
+                        <p>[{{ item.time }}][{{ item.areaCode }}]{{ item.context }}</p>
+                      </div>
                     </div>
                   </div>
-                </div>
-                <p v-else>{{ orderInfo.express?.data }}</p>
+                  <p v-else>{{ orderInfo.express?.data }}</p>
+                </template>
               </div>
             </a-col>
           </a-row>

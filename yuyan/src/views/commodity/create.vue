@@ -18,7 +18,7 @@ let formState = reactive({
   cover: null,
   imageUrl: null,
   desc: null,
-  price: null,
+  price: 1,
   discount: 100,
   category_id: [13],
 });
@@ -31,16 +31,18 @@ watch(
   }
 );
 const handleReset = () => {
-  Object.keys(formState).forEach((key) => {
-    if (key == "category_id") {
-      formState[key] = [];
-    } else {
-      formState[key] = null;
-    }
-  });
+  formState.title = null;
+  formState.category_id = [13];
+  formState.desc = null;
+  formState.imageUrl = null;
+  formState.cover = null;
   head_image.value = [];
   deputy_image.value = [];
   detail_image.value = [];
+};
+const handleReset2 = () => {
+  formState.discount = 100;
+  formState.price = 1;
 };
 let disPrice = computed(() => {
   let val = (formState.price * (formState.discount / 100)).toFixed(2);
@@ -125,6 +127,7 @@ const coverBeforeUpload2 = (file) => {
         }
       };
       deputy_image.value = [...(deputy_image.value || []), file];
+      if (upindex == 0) upindex = deputy_image.value.length;
       deputy_image_show.value[upindex - 1] = src as string;
       image.src = src as string;
       upindex = 0;
@@ -137,9 +140,9 @@ const handleRm = (index) => {
   deputy_image_show.value[index] = "";
 };
 const handleRemoveimage = (res) => {
-  console.log(res);
-  let index = res.upindex;
-  deputy_image_show.value[index] = "";
+  let index = deputy_image.value.findIndex((item) => item.uid == res.uid);
+  deputy_image.value.splice(index, 1);
+  deputy_image_show.value.splice(index, 1);
 };
 const imageBeforeUpload = (file) => {
   const isLt = file.size / 1024 / 1024 < 50;
@@ -318,7 +321,7 @@ onMounted(() => {
           <a-form :model="formState" v-bind="layout">
             <a-row :gutter="180">
               <a-col :span="8">
-                <a-form-item label="商品名称">
+                <a-form-item label="商品名称（必填）">
                   <a-input v-model:value="formState.title" />
                 </a-form-item>
                 <div class="form-upload">
@@ -385,7 +388,6 @@ onMounted(() => {
                 <a-form-item label="商品描述（必填）">
                   <a-textarea
                     v-model:value="formState.desc"
-                    placeholder="Basic usage"
                     :showCount="true"
                     :maxlength="200"
                     :rows="80"
@@ -397,7 +399,10 @@ onMounted(() => {
         </div>
       </div>
       <div class="page-main" style="margin-top: 20px">
-        <p class="title">价格填写</p>
+        <p class="title">
+          价格填写
+          <a-button @click="handleReset2">清空</a-button>
+        </p>
         <div class="page-form" style="width: 100%">
           <a-form :model="formState" v-bind="layout">
             <a-row :gutter="180">
@@ -452,111 +457,18 @@ onMounted(() => {
           <div class="covers">
             <img :src="formState.cover" mode="" />
           </div>
-          <div class="ci-banners" v-if="false">
+          <div class="ci-banners">
             <div class="item" @click="coverBeforeChange(1)">
-              <a-button
-                type="primary"
-                @click="handleRm(0)"
-                v-show="deputy_image_show[0] != ''"
-                class="rm"
-              >
-                删除
-              </a-button>
-              <img v-if="deputy_image_show[0] != ''" :src="deputy_image_show[0]" alt="" />
-
-              <div v-else>
-                <a-upload
-                  name="file"
-                  :file-list="deputy_image"
-                  :before-upload="coverBeforeUpload2"
-                  :showUploadList="false"
-                  action="0"
-                  :maxCount="4"
-                >
-                  <a-button type="primary">
-                    <PlusOutlined />
-                    上传
-                  </a-button>
-                </a-upload>
-              </div>
+              <img :src="deputy_image_show[0]" alt="" />
             </div>
             <div class="item" @click="coverBeforeChange(2)">
-              <a-button
-                type="primary"
-                @click="handleRm(1)"
-                v-show="deputy_image_show[1] != ''"
-                class="rm"
-              >
-                删除
-              </a-button>
-              <img v-if="deputy_image_show[1] != ''" :src="deputy_image_show[1]" alt="" />
-              <div v-else>
-                <a-upload
-                  name="file"
-                  :file-list="deputy_image"
-                  :before-upload="coverBeforeUpload2"
-                  :showUploadList="false"
-                  action="1"
-                  :maxCount="4"
-                >
-                  <a-button type="primary">
-                    <PlusOutlined />
-                    上传
-                  </a-button>
-                </a-upload>
-              </div>
+              <img :src="deputy_image_show[1]" alt="" />
             </div>
             <div class="item" @click="coverBeforeChange(3)">
-              <a-button
-                type="primary"
-                @click="handleRm(2)"
-                v-show="deputy_image_show[2] != ''"
-                class="rm"
-              >
-                删除
-              </a-button>
-              <img v-if="deputy_image_show[2] != ''" :src="deputy_image_show[2]" alt="" />
-              <div v-else>
-                <a-upload
-                  name="file"
-                  :file-list="deputy_image"
-                  :before-upload="coverBeforeUpload2"
-                  :showUploadList="false"
-                  action="2"
-                  :maxCount="4"
-                >
-                  <a-button type="primary">
-                    <PlusOutlined />
-                    上传
-                  </a-button>
-                </a-upload>
-              </div>
+              <img :src="deputy_image_show[2]" alt="" />
             </div>
             <div class="item" @click="coverBeforeChange(4)">
-              <a-button
-                type="primary"
-                @click="handleRm(3)"
-                v-show="deputy_image_show[3] != ''"
-                class="rm"
-              >
-                删除
-              </a-button>
-              <img v-if="deputy_image_show[3] != ''" :src="deputy_image_show[3]" alt="" />
-              <div v-else>
-                <a-upload
-                  name="file"
-                  :file-list="deputy_image"
-                  :before-upload="coverBeforeUpload2"
-                  :showUploadList="false"
-                  action="3"
-                  :maxCount="4"
-                >
-                  <a-button type="primary">
-                    <PlusOutlined />
-                    上传
-                  </a-button>
-                </a-upload>
-              </div>
+              <img :src="deputy_image_show[3]" alt="" />
             </div>
           </div>
         </div>

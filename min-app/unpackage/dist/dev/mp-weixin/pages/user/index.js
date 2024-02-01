@@ -111,6 +111,7 @@ const _sfc_main = {
                     common_vendor.index.setStorageSync("yy-phone", res);
                   });
                   handleServerGetUserInfo();
+                  handleGetOrderList();
                 });
               }
             }

@@ -89,6 +89,7 @@
                   <input
                     @input="handleOnChangeForm"
                     type="text"
+                    disabled
                     v-model="addrForm.provinces"
                     placeholder="省市区"
                   />

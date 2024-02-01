@@ -81,7 +81,7 @@
                     type="text"
                     disabled
                     @change="handleChangeFrom"
-                    placeholder="年龄"
+                    placeholder="出生日期"
                     v-model="popularForm.age"
                   />
                 </view>

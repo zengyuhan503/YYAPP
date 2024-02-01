@@ -68,7 +68,7 @@
                 <a-row>
                   <a-col
                     :span="24"
-                    v-for="(item, i = 0) in [].concat(checkboxs.slice(0, 5))"
+                    v-for="(item, i = 0) in [].concat(checkboxs.slice(0, 3))"
                     :key="i"
                   >
                     <div class="time-checkbox">
@@ -89,7 +89,7 @@
                 <a-row>
                   <a-col
                     :span="24"
-                    v-for="(item, i) in [].concat(checkboxs.slice(6, checkboxs.length))"
+                    v-for="(item, i) in [].concat(checkboxs.slice(3, checkboxs.length))"
                     :key="i"
                   >
                     <div class="time-checkbox">
@@ -107,6 +107,9 @@
           </div>
         </a-checkbox-group>
         <div class="footer">
+          <div class="selectAll">
+            <a-checkbox :disabled="activeDay == '' || is_disabled" @change="handleChangeAll" v-model:checked="indexAll">所有时间段</a-checkbox>
+          </div>
           <div class="footer-left">
             <p>说明：人数限制后，每时段最多预约20人</p>
             <div>
@@ -141,7 +144,7 @@
   <div style="height: 100px"></div>
 </template>
 <script setup lang="ts">
-import { ref, onMounted, nextTick } from "vue";
+import { ref, onMounted, nextTick,watch } from "vue";
 import {
   LeftOutlined,
   DoubleLeftOutlined,
@@ -151,7 +154,6 @@ import {
 import moment from "moment";
 import { booking_plan, booking_plan_edit } from "@/utils/request/index";
 import { message, Modal } from "ant-design-vue";
-import { timeStamp } from "console";
 
 let props = defineProps({
   type: Number,
@@ -165,15 +167,13 @@ let ams = ref([]);
 let is_limit = ref("1");
 let timeForm = ref({
   index: null,
-  is_limit: 1,
+  is_limit: 0,
 });
+let indexAll = ref(false);
 let pickerDayActives = ref([]);
 let pickerDayDatas = ref([]);
 
 let checkboxs = ref([
-  { start_time: "06:00", end_time: "07:00", is_limit: 0, index: "1" },
-  { start_time: "07:00", end_time: "08:00", is_limit: 0, index: "2" },
-  { start_time: "08:00", end_time: "09:00", is_limit: 0, index: "3" },
   { start_time: "09:00", end_time: "10:00", is_limit: 0, index: "4" },
   { start_time: "10:00", end_time: "11:00", is_limit: 0, index: "5" },
   { start_time: "11:00", end_time: "12:00", is_limit: 0, index: "6" },
@@ -347,7 +347,6 @@ const getList = () => {
     let data = res.data;
     hastime = data;
     hastime.forEach((item) => {
-      console.log(moment(item.date).valueOf());
       pickerDayDatas.value.push(moment(item.date).valueOf() / 1000);
     });
   });
@@ -381,12 +380,10 @@ const saveTimes = () => {
   let isHas = hastime.findIndex(
     (obj) => moment(obj.date).valueOf() / 1000 == activeTimes
   );
-
   Modal.confirm({
     title: `已保存设${moment(activeTimes * 1000).format("YYYY年MM月DD日")}置?`,
     content: "点击确定后自动跳到下一日期设置",
     onOk() {
-      console.log(timeForm.value.index);
       if (isHas != -1) {
         if (timeForm.value.index.length == 0) {
           // pickerDayDatas.value.push(activeTimes);
@@ -437,23 +434,43 @@ const handleSubmit = () => {
     type: props.type,
   };
   booking_plan_edit(params).then((res) => {
-    console.log(res);
     message.success("提交成功");
     getList();
   });
 };
+watch(timeForm.value,val=>{
+  if(val.index==null){
+    indexAll.value=false
+    return false
+  }
+  if(val.index.length!=11){
+    indexAll.value=false
+  }else{
+    indexAll.value=true
+  }
+})
+const handleChangeAll=()=>{
+    if(indexAll.value){
+      timeForm.value.index=["4","5","6","7","8","9","10","11","12","13","14"]
+    }else{
+      timeForm.value.index=[]
+    }
+}
 // 初始渲染
 onMounted(() => {
-  renderCalendar(currentYear, currentMonth);
-
   const today = new Date();
   const eightDaysLater = new Date(today);
   eightDaysLater.setDate(today.getDate() + 7);
   eightDaysLater.setHours(0, 0, 0, 0);
   const date = moment(eightDaysLater.getTime()).format("YYYY年M月D日");
+
+  const currentYear = moment(eightDaysLater).year();
+  const currentMonth = moment(eightDaysLater).month(); // 月份从0开始，所以要加1
+  renderCalendar(currentYear, currentMonth);
   activeDay.value = date;
   pickerDayActives.value = [];
   pickerDayActives.value.push(eightDaysLater.getTime() / 1000);
+  activeTimes = eightDaysLater.getTime() / 1000;
   getList();
 });
 </script>
@@ -689,5 +706,18 @@ onMounted(() => {
     justify-content: flex-end;
     align-items: center;
   }
+}
+.selectAll {
+  padding: 0 14px;
+  position: absolute;
+  width: 100%;
+  top: -36px;
+  left: 0px;
+}
+</style>
+
+<style>
+.selectAll .ant-checkbox-wrapper{
+  font-size: 18px ;
 }
 </style>

@@ -51,7 +51,6 @@
                     background: linear-gradient(163deg, #EBEFF2 0%, #E6EBF0 100%);
                     position: relative;
                     width: 360px;
-                    height: 180px;
                     border: 1px solid #E9E9E9;
                     border-radius: 3px 3px 0px 0px;
                     overflow: hidden;
@@ -64,7 +63,6 @@
                         position: relative;
                         z-index: 1;
                         width: 360px;
-                        height: 180px;
                     }
 
                     &.cover2 {
@@ -189,5 +187,41 @@
         display: flex;
         justify-content: flex-end;
         align-items: center;
+    }
+}
+
+.bannersinfo {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    .item {
+        width: 360px;
+
+        .cover {
+            width: 100%;
+
+            img {
+                width: 100%;
+            }
+        }
+    }
+
+    .long-image {
+        width: 750px;
+        margin-left: 20px;
+
+        img {
+            width: 100%;
+        }
+    }
+
+    .title {
+        font-size: 22px;
+        font-family: PingFangSC, PingFang SC;
+        font-weight: 500;
+        color: rgba(0, 0, 0, 0.85);
+        text-align: center;
+        margin-bottom: 18px;
     }
 }

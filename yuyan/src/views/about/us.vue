@@ -62,7 +62,7 @@ const handleSubmit = () => {
   uploadImages()
     .then((res) => {
       handleEditDetail(res);
-      message.success('操作成功')
+      message.success("操作成功");
     })
     .catch((err) => {
       //   message.error(err);
@@ -147,7 +147,7 @@ onMounted(() => {
                     :maxCount="1"
                   >
                     <a-button type="primary">
-                      <upload-outlined></upload-outlined>
+                      <PlusOutlined />
                       上传
                     </a-button>
                   </a-upload>
@@ -165,11 +165,12 @@ onMounted(() => {
           </a-form>
         </div>
       </div>
-      <a-divider orientation="left">实例</a-divider>
+
       <div class="banners" style="padding: 20px">
+        <div class="title">长图展示</div>
         <div class="cover">
           <img
-            style="width: 700px"
+            style="width: 750px"
             v-show="formState.image != ''"
             :src="formState.image"
           />

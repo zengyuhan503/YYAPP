@@ -16,7 +16,7 @@ export default defineConfig({
   },
   server: {
     host:true,
-    port: 8090,
+    port: 8091,
     https: false,
     proxy:{
       '/web':{

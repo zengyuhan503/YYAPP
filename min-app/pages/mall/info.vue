@@ -229,6 +229,10 @@ uni-swiper-dot,
   line-height: 33px;
   position: absolute;
 }
+.uni-swiper__dots-box{
+  bottom: 20px !important;
+
+}
 
 .uni-swiper__dots-item {
   width: 10px !important;

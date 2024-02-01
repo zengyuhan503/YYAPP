@@ -15,6 +15,7 @@ let tabActive = ref(1);
 let searchVal = ref("");
 let contact_status = ref("0");
 const onSearch = () => {
+  pagination.current = 1;
   getList();
 };
 let checkboxs = [
@@ -33,7 +34,14 @@ let checkboxs = [
   { start_time: "18:00", end_time: "19:00", is_limit: 0, index: "13" },
   { start_time: "19:00", end_time: "20:00", is_limit: 0, index: "14" },
 ];
-let dateElementRef=ref(null)
+
+const pagination = reactive({
+  total: 0,
+  current: 1,
+  pageSize: 6,
+  hideOnSinglePage: true,
+});
+let dateElementRef = ref(null);
 const columns = [
   {
     title: "用户昵称",
@@ -61,12 +69,21 @@ const columns = [
     customRender: (record) => {
       let str = record.text;
       let times = checkboxs.filter((item) => item.index == record.record.time_index);
-      if (times.length!=0) {
+      if (times.length != 0) {
         str += `  ${times[0].start_time} - ${times[0].end_time}  `;
       }
-      return str
+      return str;
     },
-  
+    sorter: (a, b) => {
+      let astr = a;
+      let times = checkboxs.filter((item) => item.index == astr.time_index);
+      let ats = `${a.booking_time} ${times[0].start_time}`;
+
+      let bstr = b;
+      let btimes = checkboxs.filter((item) => item.index == bstr.time_index);
+      let bts = `${b.booking_time} ${btimes[0].start_time}`;
+      return moment(bts).valueOf() - moment(ats).valueOf();
+    },
   },
   {
     title: "预约姓名",
@@ -74,9 +91,9 @@ const columns = [
     align: "center",
     dataIndex: "user",
     customRender: (record) => {
-      if(record.text){
+      if (record.text) {
         return record.text.nickname;
-      }else{
+      } else {
         return "-";
       }
     },
@@ -87,9 +104,9 @@ const columns = [
     align: "center",
     dataIndex: "user",
     customRender: (record) => {
-      if(record.text){
+      if (record.text) {
         return record.text.phone;
-      }else{
+      } else {
         return "-";
       }
     },
@@ -105,6 +122,25 @@ const columns = [
     key: "status",
     align: "center",
     dataIndex: "status",
+    filters: [
+      {
+        text: "待到店",
+        value: "0",
+      },
+      {
+        text: "已到达",
+        value: "1",
+      },
+      {
+        text: "已取消",
+        value: "2",
+      },
+      {
+        text: "已过期",
+        value: "3",
+      },
+    ],
+    onFilter: (value, record) => record.status == value,
   },
   {
     title: "操作",
@@ -167,19 +203,28 @@ const handleCancelReservation = (record) => {
   });
 };
 const changeTables = (status) => {
+  pagination.current = 1;
   tabActive.value = status;
-  getList()
+  getList();
 };
 const getList = () => {
   let params = {
-    page: 1,
-    page_size: 10000,
+    page: pagination.current,
+    page_size: pagination.pageSize,
     type: 2,
     keywords: searchVal.value,
   };
   booking_order(params).then((res) => {
+    let data = res.data;
+    pagination.total = data.total;
+    pagination.current = data.current_page;
     dataSource.value = res.data.data;
   });
+};
+
+const handlePageChange = (page) => {
+  pagination.current = page.current;
+  getList();
 };
 const handleChangeContact = (record) => {
   let params = {
@@ -202,7 +247,7 @@ const setContactStatus = (status) => {
 
 let days = ref({
   day: moment().format("YYYY年MM月DD日"),
-  nextDay: moment().add(6,'days').format("YYYY年MM月DD日"),
+  nextDay: moment().add(6, "days").format("YYYY年MM月DD日"),
 });
 onMounted(() => {
   getList();
@@ -225,7 +270,7 @@ onMounted(() => {
           :loading="searchStatus"
         />
         <div class="page-desc" v-if="tabActive == 2">
-          <p class="label">今日：{{days.day}} 可操作{{days.nextDay}}后的日期</p>
+          <p class="label">今日：{{ days.day }} 可操作{{ days.nextDay }}后的日期</p>
           <p>请按时提前设置时间管理，如未设置时间管理，则用户端无法成功预约</p>
         </div>
       </div>
@@ -238,7 +283,12 @@ onMounted(() => {
       <div class="page-table" v-if="tabActive == 1">
         <p class="title">预约用户清单</p>
         <div class="tables">
-          <a-table :columns="columns" :data-source="dataSource" :pagination="false">
+          <a-table
+            :columns="columns"
+            @change="handlePageChange"
+            :data-source="dataSource"
+            :pagination="pagination"
+          >
             <template #bodyCell="{ column, record }">
               <template v-if="column.key === 'name'">
                 {{ record.name }}
@@ -280,7 +330,7 @@ onMounted(() => {
                     v-model:value="record.contact_status"
                     @change="handleChangeContact(record)"
                   >
-                  {{ record.contact_status }}
+                    {{ record.contact_status }}
                     <a-select-option :value="0">未联系</a-select-option>
                     <a-select-option :value="1">已联系</a-select-option>
                     <a-select-option :value="2">未接通</a-select-option>

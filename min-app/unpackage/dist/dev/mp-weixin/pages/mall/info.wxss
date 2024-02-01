@@ -664,6 +664,9 @@ uni-swiper-dot,
   line-height: 33px;
   position: absolute;
 }
+.uni-swiper__dots-box {
+  bottom: 20px !important;
+}
 .uni-swiper__dots-item {
   width: 10px !important;
   box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.2);
