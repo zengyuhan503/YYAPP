@@ -238,17 +238,14 @@
   justify-content: space-between;
   align-items: center;
 }
-.info-main .price.data-v-bcb386f7 {
-  padding-left: 20px;
-}
 .info-main .price view.data-v-bcb386f7 {
-  font-size: 12px;
+  font-size: 14px;
   font-family: PingFangSC, PingFang SC;
   font-weight: 400;
   color: #F9A143;
 }
 .info-main .price view text.data-v-bcb386f7 {
-  font-size: 22px;
+  font-size: 20px;
 }
 .info-main .discounts.data-v-bcb386f7 {
   min-width: 102px;
@@ -626,4 +623,7 @@
 .selectBox .selects image.data-v-bcb386f7 {
   width: 18px;
   height: 18px;
+}
+.geli.data-v-bcb386f7 {
+  height: calc(90px + env(safe-area-inset-bottom));
 }

@@ -77,6 +77,17 @@
           </view>
         </view>
       </view>
+      <view class="areements"  v-if="!isLogin">
+        <view class="selectBox">
+          <view class="selects" @click="handleClickRadio">
+            <image v-show="isArg" src="../../static/image/default.png" mode="widthFix" />
+          </view>
+          <view class="text">
+            已阅读并同意 <text @click="handleToArg1">《预颜小程序用户服务协议》</text> 及
+            <text @click="handleToArg2">《隐私政策》 </text>
+          </view>
+        </view>
+      </view>
       <view class="loginOut">
         <button
           size="default"
@@ -88,16 +99,28 @@
         >
           退出登录
         </button>
-        <button
-          @getphonenumber="getinfos"
-          size="default"
-          open-type="getPhoneNumber"
-          style="color: #ffffff; bordercolor: #d44469"
-          hover-class="is-hover"
-          v-else
-        >
-          登录/注册
-        </button>
+				<template v-else>
+					<button
+						v-if="isArg"
+					  @getphonenumber="getinfos"
+					  open-type="getPhoneNumber"
+					  size="default"
+					  style="color: #ffffff; bordercolor: #d44469"
+					  hover-class="is-hover"
+					>
+					  登录/注册
+					</button>
+					<button
+						@click="handleClickLogin"
+					  size="default"
+					  style="color: #ffffff; bordercolor: #d44469"
+					  hover-class="is-hover"
+					  v-else
+					>
+					  登录/注册
+					</button>
+				</template>
+        
       </view>
     </view>
     <navs active="user" />
@@ -204,6 +227,16 @@ const handleLoginOut = () => {
   uni.removeStorageSync("yy-userinfo");
   isLogin.value = false;
 };
+const handleClickLogin=()=>{
+	if(!isArg.value){
+		uni.showToast({
+			icon:'error',
+			title:'请阅读并同意',
+			duration:2000
+		})
+		return false
+	}
+}
 const getinfos = (e) => {
   let detail = e.detail;
   uni.login({
@@ -241,6 +274,20 @@ const getinfos = (e) => {
   });
   let params = {};
 };
+let isArg = ref(false);
+const handleClickRadio = () => {
+  isArg.value = !isArg.value;
+};
+const handleToArg1 = () => {
+  uni.navigateTo({
+    url: "/pages/args/index1",
+  });
+};
+const handleToArg2 = () => {
+  uni.navigateTo({
+    url: "/pages/args/index2",
+  });
+};
 onLoad((e) => {
   wxInfo = e;
 });
@@ -256,7 +303,6 @@ const handleEditInfo = () => {
 const handleServerGetUserInfo = () => {
   GetServerUserInfo().then((res) => {
     userInfo.value = res;
-    console.log(res);
     userInfo.value.avatar = "https://dental.cdwuhu.com/" + res.avatar;
     isLogin.value = true;
   });
@@ -289,8 +335,6 @@ const handleGetOrderList = () => {
     status: "all",
   };
   GetOrderList(params).then((res) => {
-    console.log(res);
-
     let list = res.data;
     orderList["0"] = list.filter((item) => item.status == 0);
     orderList["2"] = list.filter((item) => item.status == 2);

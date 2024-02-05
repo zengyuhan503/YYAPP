@@ -9,7 +9,7 @@ const DateElement = () => "../../components/DateElement.js";
 const _sfc_main = {
   __name: "index2",
   setup(__props) {
-    let endTime = common_vendor.ref(common_vendor.hooks().format("YYYY-MM-DD"));
+    let endTime = common_vendor.ref(common_vendor.hooks().subtract(1, "months").format("YYYY-MM-DD"));
     let showDate = common_vendor.ref(false);
     let hasSubscribe = common_vendor.ref(false);
     let showCancel = common_vendor.ref(false);
@@ -160,9 +160,16 @@ const _sfc_main = {
       const birthdate = common_vendor.hooks(e.detail.value);
       popularForm.value.birthday = birthdate.format("YYYY-MM-DD日");
       const currentDate = common_vendor.hooks();
-      const age = currentDate.diff(birthdate, "years");
+      let age = currentDate.diff(birthdate, "years");
+      let months = currentDate.diff(birthdate, "months");
+      if (age == 0) {
+        age = "0." + months;
+        popularForm.value.age = months + "个月";
+      } else {
+        popularForm.value.age = age + "岁";
+      }
       agenum = age;
-      popularForm.value.age = age + "岁";
+      console.log(age);
       handleChangeFrom();
     };
     common_vendor.ref([]);

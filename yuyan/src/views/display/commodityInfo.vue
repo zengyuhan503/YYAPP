@@ -33,6 +33,9 @@ const handleReset = () => {
   });
   coverUploadList.value = [];
   imagersUploadList.value = [];
+  let params = route.query;
+  if (Object.keys(params).length == 0) return false;
+  formState.id = params.id as string;
 };
 const coverBeforeUpload = (file) => {
   const isLt = file.size / 1024 / 1024 < 20;
@@ -323,7 +326,7 @@ onMounted(() => {
         </div>
         <div class="long-image">
           <div class="title">
-            <p>商店banner展示</p>
+            <p>长图展示</p>
           </div>
           <img class="imageUrl" :src="formState.imageUrl" alt="" />
         </div>

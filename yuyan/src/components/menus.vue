@@ -37,7 +37,6 @@
 import { ref, inject, watch, onMounted, nextTick } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import options from "@router/config";
-import { createFromIconfontCN } from "@ant-design/icons-vue";
 const selectedKeys = ref<string[]>([]);
 const rootSubmenuKeys = ref([]);
 const openKeys = ref<string[]>([]);
@@ -45,9 +44,6 @@ const collapsed = inject("collapsed");
 let menuLists = ref([]);
 const router = useRouter();
 const route = useRoute();
-const IconFont = createFromIconfontCN({
-  scriptUrl: "./util/icon/iconfont.js",
-});
 const handleopenChange = (refopenKeys: string[]) => {
   // let openKey = refopenKeys[refopenKeys.length - 1];
   // openKeys.value = [openKey];

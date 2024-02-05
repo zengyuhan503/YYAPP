@@ -54,3 +54,6 @@
   font-weight: 500;
   color: rgba(111, 111, 111, 0.4);
 }
+.geli {
+  height: calc(90px + env(safe-area-inset-bottom));
+}

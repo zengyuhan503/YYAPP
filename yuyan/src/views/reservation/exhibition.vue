@@ -51,9 +51,9 @@ const columns = [
   },
   {
     title: "用户ID",
-    dataIndex: "id",
+    dataIndex: "user_id",
     align: "center",
-    key: "id",
+    key: "user_id",
   },
   {
     title: "用户电话号码",

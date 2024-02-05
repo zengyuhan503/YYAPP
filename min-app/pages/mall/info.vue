@@ -75,6 +75,9 @@
           mode="widthFix"
         />
       </view>
+			<view class="geli">
+				
+			</view>
       <view class="pays">
         <view class="price">
           <text v-if="goodsInfo.sale_price != goodsInfo.price">折后价</text>
@@ -86,6 +89,7 @@
       </view>
     </view>
   </view>
+	
 </template>
 
 <script setup>

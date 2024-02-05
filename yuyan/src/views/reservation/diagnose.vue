@@ -51,9 +51,9 @@ const columns = [
   },
   {
     title: "用户ID",
-    dataIndex: "id",
+    dataIndex: "user_id",
     align: "center",
-    key: "id",
+    key: "user_id",
   },
   {
     title: "用户电话号码",
@@ -134,6 +134,16 @@ const columns = [
     key: "age",
     align: "center",
     dataIndex: "age",
+    customRender: (record) => {
+      let age = Number(record.text);
+      let str=''
+      if (age < 1) {
+        str = record.text.replace("0.", "")+'个月';
+      }else{
+        str=age+'岁'
+      }
+      return str;
+    },
   },
   {
     title: "状态",

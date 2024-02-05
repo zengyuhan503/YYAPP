@@ -5,10 +5,6 @@
         <view class="label">
           <view class="">新增收货地址</view>
           <view class="selectBox" @click="handleClickRadio">
-            <!-- <radio-group @change="handleChangeRadio" @click="handleClickRadio">
-              <radio color="#d44469" value="1" :checked="addrForm.is_default == 1" />
-              设为默认地址
-            </radio-group> -->
             <view class="selects" >
               <image
                 v-show="addrForm.is_default"

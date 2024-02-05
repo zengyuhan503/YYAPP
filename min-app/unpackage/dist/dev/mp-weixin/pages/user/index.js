@@ -83,6 +83,16 @@ const _sfc_main = {
       common_vendor.index.removeStorageSync("yy-userinfo");
       isLogin.value = false;
     };
+    const handleClickLogin = () => {
+      if (!isArg.value) {
+        common_vendor.index.showToast({
+          icon: "error",
+          title: "请阅读并同意",
+          duration: 2e3
+        });
+        return false;
+      }
+    };
     const getinfos = (e) => {
       let detail = e.detail;
       common_vendor.index.login({
@@ -119,6 +129,20 @@ const _sfc_main = {
         }
       });
     };
+    let isArg = common_vendor.ref(false);
+    const handleClickRadio = () => {
+      isArg.value = !isArg.value;
+    };
+    const handleToArg1 = () => {
+      common_vendor.index.navigateTo({
+        url: "/pages/args/index1"
+      });
+    };
+    const handleToArg2 = () => {
+      common_vendor.index.navigateTo({
+        url: "/pages/args/index2"
+      });
+    };
     common_vendor.onLoad((e) => {
       wxInfo = e;
     });
@@ -134,7 +158,6 @@ const _sfc_main = {
     const handleServerGetUserInfo = () => {
       utils_api_index.GetServerUserInfo().then((res) => {
         userInfo.value = res;
-        console.log(res);
         userInfo.value.avatar = "https://dental.cdwuhu.com/" + res.avatar;
         isLogin.value = true;
       });
@@ -167,7 +190,6 @@ const _sfc_main = {
         status: "all"
       };
       utils_api_index.GetOrderList(params).then((res) => {
-        console.log(res);
         let list = res.data;
         orderList["0"] = list.filter((item) => item.status == 0);
         orderList["2"] = list.filter((item) => item.status == 2);
@@ -246,23 +268,34 @@ const _sfc_main = {
         }),
         s: common_vendor.o(($event) => showCtUs.value = true)
       } : {}, {
-        t: isLogin.value
+        t: !isLogin.value
+      }, !isLogin.value ? {
+        v: common_vendor.unref(isArg),
+        w: common_vendor.o(handleClickRadio),
+        x: common_vendor.o(handleToArg1),
+        y: common_vendor.o(handleToArg2)
+      } : {}, {
+        z: isLogin.value
       }, isLogin.value ? {
-        v: common_vendor.o(handleLoginOut)
+        A: common_vendor.o(handleLoginOut)
+      } : common_vendor.e({
+        B: common_vendor.unref(isArg)
+      }, common_vendor.unref(isArg) ? {
+        C: common_vendor.o(getinfos)
       } : {
-        w: common_vendor.o(getinfos)
-      }, {
-        x: common_vendor.p({
+        D: common_vendor.o(handleClickLogin)
+      }), {
+        E: common_vendor.p({
           active: "user"
         }),
-        y: showCtUs.value
+        F: showCtUs.value
       }, showCtUs.value ? {
-        z: common_vendor.o(($event) => showCtUs.value = false),
-        A: common_vendor.p({
+        G: common_vendor.o(($event) => showCtUs.value = false),
+        H: common_vendor.p({
           type: "closeempty",
           size: "30"
         }),
-        B: common_vendor.o(handleMakePhoneCall)
+        I: common_vendor.o(handleMakePhoneCall)
       } : {});
     };
   }

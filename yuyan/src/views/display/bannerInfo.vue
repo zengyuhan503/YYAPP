@@ -31,6 +31,9 @@ const handleReset = () => {
   });
   coverUploadList.value = [];
   imagersUploadList.value = [];
+  let params = route.query;
+  if (Object.keys(params).length == 0) return false;
+  formState.id = params.id as string;
 };
 const coverBeforeUpload = (file) => {
   const isLt = file.size / 1024 / 1024 < 20;
@@ -209,12 +212,14 @@ const uploadImages = () => {
 };
 onMounted(() => {
   let params = route.query;
+  console.log(params);
   if (Object.keys(params).length === 0) return false;
   for (const key in params) {
     formState[key] = params[key];
   }
   formState.cover = "https://dental.cdwuhu.com/" + params.image;
-  formState.imageUrl = "https://dental.cdwuhu.com/" + params.long_image;
+  formState.imageUrl =
+    params.long_image == "" ? "" : "https://dental.cdwuhu.com/" + params.long_image;
   console.log(!params);
 });
 </script>
@@ -314,7 +319,7 @@ onMounted(() => {
         </div>
         <div class="long-image">
           <div class="title">
-            <p>商店banner展示</p>
+            <p>长图展示</p>
           </div>
           <img class="imageUrl" :src="formState.imageUrl" alt="" />
         </div>

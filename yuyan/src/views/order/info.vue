@@ -50,8 +50,22 @@ const handleGetInfo = (id) => {
   order_info(params).then((res) => {
     console.log(res);
     orderInfo.value = res.data;
+    if (orderInfo.value.avatar.indexOf("thirdwx") == -1) {
+      orderInfo.value.avatar = "https://dental.cdwuhu.com/" + orderInfo.value.avatar;
+    }
   });
 };
+let orderStatus={
+  0: "待付款",
+  1: "待发货",
+  2: "待收货",
+  3: "已收货",
+  4: "完成订单",
+  "-1": "已关闭",
+  "-2": "已取消",
+  "-3": "已取消",
+  all: "全部订单",
+}
 onMounted(() => {
   let query = route.query;
   let id = query.id;
@@ -77,7 +91,7 @@ onMounted(() => {
         <p>下单时间：{{ orderInfo.create_time }}</p>
         <!-- <p>在小程序中注册后的用户都会在以下列表中显</p> -->
       </div>
-      <div class="status">已完成</div>
+      <div class="status">{{orderStatus[orderInfo.status]}}</div>
     </div>
     <div class="page-body">
       <div class="page-main">
@@ -90,13 +104,13 @@ onMounted(() => {
                   <p><span>用户昵称：</span>{{ orderInfo.name }}</p></a-col
                 >
                 <a-col :span="12">
-                  <p><span>用户ID：</span>UserID {{ orderInfo.user_id }}</p></a-col
+                  <p><span>用户ID：</span> {{ orderInfo.user_id }}</p></a-col
                 >
                 <a-col :span="12">
                   <p><span>用户电话：</span>{{ orderInfo.phone }}</p></a-col
                 >
                 <a-col :span="12">
-                  <p><span>该用户注册时间：</span> 2017-04-05</p></a-col
+                  <p><span>该用户注册时间：</span> {{ orderInfo.create_time }}</p></a-col
                 >
                 <a-col :span="24">
                   <p><span>用户备注</span></p>
@@ -106,7 +120,7 @@ onMounted(() => {
             </a-col>
             <a-col :span="6">
               <div class="avatar">
-                <img :src="'https://dental.cdwuhu.com/' + orderInfo.avatar" alt="" />
+                <img :src="orderInfo.avatar" alt="" />
                 <p>用户头像</p>
               </div>
             </a-col>
@@ -120,7 +134,7 @@ onMounted(() => {
         <p class="title" style="display: block">
           <a-row :gutter="112">
             <a-col :span="12"> 收货地址详情 </a-col>
-            <a-col :span="12"> 物流状态详情 </a-col>
+            <a-col :span="12" v-if="orderInfo.status!=1"> 物流状态详情 </a-col>
           </a-row>
         </p>
         <div class="page-info info1">
@@ -134,7 +148,7 @@ onMounted(() => {
               </div>
             </a-col>
             <a-col :span="12">
-              <div>
+              <div v-if="orderInfo.status==2||orderInfo.status==3||orderInfo.status==4">
                 <p><span>快递公司：</span>{{ orderInfo.ship_company }}</p>
                 <p>
                   <span>快递单号：</span

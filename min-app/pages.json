@@ -13,6 +13,26 @@
 			}
 		},
 		{
+			"path": "pages/args/index1",
+			"style": {
+				"navigationBarTitleText": "预颜小程序用户服务协议",
+				"backgroundColorTop": "#D44469",
+				"navigationBarBackgroundColor": "#D44469",
+				"backgroundColor": "#D44469",
+				"navigationBarTextStyle": "white"
+			}
+		},
+		{
+			"path": "pages/args/index2",
+			"style": {
+				"navigationBarTitleText": "隐私政策",
+				"backgroundColorTop": "#D44469",
+				"navigationBarBackgroundColor": "#D44469",
+				"backgroundColor": "#D44469",
+				"navigationBarTextStyle": "white"
+			}
+		},
+		{
 			"path": "pages/user/index",
 			"style": {
 				"navigationBarTitleText": "预颜口腔",

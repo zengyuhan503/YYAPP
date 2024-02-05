@@ -176,7 +176,7 @@ import {
   CreateBookingPlans,
   CancelBookingPlans,
 } from "../../utils/api/index";
-let endTime = ref(moment().format("YYYY-MM-DD"));
+let endTime = ref(moment().subtract(1, "months").format("YYYY-MM-DD"));
 let showDate = ref(false);
 let hasSubscribe = ref(false);
 let showCancel = ref(false);
@@ -326,9 +326,16 @@ const handleSelectCount = (e) => {
   const birthdate = moment(e.detail.value);
   popularForm.value.birthday = birthdate.format("YYYY-MM-DD日");
   const currentDate = moment();
-  const age = currentDate.diff(birthdate, "years");
+  let age = currentDate.diff(birthdate, "years");
+  let months = currentDate.diff(birthdate, "months");
+  if (age == 0) {
+    age = "0." + months;
+    popularForm.value.age = months+"个月";
+  } else {
+    popularForm.value.age = age + "岁";
+  }
   agenum = age;
-  popularForm.value.age = age + "岁";
+  console.log(age);
   handleChangeFrom();
 };
 let hasTimes = ref([]);

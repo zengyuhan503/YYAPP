@@ -2,6 +2,8 @@
   "pages": [
     "pages/index/index",
     "pages/index/bannerinfo",
+    "pages/args/index1",
+    "pages/args/index2",
     "pages/user/index",
     "pages/about/desc",
     "pages/about/us",
@@ -24,6 +26,5 @@
     "backgroundColor": "#F8F8F8"
   },
   "permission": {},
-  "usingComponents": {},
-  "sitemapLocation": "sitemap.json"
+  "usingComponents": {}
 }

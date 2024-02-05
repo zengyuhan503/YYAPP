@@ -30,7 +30,7 @@ const columns = [
     align: "center",
     key: "out_trade_no",
     ellipsis: true,
-    width: 250,
+    width: 280,
     fixed: "left",
   },
   {
@@ -150,7 +150,8 @@ const columns2 = [
     align: "center",
     ellipsis: true,
     key: "out_trade_no",
-    width: 250,
+    width: 280,
+    fixed: "left",
   },
   {
     title: "商品缩略图",
@@ -203,6 +204,7 @@ const columns2 = [
     align: "center",
     dataIndex: "name",
     ellipsis: true,
+    width: 100,
   },
   {
     title: "收货人电话",
@@ -210,6 +212,7 @@ const columns2 = [
     align: "center",
     dataIndex: "phone",
     ellipsis: true,
+    width: 200,
   },
   {
     title: "收货人地址",
@@ -217,13 +220,14 @@ const columns2 = [
     align: "center",
     ellipsis: true,
     dataIndex: "address",
+    width: 360,
   },
   {
     title: "操作",
     align: "center",
     key: "action",
     fixed: "right",
-    width: 360,
+    width: 300,
   },
 ];
 // 全部
@@ -234,7 +238,7 @@ const columns3 = [
     align: "center",
     key: "out_trade_no",
     ellipsis: true,
-    width: 250,
+    width: 280,
     fixed: "left",
   },
   {

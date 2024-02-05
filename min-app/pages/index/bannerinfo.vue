@@ -5,7 +5,7 @@
       :src="'https://dental.cdwuhu.com/' + info.long_image"
       mode="widthFix"
     ></image>
-    <web-view v-if="info.url != ''" :src="info.url"></web-view>
+    <web-view  v-if="info.url != ''" :src="info.url"></web-view>
   </view>
 </template>
 
@@ -23,6 +23,9 @@ onLoad((options) => {
 </script>
 <style lang="less" scoped>
 .page-content {
+	width: 100%;
+	height: 100vh;
+	
   image {
     width: 100%;
   }

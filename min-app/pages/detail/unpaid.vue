@@ -145,7 +145,7 @@
         >
           <text>{{ orderInfo.express.data }}</text>
         </view>
-        <view v-else>
+        <template v-else>
           <view
             class="ship_item"
             v-for="(item, index) in orderInfo.express.data"
@@ -153,7 +153,7 @@
           >
             <text style="margin-right: 10px">[{{ item.time }}]</text> - {{ item.context }}
           </view>
-        </view>
+        </template>
       </view>
     </view>
   </uni-popup>
