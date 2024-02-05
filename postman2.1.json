@@ -1,0 +1,6685 @@
+{
+	"info": {
+		"name": "牙科",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"variable": [],
+	"auth": {
+		"type": "noauth",
+		"apikey": [
+			{
+				"key": "value",
+				"value": "",
+				"type": "string"
+			},
+			{
+				"key": "key",
+				"value": "",
+				"type": "string"
+			}
+		],
+		"bearer": [
+			{
+				"key": "token",
+				"value": "",
+				"type": "string"
+			}
+		],
+		"basic": [
+			{
+				"key": "username",
+				"value": "",
+				"type": "string"
+			},
+			{
+				"key": "password",
+				"value": "",
+				"type": "string"
+			}
+		]
+	},
+	"env": [],
+	"item": [
+		{
+			"name": "前端",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"item": [
+				{
+					"name": "商品",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"item": [
+						{
+							"name": "详情",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"url": {
+									"raw": "{{web}}/goods/detail?goods_id=13",
+									"host": [
+										"{{web}}"
+									],
+									"query": [
+										{
+											"key": "goods_id",
+											"value": "13"
+										}
+									],
+									"variable": [],
+									"path": [
+										"goods",
+										"detail"
+									]
+								},
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"raw": "{}",
+									"formdata": [
+										{
+											"key": "",
+											"value": "",
+											"type": "text"
+										}
+									]
+								},
+								"auth": {
+									"type": "noauth",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "",
+											"type": "string"
+										}
+									],
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									],
+									"basic": [
+										{
+											"key": "username",
+											"value": "",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"description": ""
+							}
+						},
+						{
+							"name": "分类列表",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"url": {
+									"raw": "{{api}}/goods_category/lists?page=1&page_size=10",
+									"host": [
+										"{{api}}"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "page_size",
+											"value": "10"
+										}
+									],
+									"variable": [],
+									"path": [
+										"goods_category",
+										"lists"
+									]
+								},
+								"header": [],
+								"body": {
+									"mode": "none",
+									"raw": "{}"
+								},
+								"auth": {
+									"type": "noauth",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "",
+											"type": "string"
+										}
+									],
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									],
+									"basic": [
+										{
+											"key": "username",
+											"value": "",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"description": ""
+							}
+						},
+						{
+							"name": "商品列表",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"url": {
+									"raw": "{{web}}/goods/lists?page=1&page_size=10&category_id=",
+									"host": [
+										"{{web}}"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "page_size",
+											"value": "10"
+										},
+										{
+											"key": "category_id",
+											"value": ""
+										}
+									],
+									"variable": [],
+									"path": [
+										"goods",
+										"lists"
+									]
+								},
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"raw": "{}",
+									"formdata": []
+								},
+								"auth": {
+									"type": "noauth",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "",
+											"type": "string"
+										}
+									],
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									],
+									"basic": [
+										{
+											"key": "username",
+											"value": "",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"description": ""
+							}
+						}
+					]
+				},
+				{
+					"name": "订单",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"item": [
+						{
+							"name": "订单计算",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"url": {
+									"raw": "{{api}}/order/calculate?goods_id=14&number=2",
+									"host": [
+										"{{api}}"
+									],
+									"query": [
+										{
+											"key": "goods_id",
+											"value": "14"
+										},
+										{
+											"key": "number",
+											"value": "2"
+										}
+									],
+									"variable": [],
+									"path": [
+										"order",
+										"calculate"
+									]
+								},
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"raw": "{}",
+									"formdata": []
+								},
+								"auth": {
+									"type": "noauth",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "",
+											"type": "string"
+										}
+									],
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									],
+									"basic": [
+										{
+											"key": "username",
+											"value": "",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"description": ""
+							}
+						},
+						{
+							"name": "取消订单",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"url": {
+									"raw": "{{api}}/order/cancel",
+									"host": [
+										"{{api}}"
+									],
+									"query": [],
+									"variable": [],
+									"path": [
+										"order",
+										"cancel"
+									]
+								},
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"raw": "{}",
+									"formdata": [
+										{
+											"key": "order_id",
+											"value": "20",
+											"type": "text"
+										}
+									]
+								},
+								"auth": {
+									"type": "noauth",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "",
+											"type": "string"
+										}
+									],
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									],
+									"basic": [
+										{
+											"key": "username",
+											"value": "",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"description": ""
+							}
+						},
+						{
+							"name": "订单列表",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"url": {
+									"raw": "{{api}}/order/lists?page=1&page_size=10&status=0",
+									"host": [
+										"{{api}}"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "page_size",
+											"value": "10"
+										},
+										{
+											"key": "status",
+											"value": "0"
+										}
+									],
+									"variable": [],
+									"path": [
+										"order",
+										"lists"
+									]
+								},
+								"header": [],
+								"body": {
+									"mode": "none",
+									"raw": "{}"
+								},
+								"auth": {
+									"type": "noauth",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "",
+											"type": "string"
+										}
+									],
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									],
+									"basic": [
+										{
+											"key": "username",
+											"value": "",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"description": ""
+							}
+						},
+						{
+							"name": "发起支付",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"url": {
+									"raw": "{{api}}/order/pay",
+									"host": [
+										"{{api}}"
+									],
+									"query": [],
+									"variable": [],
+									"path": [
+										"order",
+										"pay"
+									]
+								},
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"raw": "{}",
+									"formdata": [
+										{
+											"key": "order_id",
+											"value": "27",
+											"type": "text"
+										}
+									]
+								},
+								"auth": {
+									"type": "noauth",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "",
+											"type": "string"
+										}
+									],
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									],
+									"basic": [
+										{
+											"key": "username",
+											"value": "",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"description": ""
+							}
+						},
+						{
+							"name": "创建订单",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"url": {
+									"raw": "{{api}}/order/create",
+									"host": [
+										"{{api}}"
+									],
+									"query": [],
+									"variable": [],
+									"path": [
+										"order",
+										"create"
+									]
+								},
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"raw": "{}",
+									"formdata": [
+										{
+											"key": "goods_id",
+											"value": "10",
+											"type": "text"
+										},
+										{
+											"key": "number",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "address_id",
+											"value": "0",
+											"type": "text"
+										},
+										{
+											"key": "remark",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "name",
+											"value": "测试",
+											"type": "text"
+										},
+										{
+											"key": "phone",
+											"value": "176280821116",
+											"type": "text"
+										},
+										{
+											"key": "provinces",
+											"value": "四川省-成都市-金牛区",
+											"type": "text"
+										},
+										{
+											"key": "address",
+											"value": "123123",
+											"type": "text"
+										},
+										{
+											"key": "is_default",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "",
+											"value": "",
+											"type": "text"
+										}
+									]
+								},
+								"auth": {
+									"type": "noauth",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "",
+											"type": "string"
+										}
+									],
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									],
+									"basic": [
+										{
+											"key": "username",
+											"value": "",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"description": ""
+							}
+						},
+						{
+							"name": "订单详情",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"url": {
+									"raw": "{{api}}/order/detail?order_id=7",
+									"host": [
+										"{{api}}"
+									],
+									"query": [
+										{
+											"key": "order_id",
+											"value": "7"
+										}
+									],
+									"variable": [],
+									"path": [
+										"order",
+										"detail"
+									]
+								},
+								"header": [],
+								"body": {
+									"mode": "none",
+									"raw": "{}"
+								},
+								"auth": {
+									"type": "noauth",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "",
+											"type": "string"
+										}
+									],
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									],
+									"basic": [
+										{
+											"key": "username",
+											"value": "",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"description": ""
+							}
+						}
+					]
+				},
+				{
+					"name": "测试微信支付",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"url": {
+							"raw": "",
+							"host": [],
+							"query": [],
+							"variable": []
+						},
+						"header": [],
+						"body": {
+							"mode": "none",
+							"raw": "{}"
+						},
+						"auth": {
+							"type": "noauth",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "",
+									"type": "string"
+								}
+							],
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							],
+							"basic": [
+								{
+									"key": "username",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"description": ""
+					}
+				},
+				{
+					"name": "基础接口",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"item": [
+						{
+							"name": "上传",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"url": {
+									"raw": "{{api}}/upload",
+									"host": [
+										"{{api}}"
+									],
+									"query": [],
+									"variable": [],
+									"path": [
+										"upload"
+									]
+								},
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"raw": "{}",
+									"formdata": [
+										{
+											"key": "limit_image",
+											"value": [
+												"C:\\Users\\14913\\Desktop\\g4xzCQv2VCt9T29WM7eWwbX24V424t.jpg"
+											],
+											"type": "text"
+										}
+									]
+								},
+								"auth": {
+									"type": "noauth",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "",
+											"type": "string"
+										}
+									],
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									],
+									"basic": [
+										{
+											"key": "username",
+											"value": "",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"description": ""
+							}
+						},
+						{
+							"name": "医生介绍",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"url": {
+									"raw": "{{api}}/common/desc",
+									"host": [
+										"{{api}}"
+									],
+									"query": [],
+									"variable": [],
+									"path": [
+										"common",
+										"desc"
+									]
+								},
+								"header": [],
+								"body": {
+									"mode": "none",
+									"raw": "{}"
+								},
+								"auth": {
+									"type": "noauth",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "",
+											"type": "string"
+										}
+									],
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									],
+									"basic": [
+										{
+											"key": "username",
+											"value": "",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"description": ""
+							}
+						},
+						{
+							"name": "关于我们",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"url": {
+									"raw": "{{api}}/common/about",
+									"host": [
+										"{{api}}"
+									],
+									"query": [],
+									"variable": [],
+									"path": [
+										"common",
+										"about"
+									]
+								},
+								"header": [],
+								"body": {
+									"mode": "none",
+									"raw": "{}"
+								},
+								"auth": {
+									"type": "noauth",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "",
+											"type": "string"
+										}
+									],
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									],
+									"basic": [
+										{
+											"key": "username",
+											"value": "",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"description": ""
+							}
+						},
+						{
+							"name": "banner",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"url": {
+									"raw": "{{api}}/common/banner?type=1",
+									"host": [
+										"{{api}}"
+									],
+									"query": [
+										{
+											"key": "type",
+											"value": "1"
+										}
+									],
+									"variable": [],
+									"path": [
+										"common",
+										"banner"
+									]
+								},
+								"header": [],
+								"body": {
+									"mode": "none",
+									"raw": "{}"
+								},
+								"auth": {
+									"type": "noauth",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "",
+											"type": "string"
+										}
+									],
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									],
+									"basic": [
+										{
+											"key": "username",
+											"value": "",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"description": ""
+							}
+						}
+					]
+				},
+				{
+					"name": "用户",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"item": [
+						{
+							"name": "修改资料",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"url": {
+									"raw": "{{api}}/user/edit",
+									"host": [
+										"{{api}}"
+									],
+									"query": [],
+									"variable": [],
+									"path": [
+										"user",
+										"edit"
+									]
+								},
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"raw": "{}",
+									"formdata": [
+										{
+											"key": "avatar",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "phone",
+											"value": "17628082116",
+											"type": "text"
+										},
+										{
+											"key": "nickname",
+											"value": "1",
+											"type": "text"
+										}
+									]
+								},
+								"auth": {
+									"type": "noauth",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "",
+											"type": "string"
+										}
+									],
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									],
+									"basic": [
+										{
+											"key": "username",
+											"value": "",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"description": ""
+							}
+						},
+						{
+							"name": "获取手机号",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"url": {
+									"raw": "{{api}}/user/phone",
+									"host": [
+										"{{api}}"
+									],
+									"query": [],
+									"variable": [],
+									"path": [
+										"user",
+										"phone"
+									]
+								},
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"raw": "{}",
+									"formdata": [
+										{
+											"key": "code",
+											"value": "",
+											"type": "text"
+										}
+									]
+								},
+								"auth": {
+									"type": "noauth",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "",
+											"type": "string"
+										}
+									],
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									],
+									"basic": [
+										{
+											"key": "username",
+											"value": "",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"description": ""
+							}
+						},
+						{
+							"name": "微信授权",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"url": {
+									"raw": "{{api}}/user/wechat",
+									"host": [
+										"{{api}}"
+									],
+									"query": [],
+									"variable": [],
+									"path": [
+										"user",
+										"wechat"
+									]
+								},
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"raw": "{}",
+									"formdata": [
+										{
+											"key": "code",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "rawData",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "signature",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "iv",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "encryptedData",
+											"value": "",
+											"type": "text"
+										}
+									]
+								},
+								"auth": {
+									"type": "noauth",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "",
+											"type": "string"
+										}
+									],
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									],
+									"basic": [
+										{
+											"key": "username",
+											"value": "",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"description": ""
+							}
+						},
+						{
+							"name": "获取用户信息",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"url": {
+									"raw": "{{api}}/user/getUser",
+									"host": [
+										"{{api}}"
+									],
+									"query": [],
+									"variable": [],
+									"path": [
+										"user",
+										"getUser"
+									]
+								},
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"raw": "{}",
+									"formdata": []
+								},
+								"auth": {
+									"type": "noauth",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "",
+											"type": "string"
+										}
+									],
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									],
+									"basic": [
+										{
+											"key": "username",
+											"value": "",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"description": ""
+							}
+						},
+						{
+							"name": "收获地址",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							],
+							"item": [
+								{
+									"name": "列表",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"type": "text/javascript",
+												"exec": [
+													""
+												]
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"type": "text/javascript",
+												"exec": [
+													""
+												]
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"url": {
+											"raw": "{{api}}/user/address/lists",
+											"host": [
+												"{{api}}"
+											],
+											"query": [],
+											"variable": [],
+											"path": [
+												"user",
+												"address",
+												"lists"
+											]
+										},
+										"header": [],
+										"body": {
+											"mode": "none",
+											"raw": "{}"
+										},
+										"auth": {
+											"type": "noauth",
+											"apikey": [
+												{
+													"key": "value",
+													"value": "",
+													"type": "string"
+												},
+												{
+													"key": "key",
+													"value": "",
+													"type": "string"
+												}
+											],
+											"bearer": [
+												{
+													"key": "token",
+													"value": "",
+													"type": "string"
+												}
+											],
+											"basic": [
+												{
+													"key": "username",
+													"value": "",
+													"type": "string"
+												},
+												{
+													"key": "password",
+													"value": "",
+													"type": "string"
+												}
+											]
+										},
+										"description": ""
+									}
+								},
+								{
+									"name": "修改",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"type": "text/javascript",
+												"exec": [
+													""
+												]
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"type": "text/javascript",
+												"exec": [
+													""
+												]
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"url": {
+											"raw": "{{api}}/user/address/edit",
+											"host": [
+												"{{api}}"
+											],
+											"query": [],
+											"variable": [],
+											"path": [
+												"user",
+												"address",
+												"edit"
+											]
+										},
+										"header": [],
+										"body": {
+											"mode": "formdata",
+											"raw": "{}",
+											"formdata": [
+												{
+													"key": "name",
+													"value": "1",
+													"type": "text"
+												},
+												{
+													"key": "phone",
+													"value": "17628082116",
+													"type": "text"
+												},
+												{
+													"key": "provinces",
+													"value": "北京市 北京市 北京市",
+													"type": "text"
+												},
+												{
+													"key": "address",
+													"value": "dadad",
+													"type": "text"
+												},
+												{
+													"key": "is_default",
+													"value": "1",
+													"type": "text"
+												},
+												{
+													"key": "address_id",
+													"value": "3",
+													"type": "text"
+												}
+											]
+										},
+										"auth": {
+											"type": "noauth",
+											"apikey": [
+												{
+													"key": "value",
+													"value": "",
+													"type": "string"
+												},
+												{
+													"key": "key",
+													"value": "",
+													"type": "string"
+												}
+											],
+											"bearer": [
+												{
+													"key": "token",
+													"value": "",
+													"type": "string"
+												}
+											],
+											"basic": [
+												{
+													"key": "username",
+													"value": "",
+													"type": "string"
+												},
+												{
+													"key": "password",
+													"value": "",
+													"type": "string"
+												}
+											]
+										},
+										"description": ""
+									}
+								},
+								{
+									"name": "新增",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"type": "text/javascript",
+												"exec": [
+													""
+												]
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"type": "text/javascript",
+												"exec": [
+													""
+												]
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"url": {
+											"raw": "{{api}}/user/address/add",
+											"host": [
+												"{{api}}"
+											],
+											"query": [],
+											"variable": [],
+											"path": [
+												"user",
+												"address",
+												"add"
+											]
+										},
+										"header": [],
+										"body": {
+											"mode": "formdata",
+											"raw": "{}",
+											"formdata": [
+												{
+													"key": "name",
+													"value": "1",
+													"type": "text"
+												},
+												{
+													"key": "phone",
+													"value": "17628082116",
+													"type": "text"
+												},
+												{
+													"key": "provinces",
+													"value": "北京市 北京市 北京市",
+													"type": "text"
+												},
+												{
+													"key": "address",
+													"value": "dadad",
+													"type": "text"
+												},
+												{
+													"key": "is_default",
+													"value": "1",
+													"type": "text"
+												}
+											]
+										},
+										"auth": {
+											"type": "noauth",
+											"apikey": [
+												{
+													"key": "value",
+													"value": "",
+													"type": "string"
+												},
+												{
+													"key": "key",
+													"value": "",
+													"type": "string"
+												}
+											],
+											"bearer": [
+												{
+													"key": "token",
+													"value": "",
+													"type": "string"
+												}
+											],
+											"basic": [
+												{
+													"key": "username",
+													"value": "",
+													"type": "string"
+												},
+												{
+													"key": "password",
+													"value": "",
+													"type": "string"
+												}
+											]
+										},
+										"description": ""
+									}
+								},
+								{
+									"name": "删除",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"type": "text/javascript",
+												"exec": [
+													""
+												]
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"type": "text/javascript",
+												"exec": [
+													""
+												]
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"url": {
+											"raw": "{{api}}/user/address/delete",
+											"host": [
+												"{{api}}"
+											],
+											"query": [],
+											"variable": [],
+											"path": [
+												"user",
+												"address",
+												"delete"
+											]
+										},
+										"header": [],
+										"body": {
+											"mode": "formdata",
+											"raw": "{}",
+											"formdata": [
+												{
+													"key": "address_id",
+													"value": "3",
+													"type": "text"
+												}
+											]
+										},
+										"auth": {
+											"type": "noauth",
+											"apikey": [
+												{
+													"key": "value",
+													"value": "",
+													"type": "string"
+												},
+												{
+													"key": "key",
+													"value": "",
+													"type": "string"
+												}
+											],
+											"bearer": [
+												{
+													"key": "token",
+													"value": "",
+													"type": "string"
+												}
+											],
+											"basic": [
+												{
+													"key": "username",
+													"value": "",
+													"type": "string"
+												},
+												{
+													"key": "password",
+													"value": "",
+													"type": "string"
+												}
+											]
+										},
+										"description": ""
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "预约",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"item": [
+						{
+							"name": "创建预约",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"url": {
+									"raw": "{{api}}/booking_order/createKpBooking",
+									"host": [
+										"{{api}}"
+									],
+									"query": [],
+									"variable": [],
+									"path": [
+										"booking_order",
+										"createKpBooking"
+									]
+								},
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"raw": "{}",
+									"formdata": [
+										{
+											"key": "age",
+											"value": "0.1",
+											"type": "text"
+										},
+										{
+											"key": "birthday",
+											"value": "2024-01-04日",
+											"type": "text"
+										},
+										{
+											"key": "date",
+											"value": "2024-02-04",
+											"type": "text"
+										},
+										{
+											"key": "date_index",
+											"value": "5",
+											"type": "text"
+										},
+										{
+											"key": "gender",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "name",
+											"value": "曾曾",
+											"type": "text"
+										},
+										{
+											"key": "phone",
+											"value": "13458685625",
+											"type": "text"
+										},
+										{
+											"key": "type",
+											"value": "1",
+											"type": "text"
+										}
+									]
+								},
+								"auth": {
+									"type": "noauth",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "",
+											"type": "string"
+										}
+									],
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									],
+									"basic": [
+										{
+											"key": "username",
+											"value": "",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"description": ""
+							}
+						},
+						{
+							"name": "取消预约",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"url": {
+									"raw": "{{api}}/booking_order/cancel",
+									"host": [
+										"{{api}}"
+									],
+									"query": [],
+									"variable": [],
+									"path": [
+										"booking_order",
+										"cancel"
+									]
+								},
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"raw": "{}",
+									"formdata": [
+										{
+											"key": "type",
+											"value": "1",
+											"type": "text"
+										}
+									]
+								},
+								"auth": {
+									"type": "noauth",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "",
+											"type": "string"
+										}
+									],
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									],
+									"basic": [
+										{
+											"key": "username",
+											"value": "",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"description": ""
+							}
+						},
+						{
+							"name": "时间列表",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"url": {
+									"raw": "{{api}}/booking_plan/lists?type=1",
+									"host": [
+										"{{api}}"
+									],
+									"query": [
+										{
+											"key": "type",
+											"value": "1"
+										}
+									],
+									"variable": [],
+									"path": [
+										"booking_plan",
+										"lists"
+									]
+								},
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"raw": "{}",
+									"formdata": []
+								},
+								"auth": {
+									"type": "noauth",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "",
+											"type": "string"
+										}
+									],
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									],
+									"basic": [
+										{
+											"key": "username",
+											"value": "",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"description": ""
+							}
+						},
+						{
+							"name": "时间详情",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"url": {
+									"raw": "{{api}}/booking_plan/detail?date=2024-01-06&type=1",
+									"host": [
+										"{{api}}"
+									],
+									"query": [
+										{
+											"key": "date",
+											"value": "2024-01-06"
+										},
+										{
+											"key": "type",
+											"value": "1"
+										}
+									],
+									"variable": [],
+									"path": [
+										"booking_plan",
+										"detail"
+									]
+								},
+								"header": [],
+								"body": {
+									"mode": "none",
+									"raw": "{}"
+								},
+								"auth": {
+									"type": "noauth",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "",
+											"type": "string"
+										}
+									],
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									],
+									"basic": [
+										{
+											"key": "username",
+											"value": "",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"description": ""
+							}
+						},
+						{
+							"name": "查看预约",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"url": {
+									"raw": "{{api}}/booking_order/detail?type=2",
+									"host": [
+										"{{api}}"
+									],
+									"query": [
+										{
+											"key": "type",
+											"value": "2"
+										}
+									],
+									"variable": [],
+									"path": [
+										"booking_order",
+										"detail"
+									]
+								},
+								"header": [],
+								"body": {
+									"mode": "none",
+									"raw": "{}"
+								},
+								"auth": {
+									"type": "noauth",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "",
+											"type": "string"
+										}
+									],
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									],
+									"basic": [
+										{
+											"key": "username",
+											"value": "",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"description": ""
+							}
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "后端",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"item": [
+				{
+					"name": "新建接口",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "{{web}}/common/task",
+							"host": [
+								"{{web}}"
+							],
+							"query": [],
+							"variable": [],
+							"path": [
+								"common",
+								"task"
+							]
+						},
+						"header": [],
+						"body": {
+							"mode": "none",
+							"raw": "{}"
+						},
+						"auth": {
+							"type": "noauth",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "",
+									"type": "string"
+								}
+							],
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							],
+							"basic": [
+								{
+									"key": "username",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"description": ""
+					}
+				},
+				{
+					"name": "关于我们",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"item": [
+						{
+							"name": "编辑",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"url": {
+									"raw": "{{web}}/about/edit",
+									"host": [
+										"{{web}}"
+									],
+									"query": [],
+									"variable": [],
+									"path": [
+										"about",
+										"edit"
+									]
+								},
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"raw": "{}",
+									"formdata": [
+										{
+											"key": "image",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "desc",
+											"value": "2131",
+											"type": "text"
+										}
+									]
+								},
+								"auth": {
+									"type": "noauth",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "",
+											"type": "string"
+										}
+									],
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									],
+									"basic": [
+										{
+											"key": "username",
+											"value": "",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"description": ""
+							}
+						},
+						{
+							"name": "详情",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"url": {
+									"raw": "{{web}}/about/detail",
+									"host": [
+										"{{web}}"
+									],
+									"query": [],
+									"variable": [],
+									"path": [
+										"about",
+										"detail"
+									]
+								},
+								"header": [],
+								"body": {
+									"mode": "none",
+									"raw": "{}"
+								},
+								"auth": {
+									"type": "noauth",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "",
+											"type": "string"
+										}
+									],
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									],
+									"basic": [
+										{
+											"key": "username",
+											"value": "",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"description": ""
+							}
+						}
+					]
+				},
+				{
+					"name": "用户",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"item": [
+						{
+							"name": "编辑用户",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"url": {
+									"raw": "{{web}}/user/edit",
+									"host": [
+										"{{web}}"
+									],
+									"query": [],
+									"variable": [],
+									"path": [
+										"user",
+										"edit"
+									]
+								},
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"raw": "{}",
+									"formdata": [
+										{
+											"key": "user_id",
+											"value": "1064",
+											"type": "text"
+										},
+										{
+											"key": "nickname",
+											"value": "昵称",
+											"type": "text"
+										},
+										{
+											"key": "phone",
+											"value": "17628082116",
+											"type": "text"
+										},
+										{
+											"key": "gender",
+											"value": "0",
+											"type": "text"
+										},
+										{
+											"key": "avatar",
+											"value": "2",
+											"type": "text"
+										},
+										{
+											"key": "status",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "remark",
+											"value": "",
+											"type": "text"
+										}
+									]
+								},
+								"auth": {
+									"type": "noauth",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "",
+											"type": "string"
+										}
+									],
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									],
+									"basic": [
+										{
+											"key": "username",
+											"value": "",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"description": ""
+							}
+						},
+						{
+							"name": "修改状态",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"url": {
+									"raw": "{{web}}/user/changeStatus",
+									"host": [
+										"{{web}}"
+									],
+									"query": [],
+									"variable": [],
+									"path": [
+										"user",
+										"changeStatus"
+									]
+								},
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"raw": "{}",
+									"formdata": [
+										{
+											"key": "user_id",
+											"value": "1064",
+											"type": "text"
+										},
+										{
+											"key": "status",
+											"value": "",
+											"type": "text"
+										}
+									]
+								},
+								"auth": {
+									"type": "noauth",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "",
+											"type": "string"
+										}
+									],
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									],
+									"basic": [
+										{
+											"key": "username",
+											"value": "",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"description": ""
+							}
+						},
+						{
+							"name": "上传图片",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"url": {
+									"raw": "{{web}}/upload",
+									"host": [
+										"{{web}}"
+									],
+									"query": [],
+									"variable": [],
+									"path": [
+										"upload"
+									]
+								},
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"raw": "{}",
+									"formdata": [
+										{
+											"key": "limit_image",
+											"value": "",
+											"type": "text"
+										}
+									]
+								},
+								"auth": {
+									"type": "noauth",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "",
+											"type": "string"
+										}
+									],
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									],
+									"basic": [
+										{
+											"key": "username",
+											"value": "",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"description": ""
+							}
+						},
+						{
+							"name": "用户详情",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"url": {
+									"raw": "{{web}}/user/detail?user_id=1064",
+									"host": [
+										"{{web}}"
+									],
+									"query": [
+										{
+											"key": "user_id",
+											"value": "1064"
+										}
+									],
+									"variable": [],
+									"path": [
+										"user",
+										"detail"
+									]
+								},
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"raw": "{}",
+									"formdata": [
+										{
+											"key": "",
+											"value": "",
+											"type": "text"
+										}
+									]
+								},
+								"auth": {
+									"type": "noauth",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "",
+											"type": "string"
+										}
+									],
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									],
+									"basic": [
+										{
+											"key": "username",
+											"value": "",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"description": ""
+							}
+						},
+						{
+							"name": "用户列表",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"url": {
+									"raw": "{{web}}/user/lists?page=1&page_size=10&keywords=",
+									"host": [
+										"{{web}}"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "page_size",
+											"value": "10"
+										},
+										{
+											"key": "keywords",
+											"value": ""
+										}
+									],
+									"variable": [],
+									"path": [
+										"user",
+										"lists"
+									]
+								},
+								"header": [],
+								"body": {
+									"mode": "none",
+									"raw": "{}"
+								},
+								"auth": {
+									"type": "noauth",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "",
+											"type": "string"
+										}
+									],
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									],
+									"basic": [
+										{
+											"key": "username",
+											"value": "",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"description": ""
+							}
+						}
+					]
+				},
+				{
+					"name": "商品管理",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"item": [
+						{
+							"name": "商品分类",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							],
+							"item": [
+								{
+									"name": "新增",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"type": "text/javascript",
+												"exec": [
+													""
+												]
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"type": "text/javascript",
+												"exec": [
+													""
+												]
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"url": {
+											"raw": "{{web}}/goods_category/add",
+											"host": [
+												"{{web}}"
+											],
+											"query": [],
+											"variable": [],
+											"path": [
+												"goods_category",
+												"add"
+											]
+										},
+										"header": [],
+										"body": {
+											"mode": "formdata",
+											"raw": "{}",
+											"formdata": [
+												{
+													"key": "title",
+													"value": "面膜",
+													"type": "text"
+												},
+												{
+													"key": "icon",
+													"value": "",
+													"type": "text"
+												}
+											]
+										},
+										"auth": {
+											"type": "noauth",
+											"apikey": [
+												{
+													"key": "value",
+													"value": "",
+													"type": "string"
+												},
+												{
+													"key": "key",
+													"value": "",
+													"type": "string"
+												}
+											],
+											"bearer": [
+												{
+													"key": "token",
+													"value": "",
+													"type": "string"
+												}
+											],
+											"basic": [
+												{
+													"key": "username",
+													"value": "",
+													"type": "string"
+												},
+												{
+													"key": "password",
+													"value": "",
+													"type": "string"
+												}
+											]
+										},
+										"description": ""
+									}
+								},
+								{
+									"name": "删除",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"type": "text/javascript",
+												"exec": [
+													""
+												]
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"type": "text/javascript",
+												"exec": [
+													""
+												]
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"url": {
+											"raw": "{{web}}/goods_category/delete",
+											"host": [
+												"{{web}}"
+											],
+											"query": [],
+											"variable": [],
+											"path": [
+												"goods_category",
+												"delete"
+											]
+										},
+										"header": [],
+										"body": {
+											"mode": "formdata",
+											"raw": "{}",
+											"formdata": [
+												{
+													"key": "category_id",
+													"value": "1",
+													"type": "text"
+												}
+											]
+										},
+										"auth": {
+											"type": "noauth",
+											"apikey": [
+												{
+													"key": "value",
+													"value": "",
+													"type": "string"
+												},
+												{
+													"key": "key",
+													"value": "",
+													"type": "string"
+												}
+											],
+											"bearer": [
+												{
+													"key": "token",
+													"value": "",
+													"type": "string"
+												}
+											],
+											"basic": [
+												{
+													"key": "username",
+													"value": "",
+													"type": "string"
+												},
+												{
+													"key": "password",
+													"value": "",
+													"type": "string"
+												}
+											]
+										},
+										"description": ""
+									}
+								},
+								{
+									"name": "列表",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"type": "text/javascript",
+												"exec": [
+													""
+												]
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"type": "text/javascript",
+												"exec": [
+													""
+												]
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"url": {
+											"raw": "{{web}}/goods_category/lists?page=1&page_size=10&keywords=口",
+											"host": [
+												"{{web}}"
+											],
+											"query": [
+												{
+													"key": "page",
+													"value": "1"
+												},
+												{
+													"key": "page_size",
+													"value": "10"
+												},
+												{
+													"key": "keywords",
+													"value": "口"
+												}
+											],
+											"variable": [],
+											"path": [
+												"goods_category",
+												"lists"
+											]
+										},
+										"header": [],
+										"body": {
+											"mode": "none",
+											"raw": "{}"
+										},
+										"auth": {
+											"type": "noauth",
+											"apikey": [
+												{
+													"key": "value",
+													"value": "",
+													"type": "string"
+												},
+												{
+													"key": "key",
+													"value": "",
+													"type": "string"
+												}
+											],
+											"bearer": [
+												{
+													"key": "token",
+													"value": "",
+													"type": "string"
+												}
+											],
+											"basic": [
+												{
+													"key": "username",
+													"value": "",
+													"type": "string"
+												},
+												{
+													"key": "password",
+													"value": "",
+													"type": "string"
+												}
+											]
+										},
+										"description": ""
+									}
+								},
+								{
+									"name": "编辑",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"type": "text/javascript",
+												"exec": [
+													""
+												]
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"type": "text/javascript",
+												"exec": [
+													""
+												]
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"url": {
+											"raw": "{{web}}/goods_category/edit",
+											"host": [
+												"{{web}}"
+											],
+											"query": [],
+											"variable": [],
+											"path": [
+												"goods_category",
+												"edit"
+											]
+										},
+										"header": [],
+										"body": {
+											"mode": "formdata",
+											"raw": "{}",
+											"formdata": [
+												{
+													"key": "category_id",
+													"value": "2",
+													"type": "text"
+												},
+												{
+													"key": "title",
+													"value": "口红",
+													"type": "text"
+												},
+												{
+													"key": "icon",
+													"value": "",
+													"type": "text"
+												}
+											]
+										},
+										"auth": {
+											"type": "noauth",
+											"apikey": [
+												{
+													"key": "value",
+													"value": "",
+													"type": "string"
+												},
+												{
+													"key": "key",
+													"value": "",
+													"type": "string"
+												}
+											],
+											"bearer": [
+												{
+													"key": "token",
+													"value": "",
+													"type": "string"
+												}
+											],
+											"basic": [
+												{
+													"key": "username",
+													"value": "",
+													"type": "string"
+												},
+												{
+													"key": "password",
+													"value": "",
+													"type": "string"
+												}
+											]
+										},
+										"description": ""
+									}
+								}
+							]
+						},
+						{
+							"name": "商品列表",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							],
+							"item": [
+								{
+									"name": "列表",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"type": "text/javascript",
+												"exec": [
+													""
+												]
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"type": "text/javascript",
+												"exec": [
+													""
+												]
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"url": {
+											"raw": "{{web}}/goods/lists?page=1&page_size=10&status=&keywords=",
+											"host": [
+												"{{web}}"
+											],
+											"query": [
+												{
+													"key": "page",
+													"value": "1"
+												},
+												{
+													"key": "page_size",
+													"value": "10"
+												},
+												{
+													"key": "status",
+													"value": ""
+												},
+												{
+													"key": "keywords",
+													"value": ""
+												}
+											],
+											"variable": [],
+											"path": [
+												"goods",
+												"lists"
+											]
+										},
+										"header": [],
+										"body": {
+											"mode": "none",
+											"raw": "{}"
+										},
+										"auth": {
+											"type": "noauth",
+											"apikey": [
+												{
+													"key": "value",
+													"value": "",
+													"type": "string"
+												},
+												{
+													"key": "key",
+													"value": "",
+													"type": "string"
+												}
+											],
+											"bearer": [
+												{
+													"key": "token",
+													"value": "",
+													"type": "string"
+												}
+											],
+											"basic": [
+												{
+													"key": "username",
+													"value": "",
+													"type": "string"
+												},
+												{
+													"key": "password",
+													"value": "",
+													"type": "string"
+												}
+											]
+										},
+										"description": ""
+									}
+								},
+								{
+									"name": "新增",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"type": "text/javascript",
+												"exec": [
+													""
+												]
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"type": "text/javascript",
+												"exec": [
+													""
+												]
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"url": {
+											"raw": "{{web}}/goods/add",
+											"host": [
+												"{{web}}"
+											],
+											"query": [],
+											"variable": [],
+											"path": [
+												"goods",
+												"add"
+											]
+										},
+										"header": [],
+										"body": {
+											"mode": "formdata",
+											"raw": "{}",
+											"formdata": [
+												{
+													"key": "category_id",
+													"value": "1,2,3",
+													"type": "text"
+												},
+												{
+													"key": "title",
+													"value": "测试商品",
+													"type": "text"
+												},
+												{
+													"key": "price",
+													"value": "78.00",
+													"type": "text"
+												},
+												{
+													"key": "discount",
+													"value": "50",
+													"type": "text"
+												},
+												{
+													"key": "head_image",
+													"value": "1",
+													"type": "text"
+												},
+												{
+													"key": "deputy_image",
+													"value": "2",
+													"type": "text"
+												},
+												{
+													"key": "detail_image",
+													"value": "",
+													"type": "text"
+												},
+												{
+													"key": "desc",
+													"value": "12",
+													"type": "text"
+												}
+											]
+										},
+										"auth": {
+											"type": "noauth",
+											"apikey": [
+												{
+													"key": "value",
+													"value": "",
+													"type": "string"
+												},
+												{
+													"key": "key",
+													"value": "",
+													"type": "string"
+												}
+											],
+											"bearer": [
+												{
+													"key": "token",
+													"value": "",
+													"type": "string"
+												}
+											],
+											"basic": [
+												{
+													"key": "username",
+													"value": "",
+													"type": "string"
+												},
+												{
+													"key": "password",
+													"value": "",
+													"type": "string"
+												}
+											]
+										},
+										"description": ""
+									}
+								},
+								{
+									"name": "修改状态",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"type": "text/javascript",
+												"exec": [
+													""
+												]
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"type": "text/javascript",
+												"exec": [
+													""
+												]
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"url": {
+											"raw": "{{web}}/goods/changeStatus",
+											"host": [
+												"{{web}}"
+											],
+											"query": [],
+											"variable": [],
+											"path": [
+												"goods",
+												"changeStatus"
+											]
+										},
+										"header": [],
+										"body": {
+											"mode": "formdata",
+											"raw": "{}",
+											"formdata": [
+												{
+													"key": "goods_id",
+													"value": "12",
+													"type": "text"
+												},
+												{
+													"key": "status",
+													"value": "0",
+													"type": "text"
+												}
+											]
+										},
+										"auth": {
+											"type": "noauth",
+											"apikey": [
+												{
+													"key": "value",
+													"value": "",
+													"type": "string"
+												},
+												{
+													"key": "key",
+													"value": "",
+													"type": "string"
+												}
+											],
+											"bearer": [
+												{
+													"key": "token",
+													"value": "",
+													"type": "string"
+												}
+											],
+											"basic": [
+												{
+													"key": "username",
+													"value": "",
+													"type": "string"
+												},
+												{
+													"key": "password",
+													"value": "",
+													"type": "string"
+												}
+											]
+										},
+										"description": ""
+									}
+								},
+								{
+									"name": "详情",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"type": "text/javascript",
+												"exec": [
+													""
+												]
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"type": "text/javascript",
+												"exec": [
+													""
+												]
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"url": {
+											"raw": "{{web}}/goods/detail?goods_id=1",
+											"host": [
+												"{{web}}"
+											],
+											"query": [
+												{
+													"key": "goods_id",
+													"value": "1"
+												}
+											],
+											"variable": [],
+											"path": [
+												"goods",
+												"detail"
+											]
+										},
+										"header": [],
+										"body": {
+											"mode": "formdata",
+											"raw": "{}",
+											"formdata": [
+												{
+													"key": "",
+													"value": "",
+													"type": "text"
+												}
+											]
+										},
+										"auth": {
+											"type": "noauth",
+											"apikey": [
+												{
+													"key": "value",
+													"value": "",
+													"type": "string"
+												},
+												{
+													"key": "key",
+													"value": "",
+													"type": "string"
+												}
+											],
+											"bearer": [
+												{
+													"key": "token",
+													"value": "",
+													"type": "string"
+												}
+											],
+											"basic": [
+												{
+													"key": "username",
+													"value": "",
+													"type": "string"
+												},
+												{
+													"key": "password",
+													"value": "",
+													"type": "string"
+												}
+											]
+										},
+										"description": ""
+									}
+								},
+								{
+									"name": "删除",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"type": "text/javascript",
+												"exec": [
+													""
+												]
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"type": "text/javascript",
+												"exec": [
+													""
+												]
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"url": {
+											"raw": "{{web}}/goods/delete",
+											"host": [
+												"{{web}}"
+											],
+											"query": [],
+											"variable": [],
+											"path": [
+												"goods",
+												"delete"
+											]
+										},
+										"header": [],
+										"body": {
+											"mode": "formdata",
+											"raw": "{}",
+											"formdata": [
+												{
+													"key": "goods_id",
+													"value": "1",
+													"type": "text"
+												}
+											]
+										},
+										"auth": {
+											"type": "noauth",
+											"apikey": [
+												{
+													"key": "value",
+													"value": "",
+													"type": "string"
+												},
+												{
+													"key": "key",
+													"value": "",
+													"type": "string"
+												}
+											],
+											"bearer": [
+												{
+													"key": "token",
+													"value": "",
+													"type": "string"
+												}
+											],
+											"basic": [
+												{
+													"key": "username",
+													"value": "",
+													"type": "string"
+												},
+												{
+													"key": "password",
+													"value": "",
+													"type": "string"
+												}
+											]
+										},
+										"description": ""
+									}
+								},
+								{
+									"name": "修改",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"type": "text/javascript",
+												"exec": [
+													""
+												]
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"type": "text/javascript",
+												"exec": [
+													""
+												]
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"url": {
+											"raw": "{{web}}/goods/edit",
+											"host": [
+												"{{web}}"
+											],
+											"query": [],
+											"variable": [],
+											"path": [
+												"goods",
+												"edit"
+											]
+										},
+										"header": [],
+										"body": {
+											"mode": "formdata",
+											"raw": "{}",
+											"formdata": [
+												{
+													"key": "goods_id",
+													"value": "2",
+													"type": "text"
+												},
+												{
+													"key": "category_id",
+													"value": "1,2,3",
+													"type": "text"
+												},
+												{
+													"key": "title",
+													"value": "测试商品",
+													"type": "text"
+												},
+												{
+													"key": "price",
+													"value": "78.56",
+													"type": "text"
+												},
+												{
+													"key": "discount",
+													"value": "50",
+													"type": "text"
+												},
+												{
+													"key": "head_image",
+													"value": "1",
+													"type": "text"
+												},
+												{
+													"key": "deputy_image",
+													"value": "2",
+													"type": "text"
+												},
+												{
+													"key": "detail_image",
+													"value": "",
+													"type": "text"
+												},
+												{
+													"key": "desc",
+													"value": "12",
+													"type": "text"
+												}
+											]
+										},
+										"auth": {
+											"type": "noauth",
+											"apikey": [
+												{
+													"key": "value",
+													"value": "",
+													"type": "string"
+												},
+												{
+													"key": "key",
+													"value": "",
+													"type": "string"
+												}
+											],
+											"bearer": [
+												{
+													"key": "token",
+													"value": "",
+													"type": "string"
+												}
+											],
+											"basic": [
+												{
+													"key": "username",
+													"value": "",
+													"type": "string"
+												},
+												{
+													"key": "password",
+													"value": "",
+													"type": "string"
+												}
+											]
+										},
+										"description": ""
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "医生介绍",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"item": [
+						{
+							"name": "详情",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"url": {
+									"raw": "{{web}}/about/detail",
+									"host": [
+										"{{web}}"
+									],
+									"query": [],
+									"variable": [],
+									"path": [
+										"about",
+										"detail"
+									]
+								},
+								"header": [],
+								"body": {
+									"mode": "none",
+									"raw": "{}"
+								},
+								"auth": {
+									"type": "noauth",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "",
+											"type": "string"
+										}
+									],
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									],
+									"basic": [
+										{
+											"key": "username",
+											"value": "",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"description": ""
+							}
+						},
+						{
+							"name": "编辑",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"url": {
+									"raw": "{{web}}/desc/edit",
+									"host": [
+										"{{web}}"
+									],
+									"query": [],
+									"variable": [],
+									"path": [
+										"desc",
+										"edit"
+									]
+								},
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"raw": "{}",
+									"formdata": [
+										{
+											"key": "image",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "desc",
+											"value": "2131",
+											"type": "text"
+										}
+									]
+								},
+								"auth": {
+									"type": "noauth",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "",
+											"type": "string"
+										}
+									],
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									],
+									"basic": [
+										{
+											"key": "username",
+											"value": "",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"description": ""
+							}
+						}
+					]
+				},
+				{
+					"name": "预约",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"item": [
+						{
+							"name": "预约列表",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							],
+							"item": [
+								{
+									"name": "列表",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"type": "text/javascript",
+												"exec": [
+													""
+												]
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"type": "text/javascript",
+												"exec": [
+													""
+												]
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"url": {
+											"raw": "{{web}}/booking_order/lists?page=1&page_size=10&type=1&keywords=",
+											"host": [
+												"{{web}}"
+											],
+											"query": [
+												{
+													"key": "page",
+													"value": "1"
+												},
+												{
+													"key": "page_size",
+													"value": "10"
+												},
+												{
+													"key": "type",
+													"value": "1"
+												},
+												{
+													"key": "keywords",
+													"value": ""
+												}
+											],
+											"variable": [],
+											"path": [
+												"booking_order",
+												"lists"
+											]
+										},
+										"header": [],
+										"body": {
+											"mode": "none",
+											"raw": "{}"
+										},
+										"auth": {
+											"type": "noauth",
+											"apikey": [
+												{
+													"key": "value",
+													"value": "",
+													"type": "string"
+												},
+												{
+													"key": "key",
+													"value": "",
+													"type": "string"
+												}
+											],
+											"bearer": [
+												{
+													"key": "token",
+													"value": "",
+													"type": "string"
+												}
+											],
+											"basic": [
+												{
+													"key": "username",
+													"value": "",
+													"type": "string"
+												},
+												{
+													"key": "password",
+													"value": "",
+													"type": "string"
+												}
+											]
+										},
+										"description": ""
+									}
+								},
+								{
+									"name": "修改联系状态",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"type": "text/javascript",
+												"exec": [
+													""
+												]
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"type": "text/javascript",
+												"exec": [
+													""
+												]
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"url": {
+											"raw": "{{web}}/booking_order/changeContactStatus",
+											"host": [
+												"{{web}}"
+											],
+											"query": [],
+											"variable": [],
+											"path": [
+												"booking_order",
+												"changeContactStatus"
+											]
+										},
+										"header": [],
+										"body": {
+											"mode": "formdata",
+											"raw": "{}",
+											"formdata": [
+												{
+													"key": "order_id",
+													"value": "1",
+													"type": "text"
+												},
+												{
+													"key": "status",
+													"value": "2",
+													"type": "text"
+												},
+												{
+													"key": "",
+													"value": "",
+													"type": "text"
+												}
+											]
+										},
+										"auth": {
+											"type": "noauth",
+											"apikey": [
+												{
+													"key": "value",
+													"value": "",
+													"type": "string"
+												},
+												{
+													"key": "key",
+													"value": "",
+													"type": "string"
+												}
+											],
+											"bearer": [
+												{
+													"key": "token",
+													"value": "",
+													"type": "string"
+												}
+											],
+											"basic": [
+												{
+													"key": "username",
+													"value": "",
+													"type": "string"
+												},
+												{
+													"key": "password",
+													"value": "",
+													"type": "string"
+												}
+											]
+										},
+										"description": ""
+									}
+								},
+								{
+									"name": "修改状态",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"type": "text/javascript",
+												"exec": [
+													""
+												]
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"type": "text/javascript",
+												"exec": [
+													""
+												]
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"url": {
+											"raw": "{{web}}/booking_order/changeStatus",
+											"host": [
+												"{{web}}"
+											],
+											"query": [],
+											"variable": [],
+											"path": [
+												"booking_order",
+												"changeStatus"
+											]
+										},
+										"header": [],
+										"body": {
+											"mode": "formdata",
+											"raw": "{}",
+											"formdata": [
+												{
+													"key": "order_id",
+													"value": "1",
+													"type": "text"
+												},
+												{
+													"key": "status",
+													"value": "2",
+													"type": "text"
+												}
+											]
+										},
+										"auth": {
+											"type": "noauth",
+											"apikey": [
+												{
+													"key": "value",
+													"value": "",
+													"type": "string"
+												},
+												{
+													"key": "key",
+													"value": "",
+													"type": "string"
+												}
+											],
+											"bearer": [
+												{
+													"key": "token",
+													"value": "",
+													"type": "string"
+												}
+											],
+											"basic": [
+												{
+													"key": "username",
+													"value": "",
+													"type": "string"
+												},
+												{
+													"key": "password",
+													"value": "",
+													"type": "string"
+												}
+											]
+										},
+										"description": ""
+									}
+								}
+							]
+						},
+						{
+							"name": "时间设置",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							],
+							"item": [
+								{
+									"name": "新增",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"type": "text/javascript",
+												"exec": [
+													""
+												]
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"type": "text/javascript",
+												"exec": [
+													""
+												]
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"url": {
+											"raw": "{{web}}/booking_plan/add",
+											"host": [
+												"{{web}}"
+											],
+											"query": [],
+											"variable": [],
+											"path": [
+												"booking_plan",
+												"add"
+											]
+										},
+										"header": [],
+										"body": {
+											"mode": "formdata",
+											"raw": "{}",
+											"formdata": [
+												{
+													"key": "date",
+													"value": "",
+													"type": "text"
+												}
+											]
+										},
+										"auth": {
+											"type": "noauth",
+											"apikey": [
+												{
+													"key": "value",
+													"value": "",
+													"type": "string"
+												},
+												{
+													"key": "key",
+													"value": "",
+													"type": "string"
+												}
+											],
+											"bearer": [
+												{
+													"key": "token",
+													"value": "",
+													"type": "string"
+												}
+											],
+											"basic": [
+												{
+													"key": "username",
+													"value": "",
+													"type": "string"
+												},
+												{
+													"key": "password",
+													"value": "",
+													"type": "string"
+												}
+											]
+										},
+										"description": ""
+									}
+								},
+								{
+									"name": "编辑",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"type": "text/javascript",
+												"exec": [
+													""
+												]
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"type": "text/javascript",
+												"exec": [
+													""
+												]
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"url": {
+											"raw": "{{web}}/booking_plan/edit",
+											"host": [
+												"{{web}}"
+											],
+											"query": [],
+											"variable": [],
+											"path": [
+												"booking_plan",
+												"edit"
+											]
+										},
+										"header": [],
+										"body": {
+											"mode": "formdata",
+											"raw": "{}",
+											"formdata": [
+												{
+													"key": "date",
+													"value": "2024-01-06",
+													"type": "text"
+												},
+												{
+													"key": "index",
+													"value": "1,2,3,4,5,6,7",
+													"type": "text"
+												},
+												{
+													"key": "type",
+													"value": "1",
+													"type": "text"
+												},
+												{
+													"key": "is_limit",
+													"value": "1",
+													"type": "text"
+												}
+											]
+										},
+										"auth": {
+											"type": "noauth",
+											"apikey": [
+												{
+													"key": "value",
+													"value": "",
+													"type": "string"
+												},
+												{
+													"key": "key",
+													"value": "",
+													"type": "string"
+												}
+											],
+											"bearer": [
+												{
+													"key": "token",
+													"value": "",
+													"type": "string"
+												}
+											],
+											"basic": [
+												{
+													"key": "username",
+													"value": "",
+													"type": "string"
+												},
+												{
+													"key": "password",
+													"value": "",
+													"type": "string"
+												}
+											]
+										},
+										"description": ""
+									}
+								},
+								{
+									"name": "列表",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"type": "text/javascript",
+												"exec": [
+													""
+												]
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"type": "text/javascript",
+												"exec": [
+													""
+												]
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"url": {
+											"raw": "{{web}}/booking_plan/lists?type=2",
+											"host": [
+												"{{web}}"
+											],
+											"query": [
+												{
+													"key": "type",
+													"value": "2"
+												}
+											],
+											"variable": [],
+											"path": [
+												"booking_plan",
+												"lists"
+											]
+										},
+										"header": [],
+										"body": {
+											"mode": "formdata",
+											"raw": "{}",
+											"formdata": []
+										},
+										"auth": {
+											"type": "noauth",
+											"apikey": [
+												{
+													"key": "value",
+													"value": "",
+													"type": "string"
+												},
+												{
+													"key": "key",
+													"value": "",
+													"type": "string"
+												}
+											],
+											"bearer": [
+												{
+													"key": "token",
+													"value": "",
+													"type": "string"
+												}
+											],
+											"basic": [
+												{
+													"key": "username",
+													"value": "",
+													"type": "string"
+												},
+												{
+													"key": "password",
+													"value": "",
+													"type": "string"
+												}
+											]
+										},
+										"description": ""
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "登录",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"item": [
+						{
+							"name": "登录",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"url": {
+									"raw": "{{web}}/login",
+									"host": [
+										"{{web}}"
+									],
+									"query": [],
+									"variable": [],
+									"path": [
+										"login"
+									]
+								},
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"raw": "{}",
+									"formdata": [
+										{
+											"key": "account",
+											"value": "admin",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "123456",
+											"type": "text"
+										}
+									]
+								},
+								"auth": {
+									"type": "noauth",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "",
+											"type": "string"
+										}
+									],
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									],
+									"basic": [
+										{
+											"key": "username",
+											"value": "",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"description": ""
+							}
+						},
+						{
+							"name": "退出",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"url": {
+									"raw": "{{web}}/loginout",
+									"host": [
+										"{{web}}"
+									],
+									"query": [],
+									"variable": [],
+									"path": [
+										"loginout"
+									]
+								},
+								"header": [],
+								"body": {
+									"mode": "none",
+									"raw": "{}"
+								},
+								"auth": {
+									"type": "noauth",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "",
+											"type": "string"
+										}
+									],
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									],
+									"basic": [
+										{
+											"key": "username",
+											"value": "",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"description": ""
+							}
+						}
+					]
+				},
+				{
+					"name": "banner",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"item": [
+						{
+							"name": "新增",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"url": {
+									"raw": "{{web}}/banner/add",
+									"host": [
+										"{{web}}"
+									],
+									"query": [],
+									"variable": [],
+									"path": [
+										"banner",
+										"add"
+									]
+								},
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"raw": "{}",
+									"formdata": [
+										{
+											"key": "type",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "url",
+											"value": "17628082116",
+											"type": "text"
+										},
+										{
+											"key": "goods_id",
+											"value": "0",
+											"type": "text"
+										},
+										{
+											"key": "remark",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "image",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "long_image",
+											"value": "",
+											"type": "text"
+										}
+									]
+								},
+								"auth": {
+									"type": "noauth",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "",
+											"type": "string"
+										}
+									],
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									],
+									"basic": [
+										{
+											"key": "username",
+											"value": "",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"description": ""
+							}
+						},
+						{
+							"name": "列表",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"url": {
+									"raw": "{{web}}/banner/lists?page=1&page_size=10&type=1",
+									"host": [
+										"{{web}}"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "page_size",
+											"value": "10"
+										},
+										{
+											"key": "type",
+											"value": "1"
+										}
+									],
+									"variable": [],
+									"path": [
+										"banner",
+										"lists"
+									]
+								},
+								"header": [],
+								"body": {
+									"mode": "none",
+									"raw": "{}"
+								},
+								"auth": {
+									"type": "noauth",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "",
+											"type": "string"
+										}
+									],
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									],
+									"basic": [
+										{
+											"key": "username",
+											"value": "",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"description": ""
+							}
+						},
+						{
+							"name": "详情",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"url": {
+									"raw": "{{web}}/banner/detail?banner_id=1",
+									"host": [
+										"{{web}}"
+									],
+									"query": [
+										{
+											"key": "banner_id",
+											"value": "1"
+										}
+									],
+									"variable": [],
+									"path": [
+										"banner",
+										"detail"
+									]
+								},
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"raw": "{}",
+									"formdata": [
+										{
+											"key": "",
+											"value": "",
+											"type": "text"
+										}
+									]
+								},
+								"auth": {
+									"type": "noauth",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "",
+											"type": "string"
+										}
+									],
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									],
+									"basic": [
+										{
+											"key": "username",
+											"value": "",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"description": ""
+							}
+						},
+						{
+							"name": "编辑",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"url": {
+									"raw": "{{web}}/banner/edit",
+									"host": [
+										"{{web}}"
+									],
+									"query": [],
+									"variable": [],
+									"path": [
+										"banner",
+										"edit"
+									]
+								},
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\t\"banner_id\": \"1\",\r\n\t\"type\": \"1\",\r\n\t\"url\": \"17628082116\",\r\n\t\"goods_id\": \"0\",\r\n\t\"remark\": \"\",\r\n\t\"image\": \"1\",\r\n\t\"long_image\": \"\"\r\n}"
+								},
+								"auth": {
+									"type": "noauth",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "",
+											"type": "string"
+										}
+									],
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									],
+									"basic": [
+										{
+											"key": "username",
+											"value": "",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"description": ""
+							}
+						},
+						{
+							"name": "删除",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"url": {
+									"raw": "{{web}}/banner/delete",
+									"host": [
+										"{{web}}"
+									],
+									"query": [],
+									"variable": [],
+									"path": [
+										"banner",
+										"delete"
+									]
+								},
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"raw": "{}",
+									"formdata": [
+										{
+											"key": "banner_id",
+											"value": "1",
+											"type": "text"
+										}
+									]
+								},
+								"auth": {
+									"type": "noauth",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "",
+											"type": "string"
+										}
+									],
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									],
+									"basic": [
+										{
+											"key": "username",
+											"value": "",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"description": ""
+							}
+						}
+					]
+				},
+				{
+					"name": "订单",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"item": [
+						{
+							"name": "订单列表",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"url": {
+									"raw": "{{web}}/order/lists?page=1&page_size=10&status=&keyword=",
+									"host": [
+										"{{web}}"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "page_size",
+											"value": "10"
+										},
+										{
+											"key": "status",
+											"value": ""
+										},
+										{
+											"key": "keyword",
+											"value": ""
+										}
+									],
+									"variable": [],
+									"path": [
+										"order",
+										"lists"
+									]
+								},
+								"header": [],
+								"body": {
+									"mode": "none",
+									"raw": "{}"
+								},
+								"auth": {
+									"type": "noauth",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "",
+											"type": "string"
+										}
+									],
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									],
+									"basic": [
+										{
+											"key": "username",
+											"value": "",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"description": ""
+							}
+						},
+						{
+							"name": "送达订单",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"url": {
+									"raw": "{{web}}/order/finish",
+									"host": [
+										"{{web}}"
+									],
+									"query": [],
+									"variable": [],
+									"path": [
+										"order",
+										"finish"
+									]
+								},
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"raw": "{}",
+									"formdata": [
+										{
+											"key": "order_id",
+											"value": "21",
+											"type": "text"
+										}
+									]
+								},
+								"auth": {
+									"type": "noauth",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "",
+											"type": "string"
+										}
+									],
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									],
+									"basic": [
+										{
+											"key": "username",
+											"value": "",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"description": ""
+							}
+						},
+						{
+							"name": "发货",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"url": {
+									"raw": "{{web}}/order/ship",
+									"host": [
+										"{{web}}"
+									],
+									"query": [],
+									"variable": [],
+									"path": [
+										"order",
+										"ship"
+									]
+								},
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"raw": "{}",
+									"formdata": [
+										{
+											"key": "order_id",
+											"value": "19",
+											"type": "text"
+										},
+										{
+											"key": "ship_company",
+											"value": "shunfeng",
+											"type": "text"
+										},
+										{
+											"key": "ship_number",
+											"value": "1231231",
+											"type": "text"
+										},
+										{
+											"key": "",
+											"value": "",
+											"type": "text"
+										}
+									]
+								},
+								"auth": {
+									"type": "noauth",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "",
+											"type": "string"
+										}
+									],
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									],
+									"basic": [
+										{
+											"key": "username",
+											"value": "",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"description": ""
+							}
+						},
+						{
+							"name": "快递",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"url": {
+									"raw": "{{web}}/express",
+									"host": [
+										"{{web}}"
+									],
+									"query": [],
+									"variable": [],
+									"path": [
+										"express"
+									]
+								},
+								"header": [],
+								"body": {
+									"mode": "none",
+									"raw": "{}"
+								},
+								"auth": {
+									"type": "noauth",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "",
+											"type": "string"
+										}
+									],
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									],
+									"basic": [
+										{
+											"key": "username",
+											"value": "",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"description": ""
+							}
+						},
+						{
+							"name": "订单详情",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"url": {
+									"raw": "{{web}}/order/detail?order_id=19",
+									"host": [
+										"{{web}}"
+									],
+									"query": [
+										{
+											"key": "order_id",
+											"value": "19"
+										}
+									],
+									"variable": [],
+									"path": [
+										"order",
+										"detail"
+									]
+								},
+								"header": [],
+								"body": {
+									"mode": "none",
+									"raw": "{}"
+								},
+								"auth": {
+									"type": "noauth",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "",
+											"type": "string"
+										}
+									],
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									],
+									"basic": [
+										{
+											"key": "username",
+											"value": "",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"description": ""
+							}
+						},
+						{
+							"name": "开启订单",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"url": {
+									"raw": "{{web}}/order/open",
+									"host": [
+										"{{web}}"
+									],
+									"query": [],
+									"variable": [],
+									"path": [
+										"order",
+										"open"
+									]
+								},
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"raw": "{}",
+									"formdata": [
+										{
+											"key": "order_id",
+											"value": "21",
+											"type": "text"
+										}
+									]
+								},
+								"auth": {
+									"type": "noauth",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "",
+											"type": "string"
+										}
+									],
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									],
+									"basic": [
+										{
+											"key": "username",
+											"value": "",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"description": ""
+							}
+						},
+						{
+							"name": "更新物流",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"url": {
+									"raw": "{{web}}/order/updateExpress",
+									"host": [
+										"{{web}}"
+									],
+									"query": [],
+									"variable": [],
+									"path": [
+										"order",
+										"updateExpress"
+									]
+								},
+								"header": [],
+								"body": {
+									"mode": "none",
+									"raw": "{}"
+								},
+								"auth": {
+									"type": "noauth",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "",
+											"type": "string"
+										}
+									],
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									],
+									"basic": [
+										{
+											"key": "username",
+											"value": "",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"description": ""
+							}
+						},
+						{
+							"name": "关闭订单",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"url": {
+									"raw": "{{web}}/order/close",
+									"host": [
+										"{{web}}"
+									],
+									"query": [],
+									"variable": [],
+									"path": [
+										"order",
+										"close"
+									]
+								},
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"raw": "{}",
+									"formdata": [
+										{
+											"key": "order_id",
+											"value": "21",
+											"type": "text"
+										}
+									]
+								},
+								"auth": {
+									"type": "noauth",
+									"apikey": [
+										{
+											"key": "value",
+											"value": "",
+											"type": "string"
+										},
+										{
+											"key": "key",
+											"value": "",
+											"type": "string"
+										}
+									],
+									"bearer": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "string"
+										}
+									],
+									"basic": [
+										{
+											"key": "username",
+											"value": "",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "",
+											"type": "string"
+										}
+									]
+								},
+								"description": ""
+							}
+						}
+					]
+				}
+			]
+		}
+	]
+}
