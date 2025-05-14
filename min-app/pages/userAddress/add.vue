@@ -19,7 +19,7 @@
           <view class="item">
             <div class="prefix">
               <image
-                src="http://h5.dental.cdwuhu.com/static/icon/icon.png"
+                src="http://h5.yuyandental.com/static/icon/icon.png"
                 style="width: 16px; height: 18px"
               />
             </div>
@@ -30,7 +30,7 @@
           <view class="item">
             <div class="prefix">
               <image
-                src="http://h5.dental.cdwuhu.com/static/icon/icon3.png"
+                src="http://h5.yuyandental.com/static/icon/icon3.png"
                 style="width: 15px; height: 19px"
               />
             </div>
@@ -42,7 +42,7 @@
             <picker mode="region" @change="bindRegionChange" custom-item="{{customItem}}">
               <div class="prefix" style="left: 15px; top: 10px">
                 <image
-                  src="http://h5.dental.cdwuhu.com/static/icon/icon2.png"
+                  src="http://h5.yuyandental.com/static/icon/icon2.png"
                   style="width: 28px; height: 28px"
                 />
               </div>
@@ -60,7 +60,7 @@
           <view class="item">
             <div class="prefix" style="left: 19px; top: 25px">
               <image
-                src="http://h5.dental.cdwuhu.com/static/icon/icon1.png"
+                src="http://h5.yuyandental.com/static/icon/icon1.png"
                 style="width: 19px; height: 15px"
               />
             </div>

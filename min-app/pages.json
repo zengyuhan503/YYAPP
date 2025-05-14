@@ -9,7 +9,6 @@
 		{
 			"path": "pages/index/bannerinfo",
 			"style": {
-				"navigationStyle": "custom"
 			}
 		},
 		{

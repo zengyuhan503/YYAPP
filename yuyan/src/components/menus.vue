@@ -1,14 +1,6 @@
 <template>
-  <a-menu
-    style="width: 256px"
-    v-model:openKeys="openKeys"
-    v-model:selectedKeys="selectedKeys"
-    mode="inline"
-    :multiple="true"
-    theme="dark"
-    @openChange="handleopenChange"
-    :inline-collapsed="collapsed"
-  >
+  <a-menu style="width: 256px" v-model:openKeys="openKeys" v-model:selectedKeys="selectedKeys" mode="inline"
+    :multiple="true" theme="dark" @openChange="handleopenChange" :inline-collapsed="collapsed">
     <a-sub-menu v-for="item in menuLists" :key="item.path">
       <template #icon>
         <!-- <MenuFoldOutlined /> -->
@@ -19,12 +11,8 @@
         {{ item.name }}
       </template>
       <template v-for="child in item.children" :key="child.path">
-        <a-menu-item
-          @click="handleClick(child.path)"
-          v-if="child.meta.showMenu || child.showMenu"
-          :key="child.path"
-          style="padding-left: 60px"
-        >
+        <a-menu-item @click="handleClick(child.path)" v-if="child.meta.showMenu || child.showMenu" :key="child.path"
+          style="padding-left: 60px">
           <span class="dev-audit">
             {{ child.name }}
           </span>
@@ -53,11 +41,14 @@ const handleClick = (key) => {
   router.push(key);
 };
 menuLists.value = options.filter((option) => option.meta.showMenu === true);
-console.log(menuLists.value);
+
 
 watch(
   route,
   (newVal) => {
+    if (newVal.path == "/") {
+      router.push("/user/lists")
+    }
     // console.log(newVal.fullPath)
     const paths = newVal.fullPath.split("/");
     // console.log(paths)
@@ -80,45 +71,59 @@ watch(
     border-radius: 0 !important;
   }
 }
+
 .ant-menu-sub {
   background: #002140;
 }
+
 .ant-menu-submenu-selected .ant-menu-submenu-title {
   color: #177ddc;
 }
+
 .ant-menu-submenu-title:hover {
   color: #177ddc;
 }
+
 .ant-menu-submenu-active {
   color: #177ddc;
 }
+
 .ant-menu-item {
   padding-left: 70px !important;
 }
+
 .ant-menu-item:hover {
   color: #177ddc;
 }
+
 .ant-menu .ant-menu-item-selected,
 .ant-menu-submenu-popup .ant-menu-item-selected {
   background-color: #177ddc;
 }
+
 .ant-menu .ant-menu-item-selected:hover {
   color: #ffffff;
 }
+
 .dev-audit {
   position: relative;
 }
+
 .ant-menu-title-content {
   overflow: initial !important;
 }
+
 .hide-audit::before {
   display: none;
 }
+
 .ant-menu-item-icon {
   font-size: 18px !important;
 }
+
 .workorder {
   position: relative;
+
   &::before {
     display: block;
     content: "";
@@ -129,18 +134,22 @@ watch(
     top: 5px;
     border-radius: 50%;
   }
+
   &.handle::before {
     background: #ffa84a;
   }
+
   &.list::before {
     background: #ff1a2e;
   }
 }
+
 .ant-menu-submenu-title {
   background: rgb(0, 33, 64);
   padding: 0px 0px 0px 24px;
   margin: 0px;
 }
+
 .ant-menu {
   background: #002140;
 }

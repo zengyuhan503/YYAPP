@@ -219,8 +219,8 @@ const handleGetGoodsList = () => {
       formState[key] = query[key];
       formState.goods_id = parseInt(formState.goods_id);
     }
-    formState.cover = "https://dental.cdwuhu.com/" + query.image;
-    formState.imageUrl = "https://dental.cdwuhu.com/" + query.long_image;
+    formState.cover = "https://yuyandental.com//" + query.image;
+    formState.imageUrl = "https://yuyandental.com//" + query.long_image;
   });
 };
 onMounted(() => {

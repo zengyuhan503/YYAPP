@@ -254,12 +254,12 @@
   padding: 0 11px;
 }
 .info-main .discounts.hasback.data-v-43c06b56 {
-  background-image: url("http://h5.dental.cdwuhu.com/static/image/discounts.png");
+  background-image: url("http://h5.yuyandental.com/static/image/discounts.png");
   background-repeat: no-repeat;
   background-size: 100% 100%;
 }
 .info-main .discounts.hasback2.data-v-43c06b56 {
-  background-image: url("http://h5.dental.cdwuhu.com/static/image/discounts1.png");
+  background-image: url("http://h5.yuyandental.com/static/image/discounts1.png");
   background-repeat: no-repeat;
   background-size: 100% 100%;
 }

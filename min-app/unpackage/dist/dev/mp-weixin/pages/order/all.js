@@ -81,7 +81,7 @@ const _sfc_main = {
           }, item.status == -2 ? {} : {}, {
             h: item.status == -3
           }, item.status == -3 ? {} : {}, {
-            i: "https://dental.cdwuhu.com/" + item.goods_image,
+            i: "https://www.yuyandental.com/" + item.goods_image,
             j: common_vendor.t(item.goods_name),
             k: common_vendor.t(item.num),
             l: common_vendor.t(item.real_price),
@@ -94,5 +94,5 @@ const _sfc_main = {
     };
   }
 };
-const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__scopeId", "data-v-4284604b"], ["__file", "F:/PROJECT-ZENGYUHAN/yuyan-project/min-app/pages/order/all.vue"]]);
+const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__scopeId", "data-v-4284604b"]]);
 wx.createPage(MiniProgramPage);

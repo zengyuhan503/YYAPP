@@ -33,7 +33,7 @@
       </view>
       <view class="activeday"
         ><image
-          src="http://h5.dental.cdwuhu.com/static/image/dateicon.png"
+          src="http://h5.yuyandental.com/static/image/dateicon.png"
           mode="widthFix"
         />
         {{ moment(actDay).format("MM月DD日") }}
@@ -73,7 +73,7 @@
       </view>
       <div class="okTime">
         <view @click="handleConfirm">确定</view>
-        <!-- <image src="https://dental.cdwuhu.com/static/image/confirm.png" mode="" @click="handleConfirm" /> -->
+        <!-- <image src="https://www.yuyandental.com/static/image/confirm.png" mode="" @click="handleConfirm" /> -->
       </div>
     </view>
   </view>
@@ -163,6 +163,8 @@ const handleGetBooking_plans_detail = (date = null) => {
     actDay.value = moment(date.time).format("YYYY-MM-DD");
     actDayTime.value = date.time;
   }
+	let today = moment();
+	let someDay = moment(actDay.value)
   let params = {
     date: actDay.value,
     type: props.type,
@@ -174,9 +176,13 @@ const handleGetBooking_plans_detail = (date = null) => {
     const currentTime = moment();
     const filteredArray = hasTimes.value.filter((obj) => {
       const endTime = moment(obj.end_time, "HH:mm"); // 将结束时间字符串解析为 Moment 对象
-      return currentTime.isBefore(endTime); // 检查当前时间是否在结束时间之前
+			if(today.isSame(someDay,"day")){
+				return currentTime.isBefore(endTime); // 检查当前时间是否在结束时间之前
+			}else{
+				return endTime; 
+			}
+      
     });
-    console.log(filteredArray);
     hasTimes.value = filteredArray;
   });
 };

@@ -1,0 +1,1 @@
+<view class="page-content data-v-510ece46"><image wx:if="{{a}}" class="data-v-510ece46" src="{{b}}" mode="widthFix"></image><web-view wx:if="{{c}}" class="data-v-510ece46" src="{{d}}"></web-view></view>

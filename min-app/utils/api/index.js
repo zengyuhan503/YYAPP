@@ -1,6 +1,6 @@
 let apiPost = (uri, params, token = null) => {
 	return new Promise((resolve, reject) => {
-		let url = "https://dental.cdwuhu.com" + uri
+		let url = "https://www.yuyandental.com" + uri
 		wx.request({
 			url: url,
 			data: params,
@@ -55,7 +55,7 @@ const tokenfFail = () => {
 }
 let apiGet = (uri, params, token = null) => {
 	return new Promise((resolve, reject) => {
-		let url = "https://dental.cdwuhu.com" + uri
+		let url = "https://www.yuyandental.com" + uri
 		wx.request({
 			url: url,
 			data: params,
@@ -87,7 +87,7 @@ let apiGet = (uri, params, token = null) => {
 }
 const apiUploadImage = (uri) => {
 	return new Promise((resolve, reject) => {
-		let url = "https://dental.cdwuhu.com" + uri
+		let url = "https://www.yuyandental.com" + uri
 		wx.request({
 			url: url,
 			data: params,

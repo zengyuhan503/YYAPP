@@ -12,7 +12,7 @@
       />
     </div>
     <div class="covers">
-      <!-- <image :src="'https://dental.cdwuhu.com/' + goodsInfo.head_image" mode="widthFix" /> -->
+      <!-- <image :src="'https://h5.yuyandental.com/' + goodsInfo.head_image" mode="widthFix" /> -->
       <uni-swiper-dot
         class="uni-swiper-dot-box"
         :info="covers"
@@ -24,7 +24,7 @@
         <swiper class="swiper-box" @change="handleBannerChange">
           <swiper-item v-for="(item, index) in covers" :key="index">
             <image
-              :src="'https://dental.cdwuhu.com/' + item"
+              :src="'https://www.yuyandental.com/' + item"
               mode="widthFix"
               class="swiper-image"
             ></image>
@@ -47,17 +47,17 @@
             </view>
           </view>
           <view class="discounts hasback" v-if="goodsInfo.sale_price != goodsInfo.price">
-            <!-- <image src="http://h5.dental.cdwuhu.com/static/image/discounts.png" mode="" /> -->
+            <!-- <image src="http://h5.yuyandental.com/static/image/discounts.png" mode="" /> -->
             <view class="text">
               立省 ¥
               <text style="font-weight: 600">{{
-                goodsInfo.price - goodsInfo.sale_price
+               ( goodsInfo.price*1000 - goodsInfo.sale_price*1000)/1000
               }}</text></view
             >
           </view>
           <view class="discounts hasback2" v-else>
             <!-- <image
-              src="http://h5.dental.cdwuhu.com/static/image/discounts1.png"
+              src="http://h5.yuyandental.com/static/image/discounts1.png"
               mode=""
             /> -->
             <view class="text">预颜臻选</view>
@@ -71,7 +71,7 @@
       <view class="details">
         <view class="title">详情介绍</view>
         <image
-          :src="'https://dental.cdwuhu.com/' + goodsInfo.detail_image"
+          :src="'https://www.yuyandental.com/' + goodsInfo.detail_image"
           mode="widthFix"
         />
       </view>
@@ -96,6 +96,8 @@
 import { ref, onMounted } from "vue";
 import { onLaunch, onShow, onLoad } from "@dcloudio/uni-app";
 import { GetGoodsInfo, GetOrderList } from "../../utils/api";
+import { onShareAppMessage,onShareTimeline } from "@dcloudio/uni-app"
+
 let goodsId = ref(null);
 let goodsInfo = ref({});
 let mode = ref("default");
@@ -184,6 +186,20 @@ onShow((options) => {
   refStyle.value["top"] = res.top + "px";
   handleGetOrderList();
 });
+onShareAppMessage(()=>{
+	console.log(goodsInfo.value)
+	return {
+		title:goodsInfo.value.title,
+		path:`/pages/mall/info?id=${goodsId.value}`
+	}
+})
+onShareTimeline(()=>{
+	return {
+		title:goodsInfo.value.title,
+		path:`/pages/mall/info?id=${goodsId.value}`,
+		imageUrl:'https://www.yuyandental.com/'+covers.value[0]
+	}
+})
 </script>
 
 <style lang="less" scoped>

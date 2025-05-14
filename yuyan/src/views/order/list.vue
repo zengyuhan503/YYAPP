@@ -13,6 +13,11 @@ import {
 } from "@/utils/request/index";
 import moment from "moment";
 import { message, Modal } from "ant-design-vue";
+interface ResType {
+  code: number,
+  data: any,
+  msg: string,
+}
 let router = useRouter();
 let route = useRoute();
 let searchStatus = ref(false);
@@ -26,9 +31,9 @@ let goodsCategoryList = ref([]);
 const columns = [
   {
     title: "订单编号",
-    dataIndex: "out_trade_no",
+    dataIndex: "order_no",
     align: "center",
-    key: "out_trade_no",
+    key: "order_no",
     ellipsis: true,
     width: 280,
     fixed: "left",
@@ -146,10 +151,10 @@ const columns = [
 const columns2 = [
   {
     title: "订单编号",
-    dataIndex: "out_trade_no",
+    dataIndex: "order_no",
     align: "center",
     ellipsis: true,
-    key: "out_trade_no",
+    key: "order_no",
     width: 280,
     fixed: "left",
   },
@@ -234,9 +239,9 @@ const columns2 = [
 const columns3 = [
   {
     title: "订单编号",
-    dataIndex: "out_trade_no",
+    dataIndex: "order_no",
     align: "center",
-    key: "out_trade_no",
+    key: "order_no",
     ellipsis: true,
     width: 280,
     fixed: "left",
@@ -405,13 +410,17 @@ const handleShipOk = () => {
     ...shipformState.value,
     order_id: shiporderId,
   };
-  console.log(params);
-  if (Object.entries(params).some(([key, value]) => value === "")) {
+ 
+  if (params.ship_company!='ziti'&&Object.entries(params).some(([key, value]) => value === "")) {
     message.error("请填写完整信息");
     return false;
   }
-  order_ship(params).then((res) => {
+  order_ship(params).then((res:any) => {
     if (res) {
+      if (res.code !== 200) {
+        message.error(res.msg)
+        return false
+      }
       message.success("操作成功");
       shipOpen.value = false;
       getList();
@@ -525,13 +534,8 @@ onMounted(() => {
         <p class="title" style="margin-bottom: 16px">订单管理</p>
       </div>
       <div class="page-form">
-        <a-input-search
-          v-model:value="searchVal"
-          enter-button="搜 索"
-          placeholder="请输入"
-          @search="onSearch"
-          :loading="searchStatus"
-        />
+        <a-input-search v-model:value="searchVal" enter-button="搜 索" placeholder="请输入" @search="onSearch"
+          :loading="searchStatus" />
       </div>
     </div>
     <div class="tabs">
@@ -543,26 +547,19 @@ onMounted(() => {
       <div class="page-table">
         <p class="title">
           商品列表
-          <a-button type="primary" v-if="tabActive == 2" @click="handleUpdateShip()"
-            >刷新物流</a-button
-          >
+          <a-button type="primary" v-if="tabActive == 2" @click="handleUpdateShip()">刷新物流</a-button>
         </p>
         <div class="tables">
-          <a-table
-            :columns="columnsTables"
-            :data-source="orderList"
-            @change="handlePageChange"
-            :scroll="{ x: 1300, y: 1000 }"
-            :pagination="pagination"
-          >
+          <a-table :columns="columnsTables" :data-source="orderList" @change="handlePageChange"
+            :scroll="{ x: 1300, y: 1000 }" :pagination="pagination">
             <template #bodyCell="{ column, record }">
-              <template v-if="column.key === 'out_trade_no'">
+              <template v-if="column.key === 'order_no'">
                 <a-button type="link" @click="handleToInfo(record)">{{
-                  record.out_trade_no
+                  record.order_no
                 }}</a-button>
               </template>
               <template v-if="column.key === 'goods_image'">
-                <a-avatar :src="'https://dental.cdwuhu.com/' + record.goods_image" />
+                <a-avatar :src="'https://yuyandental.com//' + record.goods_image" />
               </template>
               <template v-if="column.key === 'status'">
                 <span style="color: #d44469" v-if="record.status == 0">待支付</span>
@@ -579,38 +576,19 @@ onMounted(() => {
                       复制地址
                     </a-button>
                     <a-divider type="vertical" />
-                    <a-button
-                      type="link"
-                      @click="handleShip(record)"
-                      v-if="record.status == 1"
-                      >发货
+                    <a-button type="link" @click="handleShip(record)" v-if="record.status == 1">发货
                     </a-button>
                     <a-divider type="vertical" />
-                    <a-button
-                      danger
-                      type="link"
-                      v-if="record.status != -1"
-                      @click="handleCloseOrder(record)"
-                    >
+                    <a-button danger type="link" v-if="record.status != -1" @click="handleCloseOrder(record)">
                       关闭
                     </a-button>
-                    <a-button
-                      danger
-                      type="link"
-                      v-if="record.status == -1"
-                      @click="handleOpenOrder(record)"
-                    >
+                    <a-button danger type="link" v-if="record.status == -1" @click="handleOpenOrder(record)">
                       打开
                     </a-button>
                   </div>
                 </template>
                 <template v-if="tabActive == 2">
-                  <a-button
-                    type="link"
-                    v-if="tabActive == 2"
-                    @click="handleToInfo(record)"
-                    >物流详情</a-button
-                  >
+                  <a-button type="link" v-if="tabActive == 2" @click="handleToInfo(record)">物流详情</a-button>
                   <a-divider type="vertical" />
                   <a-button type="link" @click="handleCopyAddress(record)">
                     复制地址
@@ -618,20 +596,10 @@ onMounted(() => {
                   <a-divider type="vertical" />
                   <a-button type="link" @click="handleOverOrder(record)">送达 </a-button>
                   <a-divider type="vertical" />
-                  <a-button
-                    danger
-                    type="link"
-                    v-if="record.status != -1"
-                    @click="handleCloseOrder(record)"
-                  >
+                  <a-button danger type="link" v-if="record.status != -1" @click="handleCloseOrder(record)">
                     关闭
                   </a-button>
-                  <a-button
-                    danger
-                    type="link"
-                    v-if="record.status == -1"
-                    @click="handleOpenOrder(record)"
-                  >
+                  <a-button danger type="link" v-if="record.status == -1" @click="handleOpenOrder(record)">
                     打开
                   </a-button>
                 </template>
@@ -640,35 +608,17 @@ onMounted(() => {
                     复制地址
                   </a-button>
                   <a-divider type="vertical" />
-                  <a-button
-                    type="link"
-                    :disabled="record.status < 0 || record.status > 2"
-                    v-if="record.ship_number == ''"
-                    @click="handleShip(record)"
-                    >发货
+                  <a-button type="link" :disabled="record.status!=1"
+                    v-if="record.ship_number == ''" @click="handleShip(record)">发货
                   </a-button>
-                  <a-button
-                    type="link"
-                    :disabled="record.status < 0 || record.status > 2"
-                    v-else
-                    @click="handleOverOrder(record)"
-                    >送达
+                  <a-button type="link" :disabled="record.status < 0 || record.status > 2" v-else
+                    @click="handleOverOrder(record)">送达
                   </a-button>
                   <a-divider type="vertical" />
-                  <a-button
-                    danger
-                    type="link"
-                    v-if="record.status != -1"
-                    @click="handleCloseOrder(record)"
-                  >
+                  <a-button danger type="link" v-if="record.status != -1" @click="handleCloseOrder(record)">
                     关闭
                   </a-button>
-                  <a-button
-                    danger
-                    type="link"
-                    v-if="record.status == -1"
-                    @click="handleOpenOrder(record)"
-                  >
+                  <a-button danger type="link" v-if="record.status == -1" @click="handleOpenOrder(record)">
                     打开
                   </a-button>
                 </template>
@@ -678,37 +628,20 @@ onMounted(() => {
         </div>
       </div>
     </div>
-    <a-modal
-      v-model:open="shipOpen"
-      title="单号上传"
-      @cancel="handleCancelShip"
-      @ok="handleShipOk"
-    >
+    <a-modal v-model:open="shipOpen" title="单号上传" @cancel="handleCancelShip" @ok="handleShipOk">
       <div class="forms" style="padding: 15px 0">
-        <a-form
-          :model="shipformState"
-          name="basic"
-          :label-col="{ span: 6 }"
-          :wrapper-col="{ span: 16 }"
-          autocomplete="off"
-        >
+        <a-form :model="shipformState" name="basic" :label-col="{ span: 6 }" :wrapper-col="{ span: 16 }"
+          autocomplete="off">
           <a-form-item label="快递公司" name="ship_company">
             <!-- <a-input v-model:value="shipformState.ship_company" /> -->
             <a-select ref="select" v-model:value="shipformState.ship_company">
-              <a-select-option
-                v-for="(value, key) in expressList"
-                :key="key"
-                :value="key"
-              >
+              <a-select-option v-for="(value, key) in expressList" :key="key" :value="key">
                 {{ value }}
               </a-select-option>
             </a-select>
           </a-form-item>
           <a-form-item label="快递单号" name="ship_company">
-            <a-input
-              v-model:value="shipformState.ship_number"
-              placeholder="自提方式不用填写单号"
-            />
+            <a-input v-model:value="shipformState.ship_number" placeholder="自提方式不用填写单号" />
           </a-form-item>
         </a-form>
       </div>

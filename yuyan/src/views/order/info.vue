@@ -51,7 +51,7 @@ const handleGetInfo = (id) => {
     console.log(res);
     orderInfo.value = res.data;
     if (orderInfo.value.avatar.indexOf("thirdwx") == -1) {
-      orderInfo.value.avatar = "https://dental.cdwuhu.com/" + orderInfo.value.avatar;
+      orderInfo.value.avatar = "https://yuyandental.com//" + orderInfo.value.avatar;
     }
   });
 };
@@ -213,7 +213,7 @@ onMounted(() => {
                 </p>
                 <div class="images">
                   <img
-                    :src="'https://dental.cdwuhu.com/' + orderInfo.goods_image"
+                    :src="'https://yuyandental.com//' + orderInfo.goods_image"
                     alt=""
                   />
                 </div>

@@ -217,9 +217,9 @@ onMounted(() => {
   for (const key in params) {
     formState[key] = params[key];
   }
-  formState.cover = "https://dental.cdwuhu.com/" + params.image;
+  formState.cover = "https://yuyandental.com//" + params.image;
   formState.imageUrl =
-    params.long_image == "" ? "" : "https://dental.cdwuhu.com/" + params.long_image;
+    params.long_image == "" ? "" : "https://yuyandental.com//" + params.long_image;
   console.log(!params);
 });
 </script>

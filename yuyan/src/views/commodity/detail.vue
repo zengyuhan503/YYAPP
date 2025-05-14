@@ -191,7 +191,6 @@ const handleSubmit = () => {
   }
   // submitLoading.value = true;
   uploadImages().then((res) => {
-    console.log(res);
     let head_image = res[0];
     let detail_image = res[1];
     uploadImages2().then((ciimgs: [any]) => {
@@ -202,7 +201,7 @@ const handleSubmit = () => {
       let params = {
         goods_id: query.id,
         head_image: head_image,
-        deputy_image: imgs ? imgs.join(",") : imgs,
+        deputy_image: imgs ? imgs.join(",") : "",
         detail_image: detail_image,
         price: formState.price,
         category_id: cid.join(","),
@@ -289,6 +288,13 @@ const handleGetGoodsCategorys = () => {
   };
   goodsCategorys(params).then((res) => {
     goodsCategoryList.value = res.data.data;
+    goodsCategoryList.value.forEach(item => {
+      if (item.title == '全部商品') {
+        item.disabled = true
+      } else {
+        item.disabled = false;
+      }
+    })
   });
 };
 onMounted(() => {
@@ -297,8 +303,8 @@ onMounted(() => {
   console.log(query);
   let cid = [...query.category_id.split(","), "13"];
   formState.category_id = Array.from(new Set(cid));
-  formState.cover = "https://dental.cdwuhu.com/" + query.head_image;
-  formState.imageUrl = "https://dental.cdwuhu.com/" + query.detail_image;
+  formState.cover = "https://yuyandental.com//" + query.head_image;
+  formState.imageUrl = "https://yuyandental.com//" + query.detail_image;
   formState.title = query.title;
   formState.deputy_image = query.deputy_image;
   formState.discount = parseInt(query.discount);
@@ -308,7 +314,7 @@ onMounted(() => {
   // deputy_image.value.push('deputy_image');
   if (Array.isArray(formState.deputy_image)) {
     deputy_image_show.value = formState.deputy_image.map((item) => {
-      return "https://dental.cdwuhu.com/" + item;
+      return "https://yuyandental.com//" + item;
     });
   }
 });
@@ -436,23 +442,16 @@ onMounted(() => {
                 </a-form-item>
                 <div class="form-upload form-price">
                   <p>
-                    <span class="label">折后价格：</span
-                    ><span class="price">{{ disPrice }} ¥</span>
+                    <span class="label">折后价格：</span><span class="price">{{ disPrice }} ¥</span>
                   </p>
                   <p>
-                    <span class="label">价格差：</span
-                    ><span class="price">{{ diference }} ¥</span>
+                    <span class="label">价格差：</span><span class="price">{{ diference }} ¥</span>
                   </p>
                 </div>
               </a-col>
               <a-col :span="8">
                 <a-form-item label="商品折扣（选填）">
-                  <a-input-number
-                    id="inputNumber"
-                    v-model:value="formState.discount"
-                    :min="1"
-                    :max="100"
-                  />
+                  <a-input-number id="inputNumber" v-model:value="formState.discount" :min="1" :max="100" />
                   <span class="unit">%</span>
                 </a-form-item>
               </a-col>
@@ -483,16 +482,10 @@ onMounted(() => {
               </a-col>
               <a-col :span="8">
                 <a-form-item label="商品类别（选填）">
-                  <a-select
-                    ref="select"
-                    v-model:value="formState.category_id"
-                    mode="multiple"
-                  >
-                    <a-select-option
-                      :value="item.id + ''"
-                      v-for="(item, index) in goodsCategoryList"
-                      :key="index"
-                    >
+                  <a-select ref="select" v-model:value="formState.category_id" mode="multiple" :max-tag-count="3"
+                    class="categorys">
+                    <a-select-option :value="item.id + ''" v-for="(item, index) in goodsCategoryList"
+                      :disabled="item.disabled" :key="index">
                       {{ item.title }}
                     </a-select-option>
                   </a-select>
@@ -540,9 +533,7 @@ onMounted(() => {
     </div>
     <div class="submit-footer">
       <a-button style="margin-right: 10px" @click="router.go(-1)"> 取 消 </a-button>
-      <a-button type="primary" :loading="submitLoading" @click="handleSubmit"
-        >提 交</a-button
-      >
+      <a-button type="primary" :loading="submitLoading" @click="handleSubmit">提 交</a-button>
     </div>
     <div style="height: 100px"></div>
   </div>
@@ -553,5 +544,9 @@ onMounted(() => {
 <style>
 .login-form .ant-message {
   position: absolute;
+}
+
+.categorys .ant-select-selector {
+  height: auto !important;
 }
 </style>

@@ -14,12 +14,12 @@ const _sfc_main = {
     title: String
   },
   setup(__props) {
-    const props = __props;
     let refStyle = common_vendor.ref({
       "padding-top": "42px"
     });
     let height = common_vendor.ref(0);
     let pageTitle = common_vendor.ref("标题");
+    let props = __props;
     pageTitle.value = props.title;
     common_vendor.onLaunch((options) => {
       console.log(options);
@@ -50,5 +50,4 @@ const _sfc_main = {
     };
   }
 };
-const Component = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__file", "F:/PROJECT-ZENGYUHAN/yuyan-project/min-app/components/header/index.vue"]]);
-wx.createComponent(Component);
+wx.createComponent(_sfc_main);

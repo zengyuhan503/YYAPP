@@ -4,7 +4,7 @@
       <view class="paymant-info">
         <view class="cover">
           <image
-            :src="'https://dental.cdwuhu.com/' + goodsInfo.head_image"
+            :src="'https://www.yuyandental.com/' + goodsInfo.head_image"
             mode="widthFix"
           />
         </view>
@@ -173,14 +173,14 @@
     <view class="subscribemodal">
       <view class="close">
         <image
-          src="http://h5.dental.cdwuhu.com/static/image/close.png"
+          src="http://h5.yuyandental.com/static/image/close.png"
           @click="handleToUser"
           mode="widthFix"
         />
       </view>
       <view class="submain">
         <image
-          src="http://h5.dental.cdwuhu.com/static/image/subscribe.png"
+          src="http://h5.yuyandental.com/static/image/subscribe.png"
           mode="widthFix"
         />
         <view class="title">支付成功</view>

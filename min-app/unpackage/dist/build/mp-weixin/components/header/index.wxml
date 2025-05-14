@@ -1,0 +1,1 @@
+<view class="page-header" style="{{c}}"><uni-nav-bar wx:if="{{b}}" bindclickLeft="{{a}}" u-i="cf4f3268-0" bind:__l="__l" u-p="{{b}}"/></view>

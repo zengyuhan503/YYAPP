@@ -2,7 +2,7 @@
 const common_vendor = require("../../common/vendor.js");
 let apiPost = (uri, params, token = null) => {
   return new Promise((resolve, reject) => {
-    let url = "https://dental.cdwuhu.com" + uri;
+    let url = "https://www.yuyandental.com" + uri;
     common_vendor.wx$1.request({
       url,
       data: params,
@@ -57,7 +57,7 @@ const tokenfFail = () => {
 };
 let apiGet = (uri, params, token = null) => {
   return new Promise((resolve, reject) => {
-    let url = "https://dental.cdwuhu.com" + uri;
+    let url = "https://www.yuyandental.com" + uri;
     common_vendor.wx$1.request({
       url,
       data: params,

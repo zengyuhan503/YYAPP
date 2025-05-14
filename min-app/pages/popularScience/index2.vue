@@ -15,7 +15,7 @@
         </view>
         <view class="imgs imgs">
           <image
-            src="http://h5.dental.cdwuhu.com/static/image/kanzhenyuyue.png"
+            src="http://h5.yuyandental.com/static/image/kanzhenyuyue.png"
             class="kanzhen"
             mode="widthFix"
           ></image>
@@ -24,7 +24,7 @@
         <view class="main-desc"> 让孩子们游戏化看牙，让成年人舒适化看牙 </view>
         <view class="popularForm" style="padding: 0 5px">
           <view class="formInput">
-            <image src="http://h5.dental.cdwuhu.com/static/image/name.png" />
+            <image src="http://h5.yuyandental.com/static/image/name.png" />
             <input
               type="text"
               placeholder="姓名"
@@ -34,7 +34,7 @@
             />
           </view>
           <view class="formInput">
-            <image src="http://h5.dental.cdwuhu.com/static/image/phone.png" />
+            <image src="http://h5.yuyandental.com/static/image/phone.png" />
             <input
               type="text"
               placeholder="手机号"
@@ -75,7 +75,7 @@
                 <view class="formInput">
                   <image
                     style="width: 18px; height: 18px"
-                    src="http://h5.dental.cdwuhu.com/static/image/age.png"
+                    src="http://h5.yuyandental.com/static/image/age.png"
                   />
                   <input
                     type="text"
@@ -92,7 +92,7 @@
             <view class="formInput">
               <image
                 style="width: 28px; height: 28px; left: 12px; top: 10px"
-                src="http://h5.dental.cdwuhu.com/static/image/addr.png"
+                src="http://h5.yuyandental.com/static/image/addr.png"
               />
               <input
                 type="text"
@@ -106,7 +106,7 @@
         </view>
         <view class="submit-btns">
           <!-- <image
-              src="http://h5.dental.cdwuhu.com/static/image/confirm.png"
+              src="http://h5.yuyandental.com/static/image/confirm.png"
               @click="handleSubmit"
               v-if="isSubmit"
               mode="widthFix"
@@ -132,14 +132,14 @@
     <view class="subscribemodal">
       <view class="close">
         <image
-          src="http://h5.dental.cdwuhu.com/static/image/close.png"
+          src="http://h5.yuyandental.com/static/image/close.png"
           @click="showSubscribeSuccess = false"
           mode="widthFix"
         />
       </view>
       <view class="main">
         <image
-          src="http://h5.dental.cdwuhu.com/static/image/subscribe.png"
+          src="http://h5.yuyandental.com/static/image/subscribe.png"
           mode="widthFix"
         />
         <view class="title">预约成功</view>
@@ -153,7 +153,7 @@
     <view class="body">
       <view class="close">
         <image
-          src="http://h5.dental.cdwuhu.com/static/image/close.png"
+          src="http://h5.yuyandental.com/static/image/close.png"
           @click="showCancel = false"
           mode="widthFix"
         />

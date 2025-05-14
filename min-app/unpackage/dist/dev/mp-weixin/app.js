@@ -31,14 +31,13 @@ const _sfc_main = {
     console.log("App Hide");
   }
 };
-const App = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__file", "F:/PROJECT-ZENGYUHAN/yuyan-project/min-app/App.vue"]]);
 let i18nConfig = {
   locale: common_vendor.index.getLocale()
   // 获取已设置的语言
 };
 const i18n = common_vendor.createI18n(i18nConfig);
 function createApp() {
-  const app = common_vendor.createSSRApp(App);
+  const app = common_vendor.createSSRApp(_sfc_main);
   app.use(i18n);
   return {
     app

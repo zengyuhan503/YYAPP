@@ -2,12 +2,8 @@
 const common_vendor = require("../../common/vendor.js");
 const utils_api_index = require("../../utils/api/index.js");
 if (!Array) {
-  const _easycom_uni_popup2 = common_vendor.resolveComponent("uni-popup");
-  _easycom_uni_popup2();
-}
-const _easycom_uni_popup = () => "../../uni_modules/uni-popup/components/uni-popup/uni-popup.js";
-if (!Math) {
-  _easycom_uni_popup();
+  const _component_uni_popup = common_vendor.resolveComponent("uni-popup");
+  _component_uni_popup();
 }
 const _sfc_main = {
   __name: "unpaid",
@@ -189,8 +185,8 @@ const _sfc_main = {
         t: common_vendor.t(common_vendor.unref(orderInfo).phone),
         v: common_vendor.t(common_vendor.unref(orderInfo).address),
         w: common_vendor.t(common_vendor.unref(orderInfo).create_time),
-        x: common_vendor.t(common_vendor.unref(orderInfo).out_trade_no),
-        y: "https://dental.cdwuhu.com/" + common_vendor.unref(orderInfo).goods_image,
+        x: common_vendor.t(common_vendor.unref(orderInfo).order_no),
+        y: "https://www.yuyandental.com/" + common_vendor.unref(orderInfo).goods_image,
         z: common_vendor.t(common_vendor.unref(orderInfo).goods_name),
         A: common_vendor.t(common_vendor.unref(orderInfo).num),
         B: common_vendor.t(common_vendor.unref(orderInfo).real_price),
@@ -240,5 +236,5 @@ const _sfc_main = {
     };
   }
 };
-const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__scopeId", "data-v-2550a99d"], ["__file", "F:/PROJECT-ZENGYUHAN/yuyan-project/min-app/pages/detail/unpaid.vue"]]);
+const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__scopeId", "data-v-2550a99d"]]);
 wx.createPage(MiniProgramPage);

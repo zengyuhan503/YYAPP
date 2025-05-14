@@ -19,6 +19,7 @@
               class="swiper-box"
               @change="handleBannerChange"
               :circular="true"
+							interval="3000"  :autoplay="true"
               indicator-active-color="#F9A143"
             >
               <swiper-item
@@ -28,7 +29,7 @@
                 :item-id="index"
               >
                 <image
-                  :src="'https://dental.cdwuhu.com/' + item.image"
+                  :src="'https://www.yuyandental.com/' + item.image"
                   mode="widthFix"
                   class="swiper-image"
                 ></image>
@@ -48,7 +49,7 @@
             :key="index"
             @click="handleChangeCate(item.id)"
           >
-            <image :src="'https://dental.cdwuhu.com/' + item.icon" />
+            <image :src="'https://www.yuyandental.com/' + item.icon" />
             <view class="title">{{ item.title }}</view>
           </view>
         </view>
@@ -63,7 +64,7 @@
           >
             <view class="cover">
               <image
-                :src="'https://dental.cdwuhu.com/' + item.head_image"
+                :src="'https://www.yuyandental.com/' + item.head_image"
                 mode="widthFix"
               />
             </view>
@@ -75,7 +76,7 @@
               <view class="price">¥{{ item.sale_price }}</view>
               <view class="discount" v-if="item.discount != '100.0'">
                 <image
-                  src="http://h5.dental.cdwuhu.com/static/image/mailtag.png"
+                  src="http://h5.yuyandental.com/static/image/mailtag.png"
                   mode="widthFix"
                 />
                 <view class="num"
@@ -95,13 +96,14 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import navs from "/components/navs/index.vue";
+import {onShareAppMessage,onShareTimeline} from "@dcloudio/uni-app"
 import { GetIndexBanner, GetCateList, GetGoodsList } from "../../utils/api";
 let banners = ref([]);
 const handleGetBanner = () => {
   GetIndexBanner({ type: 2 }).then((res) => {
     console.log(res);
     banners.value = res;
-    showbanner.value = "https://dental.cdwuhu.com/" + res[0].image;
+    showbanner.value = "https://www.yuyandental.com/" + res[0].image;
   });
 };
 let dotsStyles = ref({
@@ -130,7 +132,7 @@ let swiperDotIndex = ref(0);
 const handleBannerChange = (e) => {
   let index = e.detail.current;
   swiperDotIndex.value = index;
-  showbanner.value = "https://dental.cdwuhu.com/" + banners.value[index].image;
+  showbanner.value = "https://www.yuyandental.com/" + banners.value[index].image;
 };
 let goodsList = ref([]);
 const handleGetGoodsList = () => {
@@ -158,6 +160,20 @@ const handleToBannerInfo = (item) => {
     url: "/pages/mall/info?id=" + item.goods_id,
   });
 };
+
+onShareAppMessage(()=>{
+	return {
+		title:"多一点预防，多一点健康",
+		path:'/pages/mall/index'
+	}
+})
+
+onShareTimeline(()=>{
+	return {
+		title:"多一点预防，多一点健康",
+		path:'/pages/mall/index'
+	}
+})
 onMounted(() => {
   handleGetBanner();
   handleGetCateList();

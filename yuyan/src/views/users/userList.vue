@@ -157,7 +157,7 @@ const handlechangeUserStatus = (status: string) => {
               </template>
               <template v-if="column.key === 'avatar'">
                 <a>
-                  <a-avatar :src="'https://dental.cdwuhu.com/' + record.avatar" />
+                  <a-avatar :src="'https://yuyandental.com//' + record.avatar" />
                 </a>
               </template>
               <template v-else-if="column.key === 'action'">

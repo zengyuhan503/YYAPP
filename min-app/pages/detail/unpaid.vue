@@ -59,7 +59,7 @@
             下单时间： <text>{{ orderInfo.create_time }}</text>
           </view>
           <view class="phone">
-            订单编号： <text>{{ orderInfo.out_trade_no }}</text>
+            订单编号： <text>{{ orderInfo.order_no }}</text>
           </view>
         </view>
       </view>
@@ -70,7 +70,7 @@
         <view class="info">
           <view class="cover">
             <image
-              :src="'https://dental.cdwuhu.com/' + orderInfo.goods_image"
+              :src="'https://www.yuyandental.com/' + orderInfo.goods_image"
               mode="widthFix"
             />
           </view>
@@ -113,7 +113,7 @@
     <view class="body">
       <view class="close">
         <image
-          src="http://h5.dental.cdwuhu.com/static/image/close.png"
+          src="http://h5.yuyandental.com/static/image/close.png"
           @click="showCancel = false"
           mode="widthFix"
         />

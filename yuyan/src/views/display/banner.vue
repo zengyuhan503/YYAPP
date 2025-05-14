@@ -73,7 +73,7 @@ onMounted(() => {
         </div>
         <div class="item" v-for="(item, index) in banners" :key="index">
           <div class="cover" @click="createBanner(item)">
-            <img :src="'https://dental.cdwuhu.com/' + item.image" alt="" />
+            <img :src="'https://yuyandental.com//' + item.image" alt="" />
           </div>
           <div class="info" @click="createBanner(item)">
             <p class="position">NO.{{ index + 1 }}</p>

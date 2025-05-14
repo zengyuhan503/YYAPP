@@ -8,7 +8,7 @@
         <view class="content-top">
           <view class="imgs">
             <image
-              src="http://h5.dental.cdwuhu.com/static/image/1.png"
+              src="http://h5.yuyandental.com/static/image/1.png"
               mode="widthFix"
             ></image>
           </view>
@@ -19,7 +19,7 @@
         </view>
         <view class="popularForm">
           <view class="formInput">
-            <image src="http://h5.dental.cdwuhu.com/static/image/name.png" />
+            <image src="http://h5.yuyandental.com/static/image/name.png" />
             <input
               type="text"
               placeholder="姓名"
@@ -29,7 +29,7 @@
             />
           </view>
           <view class="formInput">
-            <image src="http://h5.dental.cdwuhu.com/static/image/phone.png" />
+            <image src="http://h5.yuyandental.com/static/image/phone.png" />
             <input
               type="text"
               placeholder="手机号"
@@ -43,7 +43,7 @@
               <view class="formInput">
                 <image
                   style="width: 28px; height: 28px; left: 12px; top: 10px"
-                  src="http://h5.dental.cdwuhu.com/static/image/addr.png"
+                  src="http://h5.yuyandental.com/static/image/addr.png"
                 />
                 <input
                   type="text"
@@ -66,7 +66,7 @@
                 <view class="formInput" bindchange="bindPickerChange">
                   <image
                     style="width: 18px; height: 18px"
-                    src="http://h5.dental.cdwuhu.com/static/image/count.png"
+                    src="http://h5.yuyandental.com/static/image/count.png"
                   />
                   <input
                     type="text"
@@ -102,14 +102,14 @@
     <view class="subscribemodal">
       <view class="close">
         <image
-          src="http://h5.dental.cdwuhu.com/static/image/close.png"
+          src="http://h5.yuyandental.com/static/image/close.png"
           @click="showSubscribeSuccess = false"
           mode="widthFix"
         />
       </view>
       <view class="main">
         <image
-          src="http://h5.dental.cdwuhu.com/static/image/subscribe.png"
+          src="http://h5.yuyandental.com/static/image/subscribe.png"
           mode="widthFix"
         />
         <view class="title">预约成功</view>
@@ -124,7 +124,7 @@
     <view class="body">
       <view class="close">
         <image
-          src="http://h5.dental.cdwuhu.com/static/image/close.png"
+          src="http://h5.yuyandental.com/static/image/close.png"
           @click="showCancel = false"
           mode="widthFix"
         />

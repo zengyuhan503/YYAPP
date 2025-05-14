@@ -181,7 +181,7 @@ const handleEditOk = async () => {
       params.append("limit_image", editCateForm.value.iconFiles[0]);
       icon = (await imageUpLoad(params)).data;
     } else {
-      icon = editCateForm.value.icon.replace("https://dental.cdwuhu.com/", "");
+      icon = editCateForm.value.icon.replace("https://yuyandental.com//", "");
     }
     let params2 = {
       title: editCateForm.value.title,
@@ -216,7 +216,7 @@ const handleEditCate = (record) => {
   for (const key in newRecord) {
     editCateForm.value[key] = newRecord[key];
   }
-  editCateForm.value.icon = "https://dental.cdwuhu.com/" + editCateForm.value.icon;
+  editCateForm.value.icon = "https://yuyandental.com//" + editCateForm.value.icon;
   EditCateOpen.value = true;
 };
 const handleRmCate = (record) => {
@@ -389,7 +389,7 @@ onMounted(() => {
           >
             <template #bodyCell="{ column, record }">
               <template v-if="column.key === 'icon'">
-                <a-avatar :src="'https://dental.cdwuhu.com/' + record.icon" />
+                <a-avatar :src="'https://yuyandental.com//' + record.icon" />
               </template>
               <template v-else-if="column.key === 'action'">
                 <a-button type="link" @click="handleEditCate(record)">编辑</a-button>
@@ -420,7 +420,7 @@ onMounted(() => {
             <template #bodyCell="{ column, record }">
               <template v-if="column.key === 'head_image'">
                 <a>
-                  <a-avatar :src="'https://dental.cdwuhu.com/' + record.head_image" />
+                  <a-avatar :src="'https://yuyandental.com//' + record.head_image" />
                 </a>
               </template>
               <template v-else-if="column.key === 'action'">

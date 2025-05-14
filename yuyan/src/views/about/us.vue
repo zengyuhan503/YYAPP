@@ -101,7 +101,7 @@ const handleGetInfo = () => {
     detail.desc = res.data.desc as string;
     detail.image = res.data.image as string;
     formState.desc = detail.desc;
-    formState.image = "https://dental.cdwuhu.com/" + detail.image;
+    formState.image = "https://yuyandental.com//" + detail.image;
   });
 };
 const handleEditDetail = (res) => {

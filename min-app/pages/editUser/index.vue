@@ -54,7 +54,7 @@ const handleEditNickname = () => {
   let params = {
     ...alignmentFormData.value,
   };
-  params.avatar = params.avatar.replace("https://dental.cdwuhu.com/", "");
+  params.avatar = params.avatar.replace("https://www.yuyandental.com/", "");
   EditUserInfo(params).then((res) => {
     console.log(res);
     uni.showToast({
@@ -68,7 +68,7 @@ const handleServerGetUserInfo = () => {
   GetServerUserInfo().then((res) => {
     console.log(res.avatar.indexOf("thirdwx.qlogo"));
     if (res.avatar.indexOf("thirdwx.qlogo") == -1) {
-      alignmentFormData.value.avatar = "https://dental.cdwuhu.com/" + res.avatar;
+      alignmentFormData.value.avatar = "https://www.yuyandental.com/" + res.avatar;
     } else {
       alignmentFormData.value.avatar = res.avatar;
     }
@@ -79,13 +79,13 @@ const handleServerGetUserInfo = () => {
 const handlebindchooseavatar = (e) => {
   let avatar = e.detail.avatarUrl;
   uni.uploadFile({
-    url: "https://dental.cdwuhu.com/api/upload", //仅为示例，非真实的接口地址
+    url: "https://www.yuyandental.com/api/upload", //仅为示例，非真实的接口地址
     filePath: avatar,
     name: "limit_image",
     success: (uploadFileRes) => {
       let url = uploadFileRes.data;
       url = JSON.parse(url);
-      alignmentFormData.value.avatar = "https://dental.cdwuhu.com/" + url.data;
+      alignmentFormData.value.avatar = "https://www.yuyandental.com/" + url.data;
       let params = {
         ...alignmentFormData.value,
         avatar: url.data,
@@ -113,7 +113,7 @@ const getinfos = (e) => {
       let params = {
         ...alignmentFormData.value,
       };
-      params.avatar = params.avatar.replace("https://dental.cdwuhu.com/", "");
+      params.avatar = params.avatar.replace("https://www.yuyandental.com/", "");
       EditUserInfo(params).then((res) => {
         uni.showToast({
           title: "修改成功",

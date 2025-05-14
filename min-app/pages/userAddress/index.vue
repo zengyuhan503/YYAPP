@@ -22,13 +22,13 @@
             <div class="action">
               <div class="delete" @click="handleDelete(item)">
                 <div class="icons">
-                  <image src="http://h5.dental.cdwuhu.com/static/image/delete.png" />
+                  <image src="http://h5.yuyandental.com/static/image/delete.png" />
                 </div>
                 <div class="label">删除</div>
               </div>
               <div class="delete" style="margin-right: 0" @click="handleEditAdd(item)">
                 <div class="icons">
-                  <image src="http://h5.dental.cdwuhu.com/static/image/edit.png" />
+                  <image src="http://h5.yuyandental.com/static/image/edit.png" />
                 </div>
                 <div class="label">编辑</div>
               </div>

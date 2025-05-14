@@ -18,7 +18,7 @@ const _sfc_main = {
       utils_api_index.GetIndexBanner({ type: 2 }).then((res) => {
         console.log(res);
         banners.value = res;
-        showbanner.value = "https://dental.cdwuhu.com/" + res[0].image;
+        showbanner.value = "https://www.yuyandental.com/" + res[0].image;
       });
     };
     let dotsStyles = common_vendor.ref({
@@ -47,7 +47,7 @@ const _sfc_main = {
     const handleBannerChange = (e) => {
       let index = e.detail.current;
       swiperDotIndex.value = index;
-      showbanner.value = "https://dental.cdwuhu.com/" + banners.value[index].image;
+      showbanner.value = "https://www.yuyandental.com/" + banners.value[index].image;
     };
     let goodsList = common_vendor.ref([]);
     const handleGetGoodsList = () => {
@@ -75,6 +75,18 @@ const _sfc_main = {
         url: "/pages/mall/info?id=" + item.goods_id
       });
     };
+    common_vendor.onShareAppMessage(() => {
+      return {
+        title: "多一点预防，多一点健康",
+        path: "/pages/mall/index"
+      };
+    });
+    common_vendor.onShareTimeline(() => {
+      return {
+        title: "多一点预防，多一点健康",
+        path: "/pages/mall/index"
+      };
+    });
     common_vendor.onMounted(() => {
       handleGetBanner();
       handleGetCateList();
@@ -84,7 +96,7 @@ const _sfc_main = {
         a: common_vendor.unref(showbanner),
         b: common_vendor.f(common_vendor.unref(banners), (item, index, i0) => {
           return {
-            a: "https://dental.cdwuhu.com/" + item.image,
+            a: "https://www.yuyandental.com/" + item.image,
             b: common_vendor.o(($event) => handleToBannerInfo(item), index),
             c: index,
             d: index
@@ -100,7 +112,7 @@ const _sfc_main = {
         }),
         e: common_vendor.f(common_vendor.unref(cateList), (item, index, i0) => {
           return {
-            a: "https://dental.cdwuhu.com/" + item.icon,
+            a: "https://www.yuyandental.com/" + item.icon,
             b: common_vendor.t(item.title),
             c: item.id == common_vendor.unref(cateActive) ? 1 : "",
             d: index,
@@ -109,7 +121,7 @@ const _sfc_main = {
         }),
         f: common_vendor.f(common_vendor.unref(goodsList), (item, index, i0) => {
           return common_vendor.e({
-            a: "https://dental.cdwuhu.com/" + item.head_image,
+            a: "https://www.yuyandental.com/" + item.head_image,
             b: common_vendor.t(item.title),
             c: item.discount != "100.0"
           }, item.discount != "100.0" ? {
@@ -131,5 +143,6 @@ const _sfc_main = {
     };
   }
 };
-const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__scopeId", "data-v-43c06b56"], ["__file", "F:/PROJECT-ZENGYUHAN/yuyan-project/min-app/pages/mall/index.vue"]]);
+const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__scopeId", "data-v-43c06b56"]]);
+_sfc_main.__runtimeHooks = 6;
 wx.createPage(MiniProgramPage);

@@ -16,13 +16,9 @@ export default defineConfig({
   },
   server: {
     host:true,
-    port: 8091,
+    port: 8099,
     https: false,
     proxy:{
-      '/web':{
-        target:"https://dental.cdwuhu.com/",
-        changeOrigin:true,
-      }
     }
   }
 })

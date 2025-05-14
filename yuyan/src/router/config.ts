@@ -24,6 +24,14 @@ import orders from "@views/order/list.vue"
 import orderinfo from "@views/order/info.vue"
 let options = [
     {
+        path: '/',
+        name: '注册用户管理',
+        redirect: "/user/lists",
+        meta:{
+            showMenu:false
+        }
+    },
+    {
         path: '/login',
         name: '登录页',
         meta: {

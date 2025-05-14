@@ -15,8 +15,8 @@ const _sfc_main = {
     type: String
   },
   emits: "handleClosePopup",
-  setup(__props, { expose, emit }) {
-    const props = __props;
+  setup(__props, { expose: __expose, emit: __emit }) {
+    let props = __props;
     const weekdays = ["天", "一", "二", "三", "四", "五", "六"];
     const weekDates = common_vendor.ref([]);
     const generatedWeekdays = common_vendor.ref([]);
@@ -43,6 +43,7 @@ const _sfc_main = {
       { start_time: "19:00", end_time: "20:00", is_limit: 0, index: "14", show: false }
     ]);
     let hasTimes = common_vendor.ref([]);
+    let emit = __emit;
     const closePopup = () => {
       emit("handleClosePopup");
     };
@@ -88,6 +89,8 @@ const _sfc_main = {
         actDay.value = common_vendor.hooks(date.time).format("YYYY-MM-DD");
         actDayTime.value = date.time;
       }
+      let today = common_vendor.hooks();
+      let someDay = common_vendor.hooks(actDay.value);
       let params = {
         date: actDay.value,
         type: props.type
@@ -100,9 +103,12 @@ const _sfc_main = {
         const currentTime = common_vendor.hooks();
         const filteredArray = hasTimes.value.filter((obj) => {
           const endTime = common_vendor.hooks(obj.end_time, "HH:mm");
-          return currentTime.isBefore(endTime);
+          if (today.isSame(someDay, "day")) {
+            return currentTime.isBefore(endTime);
+          } else {
+            return endTime;
+          }
         });
-        console.log(filteredArray);
         hasTimes.value = filteredArray;
       });
     };
@@ -117,7 +123,7 @@ const _sfc_main = {
       }
       emit("handleSelectTimes", actTimeItem.value, actDayTime.value);
     };
-    expose([actTimeItem]);
+    __expose([actTimeItem]);
     common_vendor.onMounted(() => {
       renderDays();
       handleGetBooking_plans_detail();
@@ -175,5 +181,5 @@ const _sfc_main = {
     };
   }
 };
-const Component = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__scopeId", "data-v-29cd71d4"], ["__file", "F:/PROJECT-ZENGYUHAN/yuyan-project/min-app/components/DateElement.vue"]]);
+const Component = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__scopeId", "data-v-29cd71d4"]]);
 wx.createComponent(Component);

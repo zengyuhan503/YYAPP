@@ -71,6 +71,18 @@ const _sfc_main = {
         url
       });
     };
+    common_vendor.onShareAppMessage(() => {
+      return {
+        title: "多一点预防，多一点健康",
+        path: "/pages/index/index"
+      };
+    });
+    common_vendor.onShareTimeline(() => {
+      return {
+        title: "多一点预防，多一点健康",
+        path: "/pages/index/index"
+      };
+    });
     common_vendor.onMounted(() => {
       handleGetBanner();
     });
@@ -78,7 +90,7 @@ const _sfc_main = {
       return {
         a: common_vendor.f(common_vendor.unref(banners), (item, index, i0) => {
           return {
-            a: "https://dental.cdwuhu.com/" + item.image,
+            a: "https://www.yuyandental.com/" + item.image,
             b: index,
             c: common_vendor.o(($event) => handleToBannerInfo(item), index)
           };
@@ -101,5 +113,6 @@ const _sfc_main = {
     };
   }
 };
-const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__scopeId", "data-v-1cf27b2a"], ["__file", "F:/PROJECT-ZENGYUHAN/yuyan-project/min-app/pages/index/index.vue"]]);
+const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__scopeId", "data-v-1cf27b2a"]]);
+_sfc_main.__runtimeHooks = 6;
 wx.createPage(MiniProgramPage);

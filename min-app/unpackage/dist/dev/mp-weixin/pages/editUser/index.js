@@ -25,7 +25,7 @@ const _sfc_main = {
       let params = {
         ...alignmentFormData.value
       };
-      params.avatar = params.avatar.replace("https://dental.cdwuhu.com/", "");
+      params.avatar = params.avatar.replace("https://www.yuyandental.com/", "");
       utils_api_index.EditUserInfo(params).then((res) => {
         console.log(res);
         common_vendor.index.showToast({
@@ -39,7 +39,7 @@ const _sfc_main = {
       utils_api_index.GetServerUserInfo().then((res) => {
         console.log(res.avatar.indexOf("thirdwx.qlogo"));
         if (res.avatar.indexOf("thirdwx.qlogo") == -1) {
-          alignmentFormData.value.avatar = "https://dental.cdwuhu.com/" + res.avatar;
+          alignmentFormData.value.avatar = "https://www.yuyandental.com/" + res.avatar;
         } else {
           alignmentFormData.value.avatar = res.avatar;
         }
@@ -49,14 +49,14 @@ const _sfc_main = {
     const handlebindchooseavatar = (e) => {
       let avatar = e.detail.avatarUrl;
       common_vendor.index.uploadFile({
-        url: "https://dental.cdwuhu.com/api/upload",
+        url: "https://www.yuyandental.com/api/upload",
         //仅为示例，非真实的接口地址
         filePath: avatar,
         name: "limit_image",
         success: (uploadFileRes) => {
           let url = uploadFileRes.data;
           url = JSON.parse(url);
-          alignmentFormData.value.avatar = "https://dental.cdwuhu.com/" + url.data;
+          alignmentFormData.value.avatar = "https://www.yuyandental.com/" + url.data;
           let params = {
             ...alignmentFormData.value,
             avatar: url.data
@@ -85,7 +85,7 @@ const _sfc_main = {
           let params2 = {
             ...alignmentFormData.value
           };
-          params2.avatar = params2.avatar.replace("https://dental.cdwuhu.com/", "");
+          params2.avatar = params2.avatar.replace("https://www.yuyandental.com/", "");
           utils_api_index.EditUserInfo(params2).then((res2) => {
             common_vendor.index.showToast({
               title: "修改成功",
@@ -145,5 +145,5 @@ const _sfc_main = {
     };
   }
 };
-const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__scopeId", "data-v-d9dfb2ef"], ["__file", "F:/PROJECT-ZENGYUHAN/yuyan-project/min-app/pages/editUser/index.vue"]]);
+const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__scopeId", "data-v-d9dfb2ef"]]);
 wx.createPage(MiniProgramPage);

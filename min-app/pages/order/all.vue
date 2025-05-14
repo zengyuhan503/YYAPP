@@ -16,7 +16,7 @@
           </div>
           <div class="info">
             <div class="cover">
-              <image :src="'https://dental.cdwuhu.com/' + item.goods_image" mode="" />
+              <image :src="'https://www.yuyandental.com/' + item.goods_image" mode="" />
             </div>
             <div class="desc">
               <div class="title">{{ item.goods_name }}</div>

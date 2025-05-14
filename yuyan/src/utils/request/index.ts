@@ -17,11 +17,10 @@ message.config({
     top: `150px`,
     duration: 3,
     maxCount: 3
-    ,
 });
 const deleteApi = axios.delete // delete 关键词
 
-axios.defaults.baseURL = 'https://dental.cdwuhu.com';
+axios.defaults.baseURL = 'https://yuyandental.com';
 axios.defaults.timeout = 1000 * 600;
 axios.interceptors.request.use(
     config => {
@@ -48,7 +47,6 @@ axios.interceptors.response.use(
         if (response.data.code == undefined) return response;
         if (response.data.code !== 200) {
             message.error(response.data.msg);
-            return false
         }
         return response.data;
     },

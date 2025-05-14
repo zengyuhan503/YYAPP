@@ -29,7 +29,7 @@ const _sfc_main = {
     let aboutDescs = common_vendor.ref("");
     common_vendor.onMounted(() => {
       utils_api_index.AboutUs().then((res) => {
-        aboutDescs.value = "https://dental.cdwuhu.com/" + res.image;
+        aboutDescs.value = "https://www.yuyandental.com/" + res.image;
       });
     });
     return (_ctx, _cache) => {
@@ -49,5 +49,5 @@ const _sfc_main = {
     };
   }
 };
-const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__scopeId", "data-v-99a1d68c"], ["__file", "F:/PROJECT-ZENGYUHAN/yuyan-project/min-app/pages/about/us.vue"]]);
+const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__scopeId", "data-v-99a1d68c"]]);
 wx.createPage(MiniProgramPage);

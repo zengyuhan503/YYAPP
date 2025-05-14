@@ -2,7 +2,7 @@
   <view class="page-content">
     <image
       v-if="info.long_image != ''"
-      :src="'https://dental.cdwuhu.com/' + info.long_image"
+      :src="'https://www.yuyandental.com/' + info.long_image"
       mode="widthFix"
     ></image>
     <web-view  v-if="info.url != ''" :src="info.url"></web-view>

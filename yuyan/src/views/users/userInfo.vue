@@ -131,7 +131,7 @@ onMounted(() => {
               </a-row>
             </a-col>
             <a-col :span="6">
-              <img :src="'https://dental.cdwuhu.com/' +(info.avatar as string)" alt="" />
+              <img :src="'https://yuyandental.com//' +(info.avatar as string)" alt="" />
             </a-col>
           </a-row>
         </div>

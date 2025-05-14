@@ -38,7 +38,7 @@ onShow((options) => {
 let aboutDescs = ref("");
 onMounted(() => {
   AboutDesc().then((res) => {
-    aboutDescs.value = "https://dental.cdwuhu.com/" + res.image;
+    aboutDescs.value = "https://www.yuyandental.com/" + res.image;
   });
 });
 </script>

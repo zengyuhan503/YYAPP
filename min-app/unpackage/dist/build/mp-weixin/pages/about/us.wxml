@@ -1,0 +1,1 @@
+<view class="page-content data-v-e048f8d9"><view class="page-header data-v-e048f8d9" style="{{c}}"><uni-nav-bar wx:if="{{b}}" class="data-v-e048f8d9" bindclickLeft="{{a}}" u-i="e048f8d9-0" bind:__l="__l" u-p="{{b}}"/></view><image class="data-v-e048f8d9" src="{{d}}" mode="widthFix"/></view>

@@ -9,6 +9,11 @@ const layout = reactive({
   labelCol: { span: 24 },
   wrapperCol: { span: 24 },
 });
+interface resType {
+  code: number,
+  data: any,
+  msg: string
+}
 const head_image = ref([]);
 const deputy_image = ref([]);
 const deputy_image_show = ref(["", "", "", ""]);
@@ -170,11 +175,11 @@ const imageBeforeUpload = (file) => {
           detail_image.value = [];
           return false;
         }
-        if (img.height > 2000) {
-          message.error(`请上传高度不能超过2000px的长图`);
-          detail_image.value = [];
-          return false;
-        }
+        // if ( img.height > 2000 ) {
+        //   message.error(`请上传高度不能超过2000px的长图`);
+        //   detail_image.value = [];
+        //   return false;
+        // }
         detail_image.value = [...(detail_image.value || []), file];
         formState.imageUrl = src as string;
       };
@@ -188,7 +193,7 @@ const handleSubmit = () => {
   let key = "imageUrl";
   let can = true;
   Object.keys(formState).forEach((prop) => {
-    if (formState[prop] === null && formState[prop] === "") {
+    if (formState[prop] === null || formState[prop] === "") {
       console.log(prop);
       can = false;
     }
@@ -203,7 +208,7 @@ const handleSubmit = () => {
       let head_image = res[0];
       let detail_image = res[1];
       uploadImages2().then((ciimgs) => {
-        let imgs = ciimgs ? ciimgs.map((item) => item.data) : null;
+        let imgs = ciimgs ? ciimgs.map((item: { data: any; }) => item.data) : "";
         let cid = [...formState.category_id, "13"];
         cid = Array.from(new Set(cid));
         let params = {
@@ -216,20 +221,19 @@ const handleSubmit = () => {
           desc: formState.desc,
           discount: formState.discount + "",
         };
-        if (imgs == null) {
-          delete params.deputy_image;
-        }
         createGoods(params)
           .then((res) => {
-            message.success("操作成功");
-            router.push({
-              path: "/commodity/list",
-              query: { active: 2 },
-            });
-          })
-          .catch(() => {
+            let data = res as unknown as resType;
+            if (data.code == 200) {
+              message.success("操作成功");
+              router.push({
+                path: "/commodity/list",
+                query: { active: 2 },
+              });
+            }
+          }).finally(() => {
             submitLoading.value = false;
-          });
+          })
       });
     })
     .catch(() => {
@@ -326,12 +330,7 @@ onMounted(() => {
                 </a-form-item>
                 <div class="form-upload">
                   <a-form-item label="商品主头图（必填）">
-                    <a-upload
-                      name="file"
-                      :file-list="head_image"
-                      :before-upload="coverBeforeUpload"
-                      :maxCount="1"
-                    >
+                    <a-upload name="file" :file-list="head_image" :before-upload="coverBeforeUpload" :maxCount="1">
                       <a-button type="primary">
                         <PlusOutlined />
                         上传
@@ -339,13 +338,8 @@ onMounted(() => {
                     </a-upload>
                   </a-form-item>
                   <a-form-item label="商品次头图（选填）">
-                    <a-upload
-                      name="file"
-                      :file-list="deputy_image"
-                      :before-upload="coverBeforeUpload2"
-                      :maxCount="4"
-                      @remove="handleRemoveimage"
-                    >
+                    <a-upload name="file" :file-list="deputy_image" :before-upload="coverBeforeUpload2" :maxCount="4"
+                      @remove="handleRemoveimage">
                       <a-button type="primary">
                         <PlusOutlined />
                         上传
@@ -356,27 +350,14 @@ onMounted(() => {
               </a-col>
               <a-col :span="8">
                 <a-form-item label="商品类别（选填）">
-                  <a-select
-                    ref="select"
-                    v-model:value="formState.category_id"
-                    mode="multiple"
-                  >
-                    <a-select-option
-                      :value="item.id"
-                      v-for="(item, index) in goodsCategoryList"
-                      :key="index"
-                    >
+                  <a-select ref="select" v-model:value="formState.category_id" mode="multiple">
+                    <a-select-option :value="item.id" v-for="(item, index) in goodsCategoryList" :key="index">
                       {{ item.title }}
                     </a-select-option>
                   </a-select>
                 </a-form-item>
                 <a-form-item label="长图（必填）">
-                  <a-upload
-                    name="file"
-                    :file-list="detail_image"
-                    :before-upload="imageBeforeUpload"
-                    :maxCount="1"
-                  >
+                  <a-upload name="file" :file-list="detail_image" :before-upload="imageBeforeUpload" :maxCount="1">
                     <a-button type="primary">
                       <PlusOutlined />
                       上传
@@ -386,12 +367,7 @@ onMounted(() => {
               </a-col>
               <a-col :span="8">
                 <a-form-item label="商品描述（必填）">
-                  <a-textarea
-                    v-model:value="formState.desc"
-                    :showCount="true"
-                    :maxlength="200"
-                    :rows="80"
-                  />
+                  <a-textarea v-model:value="formState.desc" :showCount="true" :maxlength="200" :rows="80" />
                 </a-form-item>
               </a-col>
             </a-row>
@@ -408,33 +384,21 @@ onMounted(() => {
             <a-row :gutter="180">
               <a-col :span="8">
                 <a-form-item label="商品原价（必填）">
-                  <a-input-number
-                    style="width: 100%"
-                    id="inputNumber"
-                    v-model:value="formState.price"
-                    :min="1"
-                    :max="999.99"
-                  />
+                  <a-input-number style="width: 100%" id="inputNumber" v-model:value="formState.price" :min="1"
+                    :max="999.99" />
                 </a-form-item>
                 <div class="form-upload form-price">
                   <p>
-                    <span class="label">折后价格：</span
-                    ><span class="price">{{ disPrice }} ¥</span>
+                    <span class="label">折后价格：</span><span class="price">{{ disPrice }} ¥</span>
                   </p>
                   <p>
-                    <span class="label">价格差：</span
-                    ><span class="price">{{ diference }} ¥</span>
+                    <span class="label">价格差：</span><span class="price">{{ diference }} ¥</span>
                   </p>
                 </div>
               </a-col>
               <a-col :span="8">
                 <a-form-item label="商品折扣（选填）">
-                  <a-input-number
-                    id="inputNumber"
-                    v-model:value="formState.discount"
-                    :min="1"
-                    :max="100"
-                  />
+                  <a-input-number id="inputNumber" v-model:value="formState.discount" :min="1" :max="100" />
                   <span class="unit">%</span>
                 </a-form-item>
               </a-col>
@@ -482,9 +446,7 @@ onMounted(() => {
     </div>
     <div class="submit-footer">
       <a-button style="margin-right: 10px" @click="router.go(-1)"> 取 消 </a-button>
-      <a-button type="primary" :loading="submitLoading" @click="handleSubmit"
-        >提 交</a-button
-      >
+      <a-button type="primary" :loading="submitLoading" @click="handleSubmit">提 交</a-button>
     </div>
     <div style="height: 100px"></div>
   </div>
@@ -496,6 +458,7 @@ onMounted(() => {
 .login-form .ant-message {
   position: absolute;
 }
+
 .ci-banners .ant-upload-list {
   display: none !important;
 }

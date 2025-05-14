@@ -96,6 +96,20 @@ const _sfc_main = {
       refStyle.value["top"] = res.top + "px";
       handleGetOrderList();
     });
+    common_vendor.onShareAppMessage(() => {
+      console.log(goodsInfo.value);
+      return {
+        title: goodsInfo.value.title,
+        path: `/pages/mall/info?id=${goodsId.value}`
+      };
+    });
+    common_vendor.onShareTimeline(() => {
+      return {
+        title: goodsInfo.value.title,
+        path: `/pages/mall/info?id=${goodsId.value}`,
+        imageUrl: "https://www.yuyandental.com/" + covers.value[0]
+      };
+    });
     return (_ctx, _cache) => {
       return common_vendor.e({
         a: common_vendor.o(handleleft),
@@ -110,7 +124,7 @@ const _sfc_main = {
         c: common_vendor.s(common_vendor.unref(refStyle)),
         d: common_vendor.f(common_vendor.unref(covers), (item, index, i0) => {
           return {
-            a: "https://dental.cdwuhu.com/" + item,
+            a: "https://www.yuyandental.com/" + item,
             b: index
           };
         }),
@@ -131,11 +145,11 @@ const _sfc_main = {
       }, {
         k: common_vendor.unref(goodsInfo).sale_price != common_vendor.unref(goodsInfo).price
       }, common_vendor.unref(goodsInfo).sale_price != common_vendor.unref(goodsInfo).price ? {
-        l: common_vendor.t(common_vendor.unref(goodsInfo).price - common_vendor.unref(goodsInfo).sale_price)
+        l: common_vendor.t((common_vendor.unref(goodsInfo).price * 1e3 - common_vendor.unref(goodsInfo).sale_price * 1e3) / 1e3)
       } : {}, {
         m: common_vendor.t(common_vendor.unref(goodsInfo).title),
         n: common_vendor.t(common_vendor.unref(goodsInfo).desc),
-        o: "https://dental.cdwuhu.com/" + common_vendor.unref(goodsInfo).detail_image,
+        o: "https://www.yuyandental.com/" + common_vendor.unref(goodsInfo).detail_image,
         p: common_vendor.unref(goodsInfo).sale_price != common_vendor.unref(goodsInfo).price
       }, common_vendor.unref(goodsInfo).sale_price != common_vendor.unref(goodsInfo).price ? {} : {}, {
         q: common_vendor.t(common_vendor.unref(goodsInfo).sale_price),
@@ -144,5 +158,6 @@ const _sfc_main = {
     };
   }
 };
-const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__scopeId", "data-v-6f02fc2b"], ["__file", "F:/PROJECT-ZENGYUHAN/yuyan-project/min-app/pages/mall/info.vue"]]);
+const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__scopeId", "data-v-6f02fc2b"]]);
+_sfc_main.__runtimeHooks = 6;
 wx.createPage(MiniProgramPage);

@@ -1,5 +1,6 @@
 "use strict";
 const common_vendor = require("../../common/vendor.js");
+const common_assets = require("../../common/assets.js");
 const utils_api_index = require("../../utils/api/index.js");
 if (!Array) {
   const _easycom_uni_icons2 = common_vendor.resolveComponent("uni-icons");
@@ -158,7 +159,7 @@ const _sfc_main = {
     const handleServerGetUserInfo = () => {
       utils_api_index.GetServerUserInfo().then((res) => {
         userInfo.value = res;
-        userInfo.value.avatar = "https://dental.cdwuhu.com/" + res.avatar;
+        userInfo.value.avatar = "https://www.yuyandental.com/" + res.avatar;
         isLogin.value = true;
       });
     };
@@ -197,6 +198,18 @@ const _sfc_main = {
         orderList["all"] = list;
       });
     };
+    common_vendor.onShareAppMessage(() => {
+      return {
+        title: "多一点预防，多一点健康",
+        path: "/pages/user/index"
+      };
+    });
+    common_vendor.onShareTimeline(() => {
+      return {
+        title: "多一点预防，多一点健康",
+        path: "/pages/user/index"
+      };
+    });
     const handleToOrderPage = (status) => {
       let str = {
         0: "待付款",
@@ -271,34 +284,36 @@ const _sfc_main = {
         t: !isLogin.value
       }, !isLogin.value ? {
         v: common_vendor.unref(isArg),
-        w: common_vendor.o(handleClickRadio),
-        x: common_vendor.o(handleToArg1),
-        y: common_vendor.o(handleToArg2)
+        w: common_assets._imports_0,
+        x: common_vendor.o(handleClickRadio),
+        y: common_vendor.o(handleToArg1),
+        z: common_vendor.o(handleToArg2)
       } : {}, {
-        z: isLogin.value
+        A: isLogin.value
       }, isLogin.value ? {
-        A: common_vendor.o(handleLoginOut)
+        B: common_vendor.o(handleLoginOut)
       } : common_vendor.e({
-        B: common_vendor.unref(isArg)
+        C: common_vendor.unref(isArg)
       }, common_vendor.unref(isArg) ? {
-        C: common_vendor.o(getinfos)
+        D: common_vendor.o(getinfos)
       } : {
-        D: common_vendor.o(handleClickLogin)
+        E: common_vendor.o(handleClickLogin)
       }), {
-        E: common_vendor.p({
+        F: common_vendor.p({
           active: "user"
         }),
-        F: showCtUs.value
+        G: showCtUs.value
       }, showCtUs.value ? {
-        G: common_vendor.o(($event) => showCtUs.value = false),
-        H: common_vendor.p({
+        H: common_vendor.o(($event) => showCtUs.value = false),
+        I: common_vendor.p({
           type: "closeempty",
           size: "30"
         }),
-        I: common_vendor.o(handleMakePhoneCall)
+        J: common_vendor.o(handleMakePhoneCall)
       } : {});
     };
   }
 };
-const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__scopeId", "data-v-79e6a490"], ["__file", "F:/PROJECT-ZENGYUHAN/yuyan-project/min-app/pages/user/index.vue"]]);
+const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["__scopeId", "data-v-79e6a490"]]);
+_sfc_main.__runtimeHooks = 6;
 wx.createPage(MiniProgramPage);

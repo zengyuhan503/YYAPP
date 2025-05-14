@@ -12,14 +12,14 @@
             mode="round"
             field="content"
           >
-            <swiper class="swiper-box" @change="change" :current="swiperDotIndex">
+            <swiper class="swiper-box" @change="change" interval="3000"  :autoplay="true" :current="swiperDotIndex">
               <swiper-item
                 v-for="(item, index) in banners"
                 :key="index"
                 @click="handleToBannerInfo(item)"
               >
                 <image
-                  :src="'https://dental.cdwuhu.com/' + item.image"
+                  :src="'https://www.yuyandental.com/' + item.image"
                   mode="widthFix"
                   class="swiper-image"
                 ></image>
@@ -34,10 +34,10 @@
             <view class="title">科普馆预约</view>
             <view class="desc">了解更多科普知识</view>
           </view>
-          <image class="yuyueimg" src="http://h5.dental.cdwuhu.com/static/image/bj1.png" mode="widthFix">
+          <image class="yuyueimg" src="http://h5.yuyandental.com/static/image/bj1.png" mode="widthFix">
           </image>
           <view class="yuyue-btn">
-            <image src="http://h5.dental.cdwuhu.com/static/image/yuyue-btn1.png" mode="">
+            <image src="http://h5.yuyandental.com/static/image/yuyue-btn1.png" mode="">
             </image>
             <view class=""> 预约 </view>
           </view>
@@ -48,12 +48,12 @@
             <view class="title">看诊预约</view>
             <view class="desc">专业团队一触即达</view>
           </view>
-          <image class="yuyueimg" src="http://h5.dental.cdwuhu.com/static/image/bj2.png" mode="widthFix">
+          <image class="yuyueimg" src="http://h5.yuyandental.com/static/image/bj2.png" mode="widthFix">
           </image>
           <view class="yuyue-btn">
             <image
               style="width: 134px"
-              src="http://h5.dental.cdwuhu.com/static/image/yuyue-btn2.png"
+              src="http://h5.yuyandental.com/static/image/yuyue-btn2.png"
               mode=""
             ></image>
             <view class=""> 预约 </view>
@@ -64,13 +64,9 @@
         <view class="homeImagebox">
           <view class="showimage">
             <image
-              src="http://h5.dental.cdwuhu.com/static/image/homeimage1.png"
+              src="http://h5.yuyandental.com/static/image/home03.jpg"
               mode="widthFix"
             ></image>
-          </view>
-          <view class="text">
-            <view class="text1"> 科普互动 </view>
-            <view class="text2"> 即将推出 </view>
           </view>
         </view>
       </view>
@@ -84,11 +80,13 @@
 import navs from "/components/navs/index.vue";
 import { ref, onMounted } from "vue";
 import { GetIndexBanner } from "../../utils/api/index";
+import {onShareAppMessage ,onShareTimeline} from "@dcloudio/uni-app"
 let modeIndex = ref(-1);
 let styleIndex = ref(-1);
 let current = ref(0);
 let info = ref([{}]);
 let mode = ref("default");
+
 let dotsStyles = ref({
   backgroundColor: "rgba(255,255,255,0.5);",
   border: "2px rgba(255,255,255,0.5); solid",
@@ -147,6 +145,19 @@ const handleToBannerInfo = (item) => {
     url: url,
   });
 };
+onShareAppMessage(()=>{
+	return {
+		title:"多一点预防，多一点健康",
+		path:'/pages/index/index'
+	}
+})
+
+onShareTimeline(()=>{
+	return {
+		title:"多一点预防，多一点健康",
+		path:'/pages/index/index'
+	}
+})
 onMounted(() => {
   handleGetBanner();
 });

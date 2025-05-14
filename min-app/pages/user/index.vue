@@ -4,7 +4,7 @@
       <view class="user-info">
         <view class="portrait">
           <image
-            src="http://h5.dental.cdwuhu.com/static/image/logo.png"
+            src="http://h5.yuyandental.com/static/image/logo.png"
             v-if="!isLogin"
             mode=""
           />
@@ -20,19 +20,19 @@
         <view class="title">我的订单</view>
         <view class="items">
           <view class="item" @click="handleToOrderPage('0')">
-            <image src="http://h5.dental.cdwuhu.com/static/icon/order1.png" />
+            <image src="http://h5.yuyandental.com/static/icon/order1.png" />
             <view>待付款</view>
           </view>
           <view class="item" @click="handleToOrderPage('2')">
-            <image src="http://h5.dental.cdwuhu.com/static/icon/order2.png" />
+            <image src="http://h5.yuyandental.com/static/icon/order2.png" />
             <view>待收货</view>
           </view>
           <view class="item" @click="handleToOrderPage('4')">
-            <image src="http://h5.dental.cdwuhu.com/static/icon/order3.png" />
+            <image src="http://h5.yuyandental.com/static/icon/order3.png" />
             <view>完成订单</view>
           </view>
           <view class="item" @click="handleToOrderPage('all')">
-            <image src="http://h5.dental.cdwuhu.com/static/icon/order4.png" />
+            <image src="http://h5.yuyandental.com/static/icon/order4.png" />
             <view>全部订单</view>
           </view>
         </view>
@@ -42,7 +42,7 @@
           <view class="item" @click="handleToAddress">
             <view class="label">
               <image
-                src="http://h5.dental.cdwuhu.com/static/icon/help1.png"
+                src="http://h5.yuyandental.com/static/icon/help1.png"
                 mode=""
               /><text>地址管理</text>
             </view>
@@ -51,7 +51,7 @@
           <view class="item" @click="handleToAboutDesc">
             <view class="label">
               <image
-                src="http://h5.dental.cdwuhu.com/static/icon/help2.png"
+                src="http://h5.yuyandental.com/static/icon/help2.png"
                 mode=""
               /><text>医生介绍</text>
             </view>
@@ -60,7 +60,7 @@
           <view class="item" @click="handleToAboutUs">
             <view class="label">
               <image
-                src="http://h5.dental.cdwuhu.com/static/icon/help3.png"
+                src="http://h5.yuyandental.com/static/icon/help3.png"
                 mode=""
               /><text>关于我们</text>
             </view>
@@ -69,7 +69,7 @@
           <view class="item" @click="showCtUs = true">
             <view class="label">
               <image
-                src="http://h5.dental.cdwuhu.com/static/icon/help4.png"
+                src="http://h5.yuyandental.com/static/icon/help4.png"
                 mode=""
               /><text>联系我们</text>
             </view>
@@ -146,7 +146,7 @@
 
 <script setup>
 import navs from "/components/navs/index.vue";
-import { onLaunch, onShow, onLoad } from "@dcloudio/uni-app";
+import { onLaunch, onShow, onLoad,onShareAppMessage,onShareTimeline } from "@dcloudio/uni-app";
 import {
   GetUserInfo,
   GetUserPhone,
@@ -303,7 +303,7 @@ const handleEditInfo = () => {
 const handleServerGetUserInfo = () => {
   GetServerUserInfo().then((res) => {
     userInfo.value = res;
-    userInfo.value.avatar = "https://dental.cdwuhu.com/" + res.avatar;
+    userInfo.value.avatar = "https://www.yuyandental.com/" + res.avatar;
     isLogin.value = true;
   });
 };
@@ -342,6 +342,19 @@ const handleGetOrderList = () => {
     orderList["all"] = list;
   });
 };
+
+onShareAppMessage(()=>{
+	return {
+		title:"多一点预防，多一点健康",
+		path:'/pages/user/index'
+	}
+})
+onShareTimeline(()=>{
+	return {
+		title:"多一点预防，多一点健康",
+		path:'/pages/user/index'
+	}
+})
 const handleToOrderPage = (status) => {
   let str = {
     0: "待付款",
